@@ -7,7 +7,6 @@ import DropdownItem from './DropdownItem';
 
 export type { DropdownProps } from './Dropdown';
 export type { DropdownItemProps } from './DropdownItem';
-export type { DropdownDividerProps } from './DropdownDivider';
 export { Dropdown, DropdownDivider, DropdownItem };
 export default Object.assign(Dropdown, {
     Divider: DropdownDivider,

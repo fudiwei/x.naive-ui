@@ -8,10 +8,6 @@ const _props = {
     disabled: {
         type: Boolean as PropType<boolean>,
         default: false
-    },
-    show: {
-        type: Boolean as PropType<boolean>,
-        default: true
     }
 } as const;
 

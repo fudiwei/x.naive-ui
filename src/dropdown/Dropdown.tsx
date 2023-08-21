@@ -58,7 +58,6 @@ export default defineComponent({
                         key: vnode.key ?? `_item_${temp.length}`,
                         props: vnodeProps as HTMLAttributes,
                         disabled: !!vnodeProps.disabled || vnodeProps.disabled === '',
-                        show: vnodeProps.show !== false,
                         label: vnodeSlots['default'] ? () => h(vnodeSlots['default']) : vnodeProps.label,
                         icon: vnodeSlots['icon'] ? () => h(vnodeSlots['icon']) : undefined
                     } as NDropdownOption);
@@ -67,8 +66,7 @@ export default defineComponent({
                     temp.push({
                         type: 'divider',
                         key: vnode.key ?? `_item_${temp.length}`,
-                        props: vnodeProps as HTMLAttributes,
-                        show: vnodeProps.show !== false
+                        props: vnodeProps as HTMLAttributes
                     } as NDropdownDividerOption);
                 } else if (!isEmptyVNode(vnode)) {
                     // 纯渲染的内容
