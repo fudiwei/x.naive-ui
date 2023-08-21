@@ -18,7 +18,7 @@
 
 官方团队出于可维护性的考虑，没有提供 `DataTable`、`Dropdown`、`Select`、`Menu` 等组件的插槽或 template 式的写法支持。
 
-以下是一些 GitHub 上的一些相关 Issues：
+以下是 GitHub 上的一些相关 Issues：
 
 -   [#205: 增加数据表格展开功能的插槽](https://github.com/tusen-ai/naive-ui/issues/205)
 -   [#216: table 使用 template 风格的 API](https://github.com/tusen-ai/naive-ui/issues/216)

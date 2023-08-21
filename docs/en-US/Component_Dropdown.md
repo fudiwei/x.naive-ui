@@ -28,7 +28,6 @@ For other props, please see [Naive-UI 文档](https://www.naiveui.com/en-US/os-t
 | Name     | Type      | Default | Description                    | Version |
 | :------- | :-------- | :------ | :----------------------------- | :------ |
 | disabled | `boolean` | `false` | Whether to disable the option. |         |
-| show     | `boolean` | `true`  | Whether to show the option.    |         |
 
 #### `XNDropdownItem` Slots
 
@@ -36,9 +35,3 @@ For other props, please see [Naive-UI 文档](https://www.naiveui.com/en-US/os-t
 | :------ | :--- | :---------------------------- | :--- |
 | default | `()` | Custom displayed label value. |      |
 | icon    | `()` | Custom icon.                  |      |
-
-#### `XNDropdownDivider` Props
-
-| Name | Type      | Default | Description                 | Version |
-| :--- | :-------- | :------ | :-------------------------- | :------ |
-| show | `boolean` | `true`  | Whether to show the option. |         |
