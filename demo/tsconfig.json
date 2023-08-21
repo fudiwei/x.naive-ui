@@ -1,0 +1,19 @@
+﻿{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "@skit/x.naive-ui": [
+                "../src"
+            ]
+        }
+    },
+    "include": [
+        "../src/**/*.ts",
+        "../src/**/*.tsx",
+        "../demo/**/*.ts",
+        "../demo/**/*.tsx"
+    ],
+    "files": [
+        "./global.d.ts"
+    ]
+}

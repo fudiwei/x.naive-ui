@@ -1,0 +1,10 @@
+﻿{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "outDir": "lib"
+    }
+}

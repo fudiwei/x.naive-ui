@@ -1,0 +1,35 @@
+﻿## 数据表格 XNDataTable
+
+本组件是基于 Naive-UI 的 NDataTable 组件二次封装的。
+
+---
+
+### 使用方式
+
+见 Demo。
+
+---
+
+### API
+
+#### `XNDataTable` Props
+
+| 名称      | 类型     | 默认值       | 说明                     | 版本 |
+| :-------- | :------- | :----------- | :----------------------- | :--- |
+| emptyText | `string` | `'暂无数据'` | 表格数据为空时的展示文案 |      |
+
+其他 Props 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
+
+#### `XNDataTable` Methods
+
+其他 Methods 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Methods)。
+
+#### `XNDataTable` Slots
+
+| 名称         | 参数                          | 说明               | 版本 |
+| :----------- | :---------------------------- | :----------------- | :--- |
+| renderColumn | `(column)`                    | 自定义列头的内容   |      |
+| renderCell   | `(column, rowData, rowIndex)` | 自定义单元格的内容 |      |
+| renderExpand | `(rowData, rowIndex)`         | 自定义展开行的内容 |      |
+
+其他 Slots 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Slots)。

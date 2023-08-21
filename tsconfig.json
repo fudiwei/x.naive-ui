@@ -1,0 +1,30 @@
+﻿{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "jsx": "preserve",
+        "lib": [
+            "DOM",
+            "ESNext"
+        ],
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "paths": {
+            "@skit/x.naive-ui": [
+                "./src"
+            ]
+        },
+        "strict": true,
+        "target": "ES2015",
+        "typeRoots": [
+            "./node_modules/@type",
+            "./types"
+        ]
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
