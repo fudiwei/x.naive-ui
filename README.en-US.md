@@ -24,8 +24,8 @@ Here are some related issues on GitHub:
 -   [#216: table 使用 template 风格的 API](https://github.com/tusen-ai/naive-ui/issues/216)
 -   [#307: NDataTable 和 NTree 组件能够支持使用插槽渲染吗？](https://github.com/tusen-ai/naive-ui/issues/307)
 -   [#520: NDropdown support template option](https://github.com/tusen-ai/naive-ui/issues/520)
--   [#1136: 你认同DataTable的设计方案么？](https://github.com/tusen-ai/naive-ui/discussions/1136)
--   [#2054: 是否考虑将组件中的H函数调整为 template 插槽](https://github.com/tusen-ai/naive-ui/issues/2054)
+-   [#1136: 你认同 DataTable 的设计方案么？](https://github.com/tusen-ai/naive-ui/discussions/1136)
+-   [#2054: 是否考虑将组件中的 h 函数调整为 template 插槽](https://github.com/tusen-ai/naive-ui/issues/2054)
 -   [#2252: 建议 DataTable 组件支持自定义列模板](https://github.com/tusen-ai/naive-ui/issues/2252)
 -   [#3337: 使用 h 渲染函数的建议](https://github.com/tusen-ai/naive-ui/issues/3337)
 -   [#4273: DataTable 增加 template 支持](https://github.com/tusen-ai/naive-ui/issues/4273)
@@ -79,7 +79,7 @@ app.use(DataTable);
 app.use(Dropdown);
 ```
 
-### 2.3. Local Registration
+#### 2.3. Local Registration
 
 ```html
 <template>
