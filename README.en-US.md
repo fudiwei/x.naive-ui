@@ -1,6 +1,6 @@
 ﻿[![NPM Version](https://img.shields.io/npm/v/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
 [![NPM Download](https://img.shields.io/npm/dm/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
-[![License](https://img.shields.io/github/license/fudiwei/skit-x.naive-ui.js)](https://mit-license.org/)
+[![License](https://img.shields.io/github/license/fudiwei/x.naive-ui)](https://mit-license.org/)
 
 ---
 
