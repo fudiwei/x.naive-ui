@@ -97,13 +97,13 @@ app.use(Dropdown);
 </script>
 ```
 
-### 3. Documentation
+### 3. 开发文档
 
 [点此查看](./docs/zh-CN/README.md)。
 
-### 4. Demo 示例项目
+### 4. 示例项目
 
-你可以运行 Demo 示例项目来查看更多内容。
+你可以运行 Demo 来查看更多内容。
 
 ```shell
 > pnpm install
