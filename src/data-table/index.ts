@@ -7,6 +7,7 @@ export type {
     DataTableProps,
     DataTableRowData,
     DataTableColumn,
+    DataTableColumns,
     DataTableRenderColumnParams,
     DataTableRenderCellParams,
     DataTableRenderExpandParams

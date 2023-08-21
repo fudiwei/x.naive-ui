@@ -17,6 +17,7 @@ export type DataTableRowData = NDataTableRowData;
 export type DataTableColumn<T extends DataTableRowData = any> = Partial<Omit<NDataTableBaseColumn<T>, 'type'>> &
     Partial<Omit<NDataTableSelectionColumn<T>, 'type'>> &
     Partial<Omit<NDataTableExpandColumn<T>, 'type'>> & { type?: 'selection' | 'expand' };
+export type DataTableColumns<T extends DataTableRowData = any> = DataTableColumn<T>[];
 export type DataTableRenderColumnParams<T extends DataTableRowData = any> = {
     column: DataTableColumn<T>;
 };
