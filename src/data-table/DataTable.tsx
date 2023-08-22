@@ -139,11 +139,19 @@ export default (<T extends DataTableRowData = any>() => {
                 });
             });
 
-            const nSlots = computed(() => ({
-                ...slots,
-
-                empty: slots['empty'] ?? (() => <ComponentEmpty description={props.emptyText} />)
-            }));
+            const nSlots = computed(() => {
+                const temp = {
+                    ...slots,
+                    empty: slots['empty'] ?? (() => <ComponentEmpty description={props.emptyText} />),
+                    renderColumn: undefined,
+                    renderCell: undefined,
+                    renderExpand: undefined
+                };
+                delete temp['renderColumn'];
+                delete temp['renderCell'];
+                delete temp['renderExpand'];
+                return temp;
+            });
 
             return () => <NDataTable {...attrs} {...props} columns={nColumns.value} v-slots={nSlots.value} />;
         }
