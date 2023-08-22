@@ -1,6 +1,6 @@
 ﻿import type { VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
-import type { SelectOption as NSelectOption } from 'naive-ui';
-import { defineComponent, computed, getCurrentInstance } from 'vue';
+import type { SelectOption as NSelectOption, SelectInst as NSelectInst } from 'naive-ui';
+import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
 import { COMLIB_PREFIX } from '../_utils/const';
@@ -12,6 +12,7 @@ import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
 
 export type SelectOption = Omit<NSelectOption, 'render'>;
+export type SelectOptions = SelectOption[];
 
 const _props = (() => {
     const {
@@ -31,6 +32,7 @@ const _props = (() => {
 })();
 
 export type SelectProps = ExtractPublicPropTypes<typeof _props>;
+export type SelectInstance = NSelectInst;
 
 function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
     const temp = [] as NSelectOption[];
@@ -101,7 +103,9 @@ export default defineComponent({
         empty: NonNullable<unknown>;
     }>,
 
-    setup(props, { attrs, slots }) {
+    setup(props, { attrs, slots, expose }) {
+        const nRef = ref<NSelectInst>();
+
         const nOptions = computed<NSelectOption[]>(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNodes(vnodes)) {
@@ -116,12 +120,23 @@ export default defineComponent({
             const temp = {
                 ...slots,
                 empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
-                default: undefined
+                default: undefined,
+                renderLabel: undefined,
+                renderOption: undefined,
+                renderTag: undefined
             };
             delete temp['default'];
+            delete temp['renderLabel'];
+            delete temp['renderOption'];
+            delete temp['renderTag'];
             return temp;
         });
 
-        return () => <NSelect {...attrs} {...props} options={nOptions.value} v-slots={nSlots.value} />;
+        expose({
+            focus: () => nRef.value?.focus(),
+            blur: () => nRef.value?.blur()
+        } as SelectInstance);
+
+        return () => <NSelect ref={nRef} {...attrs} {...props} options={nOptions.value} v-slots={nSlots.value} />;
     }
 });

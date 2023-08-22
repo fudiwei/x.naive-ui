@@ -10,7 +10,7 @@ import DemoCodeTs from './code-ts.vuecode';
         <template #content>
             <p>
                 见 Naive-UI 官方文档示例中「
-                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#group.vue" target="blank">基础用法</n-a>
+                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#group.vue" target="blank">选项组</n-a>
                 」。以插槽形式改写。
             </p>
         </template>

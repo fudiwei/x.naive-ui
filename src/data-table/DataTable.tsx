@@ -7,7 +7,7 @@ import type {
     DataTableInst as NDataTableInst
 } from 'naive-ui';
 import type { RowData as NDataTableRowData } from 'naive-ui/es/data-table/src/interface';
-import { defineComponent, computed } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
 import { COMLIB_PREFIX } from '../_utils/const';
@@ -73,7 +73,9 @@ export default (<T extends DataTableRowData = any>() => {
             renderExpand: DataTableRenderExpandParams<T>;
         }>,
 
-        setup(props, { attrs, slots }) {
+        setup(props, { attrs, slots, expose }) {
+            const nRef = ref<NDataTableInst>();
+
             const nColumns = computed(() => {
                 return props.columns?.map((col) => {
                     let renderColumn = (col as NDataTableBaseColumn<T>).title;
@@ -153,7 +155,20 @@ export default (<T extends DataTableRowData = any>() => {
                 return temp;
             });
 
-            return () => <NDataTable {...attrs} {...props} columns={nColumns.value} v-slots={nSlots.value} />;
+            expose({
+                filter: (filters) => nRef.value?.filter(filters),
+                filters: (filters) => nRef.value?.filters(filters),
+                clearFilter: () => nRef.value?.clearFilter(),
+                clearFilters: () => nRef.value?.clearFilters(),
+                sort: (columnKey, order) => nRef.value?.sort(columnKey, order),
+                clearSorter: () => nRef.value?.clearSorter(),
+                page: (page: number) => nRef.value?.page(page),
+                scrollTo: (x, y) => nRef.value?.scrollTo(x, y)
+            } as DataTableInstance);
+
+            return () => (
+                <NDataTable ref={nRef} {...attrs} {...props} columns={nColumns.value} v-slots={nSlots.value} />
+            );
         }
     });
 })();
