@@ -66,8 +66,8 @@ export default (<T extends DataTableRowData = any>() => {
         props: _props as ReturnType<typeof _propsMakeGeneric<T>>,
 
         slots: Object as SlotsType<{
-            loading: any;
-            empty: any;
+            loading: NonNullable<unknown>;
+            empty: NonNullable<unknown>;
             renderColumn: DataTableRenderColumnParams<T>;
             renderCell: DataTableRenderCellParams<T>;
             renderExpand: DataTableRenderExpandParams<T>;

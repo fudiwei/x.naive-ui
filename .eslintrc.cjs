@@ -31,6 +31,14 @@ module.exports = {
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
-        '@typescript-eslint/triple-slash-reference': 'off'
+        '@typescript-eslint/triple-slash-reference': 'off',
+        '@typescript-eslint/no-unused-vars': [
+            'warn',
+            {
+                varsIgnorePattern: '^__',
+                argsIgnorePattern: '^_',
+                caughtErrorsIgnorePattern: '^_'
+            }
+        ]
     }
 };

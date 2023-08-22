@@ -21,8 +21,8 @@ export default defineComponent({
     props: _props,
 
     slots: Object as SlotsType<{
-        default: any;
-        icon: any;
+        default: NonNullable<unknown>;
+        icon: NonNullable<unknown>;
     }>,
 
     render() {

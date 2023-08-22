@@ -55,7 +55,7 @@ export const flattenVNodeChildren = (children?: VNodeNormalizedChildren, filterE
     array.forEach((child) => {
         if (Array.isArray(child)) {
             temp.push(...flattenVNodeChildren(child, filterEmpty));
-        } else if (isVNode(child)) {
+        } else if (isVNode(child) && child.type === Fragment) {
             if (child.type === Fragment) {
                 if (child.key === SKIPPED_FLATTEN_KEY) {
                     temp.push(child);
