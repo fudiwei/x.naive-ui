@@ -2,7 +2,7 @@
 import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
-import { COMLIB_PREFIX } from '../_utils';
+import { COMLIB_PREFIX } from '../_utils/const';
 
 const _props = {
     ...defaultNEmptyProps,

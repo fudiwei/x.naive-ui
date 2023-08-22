@@ -8,16 +8,16 @@ import { defineComponent, computed, h } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
-import { COMLIB_PREFIX } from '../_utils';
-import { isEmptyVNode } from '../_utils';
+import { COMLIB_PREFIX } from '../_utils/const';
+import { isEmptyVNode, isEmptyVNodes } from '../_utils/vue';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
 
 const _props = (() => {
     const {
-        options: __1, // dropped
-        keyField: __2, // dropped
-        labelField: __3, // dropped
+        keyField: __1, // dropped
+        labelField: __2, // dropped
+        options: __3, // dropped
         ...rest
     } = defaultNDropdownProps;
     return {
@@ -43,20 +43,20 @@ export default defineComponent({
 
     setup(props, { attrs, slots }) {
         const nOptions = computed<NDropdownOption[]>(() => {
-            const vnodes = slots['default']?.();
-            if (!vnodes) {
+            const vnodes: VNode[] = slots['default']?.();
+            if (isEmptyVNodes(vnodes)) {
                 return [];
             }
 
             const temp = [] as NDropdownOption[];
-            vnodes.forEach((vnode: VNode) => {
+            vnodes.forEach((vnode, index) => {
                 const vnodeProps = (vnode.props as Record<string, unknown>) || {};
                 const vnodeSlots = (vnode.children as Record<string, VNode>) || {};
 
                 if (vnode.type === ComponentDropdownItem) {
                     // 菜单项
                     temp.push({
-                        key: vnode.key ?? `_item_${temp.length}`,
+                        key: vnode.key ?? `__X_DROPDOWN_ITEM_${index}`,
                         props: vnodeProps as HTMLAttributes,
                         disabled: !!vnodeProps.disabled || vnodeProps.disabled === '',
                         label: vnodeSlots['default'] ? () => h(vnodeSlots['default']) : vnodeProps.label,
@@ -66,14 +66,14 @@ export default defineComponent({
                     // 分割线
                     temp.push({
                         type: 'divider',
-                        key: vnode.key ?? `_item_${temp.length}`,
+                        key: vnode.key ?? `__X_DROPDOWN_DIVIDER_${index}`,
                         props: vnodeProps as HTMLAttributes
                     } as NDropdownDividerOption);
                 } else if (!isEmptyVNode(vnode)) {
                     // 纯渲染的内容
                     temp.push({
                         type: 'render',
-                        key: vnode.key ?? `_item_${temp.length}`,
+                        key: vnode.key ?? `__X_DROPDOWN_RENDER_${index}`,
                         props: vnodeProps as HTMLAttributes,
                         render: () => <>{vnode}</>
                     } as NDropdownRenderOption);
@@ -93,9 +93,9 @@ export default defineComponent({
             <NDropdown
                 {...attrs}
                 {...props}
-                options={nOptions.value}
                 keyField={undefined}
                 labelField={undefined}
+                options={nOptions.value}
                 v-slots={nSlots.value}
             />
         );
