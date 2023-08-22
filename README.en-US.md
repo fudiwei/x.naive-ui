@@ -39,8 +39,9 @@ This project is aimed to provide a solution for these issues above.
 
 ## Features
 
--   `DataTable`: Slots for **colums**, **cells** and **expandable rows**.
+-   `DataTable`: Slots for **colums**, **cells**, **expandable rows**.
 -   `Dropdown`: Slots for **options**.
+-   `Select`: Slots for **options**, **option groups**.
 
 ---
 
@@ -97,9 +98,9 @@ app.use(Dropdown);
 </script>
 ```
 
-### 3. Documentation
+### 3. Usage
 
-[Click here to view](./docs/en-US/README.md).
+Please view the [Documentation](./docs/en-US/README.md).
 
 ### 4. Demo
 
@@ -120,6 +121,6 @@ You can run the demo to view more details.
 -   [x] `Dropdown`: Slots
 -   [ ] `Dropdown`: Cascaded Menu
 -   [ ] `Menu`: Slots
--   [ ] `Select`: Slots
+-   [x] `Select`: Slots
 -   [ ] `Tree`: Slots
 -   [ ] `TreeSelect`: Slots

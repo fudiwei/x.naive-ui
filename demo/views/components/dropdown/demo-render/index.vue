@@ -17,9 +17,9 @@ import DemoCodeTs from './code-ts.vuecode';
             </p>
             <p>
                 注意：任何非
-                <n-text type="info">&lt;XNDropdownItem&gt;</n-text>
+                <n-text type="info">&lt;x-n-dropdown-item&gt;</n-text>
                 、
-                <n-text type="info">&lt;XNDropdownDivider&gt;</n-text>
+                <n-text type="info">&lt;x-n-dropdown-divider&gt;</n-text>
                 类型的子元素，将被当作纯渲染内容。
             </p>
         </template>

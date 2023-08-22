@@ -39,8 +39,9 @@
 
 ## 特性
 
--   `DataTable`：提供了**列头**、**单元格**、**展开行**的插槽式写法支持。
--   `Dropdown`：提供了**下拉菜单项**的插槽式写法支持。
+-   `DataTable`：提供了**列头**、**单元格**、**展开行**的插槽写法支持。
+-   `Dropdown`：提供了**下拉菜单项**的插槽写法支持。
+-   `Select`：提供了**选项**、**选项组**的插槽写法支持。
 
 ---
 
@@ -97,9 +98,9 @@ app.use(Dropdown);
 </script>
 ```
 
-### 3. 开发文档
+### 3. 使用组件
 
-[点此查看](./docs/zh-CN/README.md)。
+请参阅[《开发文档》](./docs/zh-CN/README.md)。
 
 ### 4. 示例项目
 
@@ -120,6 +121,6 @@ app.use(Dropdown);
 -   [x] `Dropdown`: Slot 插槽
 -   [ ] `Dropdown`: 多级菜单
 -   [ ] `Menu`: Slot 插槽
--   [ ] `Select`: Slot 插槽
+-   [x] `Select`: Slot 插槽
 -   [ ] `Tree`: Slot 插槽
 -   [ ] `TreeSelect`: Slot 插槽

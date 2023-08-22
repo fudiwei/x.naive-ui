@@ -1,0 +1,39 @@
+﻿<script>
+import { defineComponent } from 'vue';
+import { PersonCircleOutline as UserIcon, Pencil as EditIcon, LogOutOutline as LogoutIcon } from '@vicons/ionicons5';
+
+export default defineComponent({});
+</script>
+
+<template>
+    <x-n-dropdown>
+        <template #trigger>
+            <n-button>用户资料</n-button>
+        </template>
+
+        <x-n-dropdown-item key="profile">
+            <template #icon>
+                <n-icon>
+                    <UserIcon />
+                </n-icon>
+            </template>
+            用户资料
+        </x-n-dropdown-item>
+        <x-n-dropdown-item key="editProfile">
+            <template #icon>
+                <n-icon>
+                    <EditIcon />
+                </n-icon>
+            </template>
+            编辑用户资料
+        </x-n-dropdown-item>
+        <x-n-dropdown-item key="logout">
+            <template #icon>
+                <n-icon>
+                    <LogoutIcon />
+                </n-icon>
+            </template>
+            退出登录
+        </x-n-dropdown-item>
+    </x-n-dropdown>
+</template>

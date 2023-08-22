@@ -74,8 +74,6 @@ export default (<T extends DataTableRowData = any>() => {
         }>,
 
         setup(props, { attrs, slots, expose }) {
-            const nRef = ref<NDataTableInst>();
-
             const nColumns = computed(() => {
                 return props.columns?.map((col) => {
                     let renderColumn = (col as NDataTableBaseColumn<T>).title;
@@ -155,6 +153,7 @@ export default (<T extends DataTableRowData = any>() => {
                 return temp;
             });
 
+            const nRef = ref<NDataTableInst>();
             expose({
                 filter: (filters) => nRef.value?.filter(filters),
                 filters: (filters) => nRef.value?.filters(filters),
