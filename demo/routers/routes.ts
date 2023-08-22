@@ -24,6 +24,14 @@ const routes: RouteRecordRaw[] = [
             sider: true,
             title: 'Dropdown / 下拉菜单'
         }
+    },
+    {
+        path: '/components/select',
+        component: () => import('../views/components/select/index.vue'),
+        meta: {
+            sider: true,
+            title: 'Select / 选择器'
+        }
     }
 ];
 

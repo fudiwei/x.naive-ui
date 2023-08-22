@@ -115,10 +115,11 @@ app.use(Dropdown);
 
 ## 迭代计划
 
--   [x] DataTable slots
--   [x] Dropdown slots
--   [ ] DataTable template style API
--   [ ] Dropdown cascaded slots
--   [ ] Select slots
--   [ ] Menu slots
--   [ ] Tree slots
+-   [x] `DataTable`: Slot 插槽
+-   [ ] `DataTable`: Template 模板式 API
+-   [x] `Dropdown`: Slot 插槽
+-   [ ] `Dropdown`: 多级菜单
+-   [ ] `Menu`: Slot 插槽
+-   [ ] `Select`: Slot 插槽
+-   [ ] `Tree`: Slot 插槽
+-   [ ] `TreeSelect`: Slot 插槽

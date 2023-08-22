@@ -115,10 +115,11 @@ You can run the demo to view more details.
 
 ## Road Map
 
--   [x] DataTable slots
--   [x] Dropdown slots
--   [ ] DataTable template style API
--   [ ] Dropdown cascaded slots
--   [ ] Select slots
--   [ ] Menu slots
--   [ ] Tree slots
+-   [x] `DataTable`: Slots
+-   [ ] `DataTable`: Template Style API
+-   [x] `Dropdown`: Slots
+-   [ ] `Dropdown`: Cascaded Menu
+-   [ ] `Menu`: Slots
+-   [ ] `Select`: Slots
+-   [ ] `Tree`: Slots
+-   [ ] `TreeSelect`: Slots
