@@ -10,6 +10,7 @@ import type { RowData as NDataTableRowData } from 'naive-ui/es/data-table/src/in
 import { defineComponent, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
+import { COMLIB_PREFIX } from '../_utils';
 import { isEmptyVNodes } from '../_utils';
 import ComponentEmpty from '../empty/Empty';
 
@@ -54,7 +55,7 @@ export type DataTableInstance = NDataTableInst;
 
 export default (<T extends DataTableRowData = any>() => {
     return defineComponent({
-        name: 'DataTable',
+        name: `${COMLIB_PREFIX}DataTable`,
 
         components: {
             NDataTable,

@@ -2,6 +2,8 @@
 import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
+import { COMLIB_PREFIX } from '../_utils';
+
 const _props = {
     ...defaultNEmptyProps,
     description: {
@@ -13,7 +15,7 @@ const _props = {
 export type EmptyProps = ExtractPublicPropTypes<typeof _props>;
 
 export default defineComponent({
-    name: 'Empty',
+    name: `${COMLIB_PREFIX}Empty`,
 
     components: {
         NEmpty,

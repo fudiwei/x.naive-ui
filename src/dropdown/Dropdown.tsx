@@ -8,6 +8,7 @@ import { defineComponent, computed, h } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
+import { COMLIB_PREFIX } from '../_utils';
 import { isEmptyVNode } from '../_utils';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
@@ -27,7 +28,7 @@ const _props = (() => {
 export type DropdownProps = ExtractPublicPropTypes<typeof _props>;
 
 export default defineComponent({
-    name: 'Dropdown',
+    name: `${COMLIB_PREFIX}Dropdown`,
 
     components: {
         NDropdown

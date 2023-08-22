@@ -31,7 +31,6 @@ module.exports = {
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
-        '@typescript-eslint/triple-slash-reference': 'off',
-        'vue/multi-word-component-names': 'off'
+        '@typescript-eslint/triple-slash-reference': 'off'
     }
 };

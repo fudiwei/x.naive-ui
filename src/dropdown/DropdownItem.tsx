@@ -1,6 +1,8 @@
 ﻿import type { PropType, SlotsType, ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 
+import { COMLIB_PREFIX } from '../_utils';
+
 const _props = {
     label: {
         type: String as PropType<string>
@@ -14,7 +16,7 @@ const _props = {
 export type DropdownItemProps = ExtractPropTypes<typeof _props>;
 
 export default defineComponent({
-    name: 'DropdownItem',
+    name: `${COMLIB_PREFIX}DropdownItem`,
 
     props: _props,
 
