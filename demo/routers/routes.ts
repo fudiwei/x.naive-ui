@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/components/data-table/index.vue'),
         meta: {
             sider: true,
-            title: 'Data Table'
+            title: 'Data Table / 数据表格'
         }
     },
     {
@@ -22,7 +22,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/components/dropdown/index.vue'),
         meta: {
             sider: true,
-            title: 'Dropdown'
+            title: 'Dropdown / 下拉菜单'
         }
     }
 ];

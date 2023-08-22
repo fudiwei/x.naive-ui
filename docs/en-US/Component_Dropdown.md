@@ -27,6 +27,7 @@ For other props, please see [Naive-UI 文档](https://www.naiveui.com/en-US/os-t
 
 | Name     | Type      | Default | Description                    | Version |
 | :------- | :-------- | :------ | :----------------------------- | :------ |
+| label    | `string`  |         | Label.                         |         |
 | disabled | `boolean` | `false` | Whether to disable the option. |         |
 
 #### `XNDropdownItem` Slots

@@ -142,7 +142,7 @@ export default (<T extends DataTableRowData = any>() => {
             const nSlots = computed(() => {
                 const temp = {
                     ...slots,
-                    empty: slots['empty'] ?? (() => <ComponentEmpty description={props.emptyText} />),
+                    empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                     renderColumn: undefined,
                     renderCell: undefined,
                     renderExpand: undefined

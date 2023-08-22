@@ -27,6 +27,7 @@
 
 | 名称     | 类型      | 默认值  | 说明     | 版本 |
 | :------- | :-------- | :------ | :------- | :--- |
+| label    | `string`  |         | 文本内容 |      |
 | disabled | `boolean` | `false` | 是否禁用 |      |
 
 #### `XNDropdownItem` Slots

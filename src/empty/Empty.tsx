@@ -34,7 +34,7 @@ export default defineComponent({
             ...slots,
 
             default: () => (
-                <div style="font-size: 0.75rem; line-height: 1rem;">{slots['default']?.() ?? props.description}</div>
+                <div style="font-size: 0.75rem; line-height: 1rem;">{slots['default']?.() || props.description}</div>
             ),
 
             icon: () => (
