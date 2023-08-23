@@ -11,7 +11,7 @@ import DemoCodeTs from './code-ts.vuecode';
             <p>
                 见 Naive-UI 官方文档示例中「
                 <n-a href="//www.naiveui.com/zh-CN/os-theme/components/dropdown#icon.vue" target="blank">图标</n-a>
-                」。以插槽形式改写。
+                」。以模板形式改写。
             </p>
         </template>
 

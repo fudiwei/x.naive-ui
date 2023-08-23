@@ -20,10 +20,6 @@
 
 其他 Props 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
 
-#### `XNDataTable` Methods
-
-其他 Methods 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Methods)。
-
 #### `XNDataTable` Slots
 
 | 名称         | 参数                          | 说明               | 版本 |
@@ -33,3 +29,7 @@
 | renderExpand | `(rowData, rowIndex)`         | 自定义展开行的内容 |      |
 
 其他 Slots 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Slots)。
+
+#### `XNDataTable` Methods
+
+其他 Methods 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Methods)。

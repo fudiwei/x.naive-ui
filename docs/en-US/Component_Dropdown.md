@@ -14,7 +14,7 @@ Please refer to the Demo.
 
 #### `XNDropdown` Props
 
-For other props, please see [Naive-UI 文档](https://www.naiveui.com/en-US/os-theme/components/dropdown#Dropdown-Props). Note that `key-field`, `label-field`, `options` are not available.
+For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/dropdown#Dropdown-Props). Note that `key-field`, `label-field`, `options` are not available.
 
 #### `XNDropdown` Slots
 
@@ -32,7 +32,7 @@ For other props, please see [Naive-UI 文档](https://www.naiveui.com/en-US/os-t
 
 #### `XNDropdownItem` Slots
 
-| Name    | Type | Description                   | 版本 |
-| :------ | :--- | :---------------------------- | :--- |
-| default | `()` | Custom displayed label value. |      |
-| icon    | `()` | Custom icon.                  |      |
+| Name    | Type | Description             | Version |
+| :------ | :--- | :---------------------- | :------ |
+| default | `()` | Custom displayed label. |         |
+| icon    | `()` | Custom icon.            |         |

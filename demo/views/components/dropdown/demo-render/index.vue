@@ -13,7 +13,7 @@ import DemoCodeTs from './code-ts.vuecode';
                 <n-a href="//www.naiveui.com/zh-CN/os-theme/components/dropdown#render.vue" target="blank">
                     纯渲染的内容
                 </n-a>
-                」。以插槽形式改写。
+                」。以模板形式改写。
             </p>
             <p>
                 注意：任何非
