@@ -42,8 +42,9 @@
 -   与 Naive-UI 组件几乎完全一致的 API，只需在原来的组件名前增加 `x-` 前缀（例如：`<n-data-table>` → `<x-n-data-table>`）。
 -   配合 [vue-tsc](https://github.com/vuejs/language-tools)，在模板中使用插槽也可享受到 TypeScript 的类型约束。
 -   `DataTable`：提供了**列头**、**单元格**、**展开行**的插槽写法支持。
--   `Dropdown`：提供了**下拉菜单项**的模板写法支持。
+-   `Dropdown`：提供了**菜单项**的模板写法支持。
 -   `Select`：提供了**选项**、**选项组**的模板写法支持；提供了**选项**、**标签**的插槽写法支持。
+-   `Cascader`：提供了**选项**的插槽写法支持。
 
 ---
 
@@ -122,5 +123,6 @@ app.use(XNDataTable);
 -   [x] `Dropdown`
 -   [ ] `Menu`
 -   [x] `Select`
+-   [x] `Cascader`
 -   [ ] `Tree`
 -   [ ] `TreeSelect`

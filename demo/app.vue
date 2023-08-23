@@ -65,7 +65,7 @@ html {
 body {
     width: 100%;
     height: 100%;
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
     overflow-x: auto;
     overflow-y: auto;

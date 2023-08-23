@@ -43,6 +43,7 @@ This project is aimed to provide a solution for these issues above.
 -   `DataTable`: Slots for **colums**, **cells**, **expandable rows**.
 -   `Dropdown`: Template style API for **options**.
 -   `Select`: Template style API for **options**, **option groups**. Slots for **options**, **tags**.
+-   `Cascader`: Slots for **options**.
 
 ---
 
@@ -121,5 +122,6 @@ You can run the demo to view more details.
 -   [x] `Dropdown`: Slots
 -   [ ] `Menu`
 -   [x] `Select`
+-   [x] `Cascader`
 -   [ ] `Tree`
 -   [ ] `TreeSelect`
