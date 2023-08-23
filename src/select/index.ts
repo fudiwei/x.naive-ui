@@ -4,7 +4,12 @@ import Select from './Select';
 import SelectOption from './SelectOption';
 import SelectOptionGroup from './SelectOptionGroup';
 
-export type { SelectProps } from './Select';
+export type {
+    SelectProps,
+    SelectRenderLabelParams,
+    SelectRenderOptionParams,
+    SelectRenderTagParams
+} from './Select';
 export type { SelectOptionProps } from './SelectOption';
 export type { SelectOptionGroupProps } from './SelectOptionGroup';
 export { Select, SelectOption, SelectOptionGroup };

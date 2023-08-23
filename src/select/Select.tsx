@@ -1,6 +1,10 @@
 ﻿import type { VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
-import type { SelectOption as NSelectOption, SelectInst as NSelectInst } from 'naive-ui';
-import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
+import type {
+    SelectOption as NSelectOption,
+    SelectGroupOption as NSelectGroupOption,
+    SelectInst as NSelectInst
+} from 'naive-ui';
+import { defineComponent, ref, computed, getCurrentInstance, h } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
 import { COMLIB_PREFIX } from '../_utils/const';
@@ -11,7 +15,7 @@ import ComponentEmpty from '../empty/Empty';
 import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
 
-export type SelectOption = Omit<NSelectOption, 'render'>;
+export type SelectOption = NSelectOption;
 export type SelectOptions = SelectOption[];
 
 const _props = (() => {
@@ -33,6 +37,25 @@ const _props = (() => {
 
 export type SelectProps = ExtractPublicPropTypes<typeof _props>;
 export type SelectInstance = NSelectInst;
+export type SelectRenderLabelParams = {
+    option: SelectOption;
+    label: string;
+    value?: string | number;
+    selected?: boolean;
+};
+export type SelectRenderOptionParams = {
+    optionVNode: VNode;
+    option: SelectOption;
+    label: string;
+    value?: string | number;
+    selected?: boolean;
+};
+export type SelectRenderTagParams = {
+    option: SelectOption;
+    label: string;
+    value?: string | number;
+    close: () => void;
+};
 
 function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
     const temp = [] as NSelectOption[];
@@ -101,19 +124,104 @@ export default defineComponent({
         action: NonNullable<unknown>;
         arrow: NonNullable<unknown>;
         empty: NonNullable<unknown>;
+        renderLabel: SelectRenderLabelParams;
+        renderOption: SelectRenderOptionParams;
+        renderTag: SelectRenderTagParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
-        const nRef = ref<NSelectInst>();
+        function getNOptionLabel(option: NSelectOption): string {
+            return (props.labelField != null ? option[props.labelField] : option.label) as string;
+        }
 
-        const nOptions = computed<NSelectOption[]>(() => {
+        function getNOptionValue(option: NSelectOption): string | number | undefined {
+            if (isNOptionGroup(option)) {
+                return;
+            }
+
+            return (props.valueField != null ? option[props.valueField] : option.value) as string | number;
+        }
+
+        function isNOptionGroup(option: NSelectOption): boolean {
+            return (option as NSelectGroupOption).type === 'group';
+        }
+
+        function isNOptionSelected(option: NSelectOption): boolean {
+            if (isNOptionGroup(option)) {
+                return false;
+            }
+
+            // REF: https://github.com/tusen-ai/naive-ui/blob/0a836a17aa932d54d5892c745469a1ad2058c192/src/_internal/select-menu/src/SelectOption.tsx#L101-L114
+
+            const value = props.value;
+            const multiple = props.multiple;
+
+            if (value == null) {
+                return false;
+            }
+
+            const optionValue = getNOptionValue(option);
+            if (multiple) {
+                return (value as Array<string | number>).includes(optionValue!);
+            } else {
+                return value === optionValue;
+            }
+        }
+
+        const nOptions = computed(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNodes(vnodes)) {
-                return Array.isArray(props.options) ? (props.options as NSelectOption[]) : [];
+                return props.options;
             }
 
             const temp = convertVNodesToOptions(vnodes);
             return temp;
+        });
+
+        const nRenderLabel = computed(() => {
+            if (!slots['renderLabel']) {
+                return props.renderLabel;
+            }
+
+            return (option: NSelectOption, selected: boolean) => {
+                return slots.renderLabel!({
+                    option: option,
+                    label: getNOptionLabel(option),
+                    value: getNOptionValue(option),
+                    selected: selected
+                });
+            };
+        });
+
+        const nRenderOption = computed(() => {
+            if (!slots['renderOption']) {
+                return props.renderOption;
+            }
+
+            return ({ node, option, selected }: { node: VNode; option: NSelectOption; selected: boolean }) => {
+                return slots.renderOption!({
+                    optionVNode: node,
+                    option: option,
+                    label: getNOptionLabel(option),
+                    value: getNOptionValue(option),
+                    selected: selected
+                });
+            };
+        });
+
+        const nRenderTag = computed(() => {
+            if (!slots['renderTag']) {
+                return props.renderTag;
+            }
+
+            return ({ option, handleClose }: { option: NSelectOption; handleClose: () => void }) => {
+                return slots.renderTag!({
+                    option: option,
+                    label: getNOptionLabel(option),
+                    value: getNOptionValue(option),
+                    close: handleClose
+                });
+            };
         });
 
         const nSlots = computed(() => {
@@ -132,11 +240,23 @@ export default defineComponent({
             return temp;
         });
 
+        const nRef = ref<NSelectInst>();
         expose({
             focus: () => nRef.value?.focus(),
             blur: () => nRef.value?.blur()
         } as SelectInstance);
 
-        return () => <NSelect ref={nRef} {...attrs} {...props} options={nOptions.value} v-slots={nSlots.value} />;
+        return () => (
+            <NSelect
+                ref={nRef}
+                {...attrs}
+                {...props}
+                renderLabel={nRenderLabel.value}
+                renderOption={nRenderOption.value}
+                renderTag={nRenderTag.value}
+                options={nOptions.value}
+                v-slots={nSlots.value}
+            />
+        );
     }
 });
