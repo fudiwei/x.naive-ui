@@ -1,7 +1,7 @@
 {
     "name": "@skit/x.naive-ui",
     "title": "X Naive-UI",
-    "description": "An extension to the Naive-UI component library, that enables slots for DataTable/Dropdown/Select/Menu. 一个对 Naive-UI 组件库的扩展，使 DataTable/Dropdown/Select/Menu 等组件支持插槽式的写法。",
+    "description": "An extension to the Naive-UI component library, that enables slots and template style API for DataTable/Dropdown/Menu/Select/Tree/TreeSelect. 一个对 Naive-UI 组件库的扩展，使 DataTable/Dropdown/Menu/Select/Tree/TreeSelect 等组件支持插槽模板式的写法。",
     "keywords": [
         "naive-ui",
         "component library",

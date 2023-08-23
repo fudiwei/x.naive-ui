@@ -6,7 +6,7 @@
 
 <h1 align="center">X Naive UI</h1>
 <p align="center">An extension to the <a href="https://github.com/tusen-ai/naive-ui" target="_blank">Naive-UI</a> component library.</p>
-<p align="center">Enables slots for DataTable / Dropdown / Select / Menu.</p>
+<p align="center">Enables slots and template style for DataTable / Dropdown / Menu / Select / Tree / TreeSelect.</p>
 
 <p align="center">English | <a href="README.md">中文</a></p>
 
@@ -16,7 +16,7 @@
 
 [Naive-UI](https://github.com/tusen-ai/naive-ui) is a popular Vue 3 component library.
 
-Due to the maintainability, the official team does not provide slots or template style APIs for `DataTable`, `Dropdown`, `Select`, `Menu`, _etc._.
+Due to the maintainability, the official team does not provide slots or template style APIs for `DataTable`, `Dropdown`, `Menu`, `Select`, `Tree`, `TreeSelect` _etc._.
 
 Here are some related issues on GitHub:
 
@@ -39,9 +39,10 @@ This project is aimed to provide a solution for these issues above.
 
 ## Features
 
+-   Almost the same API to Naive-UI. You just need to add `x-` before the original component name (example: `<n-data-table>` → `<x-n-data-table>`).
 -   `DataTable`: Slots for **colums**, **cells**, **expandable rows**.
--   `Dropdown`: Slots for **options**.
--   `Select`: Slots for **options**, **option groups**.
+-   `Dropdown`: Template style API for **options**.
+-   `Select`: Template style API for **options**, **option groups**. Slots for **options**, **tags**.
 
 ---
 
@@ -73,11 +74,10 @@ app.use(XNaiveUI);
 
 ```js
 import { createApp } from 'vue';
-import { DataTable, Dropdown } from '@skit/naive-ui';
+import { XNDataTable } from '@skit/naive-ui';
 
 const app = createApp(App);
-app.use(DataTable);
-app.use(Dropdown);
+app.use(XNDataTable);
 ```
 
 #### 2.3. Local Registration
@@ -88,11 +88,11 @@ app.use(Dropdown);
 </template>
 
 <script>
-    import { DataTable } from '@skit/naive-ui';
+    import { XNDataTable } from '@skit/naive-ui';
 
     export default {
         components: {
-            XNDataTable: DataTable
+            XNDataTable
         }
     };
 </script>
@@ -117,10 +117,9 @@ You can run the demo to view more details.
 ## Road Map
 
 -   [x] `DataTable`: Slots
--   [ ] `DataTable`: Template Style API
+-   [ ] `DataTable`: Template style API
 -   [x] `Dropdown`: Slots
--   [ ] `Dropdown`: Cascaded Menu
--   [ ] `Menu`: Slots
--   [x] `Select`: Slots
--   [ ] `Tree`: Slots
--   [ ] `TreeSelect`: Slots
+-   [ ] `Menu`
+-   [x] `Select`
+-   [ ] `Tree`
+-   [ ] `TreeSelect`

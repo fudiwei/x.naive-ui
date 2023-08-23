@@ -3,3 +3,5 @@
 -   [Component: `XNDataTable`](./Component_DataTable.md)
 
 -   [Component: `XNDropdown`](./Component_Dropdown.md)
+
+-   [Component: `XNSelect`](./Component_Select.md)

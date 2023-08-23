@@ -6,7 +6,7 @@
 
 <h1 align="center">X Naive UI</h1>
 <p align="center">一个对 <a href="https://github.com/tusen-ai/naive-ui" target="_blank">Naive-UI</a> 组件库的扩展。</p>
-<p align="center">使 DataTable / Dropdown / Select / Menu 等组件支持插槽式的写法。</p>
+<p align="center">使 DataTable / Dropdown / Menu / Select / Tree / TreeSelect 等组件支持插槽模板式的写法。</p>
 
 <p align="center"><a href="README.en-US.md">English</a> | 中文</p>
 
@@ -16,7 +16,7 @@
 
 [Naive-UI](https://github.com/tusen-ai/naive-ui) 是一个流行的 Vue 3 组件库。
 
-官方团队出于可维护性的考虑，没有提供 `DataTable`、`Dropdown`、`Select`、`Menu` 等组件的插槽或 template 式的写法支持。
+官方团队出于可维护性的考虑，没有提供 `DataTable`、`Dropdown`、`Menu`、`Select`、`Tree`、`TreeSelect` 等组件的 Slot 插槽或 Template 模板式的写法支持。
 
 以下是 GitHub 上的一些相关 Issues：
 
@@ -39,9 +39,11 @@
 
 ## 特性
 
+-   与 Naive-UI 组件几乎完全一致的 API，只需在原来的组件名前增加 `x-` 前缀（例如：`<n-data-table>` → `<x-n-data-table>`）。
+-   配合 [vue-tsc](https://github.com/vuejs/language-tools)，在模板中使用插槽也可享受到 TypeScript 的类型约束。
 -   `DataTable`：提供了**列头**、**单元格**、**展开行**的插槽写法支持。
--   `Dropdown`：提供了**下拉菜单项**的插槽写法支持。
--   `Select`：提供了**选项**、**选项组**的插槽写法支持。
+-   `Dropdown`：提供了**下拉菜单项**的模板写法支持。
+-   `Select`：提供了**选项**、**选项组**的模板写法支持；提供了**选项**、**标签**的插槽写法支持。
 
 ---
 
@@ -73,11 +75,10 @@ app.use(XNaiveUI);
 
 ```js
 import { createApp } from 'vue';
-import { DataTable, Dropdown } from '@skit/naive-ui';
+import { XNDataTable } from '@skit/naive-ui';
 
 const app = createApp(App);
-app.use(DataTable);
-app.use(Dropdown);
+app.use(XNDataTable);
 ```
 
 #### 2.3. 局部注册
@@ -88,11 +89,11 @@ app.use(Dropdown);
 </template>
 
 <script>
-    import { DataTable } from '@skit/naive-ui';
+    import { XNDataTable } from '@skit/naive-ui';
 
     export default {
         components: {
-            XNDataTable: DataTable
+            XNDataTable
         }
     };
 </script>
@@ -118,9 +119,8 @@ app.use(Dropdown);
 
 -   [x] `DataTable`: Slot 插槽
 -   [ ] `DataTable`: Template 模板式 API
--   [x] `Dropdown`: Slot 插槽
--   [ ] `Dropdown`: 多级菜单
--   [ ] `Menu`: Slot 插槽
--   [x] `Select`: Slot 插槽
--   [ ] `Tree`: Slot 插槽
--   [ ] `TreeSelect`: Slot 插槽
+-   [x] `Dropdown`
+-   [ ] `Menu`
+-   [x] `Select`
+-   [ ] `Tree`
+-   [ ] `TreeSelect`
