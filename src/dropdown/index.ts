@@ -1,18 +1,20 @@
 ﻿import type { App } from 'vue';
 
-import XNDropdown from './Dropdown';
-import XNDropdownDivider from './DropdownDivider';
-import XNDropdownItem from './DropdownItem';
+import ComponentDropdown from './Dropdown';
+import ComponentDropdownDivider from './DropdownDivider';
+import ComponentDropdownItem from './DropdownItem';
 
 export type { DropdownProps } from './Dropdown';
 export type { DropdownItemProps } from './DropdownItem';
-export { XNDropdown, XNDropdownDivider, XNDropdownItem };
-export default Object.assign(XNDropdown, {
-    Divider: XNDropdownDivider,
-    Item: XNDropdownItem,
+export const XNDropdown = Object.assign(ComponentDropdown, {
+    Divider: ComponentDropdownDivider,
+    Item: ComponentDropdownItem,
     install: (app: App) => {
-        app.component(XNDropdown.name, XNDropdown);
-        app.component(XNDropdownDivider.name, XNDropdownDivider);
-        app.component(XNDropdownItem.name, XNDropdownItem);
+        app.component(ComponentDropdown.name, ComponentDropdown);
+        app.component(ComponentDropdownDivider.name, ComponentDropdownDivider);
+        app.component(ComponentDropdownItem.name, ComponentDropdownItem);
     }
 });
+export const XNDropdownDivider = ComponentDropdownDivider;
+export const XNDropdownItem = ComponentDropdownItem;
+export default XNDropdown;

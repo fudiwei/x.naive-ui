@@ -1,8 +1,8 @@
 ﻿import type { App } from 'vue';
 
-import XNSelect from './Select';
-import XNSelectOption from './SelectOption';
-import XNSelectOptionGroup from './SelectOptionGroup';
+import ComponentSelect from './Select';
+import ComponentSelectOption from './SelectOption';
+import ComponentSelectOptionGroup from './SelectOptionGroup';
 
 export type {
     SelectProps,
@@ -14,13 +14,15 @@ export type {
 } from './Select';
 export type { SelectOptionProps } from './SelectOption';
 export type { SelectOptionGroupProps } from './SelectOptionGroup';
-export { XNSelect, XNSelectOption, XNSelectOptionGroup };
-export default Object.assign(XNSelect, {
-    Option: XNSelectOption,
-    OptionGroup: XNSelectOptionGroup,
+export const XNSelect = Object.assign(ComponentSelect, {
+    Option: ComponentSelectOption,
+    OptionGroup: ComponentSelectOptionGroup,
     install: (app: App) => {
-        app.component(XNSelect.name, XNSelect);
-        app.component(XNSelectOption.name, XNSelectOption);
-        app.component(XNSelectOptionGroup.name, XNSelectOptionGroup);
+        app.component(ComponentSelect.name, ComponentSelect);
+        app.component(ComponentSelectOption.name, ComponentSelectOption);
+        app.component(ComponentSelectOptionGroup.name, ComponentSelectOptionGroup);
     }
 });
+export const XNSelectOption = ComponentSelectOption;
+export const XNSelectOptionGroup = ComponentSelectOptionGroup;
+export default XNSelect;

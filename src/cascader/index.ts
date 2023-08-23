@@ -1,11 +1,11 @@
 ﻿import type { App } from 'vue';
 
-import XNCascader from './Cascader';
+import ComponentCascader from './Cascader';
 
 export type { CascaderProps, CascaderOption, CascaderOptions, CascaderRenderLabelParams } from './Cascader';
-export { XNCascader };
-export default Object.assign(XNCascader, {
+export const XNCascader = Object.assign(ComponentCascader, {
     install: (app: App) => {
         app.component(XNCascader.name, XNCascader);
     }
 });
+export default XNCascader;
