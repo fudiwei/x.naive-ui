@@ -6,7 +6,7 @@
 
 <h1 align="center">X Naive UI</h1>
 <p align="center">一个对 <a href="https://github.com/tusen-ai/naive-ui" target="_blank">Naive-UI</a> 组件库的扩展。</p>
-<p align="center">使 DataTable / Dropdown / Menu / Select / Tree / TreeSelect 等组件支持插槽模板式的写法。</p>
+<p align="center">使 DataTable / Dropdown / Menu / Select / Tree 等组件支持插槽模板式的写法。</p>
 
 <p align="center"><a href="README.en-US.md">English</a> | 中文</p>
 
