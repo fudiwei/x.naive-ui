@@ -53,7 +53,8 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
                     props: restProps as HTMLAttributes,
                     disabled: !!vProps.disabled || vProps.disabled === '',
                     label: renderSlot(vSlots['default']) || vProps.label,
-                    icon: renderSlot(vSlots['icon'])
+                    icon: renderSlot(vSlots['icon']),
+                    children: vSlots['menu'] ? convertVNodesToOptions(vSlots['menu']()) : undefined
                 } as NDropdownOption);
             } else if (vnode.type === ComponentDropdownDivider) {
                 // 分割线

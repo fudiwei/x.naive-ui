@@ -6,11 +6,11 @@
         XNDropdownItem: (typeof import('@skit/x.naive-ui'))['XNDropdownItem'];
         XNDropdownDivider: (typeof import('@skit/x.naive-ui'))['XNDropdownDivider'];
 
+        XNEmpty: (typeof import('@skit/x.naive-ui'))['XNEmpty'];
+
         XNSelect: (typeof import('@skit/x.naive-ui'))['XNSelect'];
         XNSelectOption: (typeof import('@skit/x.naive-ui'))['XNSelectOption'];
         XNSelectOptionGroup: (typeof import('@skit/x.naive-ui'))['XNSelectOptionGroup'];
-
-        XNEmpty: (typeof import('@skit/x.naive-ui'))['XNEmpty'];
     }
 }
 
