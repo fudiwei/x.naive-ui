@@ -51,10 +51,10 @@
 
 ### 1. 安装依赖
 
-使用 npm 或其他包管理工具安装依赖：
+使用 pnpm 或其他包管理工具安装依赖：
 
 ```shell
-> npm install @skit/x.naive-ui
+> pnpm install @skit/x.naive-ui
 ```
 
 ### 2. 组件注册
@@ -108,9 +108,9 @@ app.use(XNDataTable);
 你可以运行 Demo 来查看更多内容。
 
 ```shell
-> pnpm install
-> pnpm run build
-> pnpm run demo
+> pnpm install    # 安装依赖
+> pnpm run build  # 构建项目
+> pnpm run demo   # 运行示例，访问 http://localhost:8888/
 ```
 
 ---

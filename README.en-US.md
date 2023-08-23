@@ -50,10 +50,10 @@ This project is aimed to provide a solution for these issues above.
 
 ### 1. Installation
 
-Use npm or other package manager to install:
+Use pnpm or other package manager to install:
 
 ```shell
-> npm install @skit/x.naive-ui
+> pnpm install @skit/x.naive-ui
 ```
 
 ### 2. Components Registration
@@ -107,9 +107,9 @@ Please view the [Documentation](./docs/en-US/README.md).
 You can run the demo to view more details.
 
 ```shell
-> pnpm install
-> pnpm run build
-> pnpm run demo
+> pnpm install    # install dependencies
+> pnpm run build  # build
+> pnpm run demo   # run demo, then visit http://localhost:8888/
 ```
 
 ---
