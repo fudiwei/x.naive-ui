@@ -1,5 +1,7 @@
 ﻿declare module 'vue' {
     export interface GlobalComponents {
+        XNCascader: (typeof import('@skit/x.naive-ui'))['XNCascader'];
+
         XNDataTable: (typeof import('@skit/x.naive-ui'))['XNDataTable'];
 
         XNDropdown: (typeof import('@skit/x.naive-ui'))['XNDropdown'];

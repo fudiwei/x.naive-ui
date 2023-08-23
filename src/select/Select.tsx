@@ -113,7 +113,8 @@ export default defineComponent({
     name: 'XNSelect',
 
     components: {
-        NSelect
+        NSelect,
+        XNEmpty: ComponentEmpty
     },
 
     props: _props,

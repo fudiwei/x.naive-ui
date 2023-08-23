@@ -58,8 +58,7 @@ export default (<T extends DataTableRowData = any>() => {
 
         components: {
             NDataTable,
-
-            ComponentEmpty
+            XNEmpty: ComponentEmpty
         },
 
         props: _props as ReturnType<typeof _propsMakeGeneric<T>>,
