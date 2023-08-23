@@ -6,12 +6,14 @@ import DemoCodeTs from './code-ts.vuecode';
 </script>
 
 <template>
-    <DemoCard title="Basic / 基础用法" anchor="basic" :js-code="DemoCodeJs" :ts-code="DemoCodeTs">
+    <DemoCard title="Select Person / 选择人员" anchor="person-picker" :js-code="DemoCodeJs" :ts-code="DemoCodeTs">
         <template #content>
             <p>
                 见 Naive-UI 官方文档示例中「
-                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#basic.vue" target="blank">基础用法</n-a>
-                」。以模板形式改写。
+                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#render-person.vue" target="blank">
+                    选择人员
+                </n-a>
+                」。以插槽形式改写。
             </p>
         </template>
 

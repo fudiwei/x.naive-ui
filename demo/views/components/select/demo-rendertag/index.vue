@@ -6,19 +6,28 @@ import DemoCodeTs from './code-ts.vuecode';
 </script>
 
 <template>
-    <DemoCard title="Group / 选项组" anchor="group" :js-code="DemoCodeJs" :ts-code="DemoCodeTs">
+    <DemoCard
+        title="Customize Tag Rendering / 自定义标签渲染"
+        anchor="custom-render-tag"
+        :js-code="DemoCodeJs"
+        :ts-code="DemoCodeTs"
+    >
         <template #content>
             <p>
                 见 Naive-UI 官方文档示例中「
-                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#group.vue" target="blank">选项组</n-a>
-                」。以模板形式改写。
+                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#render-tag.vue" target="blank">
+                    自定义标签渲染
+                </n-a>
+                」。以插槽形式改写。
             </p>
             <p>
-                注意：任何非
+                注意：仅支持
+                <n-text type="info">options</n-text>
+                参数传递，不支持
                 <n-text type="info">&lt;x-n-select-option&gt;</n-text>
                 、
                 <n-text type="info">&lt;x-n-select-option-group&gt;</n-text>
-                类型的子元素，将被忽略。
+                构造节点。
             </p>
         </template>
 
