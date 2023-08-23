@@ -36,3 +36,4 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | :------ | :--- | :---------------------- | :------ |
 | default | `()` | Custom displayed label. |         |
 | icon    | `()` | Custom icon.            |         |
+| submenu | `()` | Sub menu.               |         |
