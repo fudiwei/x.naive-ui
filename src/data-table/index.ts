@@ -1,6 +1,6 @@
 ﻿import type { App } from 'vue';
 
-import DataTable from './DataTable';
+import XNDataTable from './DataTable';
 
 export type {
     DataTableProps,
@@ -11,9 +11,9 @@ export type {
     DataTableRenderCellParams,
     DataTableRenderExpandParams
 } from './DataTable';
-export { DataTable };
-export default Object.assign(DataTable, {
+export { XNDataTable };
+export default Object.assign(XNDataTable, {
     install: (app: App) => {
-        app.component(DataTable.name, DataTable);
+        app.component(XNDataTable.name, XNDataTable);
     }
 });

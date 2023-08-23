@@ -1,11 +1,11 @@
 ﻿import type { App } from 'vue';
 
-import Empty from './Empty';
+import XNEmpty from './Empty';
 
 export type { EmptyProps } from './Empty';
-export { Empty };
-export default Object.assign(Empty, {
+export { XNEmpty };
+export default Object.assign(XNEmpty, {
     install: (app: App) => {
-        app.component(Empty.name, Empty);
+        app.component(XNEmpty.name, XNEmpty);
     }
 });

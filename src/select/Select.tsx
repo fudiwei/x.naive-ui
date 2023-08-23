@@ -7,7 +7,6 @@ import type {
 import { defineComponent, ref, computed, getCurrentInstance, h } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
-import { COMLIB_PREFIX } from '../_utils/const';
 import { isVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
 import { renderSlot } from '../_utils/render';
 import * as logger from '../_utils/log';
@@ -111,7 +110,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
 }
 
 export default defineComponent({
-    name: `${COMLIB_PREFIX}Select`,
+    name: 'XNSelect',
 
     components: {
         NSelect

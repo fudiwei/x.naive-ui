@@ -8,7 +8,6 @@ import { defineComponent, computed } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
-import { COMLIB_PREFIX } from '../_utils/const';
 import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
 import { renderSlot } from '../_utils/render';
 import ComponentDropdownDivider from './DropdownDivider';
@@ -80,7 +79,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
 }
 
 export default defineComponent({
-    name: `${COMLIB_PREFIX}Dropdown`,
+    name: 'XNDropdown',
 
     components: {
         NDropdown

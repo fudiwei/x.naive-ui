@@ -1,9 +1,9 @@
 ﻿import type { App } from 'vue';
 
-import DataTable from './data-table';
-import Dropdown from './dropdown';
-import Empty from './empty';
-import Select from './select';
+import XNDataTable from './data-table';
+import XNDropdown from './dropdown';
+import XNEmpty from './empty';
+import XNSelect from './select';
 
 export type * from './data-table';
 export type * from './dropdown';
@@ -15,9 +15,9 @@ export * from './empty';
 export * from './select';
 export default {
     install: (app: App) => {
-        app.use(DataTable);
-        app.use(Dropdown);
-        app.use(Empty);
-        app.use(Select);
+        app.use(XNDataTable);
+        app.use(XNDropdown);
+        app.use(XNEmpty);
+        app.use(XNSelect);
     }
 };
