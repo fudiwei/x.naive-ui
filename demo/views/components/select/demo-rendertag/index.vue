@@ -7,7 +7,7 @@ import DemoCodeTs from './code-ts.vuecode';
 
 <template>
     <DemoCard
-        title="Customize Tag Rendering / 自定义标签渲染"
+        title="Customized Tag Rendering / 自定义标签渲染"
         anchor="custom-render-tag"
         :js-code="DemoCodeJs"
         :ts-code="DemoCodeTs"

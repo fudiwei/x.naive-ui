@@ -7,25 +7,18 @@ import DemoCodeTs from './code-ts.vuecode';
 
 <template>
     <DemoCard
-        title="Customized Option Rendering / 自定义选项渲染"
-        anchor="custom-render-label"
+        title="Customized Rendering / 自定义渲染"
+        anchor="custom-render"
         :js-code="DemoCodeJs"
         :ts-code="DemoCodeTs"
     >
         <template #content>
             <p>
                 见 Naive-UI 官方文档示例中「
-                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#custom-option.vue" target="blank">
-                    自定义选项渲染
+                <n-a href="//www.naiveui.com/zh-CN/os-theme/components/cascader#custom-render.vue" target="blank">
+                    自定义渲染
                 </n-a>
                 」。以插槽形式改写。
-            </p>
-            <p>
-                注意：仅支持
-                <n-text type="info">options</n-text>
-                参数传递，不支持
-                <n-text type="info">&lt;x-n-select-option&gt;</n-text>
-                构造节点。
             </p>
         </template>
 

@@ -6,7 +6,7 @@ import DemoCodeTs from './code-ts.vuecode';
 </script>
 
 <template>
-    <DemoCard title="Pure Rendering Content / 纯渲染的内容" anchor="render" :js-code="DemoCodeJs" :ts-code="DemoCodeTs">
+    <DemoCard title="Pure Rendering Content / 纯渲染的内容" anchor="pure" :js-code="DemoCodeJs" :ts-code="DemoCodeTs">
         <template #content>
             <p>
                 见 Naive-UI 官方文档示例中「

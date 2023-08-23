@@ -32,6 +32,14 @@ const routes: RouteRecordRaw[] = [
             sider: true,
             title: 'Select / 选择器'
         }
+    },
+    {
+        path: '/components/cascader',
+        component: () => import('../views/components/cascader/index.vue'),
+        meta: {
+            sider: true,
+            title: 'Cascader / 级联选择'
+        }
     }
 ];
 
