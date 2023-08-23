@@ -78,9 +78,12 @@ export default defineComponent({
         const nSlots = computed(() => {
             const temp = {
                 ...slots,
-                empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
-                renderLabel: undefined
+                'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
+                'not-found': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
+                'notFound': undefined,
+                'renderLabel': undefined
             };
+            delete temp['notFound'];
             delete temp['renderLabel'];
             return temp;
         });
