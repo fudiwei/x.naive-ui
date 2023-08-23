@@ -22,6 +22,10 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | :------ | :--- | :---------- | :------ |
 | default | `()` | Menu.       |         |
 
+#### `XNMenu` Methods
+
+For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/menu#Menu-Methods).
+
 #### `XNMenuItem` Props
 
 | Name     | Type      | Default | Description                       | Version |

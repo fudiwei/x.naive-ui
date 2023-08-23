@@ -22,6 +22,10 @@
 | :------ | :--- | :----------------------------------------------------------------------- | :--- |
 | default | `()` | 菜单。仅支持 `XNMenuItem`、`XNMenuItemGroup`、`XNMenuDivider` 作为子组件 |      |
 
+#### `XNMenu` Methods
+
+其他 Methods 略，与 `NMenu` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/menu#Menu-Methods)。
+
 #### `XNMenuItem` Props
 
 | 名称     | 类型      | 默认值  | 说明                                        | 版本 |

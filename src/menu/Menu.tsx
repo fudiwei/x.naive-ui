@@ -2,9 +2,10 @@
 import type {
     MenuOption as NMenuOption,
     MenuGroupOption as NMenuGroupOption,
-    MenuDividerOption as NMenuDividerOption
+    MenuDividerOption as NMenuDividerOption,
+    MenuInst as NMenuInst
 } from 'naive-ui';
-import { defineComponent, computed, getCurrentInstance } from 'vue';
+import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
 import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
@@ -33,6 +34,7 @@ const _props = (() => {
 })();
 
 export type MenuProps = ExtractPublicPropTypes<typeof _props>;
+export type MenuInstance = NMenuInst;
 
 function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
     const temp = [] as NMenuOption[];
@@ -110,7 +112,7 @@ export default defineComponent({
         default: NonNullable<unknown>;
     }>,
 
-    setup(props, { attrs, slots }) {
+    setup(props, { attrs, slots, expose }) {
         const nOptions = computed<NMenuOption[]>(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNodes(vnodes)) {
@@ -125,8 +127,14 @@ export default defineComponent({
             ...slots
         }));
 
+        const nRef = ref<NMenuInst>();
+        expose({
+            showOption: (key) => nRef.value?.showOption(key)
+        } as MenuInstance);
+
         return () => (
             <NMenu
+                ref={nRef}
                 {...attrs}
                 {...props}
                 childrenField={undefined}
