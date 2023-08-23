@@ -1,0 +1,25 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.wordWrapColumn": 120,
+    "files.associations": {
+        "*.vue": "vue",
+        "*.vuecode": "vue"
+    },
+    "files.eol": "\r\n",
+    "javascript.format.semicolons": "insert",
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "liveServer.settings.root": "/dist/",
+    "svn.ignoreMissingSvnWarning": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "vue.codeActions.enabled": false,
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
