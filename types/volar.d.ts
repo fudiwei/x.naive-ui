@@ -10,6 +10,11 @@
 
         XNEmpty: (typeof import('@skit/x.naive-ui'))['XNEmpty'];
 
+        XNMenu: (typeof import('@skit/x.naive-ui'))['XNMenu'];
+        XNMenuItem: (typeof import('@skit/x.naive-ui'))['XNMenuItem'];
+        XNMenuItemGroup: (typeof import('@skit/x.naive-ui'))['XNMenuItemGroup'];
+        XNMenuDivider: (typeof import('@skit/x.naive-ui'))['XNMenuDivider'];
+
         XNSelect: (typeof import('@skit/x.naive-ui'))['XNSelect'];
         XNSelectOption: (typeof import('@skit/x.naive-ui'))['XNSelectOption'];
         XNSelectOptionGroup: (typeof import('@skit/x.naive-ui'))['XNSelectOptionGroup'];

@@ -4,10 +4,10 @@ import type {
     SelectGroupOption as NSelectGroupOption,
     SelectInst as NSelectInst
 } from 'naive-ui';
-import { defineComponent, ref, computed, getCurrentInstance, h } from 'vue';
+import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
-import { isVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
+import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
 import { renderSlot } from '../_utils/render';
 import * as logger from '../_utils/log';
 import ComponentEmpty from '../empty/Empty';
@@ -96,7 +96,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
                     label,
                     children
                 } as SelectOption);
-            } else {
+            } else if (!isEmptyVNode(vnode)) {
                 logger.warning(
                     'Each child component should be "{0}" or "{1}" in "{2}".',
                     ComponentSelectOption.name,
