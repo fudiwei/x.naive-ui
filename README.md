@@ -16,7 +16,7 @@
 
 [Naive-UI](https://github.com/tusen-ai/naive-ui) 是一个流行的 Vue 3 组件库。
 
-官方团队出于可维护性的考虑，没有提供 `DataTable`、`Dropdown`、`Menu`、`Select`、`Tree`、`TreeSelect` 等组件的 Slot 插槽或 Template 模板式的写法支持。
+官方团队出于可维护性的考虑，没有提供 `DataTable`、`Dropdown`、`Menu`、`Select`、`Cascader`、`Tree`、`TreeSelect` 等组件的 Slot 插槽或 Template 模板式的写法支持。
 
 以下是 GitHub 上的一些相关 Issues：
 
@@ -43,6 +43,7 @@
 -   配合 [vue-tsc](https://github.com/vuejs/language-tools)，在模板中使用插槽也可享受到 TypeScript 的类型约束。
 -   `DataTable`：提供了**列头**、**单元格**、**展开行**的插槽写法支持。
 -   `Dropdown`：提供了**菜单项**的模板写法支持。
+-   `Menu`：提供了**菜单项**的模板写法支持。
 -   `Select`：提供了**选项**、**选项组**的模板写法支持；提供了**选项**、**标签**的插槽写法支持。
 -   `Cascader`：提供了**选项**的插槽写法支持。
 
@@ -55,6 +56,7 @@
 使用 pnpm 或其他包管理工具安装依赖：
 
 ```shell
+> pnpm install naive-ui
 > pnpm install @skit/x.naive-ui
 ```
 
@@ -121,7 +123,7 @@ app.use(XNDataTable);
 -   [x] `DataTable`: Slot 插槽
 -   [ ] `DataTable`: Template 模板式 API
 -   [x] `Dropdown`
--   [ ] `Menu`
+-   [x] `Menu`
 -   [x] `Select`
 -   [x] `Cascader`
 -   [ ] `Tree`

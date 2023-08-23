@@ -16,7 +16,7 @@
 
 [Naive-UI](https://github.com/tusen-ai/naive-ui) is a popular Vue 3 component library.
 
-Due to the maintainability, the official team does not provide slots or template style APIs for `DataTable`, `Dropdown`, `Menu`, `Select`, `Tree`, `TreeSelect` _etc._.
+Due to the maintainability, the official team does not provide slots or template style APIs for `DataTable`, `Dropdown`, `Menu`, `Select`, `Cascader`, `Tree`, `TreeSelect` _etc._.
 
 Here are some related issues on GitHub:
 
@@ -42,6 +42,7 @@ This project is aimed to provide a solution for these issues above.
 -   Almost the same API to Naive-UI. You just need to add `x-` before the original component name (example: `<n-data-table>` → `<x-n-data-table>`).
 -   `DataTable`: Slots for **colums**, **cells**, **expandable rows**.
 -   `Dropdown`: Template style API for **options**.
+-   `Menu`: Template style API for **options**.
 -   `Select`: Template style API for **options**, **option groups**. Slots for **options**, **tags**.
 -   `Cascader`: Slots for **options**.
 
@@ -54,6 +55,7 @@ This project is aimed to provide a solution for these issues above.
 Use pnpm or other package manager to install:
 
 ```shell
+> pnpm install naive-ui
 > pnpm install @skit/x.naive-ui
 ```
 
@@ -120,7 +122,7 @@ You can run the demo to view more details.
 -   [x] `DataTable`: Slots
 -   [ ] `DataTable`: Template style API
 -   [x] `Dropdown`: Slots
--   [ ] `Menu`
+-   [x] `Menu`
 -   [x] `Select`
 -   [x] `Cascader`
 -   [ ] `Tree`
