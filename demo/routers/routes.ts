@@ -26,6 +26,14 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
+        path: '/components/menu',
+        component: () => import('../views/components/menu/index.vue'),
+        meta: {
+            sider: true,
+            title: 'Menu / 菜单'
+        }
+    },
+    {
         path: '/components/select',
         component: () => import('../views/components/select/index.vue'),
         meta: {
