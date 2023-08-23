@@ -48,6 +48,7 @@ For other methods, please see [Naive-UI documentation](https://www.naiveui.com/e
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
 | default | `()` | Custom displayed label. |         |
+| submenu | `()` | Sub menu.               |         |
 
 #### `XNSelectOptionGroup` Props
 

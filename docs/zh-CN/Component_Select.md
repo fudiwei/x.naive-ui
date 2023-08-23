@@ -18,7 +18,7 @@
 | :-------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
 | emptyText | `string` | `'暂无数据'` | 选项数据为空时的展示文案。当使用 `empty` 插槽时该属性无效 |      |
 
-其他 Props 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/dropdown#Select-Props)。
+其他 Props 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Props)。
 
 #### `XNSelect` Slots
 
@@ -29,7 +29,7 @@
 | renderOption | `(optionVNode, option, label, value, selected)` | 自定义选项的内容 |      |
 | renderTag    | `(option, label, value, close)`                 | 自定义标签的内容 |      |
 
-其他 Slots 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/dropdown#Select-Slots)。
+其他 Slots 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Slots)。
 
 #### `XNSelect` Methods
 
@@ -48,6 +48,7 @@
 | 名称    | 参数 | 说明           | 版本 |
 | :------ | :--- | :------------- | :--- |
 | default | `()` | 自定义文本内容 |      |
+| submenu | `()` | 子菜单         |      |
 
 #### `XNSelectOptionGroup` Props
 

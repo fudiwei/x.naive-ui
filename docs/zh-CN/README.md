@@ -5,3 +5,5 @@
 -   [组件：下拉菜单 `XNDropdown`](./Component_Dropdown.md)
 
 -   [组件：选择器 `XNSelect`](./Component_Select.md)
+
+-   [组件：级联选择 `XNCascader`](./Component_Cascader.md)

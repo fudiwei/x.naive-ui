@@ -21,7 +21,7 @@ export default defineComponent({
     slots: Object as SlotsType<{
         default: NonNullable<unknown>;
         icon: NonNullable<unknown>;
-        menu: NonNullable<unknown>;
+        submenu: NonNullable<unknown>;
     }>,
 
     render() {
