@@ -6,13 +6,39 @@
 
 ### 使用方式
 
-见 Demo。
+更多用法请见 Demo。
+
+#### Slots：
+
+```html
+<script setup>
+    const options = [
+        {
+            value: 1,
+            label: '1',
+            children: [
+                { value: 11, label: '1-1' },
+                { value: 12, label: '1-2' }
+            ]
+        },
+        { value: 2, label: '2' },
+        { value: 3, label: '3' }
+    ];
+</script>
+<template>
+    <x-n-cascader :options="options">
+        <template #renderLabel="{ option }">
+            <div>{{ 'Option' + option.label }}</div>
+        </template>
+    </x-n-cascader>
+</template>
+```
 
 ---
 
 ### API
 
-#### `XNCascader` Props
+#### `XNCascader` Props：
 
 | 名称      | 类型     | 默认值       | 说明                                                      | 版本 |
 | :-------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
@@ -20,7 +46,7 @@
 
 其他 Props 略，与 `NCascader` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/cascader#Cascader-Props)。
 
-#### `XNCascader` Slots
+#### `XNCascader` Slots：
 
 | 名称        | 参数                              | 说明             | 版本 |
 | :---------- | :-------------------------------- | :--------------- | :--- |
@@ -28,6 +54,6 @@
 
 其他 Slots 略，与 `NCascader` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/dropdown#Cascader-Slots)。
 
-#### `XNCascader` Methods
+#### `XNCascader` Methods：
 
 其他 Methods 略，与 `NCascader` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/cascader#Cascader-Methods)。

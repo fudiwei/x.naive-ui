@@ -1,11 +1,15 @@
 ﻿## 目录
 
--   [组件：数据表格 `XNDataTable`](./Component_DataTable.md)
+-   [快速开始](./GettingStarted.md)
 
--   [组件：下拉菜单 `XNDropdown`](./Component_Dropdown.md)
+-   组件
 
--   [组件：菜单 `XNMenu`](./Component_Menu.md)
+    -   [数据表格 `XNDataTable`](./Component_DataTable.md)
 
--   [组件：选择器 `XNSelect`](./Component_Select.md)
+    -   [下拉菜单 `XNDropdown`](./Component_Dropdown.md)
 
--   [组件：级联选择 `XNCascader`](./Component_Cascader.md)
+    -   [菜单 `XNMenu`](./Component_Menu.md)
+
+    -   [选择器 `XNSelect`](./Component_Select.md)
+
+    -   [级联选择 `XNCascader`](./Component_Cascader.md)

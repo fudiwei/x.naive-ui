@@ -6,27 +6,45 @@
 
 ### 使用方式
 
-见 Demo。
+更多用法请见 Demo。
+
+#### Template Style：
+
+```html
+<template>
+    <x-n-menu>
+        <x-n-menu-item key="1">Menu 1</x-n-menu-item>
+        <x-n-menu-item key="1">Menu 2</x-n-menu-item>
+        <x-n-menu-divider />
+        <x-n-menu-item key="3" label="Menu 3">
+            <template #submenu>
+                <x-n-menu-item key="3-1">Sub Menu 1</x-n-menu-item>
+                <x-n-menu-item key="3-2">Sub Menu 2</x-n-menu-item>
+            </template>
+        </x-n-menu-item>
+    </x-n-menu>
+</template>
+```
 
 ---
 
 ### API
 
-#### `XNMenu` Props
+#### `XNMenu` Props：
 
 其他 Props 略，与 `NMenu` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/menu#Menu-Props)。注意 `children-field`、`disabled-field`、`expand-icon`、`key-field`、`label-field`、`options`、`render-extra`、`render-icon`、`render-label` 属性不可用。
 
-#### `XNMenu` Slots
+#### `XNMenu` Slots：
 
 | 名称    | 参数 | 说明                                                                     | 版本 |
 | :------ | :--- | :----------------------------------------------------------------------- | :--- |
 | default | `()` | 菜单。仅支持 `XNMenuItem`、`XNMenuItemGroup`、`XNMenuDivider` 作为子组件 |      |
 
-#### `XNMenu` Methods
+#### `XNMenu` Methods：
 
 其他 Methods 略，与 `NMenu` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/menu#Menu-Methods)。
 
-#### `XNMenuItem` Props
+#### `XNMenuItem` Props：
 
 | 名称     | 类型      | 默认值  | 说明                                        | 版本 |
 | :------- | :-------- | :------ | :------------------------------------------ | :--- |
@@ -34,7 +52,7 @@
 | extra    | `string`  |         | 额外内容。当使用 `extra` 插槽时该属性无效   |      |
 | disabled | `boolean` | `false` | 是否禁用                                    |      |
 
-#### `XNMenuItem` Slots
+#### `XNMenuItem` Slots：
 
 | 名称    | 参数 | 说明           | 版本 |
 | :------ | :--- | :------------- | :--- |
@@ -43,13 +61,13 @@
 | icon    | `()` | 自定义图标     |      |
 | submenu | `()` | 子菜单         |      |
 
-#### `XNMenuItemGroup` Props
+#### `XNMenuItemGroup` Props：
 
 | 名称  | 类型     | 默认值 | 说明                                      | 版本 |
 | :---- | :------- | :----- | :---------------------------------------- | :--- |
 | label | `string` |        | 文本内容。当使用 `label` 插槽时该属性无效 |      |
 
-#### `XNMenuItemGroup` Slots
+#### `XNMenuItemGroup` Slots：
 
 | 名称    | 参数 | 说明           | 版本 |
 | :------ | :--- | :------------- | :--- |

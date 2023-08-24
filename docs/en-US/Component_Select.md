@@ -6,13 +6,44 @@ This component is based on the NSelect component of Naive-UI.
 
 ### Usage
 
-Please refer to the Demo.
+For more details, please refer to the Demo.
+
+#### Template Style：
+
+```html
+<template>
+    <x-n-select>
+        <x-n-select-option value="1">Option 1</x-n-select-option>
+        <x-n-select-option value="2">Option 2</x-n-select-option>
+        <x-n-select-option value="3">Option 3</x-n-select-option>
+    </x-n-select>
+</template>
+```
+
+#### Slots：
+
+```html
+<script setup>
+    const options = [
+        { value: 1, label: '1' },
+        { value: 2, label: '2' },
+        { value: 3, label: '3' }
+    ];
+</script>
+<template>
+    <x-n-select :options="options">
+        <template #renderLabel="{ option }">
+            <div>{{ 'Option' + option.label }}</div>
+        </template>
+    </x-n-select>
+</template>
+```
 
 ---
 
 ### API
 
-#### `XNSelect` Props
+#### `XNSelect` Props:
 
 | Name      | Type     | Default     | Description                               | Version |
 | :-------- | :------- | :---------- | :---------------------------------------- | :------ |
@@ -20,7 +51,7 @@ Please refer to the Demo.
 
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Props).
 
-#### `XNSelect` Slots
+#### `XNSelect` Slots:
 
 | Name         | Type                                            | Description                | Version |
 | :----------- | :---------------------------------------------- | :------------------------- | :------ |
@@ -31,11 +62,11 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Slots)。
 
-#### `XNSelect` Methods
+#### `XNSelect` Methods:
 
 For other methods, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Methods).
 
-#### `XNSelectOption` Props
+#### `XNSelectOption` Props:
 
 | Name     | Type               | Default | Description                    | Version |
 | :------- | :----------------- | :------ | :----------------------------- | :------ |
@@ -43,19 +74,19 @@ For other methods, please see [Naive-UI documentation](https://www.naiveui.com/e
 | value    | `string \| number` |         | Value of the option.           |         |
 | disabled | `boolean`          | `false` | Whether to disable the option. |         |
 
-#### `XNSelectOption` Slots
+#### `XNSelectOption` Slots:
 
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
 | default | `()` | Custom displayed label. |         |
 
-#### `XNSelectOptionGroup` Props
+#### `XNSelectOptionGroup` Props:
 
 | Name  | Type     | Default | Description         | Version |
 | :---- | :------- | :------ | :------------------ | :------ |
 | label | `string` |         | Label of the group. |         |
 
-#### `XNSelectOptionGroup` Slots
+#### `XNSelectOptionGroup` Slots:
 
 | Name    | Type | Description               | Version |
 | :------ | :--- | :------------------------ | :------ |

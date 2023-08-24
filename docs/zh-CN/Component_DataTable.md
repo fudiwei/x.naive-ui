@@ -6,13 +6,46 @@
 
 ### 使用方式
 
-见 Demo。
+更多用法请见 Demo。
+
+#### Slots：
+
+```html
+<script setup>
+    const columns = [
+        { key: 'no', title: 'NO.' },
+        { key: 'name', title: 'Name' },
+        { key: 'age', title: 'Age' },
+        { key: 'actions', title: 'Actions' }
+    ];
+    const data = [
+        { name: 'Athos', age: 20 },
+        { name: 'Porthos', age: 19 },
+        { name: 'Aramis', age: 18 }
+    ];
+</script>
+<template>
+    <x-n-data-table :columns="columns" :data="data">
+        <template #renderColumn="{ column }">
+            <div>{{ 'Column ' + column.title }}</div>
+        </template>
+        <template #renderCell="{ column, rowData, rowIndex }">
+            <template v-if="column.key === 'no'">
+                <div>{{ rowIndex + 1 }}</div>
+            </template>
+            <template v-else-if="column.key === 'actions'">
+                <button>{{ 'Say hello to ' + rowData.name }}</button>
+            </template>
+        </template>
+    </x-n-data-table>
+</template>
+```
 
 ---
 
 ### API
 
-#### `XNDataTable` Props
+#### `XNDataTable` Props：
 
 | 名称      | 类型     | 默认值       | 说明                                                      | 版本 |
 | :-------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
@@ -20,7 +53,7 @@
 
 其他 Props 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
 
-#### `XNDataTable` Slots
+#### `XNDataTable` Slots：
 
 | 名称         | 参数                          | 说明               | 版本 |
 | :----------- | :---------------------------- | :----------------- | :--- |
@@ -30,6 +63,6 @@
 
 其他 Slots 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Slots)。
 
-#### `XNDataTable` Methods
+#### `XNDataTable` Methods：
 
 其他 Methods 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Methods)。

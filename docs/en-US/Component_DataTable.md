@@ -6,13 +6,13 @@ This component is based on the NDataTable component of Naive-UI.
 
 ### Usage
 
-Please refer to the Demo.
+For more details, please refer to the Demo.
 
 ---
 
 ### API
 
-#### `XNDataTable` Props
+#### `XNDataTable` Props:
 
 | Name      | Type     | Default     | Description                              | Version |
 | :-------- | :------- | :---------- | :--------------------------------------- | :------ |
@@ -20,7 +20,7 @@ Please refer to the Demo.
 
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Props).
 
-#### `XNDataTable` Slots
+#### `XNDataTable` Slots:
 
 | Name         | Type                          | Description            | Version |
 | :----------- | :---------------------------- | :--------------------- | :------ |
@@ -30,6 +30,6 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Slots).
 
-#### `XNDataTable` Methods
+#### `XNDataTable` Methods:
 
 For other methods, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Methods).

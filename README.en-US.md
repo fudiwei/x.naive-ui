@@ -1,10 +1,13 @@
-﻿[![NPM Version](https://img.shields.io/npm/v/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
+﻿<h1 align="center">X Naive-UI</h1>
+
+<div align="center">
+
+[![NPM Version](https://img.shields.io/npm/v/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
 [![NPM Download](https://img.shields.io/npm/dm/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
 [![License](https://img.shields.io/github/license/fudiwei/x.naive-ui)](https://mit-license.org/)
 
----
+</div>
 
-<h1 align="center">X Naive UI</h1>
 <p align="center">An extension to the <a href="https://github.com/tusen-ai/naive-ui" target="_blank">Naive-UI</a> component library.</p>
 <p align="center">Enables slots and template style for DataTable / Dropdown / Menu / Select / Tree.</p>
 
@@ -20,6 +23,7 @@ Due to the maintainability, the official team does not provide slots or template
 
 Here are some related issues on GitHub:
 
+-   [#106: Table support slot for customColumn](https://github.com/tusen-ai/naive-ui/issues/106)
 -   [#205: 增加数据表格展开功能的插槽](https://github.com/tusen-ai/naive-ui/issues/205)
 -   [#216: table 使用 template 风格的 API](https://github.com/tusen-ai/naive-ui/issues/216)
 -   [#307: NDataTable 和 NTree 组件能够支持使用插槽渲染吗？](https://github.com/tusen-ai/naive-ui/issues/307)
@@ -28,6 +32,7 @@ Here are some related issues on GitHub:
 -   [#2054: 是否考虑将组件中的 h 函数调整为 template 插槽](https://github.com/tusen-ai/naive-ui/issues/2054)
 -   [#2252: 建议 DataTable 组件支持自定义列模板](https://github.com/tusen-ai/naive-ui/issues/2252)
 -   [#3337: 使用 h 渲染函数的建议](https://github.com/tusen-ai/naive-ui/issues/3337)
+-   [#3363: 所有组件的 render 函数都删掉吧](https://github.com/tusen-ai/naive-ui/issues/3363)
 -   [#4273: DataTable 增加 template 支持](https://github.com/tusen-ai/naive-ui/issues/4273)
 -   [#4663: 希望 Dropdown 可以增加 slots 插槽](https://github.com/tusen-ai/naive-ui/issues/4663)
 -   [#5065: n-data-table slot for row or component for column](https://github.com/tusen-ai/naive-ui/issues/5065)
@@ -48,64 +53,13 @@ This project is aimed to provide a solution for these issues above.
 
 ---
 
-## Getting Started
+## Documentation
 
-### 1. Installation
+[Click here to view](./docs/en-US/README.md).
 
-Use pnpm or other package manager to install:
+---
 
-```shell
-> pnpm install naive-ui
-> pnpm install @skit/x.naive-ui
-```
-
-### 2. Components Registration
-
-If you use Vue's default template syntax, you need to register components before you can use them. There are three ways to register components:
-
-#### 2.1. Global Registration All Components
-
-```js
-import { createApp } from 'vue';
-import XNaiveUI from '@skit/naive-ui';
-
-const app = createApp(App);
-app.use(XNaiveUI);
-```
-
-#### 2.2. Global Registration Some Components
-
-```js
-import { createApp } from 'vue';
-import { XNDataTable } from '@skit/naive-ui';
-
-const app = createApp(App);
-app.use(XNDataTable);
-```
-
-#### 2.3. Local Registration
-
-```html
-<template>
-    <x-n-data-table :columns="columns" :data="data" />
-</template>
-
-<script>
-    import { XNDataTable } from '@skit/naive-ui';
-
-    export default {
-        components: {
-            XNDataTable
-        }
-    };
-</script>
-```
-
-### 3. Usage
-
-Please view the [Documentation](./docs/en-US/README.md).
-
-### 4. Demo
+## Demo
 
 You can run the demo to view more details.
 

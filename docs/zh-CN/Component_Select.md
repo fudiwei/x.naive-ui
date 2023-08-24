@@ -6,13 +6,44 @@
 
 ### 使用方式
 
-见 Demo。
+更多用法请见 Demo。
+
+#### Template Style：
+
+```html
+<template>
+    <x-n-select>
+        <x-n-select-option value="1">Option 1</x-n-select-option>
+        <x-n-select-option value="2">Option 2</x-n-select-option>
+        <x-n-select-option value="3">Option 3</x-n-select-option>
+    </x-n-select>
+</template>
+```
+
+#### Slots：
+
+```html
+<script setup>
+    const options = [
+        { value: 1, label: '1' },
+        { value: 2, label: '2' },
+        { value: 3, label: '3' }
+    ];
+</script>
+<template>
+    <x-n-select :options="options">
+        <template #renderLabel="{ option }">
+            <div>{{ 'Option ' + option.label }}</div>
+        </template>
+    </x-n-select>
+</template>
+```
 
 ---
 
 ### API
 
-#### `XNSelect` Props
+#### `XNSelect` Props：
 
 | 名称      | 类型     | 默认值       | 说明                                                      | 版本 |
 | :-------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
@@ -20,7 +51,7 @@
 
 其他 Props 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Props)。
 
-#### `XNSelect` Slots
+#### `XNSelect` Slots：
 
 | 名称         | 参数                                            | 说明             | 版本 |
 | :----------- | :---------------------------------------------- | :--------------- | :--- |
@@ -31,11 +62,11 @@
 
 其他 Slots 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Slots)。
 
-#### `XNSelect` Methods
+#### `XNSelect` Methods：
 
 其他 Methods 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Methods)。
 
-#### `XNSelectOption` Props
+#### `XNSelectOption` Props：
 
 | 名称     | 类型               | 默认值  | 说明                                          | 版本 |
 | :------- | :----------------- | :------ | :-------------------------------------------- | :--- |
@@ -43,19 +74,19 @@
 | value    | `string \| number` |         | 选项的值。在所有选项中应该是唯一的            |      |
 | disabled | `boolean`          | `false` | 是否禁用                                      |      |
 
-#### `XNSelectOption` Slots
+#### `XNSelectOption` Slots：
 
 | 名称    | 参数 | 说明           | 版本 |
 | :------ | :--- | :------------- | :--- |
 | default | `()` | 自定义文本内容 |      |
 
-#### `XNSelectOptionGroup` Props
+#### `XNSelectOptionGroup` Props：
 
 | 名称  | 类型     | 默认值 | 说明                                        | 版本 |
 | :---- | :------- | :----- | :------------------------------------------ | :--- |
 | label | `string` |        | 选项的文本。当使用 `label` 插槽时该属性无效 |      |
 
-#### `XNSelectOptionGroup` Slots
+#### `XNSelectOptionGroup` Slots：
 
 | 名称    | 参数 | 说明                                       | 版本 |
 | :------ | :--- | :----------------------------------------- | :--- |

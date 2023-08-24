@@ -1,11 +1,15 @@
 ﻿## Catalog
 
--   [Component: `XNDataTable`](./Component_DataTable.md)
+-   [Getting Started](./GettingStarted.md)
 
--   [Component: `XNDropdown`](./Component_Dropdown.md)
+-   Components
 
--   [Component: `XNMenu`](./Component_Menu.md)
+    -   [`XNDataTable`](./Component_DataTable.md)
 
--   [Component: `XNSelect`](./Component_Select.md)
+    -   [`XNDropdown`](./Component_Dropdown.md)
 
--   [Component: `XNCascader`](./Component_Cascader.md)
+    -   [`XNMenu`](./Component_Menu.md)
+
+    -   [`XNSelect`](./Component_Select.md)
+
+    -   [`XNCascader`](./Component_Cascader.md)

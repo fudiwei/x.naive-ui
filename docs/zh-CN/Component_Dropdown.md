@@ -6,31 +6,44 @@
 
 ### 使用方式
 
-见 Demo。
+更多用法请见 Demo。
+
+#### Template Style：
+
+```html
+<template>
+    <x-n-dropdown>
+        <x-n-dropdown-item key="1">Option 1</x-n-dropdown-item>
+        <x-n-dropdown-item key="2">Option 2</x-n-dropdown-item>
+        <x-n-dropdown-divider />
+        <x-n-dropdown-item key="3">Option 3</x-n-dropdown-item>
+    </x-n-dropdown>
+</template>
+```
 
 ---
 
 ### API
 
-#### `XNDropdown` Props
+#### `XNDropdown` Props：
 
 其他 Props 略，与 `NDropdown` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/dropdown#Dropdown-Props)。注意 `key-field`、`label-field`、`options` 属性不可用。
 
-#### `XNDropdown` Slots
+#### `XNDropdown` Slots：
 
 | 名称    | 参数 | 说明                     | 版本 |
 | :------ | :--- | :----------------------- | :--- |
 | default | `()` | 弹出的内容               |      |
 | trigger | `()` | 触发弹出信息的组件或元素 |      |
 
-#### `XNDropdownItem` Props
+#### `XNDropdownItem` Props：
 
 | 名称     | 类型      | 默认值  | 说明                                        | 版本 |
 | :------- | :-------- | :------ | :------------------------------------------ | :--- |
 | label    | `string`  |         | 文本内容。当使用 `default` 插槽时该属性无效 |      |
 | disabled | `boolean` | `false` | 是否禁用                                    |      |
 
-#### `XNDropdownItem` Slots
+#### `XNDropdownItem` Slots：
 
 | 名称    | 参数 | 说明           | 版本 |
 | :------ | :--- | :------------- | :--- |

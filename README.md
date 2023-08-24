@@ -1,10 +1,13 @@
-﻿[![NPM Version](https://img.shields.io/npm/v/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
+﻿<h1 align="center">X Naive-UI</h1>
+
+<div align="center">
+
+[![NPM Version](https://img.shields.io/npm/v/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
 [![NPM Download](https://img.shields.io/npm/dm/@skit/x.naive-ui.svg?sanitize=true)](https://www.npmjs.com/package/@skit/x.naive-ui)
 [![License](https://img.shields.io/github/license/fudiwei/x.naive-ui)](https://mit-license.org/)
 
----
+</div>
 
-<h1 align="center">X Naive UI</h1>
 <p align="center">一个对 <a href="https://github.com/tusen-ai/naive-ui" target="_blank">Naive-UI</a> 组件库的扩展。</p>
 <p align="center">使 DataTable / Dropdown / Menu / Select / Tree 等组件支持插槽模板式的写法。</p>
 
@@ -20,6 +23,7 @@
 
 以下是 GitHub 上的一些相关 Issues：
 
+-   [#106: Table support slot for customColumn](https://github.com/tusen-ai/naive-ui/issues/106)
 -   [#205: 增加数据表格展开功能的插槽](https://github.com/tusen-ai/naive-ui/issues/205)
 -   [#216: table 使用 template 风格的 API](https://github.com/tusen-ai/naive-ui/issues/216)
 -   [#307: NDataTable 和 NTree 组件能够支持使用插槽渲染吗？](https://github.com/tusen-ai/naive-ui/issues/307)
@@ -28,6 +32,7 @@
 -   [#2054: 是否考虑将组件中的 h 函数调整为 template 插槽](https://github.com/tusen-ai/naive-ui/issues/2054)
 -   [#2252: 建议 DataTable 组件支持自定义列模板](https://github.com/tusen-ai/naive-ui/issues/2252)
 -   [#3337: 使用 h 渲染函数的建议](https://github.com/tusen-ai/naive-ui/issues/3337)
+-   [#3363: 所有组件的 render 函数都删掉吧](https://github.com/tusen-ai/naive-ui/issues/3363)
 -   [#4273: DataTable 增加 template 支持](https://github.com/tusen-ai/naive-ui/issues/4273)
 -   [#4663: 希望 Dropdown 可以增加 slots 插槽](https://github.com/tusen-ai/naive-ui/issues/4663)
 -   [#5065: n-data-table slot for row or component for column](https://github.com/tusen-ai/naive-ui/issues/5065)
@@ -49,64 +54,13 @@
 
 ---
 
-## 快速开始
+## 使用手册
 
-### 1. 安装依赖
+[点此查看](./docs/zh-CN/README.md)。
 
-使用 pnpm 或其他包管理工具安装依赖：
+---
 
-```shell
-> pnpm install naive-ui
-> pnpm install @skit/x.naive-ui
-```
-
-### 2. 组件注册
-
-如果使用 Vue 默认的模板语法，需要注册组件后方可使用，有如下三种方式注册组件：
-
-#### 2.1. 全局完整注册
-
-```js
-import { createApp } from 'vue';
-import XNaiveUI from '@skit/naive-ui';
-
-const app = createApp(App);
-app.use(XNaiveUI);
-```
-
-#### 2.2. 全局部分注册
-
-```js
-import { createApp } from 'vue';
-import { XNDataTable } from '@skit/naive-ui';
-
-const app = createApp(App);
-app.use(XNDataTable);
-```
-
-#### 2.3. 局部注册
-
-```html
-<template>
-    <x-n-data-table :columns="columns" :data="data" />
-</template>
-
-<script>
-    import { XNDataTable } from '@skit/naive-ui';
-
-    export default {
-        components: {
-            XNDataTable
-        }
-    };
-</script>
-```
-
-### 3. 使用组件
-
-请参阅[《开发文档》](./docs/zh-CN/README.md)。
-
-### 4. 示例项目
+## 示例项目
 
 你可以运行 Demo 来查看更多内容。
 
