@@ -10,7 +10,7 @@ import type { RowData as NDataTableRowData } from 'naive-ui/es/data-table/src/in
 import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
-import { isEmptyVNodes } from '../_utils/vue';
+import { isEmptyVNodes, mergeVSlots } from '../_utils/vue';
 import ComponentEmpty from '../empty/Empty';
 
 export type DataTableRowData = NDataTableRowData;
@@ -137,19 +137,14 @@ export default (<T extends DataTableRowData = any>() => {
                 });
             });
 
-            const nSlots = computed(() => {
-                const temp = {
-                    ...slots,
+            const nSlots = computed(() =>
+                mergeVSlots(slots, {
                     empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                     renderColumn: undefined,
                     renderCell: undefined,
                     renderExpand: undefined
-                };
-                delete temp['renderColumn'];
-                delete temp['renderCell'];
-                delete temp['renderExpand'];
-                return temp;
-            });
+                })
+            );
 
             const nRef = ref<NDataTableInst>();
             expose({

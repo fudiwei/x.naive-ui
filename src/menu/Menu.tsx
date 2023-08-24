@@ -8,7 +8,7 @@ import type {
 import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
-import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
+import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
 import { renderSlot } from '../_utils/render';
 import * as logger from '../_utils/log';
 import ComponentMenuDivider from './MenuDivider';
@@ -123,9 +123,11 @@ export default defineComponent({
             return temp;
         });
 
-        const nSlots = computed(() => ({
-            ...slots
-        }));
+        const nSlots = computed(() =>
+            mergeVSlots(slots, {
+                default: undefined
+            })
+        );
 
         const nRef = ref<NMenuInst>();
         expose({

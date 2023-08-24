@@ -3,6 +3,7 @@ import type { CascaderOption as NCascaderOption, CascaderInst as NCascaderInst }
 import { defineComponent, ref, computed } from 'vue';
 import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
 
+import { mergeVSlots } from '../_utils/vue';
 import ComponentEmpty from '../empty/Empty';
 
 export type CascaderOption = NCascaderOption;
@@ -75,18 +76,14 @@ export default defineComponent({
             };
         });
 
-        const nSlots = computed(() => {
-            const temp = {
-                ...slots,
+        const nSlots = computed(() =>
+            mergeVSlots(slots, {
                 'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                 'not-found': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                 'notFound': undefined,
                 'renderLabel': undefined
-            };
-            delete temp['notFound'];
-            delete temp['renderLabel'];
-            return temp;
-        });
+            })
+        );
 
         const nRef = ref<NCascaderInst>();
         expose({

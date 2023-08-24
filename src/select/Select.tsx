@@ -7,7 +7,7 @@ import type {
 import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
-import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
+import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
 import { renderSlot } from '../_utils/render';
 import * as logger from '../_utils/log';
 import ComponentEmpty from '../empty/Empty';
@@ -146,28 +146,6 @@ export default defineComponent({
             return (option as NSelectGroupOption).type === 'group';
         }
 
-        function isNOptionSelected(option: NSelectOption): boolean {
-            if (isNOptionGroup(option)) {
-                return false;
-            }
-
-            // REF: https://github.com/tusen-ai/naive-ui/blob/0a836a17aa932d54d5892c745469a1ad2058c192/src/_internal/select-menu/src/SelectOption.tsx#L101-L114
-
-            const value = props.value;
-            const multiple = props.multiple;
-
-            if (value == null) {
-                return false;
-            }
-
-            const optionValue = getNOptionValue(option);
-            if (multiple) {
-                return (value as Array<string | number>).includes(optionValue!);
-            } else {
-                return value === optionValue;
-            }
-        }
-
         const nOptions = computed(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNodes(vnodes)) {
@@ -224,21 +202,15 @@ export default defineComponent({
             };
         });
 
-        const nSlots = computed(() => {
-            const temp = {
-                ...slots,
+        const nSlots = computed(() =>
+            mergeVSlots(slots, {
                 empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                 default: undefined,
                 renderLabel: undefined,
                 renderOption: undefined,
                 renderTag: undefined
-            };
-            delete temp['default'];
-            delete temp['renderLabel'];
-            delete temp['renderOption'];
-            delete temp['renderTag'];
-            return temp;
-        });
+            })
+        );
 
         const nRef = ref<NSelectInst>();
         expose({

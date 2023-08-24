@@ -8,7 +8,7 @@ import { defineComponent, computed } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
-import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/vue';
+import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
 import { renderSlot } from '../_utils/render';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
@@ -104,11 +104,12 @@ export default defineComponent({
             return temp;
         });
 
-        const nSlots = computed(() => ({
-            ...slots,
-
-            default: slots['trigger']
-        }));
+        const nSlots = computed(() =>
+            mergeVSlots(slots, {
+                default: slots['trigger'],
+                trigger: undefined
+            })
+        );
 
         return () => (
             <NDropdown
