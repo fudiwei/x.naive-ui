@@ -6,6 +6,7 @@ import ComponentSelectOptionGroup from './SelectOptionGroup';
 
 export type {
     SelectProps,
+    SelectInstance,
     SelectOption,
     SelectOptions,
     SelectRenderLabelParams,

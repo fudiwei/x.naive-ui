@@ -4,6 +4,7 @@ import ComponentDataTable from './DataTable';
 
 export type {
     DataTableProps,
+    DataTableInstance,
     DataTableRowData,
     DataTableColumn,
     DataTableColumns,
