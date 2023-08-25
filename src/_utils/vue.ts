@@ -13,23 +13,27 @@ export const isEmptyVNode = (vnode?: VNode): boolean => {
     }
 
     if (vnode.type === Comment) {
-        // 注释
         return true;
     }
 
-    if (vnode.type === Text && (vnode.children as string).trim() === '') {
-        // 文本
-        return true;
+    if (vnode.type === Text) {
+        return (vnode.children as string).trim() === '';
     }
 
-    if (vnode.type === Fragment && (!Array.isArray(vnode.children) || vnode.children.length === 0)) {
-        // 片段
-        return true;
+    if (vnode.type === Fragment) {
+        return Array.isArray(vnode.children) && isEmptyVNodes(vnode.children as VNode[]);
     }
 
-    if (typeof vnode.type === 'string') {
-        // 原生元素
+    if (typeof vnode.type === 'symbol') {
+        return isEmptyVNodes(vnode.children as VNode[]);
+    }
+
+    if (typeof vnode.type === 'string' || typeof vnode.type === 'number') {
         return false;
+    }
+
+    if (typeof vnode.type === 'object') {
+        return !('render' in vnode.type);
     }
 
     return vnode.el == null && vnode.children == null;

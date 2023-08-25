@@ -55,52 +55,44 @@ export type SelectRenderTagParams = {
 function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
     const temp = [] as NSelectOption[];
 
-    flattenVNodeChildren(vnodes)
-        .filter((vnode) => {
-            if (Array.isArray(vnode) && vnode.length === 1) {
-                vnode = vnode[0];
-            }
+    vnodes = flattenVNodeChildren(vnodes) as VNode[];
+    vnodes.forEach((vnode, index) => {
+        const vKey = vnode.key;
+        const vProps = vnode.props || {};
+        const vSlots = (vnode.children || {}) as Slots;
 
-            return isVNode(vnode) && !!vnode.type && typeof vnode.type !== 'symbol';
-        })
-        .map((vnode) => vnode as VNode)
-        .forEach((vnode, index) => {
-            const vKey = vnode.key;
-            const vProps = vnode.props || {};
-            const vSlots = (vnode.children || {}) as Slots;
-
-            if (vnode.type === ComponentSelectOption) {
-                // 选项
-                const label = getSlotRender(vSlots['default']) || vProps.label;
-                const value = vProps.value;
-                const disabled = !!vProps.disabled || vProps.disabled === '';
-                temp.push({
-                    ...vProps,
-                    label,
-                    value,
-                    disabled
-                } as SelectOption);
-            } else if (vnode.type === ComponentSelectOptionGroup) {
-                // 选项组
-                const key = vKey ?? `__X_SELECT_GROUP_${index}`;
-                const label = getSlotRender(vSlots['label']) || vProps.label;
-                const children = convertVNodesToOptions(vSlots['default']?.() || []);
-                temp.push({
-                    ...vProps,
-                    type: 'group',
-                    key,
-                    label,
-                    children
-                } as SelectOption);
-            } else if (!isEmptyVNode(vnode)) {
-                logger.warning(
-                    'Each child component should be "{0}" or "{1}" in "{2}".',
-                    ComponentSelectOption.name,
-                    ComponentSelectOptionGroup.name,
-                    getCurrentInstance()?.type?.name
-                );
-            }
-        });
+        if (vnode.type === ComponentSelectOption) {
+            // 选项
+            const label = getSlotRender(vSlots['default']) || vProps.label;
+            const value = vProps.value;
+            const disabled = !!vProps.disabled || vProps.disabled === '';
+            temp.push({
+                ...vProps,
+                label,
+                value,
+                disabled
+            } as SelectOption);
+        } else if (vnode.type === ComponentSelectOptionGroup) {
+            // 选项组
+            const key = vKey ?? `__X_SELECT_GROUP_${index}`;
+            const label = getSlotRender(vSlots['label']) || vProps.label;
+            const children = convertVNodesToOptions(vSlots['default']?.() || []);
+            temp.push({
+                ...vProps,
+                type: 'group',
+                key,
+                label,
+                children
+            } as SelectOption);
+        } else if (!isEmptyVNode(vnode)) {
+            logger.warning(
+                'Only "{0}" or "{1}" can be child component in "{2}".',
+                ComponentSelectOption.name,
+                ComponentSelectOptionGroup.name,
+                getCurrentInstance()?.type?.name
+            );
+        }
+    });
 
     return temp;
 }

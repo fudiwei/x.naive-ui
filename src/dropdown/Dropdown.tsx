@@ -26,51 +26,43 @@ export type DropdownProps = ExtractPublicPropTypes<typeof _props>;
 function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
     const temp = [] as NDropdownOption[];
 
-    flattenVNodeChildren(vnodes)
-        .filter((vnode) => {
-            if (Array.isArray(vnode) && vnode.length === 1) {
-                vnode = vnode[0];
-            }
+    vnodes = flattenVNodeChildren(vnodes) as VNode[];
+    vnodes.forEach((vnode, index) => {
+        const vKey = vnode.key;
+        const vProps = vnode.props || {};
+        const vSlots = (vnode.children || {}) as Slots;
+        const restProps = getRestProps(vProps, 'key', 'type', 'label', 'icon', 'disabled', 'children');
 
-            return isVNode(vnode) && !!vnode.type && typeof vnode.type !== 'symbol';
-        })
-        .map((vnode) => vnode as VNode)
-        .forEach((vnode, index) => {
-            const vKey = vnode.key;
-            const vProps = vnode.props || {};
-            const vSlots = (vnode.children || {}) as Slots;
-            const restProps = getRestProps(vProps, 'key', 'type', 'label', 'icon', 'disabled', 'children');
-
-            if (vnode.type === ComponentDropdownItem) {
-                // 菜单项
-                temp.push({
-                    ...vProps,
-                    key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
-                    props: restProps as HTMLAttributes,
-                    disabled: !!vProps.disabled || vProps.disabled === '',
-                    label: getSlotRender(vSlots['default']) || vProps.label,
-                    icon: getSlotRender(vSlots['icon']),
-                    children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
-                } as NDropdownOption);
-            } else if (vnode.type === ComponentDropdownDivider) {
-                // 分割线
-                temp.push({
-                    ...vProps,
-                    type: 'divider',
-                    key: vnode.key ?? `__X_DROPDOWN_DIVIDER_${index}`,
-                    props: restProps as HTMLAttributes
-                } as NDropdownDividerOption);
-            } else if (!isEmptyVNode(vnode)) {
-                // 纯渲染的内容
-                temp.push({
-                    ...vProps,
-                    type: 'render',
-                    key: vnode.key ?? `__X_DROPDOWN_RENDER_${index}`,
-                    props: restProps as HTMLAttributes,
-                    render: () => <>{vnode}</>
-                } as NDropdownRenderOption);
-            }
-        });
+        if (vnode.type === ComponentDropdownItem) {
+            // 菜单项
+            temp.push({
+                ...vProps,
+                key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
+                props: restProps as HTMLAttributes,
+                disabled: !!vProps.disabled || vProps.disabled === '',
+                label: getSlotRender(vSlots['default']) || vProps.label,
+                icon: getSlotRender(vSlots['icon']),
+                children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
+            } as NDropdownOption);
+        } else if (vnode.type === ComponentDropdownDivider) {
+            // 分割线
+            temp.push({
+                ...vProps,
+                type: 'divider',
+                key: vnode.key ?? `__X_DROPDOWN_DIVIDER_${index}`,
+                props: restProps as HTMLAttributes
+            } as NDropdownDividerOption);
+        } else if (!isEmptyVNode(vnode)) {
+            // 纯渲染的内容
+            temp.push({
+                ...vProps,
+                type: 'render',
+                key: vnode.key ?? `__X_DROPDOWN_RENDER_${index}`,
+                props: restProps as HTMLAttributes,
+                render: () => <>{vnode}</>
+            } as NDropdownRenderOption);
+        }
+    });
 
     return temp;
 }

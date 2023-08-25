@@ -40,62 +40,54 @@ export type MenuInstance = NMenuInst;
 function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
     const temp = [] as NMenuOption[];
 
-    flattenVNodeChildren(vnodes)
-        .filter((vnode) => {
-            if (Array.isArray(vnode) && vnode.length === 1) {
-                vnode = vnode[0];
-            }
+    vnodes = flattenVNodeChildren(vnodes) as VNode[];
+    vnodes.forEach((vnode, index) => {
+        const vKey = vnode.key;
+        const vProps = vnode.props || {};
+        const vSlots = (vnode.children || {}) as Slots;
+        const restProps = getRestProps(vProps, 'key', 'type', 'label', 'icon', 'extra', 'disabled', 'children');
 
-            return isVNode(vnode) && !!vnode.type && typeof vnode.type !== 'symbol';
-        })
-        .map((vnode) => vnode as VNode)
-        .forEach((vnode, index) => {
-            const vKey = vnode.key;
-            const vProps = vnode.props || {};
-            const vSlots = (vnode.children || {}) as Slots;
-            const restProps = getRestProps(vProps, 'key', 'type', 'label', 'icon', 'extra', 'disabled', 'children');
-
-            if (vnode.type === ComponentMenuItem) {
-                // 菜单项
-                temp.push({
-                    ...vProps,
-                    key: vKey ?? `__X_MENU_ITEM_${index}`,
-                    props: restProps as HTMLAttributes,
-                    disabled: !!vProps.disabled || vProps.disabled === '',
-                    label: getSlotRender(vSlots['default']) || vProps.label,
-                    icon: getSlotRender(vSlots['icon']),
-                    extra: getSlotRender(vSlots['extra']) || vProps.extra,
-                    children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
-                } as NMenuOption);
-            } else if (vnode.type === ComponentMenuItemGroup) {
-                // 菜单分组
-                temp.push({
-                    ...vProps,
-                    type: 'group',
-                    key: vKey ?? `__X_MENU_GROUP_${index}`,
-                    props: restProps as HTMLAttributes,
-                    label: getSlotRender(vSlots['label']) || vProps.label,
-                    icon: getSlotRender(vSlots['icon']),
-                    children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
-                } as NMenuGroupOption);
-            } else if (vnode.type === ComponentMenuDivider) {
-                // 分割线
-                temp.push({
-                    ...vProps,
-                    type: 'divider',
-                    key: vnode.key ?? `__X_MENU_DIVIDER_${index}`,
-                    props: restProps as HTMLAttributes
-                } as NMenuDividerOption);
-            } else if (!isEmptyVNode(vnode)) {
-                logger.warning(
-                    'Each child component should be "{0}", "{1}" or "{2}" in "{3}".',
-                    ComponentMenuItem.name,
-                    ComponentMenuItemGroup.name,
-                    ComponentMenuDivider.name,
-                    getCurrentInstance()?.type?.name
-                );
-            }
-        });
+        if (vnode.type === ComponentMenuItem) {
+            // 菜单项
+            temp.push({
+                ...vProps,
+                key: vKey ?? `__X_MENU_ITEM_${index}`,
+                props: restProps as HTMLAttributes,
+                disabled: !!vProps.disabled || vProps.disabled === '',
+                label: getSlotRender(vSlots['default']) || vProps.label,
+                icon: getSlotRender(vSlots['icon']),
+                extra: getSlotRender(vSlots['extra']) || vProps.extra,
+                children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
+            } as NMenuOption);
+        } else if (vnode.type === ComponentMenuItemGroup) {
+            // 菜单分组
+            temp.push({
+                ...vProps,
+                type: 'group',
+                key: vKey ?? `__X_MENU_GROUP_${index}`,
+                props: restProps as HTMLAttributes,
+                label: getSlotRender(vSlots['label']) || vProps.label,
+                icon: getSlotRender(vSlots['icon']),
+                children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
+            } as NMenuGroupOption);
+        } else if (vnode.type === ComponentMenuDivider) {
+            // 分割线
+            temp.push({
+                ...vProps,
+                type: 'divider',
+                key: vnode.key ?? `__X_MENU_DIVIDER_${index}`,
+                props: restProps as HTMLAttributes
+            } as NMenuDividerOption);
+        } else if (!isEmptyVNode(vnode)) {
+            logger.warning(
+                'Only "{0}", "{1}" or "{2}" can be child component in "{3}".',
+                ComponentMenuItem.name,
+                ComponentMenuItemGroup.name,
+                ComponentMenuDivider.name,
+                getCurrentInstance()?.type?.name
+            );
+        }
+    });
 
     return temp;
 }
