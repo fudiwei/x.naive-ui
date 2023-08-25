@@ -11,7 +11,7 @@
 <p align="center">一个对 <a href="https://github.com/tusen-ai/naive-ui" target="_blank">Naive-UI</a> 组件库的扩展。</p>
 <p align="center">使 DataTable / Dropdown / Menu / Select / Tree 等组件支持插槽模板式的写法。</p>
 
-<p align="center"><a href="README.en-US.md">English</a> | 中文</p>
+<p align="center">简体中文 | <a href="README.en-US.md">English</a></p>
 
 ---
 
@@ -48,9 +48,9 @@
 -   配合 [vue-tsc](https://github.com/vuejs/language-tools)，在模板中使用插槽也可享受到 TypeScript 的类型约束。
 -   `DataTable`：提供了**列头**、**单元格**、**展开行**的作用域插槽写法支持。
 -   `DataTable`：提供了**列**的模板写法支持（即在模板中定义 `columns` prop）。
--   `Dropdown`：提供了**菜单项**的模板写法支持（即在模板中模板定义 `options` prop）。
--   `Menu`：提供了**菜单项**的模板写法支持（即在模板中模板定义 `options` prop）。
--   `Select`：提供了**选项**、**选项组**的模板写法支持（即在模板中模板定义 `options` prop）。
+-   `Dropdown`：提供了**菜单项**的模板写法支持（即在模板中定义 `options` prop）。
+-   `Menu`：提供了**菜单项**的模板写法支持（即在模板中定义 `options` prop）。
+-   `Select`：提供了**选项**、**选项组**的模板写法支持（即在模板中定义 `options` prop）。
 -   `Select`：提供了**选项**、**标签**的作用域插槽写法支持。
 -   `Cascader`：提供了**选项**的作用域插槽写法支持。
 -   `Tree`：提供了**数据项**、**开关图标**的作用域插槽写法支持。

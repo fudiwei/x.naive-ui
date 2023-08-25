@@ -11,7 +11,7 @@
 <p align="center">An extension to the <a href="https://github.com/tusen-ai/naive-ui" target="_blank">Naive-UI</a> component library.</p>
 <p align="center">Enables slots and template style for DataTable / Dropdown / Menu / Select / Tree.</p>
 
-<p align="center">English | <a href="README.md">中文</a></p>
+<p align="center"><a href="README.md">简体中文</a> | English</p>
 
 ---
 
