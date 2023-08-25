@@ -21,5 +21,5 @@ export const XNDataTable = Object.assign(ComponentDataTable, {
         app.component(ComponentDataTableColumn.name, ComponentDataTableColumn);
     }
 });
-export const XNComponentDataTableColumn = ComponentDataTableColumn;
+export const XNDataTableColumn = ComponentDataTableColumn;
 export default XNDataTable;

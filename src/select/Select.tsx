@@ -86,10 +86,9 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
             } as SelectOption);
         } else if (!isEmptyVNode(vnode)) {
             logger.warning(
-                'Only "{0}" or "{1}" can be child component in "{2}".',
-                ComponentSelectOption.name,
-                ComponentSelectOptionGroup.name,
-                getCurrentInstance()?.type?.name
+                'Each child component in {0} should be {1}.',
+                getCurrentInstance()?.type?.name,
+                [ComponentSelectOption.name, ComponentSelectOptionGroup.name].join(', ')
             );
         }
     });

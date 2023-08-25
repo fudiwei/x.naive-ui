@@ -6,7 +6,10 @@ import type {
     DataTableExpandColumn as NDataTableExpandColumn,
     DataTableInst as NDataTableInst
 } from 'naive-ui';
-import type { RowData as NDataTableRowData } from 'naive-ui/es/data-table/src/interface';
+import type {
+    RowData as NDataTableRowData,
+    TableColumnGroup as NDataTableGroupColumn
+} from 'naive-ui/es/data-table/src/interface';
 import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
@@ -20,7 +23,8 @@ import ComponentDataTableColumn from './DataTableColumn';
 export type DataTableRowData = NDataTableRowData;
 export type DataTableColumn<T extends DataTableRowData = any> = Partial<Omit<NDataTableBaseColumn<T>, 'type'>> &
     Partial<Omit<NDataTableSelectionColumn<T>, 'type'>> &
-    Partial<Omit<NDataTableExpandColumn<T>, 'type'>> & { type?: 'selection' | 'expand' };
+    Partial<Omit<NDataTableExpandColumn<T>, 'type'>> &
+    Partial<NDataTableGroupColumn<T>> & { type?: 'selection' | 'expand' };
 export type DataTableColumns<T extends DataTableRowData = any> = DataTableColumn<T>[];
 export type DataTableRenderColumnParams<T extends DataTableRowData = any> = {
     column: DataTableColumn<T>;
@@ -29,6 +33,7 @@ export type DataTableRenderCellParams<T extends DataTableRowData = any> = {
     column: DataTableColumn<T>;
     rowData: T;
     rowIndex: number;
+    value?: any;
 };
 export type DataTableRenderExpandParams<T extends DataTableRowData = any> = {
     rowData: T;
@@ -64,6 +69,10 @@ function convertVNodesToColumns<T extends NDataTableRowData = any>(vnodes: VNode
         const restProps = getRestProps(vProps, 'key', 'children', 'render', 'renderExpand');
 
         if (vnode.type === ComponentDataTableColumn) {
+            if (!!vProps.type && vKey == null) {
+                logger.warning('Each "{0}" should have a unique `key` prop.', ComponentDataTableColumn.name);
+            }
+
             const column: NDataTableColumn<T> = {
                 ...restProps,
                 key: vKey ?? `__X_DATATABLE_COLUMN_${index}`,
@@ -82,17 +91,22 @@ function convertVNodesToColumns<T extends NDataTableRowData = any>(vnodes: VNode
                     typeof vProps.rowSpan === 'string' || typeof vProps.rowSpan === 'number'
                         ? () => +vProps.rowSpan
                         : vProps.rowSpan
-                // TODO: 表头分组
-                // children: undefined
             };
 
-            (column as NDataTableBaseColumn<T>).title = renderTableColumn(column, vSlots, true);
-            (column as NDataTableBaseColumn<T>).render = renderTableCell(column, vSlots, true);
-            (column as NDataTableExpandColumn<T>).renderExpand = renderTableExpand(column, vSlots, true)!;
+            (column as NDataTableBaseColumn<T>).title = renderTableColumn<T>(column, vSlots, true);
+            (column as NDataTableBaseColumn<T>).render = renderTableCell<T>(column, vSlots, true);
+            (column as NDataTableExpandColumn<T>).renderExpand = renderTableExpand<T>(column, vSlots, true)!;
+
+            if (vSlots['default']) {
+                const children = convertVNodesToColumns<T>(vSlots['default']());
+                if (children && children.length > 0) {
+                    (column as NDataTableGroupColumn<T>).children = children as NDataTableBaseColumn<T>[];
+                }
+            }
 
             temp.push(column);
         } else if (!isEmptyVNode(vnode)) {
-            logger.warning('Only "{0}" can be child component in "{0}".', ComponentDataTableColumn.name);
+            logger.warning('Each child component in "{0}" should be "{0}".', ComponentDataTableColumn.name);
         }
     });
 
@@ -135,7 +149,8 @@ function renderTableCell<T extends NDataTableRowData = any>(
             const params: DataTableRenderCellParams = {
                 column: column as DataTableColumn<T>,
                 rowData: rowData,
-                rowIndex: rowIndex
+                rowIndex: rowIndex,
+                value: rowData?.[(column as NDataTableBaseColumn<T>).key]
             };
             const vnodes = ctxSlots['renderCell'](params);
             if (isTemplateStyle || !isEmptyVNodes(vnodes)) {
@@ -204,17 +219,30 @@ export default (<T extends DataTableRowData = any>() => {
         }>,
 
         setup(props, { attrs, slots, expose }) {
+            function populateColumns(columns?: NDataTableColumn<T>[]): NDataTableColumn<T>[] | undefined {
+                const result = columns?.map((column) => {
+                    column = Object.assign(column, {
+                        title: renderTableColumn<T>(column, slots),
+                        render: renderTableCell<T>(column, slots),
+                        renderExpand: renderTableExpand<T>(column, slots)
+                    });
+
+                    if ('children' in column) {
+                        const children = populateColumns(column.children);
+                        if (children) {
+                            column.children = children as NDataTableBaseColumn<T>[];
+                        }
+                    }
+
+                    return column;
+                });
+                return result;
+            }
+
             const nColumns = computed(() => {
                 const vnodes = slots['default']?.({});
                 if (isEmptyVNodes(vnodes)) {
-                    return props.columns?.map((column) => {
-                        const nColumn = column as NDataTableColumn<T>;
-                        return Object.assign(nColumn, {
-                            title: renderTableColumn(nColumn, slots),
-                            render: renderTableCell(nColumn, slots),
-                            renderExpand: renderTableExpand(nColumn, slots)
-                        });
-                    });
+                    return populateColumns(props.columns as NDataTableColumn<T>[]);
                 }
 
                 return convertVNodesToColumns(vnodes);

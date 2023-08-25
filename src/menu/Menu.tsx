@@ -80,11 +80,9 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
             } as NMenuDividerOption);
         } else if (!isEmptyVNode(vnode)) {
             logger.warning(
-                'Only "{0}", "{1}" or "{2}" can be child component in "{3}".',
-                ComponentMenuItem.name,
-                ComponentMenuItemGroup.name,
-                ComponentMenuDivider.name,
-                getCurrentInstance()?.type?.name
+                'Each child component in {0} should be {1}.',
+                getCurrentInstance()?.type?.name,
+                [ComponentMenuItem.name, ComponentMenuItemGroup.name, ComponentMenuDivider.name].join(', ')
             );
         }
     });

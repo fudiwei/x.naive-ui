@@ -36,6 +36,9 @@ const _props = {
     titleAlign: {
         type: String as PropType<Required<NDataTableColumn>['titleAlign']>
     },
+    titleColSpan: {
+        type: Number as PropType<number>
+    },
     titleRowSpan: {
         type: Number as PropType<number>
     },
