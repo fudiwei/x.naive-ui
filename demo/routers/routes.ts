@@ -56,6 +56,14 @@ const routes: RouteRecordRaw[] = [
             sider: true,
             title: 'Tree / 树'
         }
+    },
+    {
+        path: '/components/tree-select',
+        component: () => import('../views/components/tree-select/index.vue'),
+        meta: {
+            sider: true,
+            title: 'TreeSelect / 树型选择'
+        }
     }
 ];
 
