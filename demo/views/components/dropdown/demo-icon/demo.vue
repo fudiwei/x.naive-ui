@@ -10,7 +10,7 @@ export default defineComponent({});
             <n-button>用户资料</n-button>
         </template>
 
-        <x-n-dropdown-item key="profile">
+        <x-n-dropdown-item key="profile" @click="() => console.log('profile')">
             <template #icon>
                 <n-icon>
                     <svg
@@ -32,7 +32,7 @@ export default defineComponent({});
             用户资料
         </x-n-dropdown-item>
 
-        <x-n-dropdown-item key="editProfile">
+        <x-n-dropdown-item key="editProfile" @click="() => console.log('editProfile')">
             <template #icon>
                 <n-icon>
                     <svg
@@ -63,7 +63,7 @@ export default defineComponent({});
             编辑用户资料
         </x-n-dropdown-item>
 
-        <x-n-dropdown-item key="logout">
+        <x-n-dropdown-item key="logout" @click="() => console.log('logout')">
             <template #icon>
                 <n-icon>
                     <svg
