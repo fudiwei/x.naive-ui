@@ -55,12 +55,12 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNSelect` Slots:
 
-| Name         | Type                                            | Description                | Version |
-| :----------- | :---------------------------------------------- | :------------------------- | :------ |
-| default      | `()`                                            | The content inside select. |         |
-| renderLabel  | `(option, label, value, selected)`              | Custom option label.       |         |
-| renderOption | `(optionVNode, option, label, value, selected)` | Custom option node.        |         |
-| renderTag    | `(option, label, value, close)`                 | Custom tag.                |         |
+| Name         | Type                               | Description                | Version |
+| :----------- | :--------------------------------- | :------------------------- | :------ |
+| default      | `()`                               | The content inside select. |         |
+| renderLabel  | `(option, label, value, selected)` | Custom option label.       |         |
+| renderOption | `(optionVNode, option, selected)`  | Custom option node.        |         |
+| renderTag    | `(option, close)`                  | Custom tag.                |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Slots)。
 

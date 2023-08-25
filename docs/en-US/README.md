@@ -13,3 +13,7 @@
     -   [`XNSelect`](./Component_Select.md)
 
     -   [`XNCascader`](./Component_Cascader.md)
+
+    -   [`XNTree`](./Component_Tree.md)
+
+    -   [`XNTreeSelect`](./Component_TreeSelect.md)

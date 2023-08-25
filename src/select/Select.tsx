@@ -45,14 +45,10 @@ export type SelectRenderLabelParams = {
 export type SelectRenderOptionParams = {
     optionVNode: VNode;
     option: SelectOption;
-    label: string;
-    value?: string | number;
     selected?: boolean;
 };
 export type SelectRenderTagParams = {
     option: SelectOption;
-    label: string;
-    value?: string | number;
     close: () => void;
 };
 
@@ -180,8 +176,6 @@ export default defineComponent({
                 return slots.renderOption!({
                     optionVNode: node,
                     option: option as NSelectOption,
-                    label: getNOptionLabel(option as NSelectOption),
-                    value: getNOptionValue(option as NSelectOption),
                     selected: selected
                 });
             };
@@ -195,8 +189,6 @@ export default defineComponent({
             return ({ option, handleClose }: Parameters<NSelectRenderTag>[0]) => {
                 return slots.renderTag!({
                     option: option,
-                    label: getNOptionLabel(option),
-                    value: getNOptionValue(option),
                     close: handleClose
                 });
             };

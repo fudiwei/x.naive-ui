@@ -10,8 +10,8 @@ export type {
     TreeSelectRenderLabelParams,
     TreeSelectRenderPrefixParams,
     TreeSelectRenderSuffixParams,
-    TreeSelectRenderTagParams,
-    TreeSelectRenderSwitcherIconParams
+    TreeSelectRenderSwitcherIconParams,
+    TreeSelectRenderTagParams
 } from './TreeSelect';
 export const XNTreeSelect = Object.assign(ComponentTreeSelect, {
     install: (app: App) => {

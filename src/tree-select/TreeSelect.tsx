@@ -34,15 +34,13 @@ export type TreeSelectRenderSuffixParams = {
     checked: boolean;
     selected: boolean;
 };
-export type TreeSelectRenderTagParams = {
-    option: TreeSelectOption;
-    label: string;
-    key?: string | number;
-    close: () => void;
-};
 export type TreeSelectRenderSwitcherIconParams = {
     expanded: boolean;
     selected: boolean;
+};
+export type TreeSelectRenderTagParams = {
+    option: TreeSelectOption;
+    close: () => void;
 };
 
 const _props = (() => {
@@ -136,21 +134,6 @@ export default defineComponent({
             };
         });
 
-        const nRenderTag = computed(() => {
-            if (!slots['renderTag']) {
-                return props.renderTag;
-            }
-
-            return ({ option, handleClose }: Parameters<NTreeSelectRenderTag>[0]) => {
-                return slots.renderTag!({
-                    option: option,
-                    label: getNOptionLabel(option),
-                    key: getNOptionKey(option),
-                    close: handleClose
-                });
-            };
-        });
-
         const nRenderSwitcherIcon = computed(() => {
             if (!slots['renderSwitcherIcon']) {
                 return props.renderSwitcherIcon;
@@ -160,6 +143,19 @@ export default defineComponent({
                 return slots.renderSwitcherIcon!({
                     expanded: expanded,
                     selected: selected
+                });
+            };
+        });
+
+        const nRenderTag = computed(() => {
+            if (!slots['renderTag']) {
+                return props.renderTag;
+            }
+
+            return ({ option, handleClose }: Parameters<NTreeSelectRenderTag>[0]) => {
+                return slots.renderTag!({
+                    option: option,
+                    close: handleClose
                 });
             };
         });
@@ -190,8 +186,8 @@ export default defineComponent({
                 renderLabel={nRenderLabel.value}
                 renderPrefix={nRenderPrefix.value}
                 renderSuffix={nRenderSuffix.value}
-                renderTag={nRenderTag.value}
                 renderSwitcherIcon={nRenderSwitcherIcon.value}
+                renderTag={nRenderTag.value}
                 v-slots={nSlots.value}
             />
         );

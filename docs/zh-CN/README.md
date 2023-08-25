@@ -13,3 +13,7 @@
     -   [选择器 `XNSelect`](./Component_Select.md)
 
     -   [级联选择 `XNCascader`](./Component_Cascader.md)
+
+    -   [树 `XNTree`](./Component_Tree.md)
+
+    -   [树型选择 `XNTreeSelect`](./Component_TreeSelect.md)
