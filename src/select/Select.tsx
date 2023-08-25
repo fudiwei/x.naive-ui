@@ -2,7 +2,9 @@
 import type {
     SelectOption as NSelectOption,
     SelectGroupOption as NSelectGroupOption,
-    SelectInst as NSelectInst
+    SelectInst as NSelectInst,
+    SelectRenderOption as NSelectRenderOption,
+    SelectRenderTag as NSelectRenderTag
 } from 'naive-ui';
 import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
@@ -174,12 +176,12 @@ export default defineComponent({
                 return props.renderOption;
             }
 
-            return ({ node, option, selected }: { node: VNode; option: NSelectOption; selected: boolean }) => {
+            return ({ node, option, selected }: Parameters<NSelectRenderOption>[0]) => {
                 return slots.renderOption!({
                     optionVNode: node,
-                    option: option,
-                    label: getNOptionLabel(option),
-                    value: getNOptionValue(option),
+                    option: option as NSelectOption,
+                    label: getNOptionLabel(option as NSelectOption),
+                    value: getNOptionValue(option as NSelectOption),
                     selected: selected
                 });
             };
@@ -190,7 +192,7 @@ export default defineComponent({
                 return props.renderTag;
             }
 
-            return ({ option, handleClose }: { option: NSelectOption; handleClose: () => void }) => {
+            return ({ option, handleClose }: Parameters<NSelectRenderTag>[0]) => {
                 return slots.renderTag!({
                     option: option,
                     label: getNOptionLabel(option),

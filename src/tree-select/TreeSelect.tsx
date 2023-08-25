@@ -1,48 +1,56 @@
 ﻿import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
-import type { TreeOption as NTreeOption, TreeInst as NTreeInst } from 'naive-ui';
 import type {
-    RenderLabel as NTreeRenderLabel,
-    RenderPrefix as NTreeRenderPrefix,
-    RenderSuffix as NTreeRenderSuffix,
-    RenderSwitcherIcon as NTreeRenderSwitcherIcon
-} from 'naive-ui/es/tree/src/interface';
+    TreeSelectOption as NTreeSelectOption,
+    TreeSelectInst as NTreeSelectInst,
+    TreeSelectRenderLabel as NTreeSelectRenderLabel,
+    TreeSelectRenderPrefix as NTreeSelectRenderPrefix,
+    TreeSelectRenderSuffix as NTreeSelectRenderSuffix,
+    TreeSelectRenderTag as NTreeSelectRenderTag
+} from 'naive-ui';
+import type { RenderSwitcherIcon as NTreeSelectRenderSwitcherIcon } from 'naive-ui/es/tree/src/interface';
 import { defineComponent, ref, computed } from 'vue';
-import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
+import { NTreeSelect, treeSelectProps as defaultNTreeSelectProps } from 'naive-ui';
 
 import { mergeVSlots } from '../_utils/vue';
 import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 
-export type TreeOption = Omit<NTreeOption, 'prefix' | 'suffix'>;
-export type TreeOptions = TreeOption[];
-export type TreeRenderLabelParams = {
-    option: TreeOption;
+export type TreeSelectOption = Omit<NTreeSelectOption, 'prefix' | 'suffix'>;
+export type TreeSelectOptions = TreeSelectOption[];
+export type TreeSelectRenderLabelParams = {
+    option: TreeSelectOption;
     label: string;
     key?: string | number;
     checked: boolean;
     selected: boolean;
 };
-export type TreeRenderPrefixParams = {
-    option: TreeOption;
+export type TreeSelectRenderPrefixParams = {
+    option: TreeSelectOption;
     checked: boolean;
     selected: boolean;
 };
-export type TreeRenderSuffixParams = {
-    option: TreeOption;
+export type TreeSelectRenderSuffixParams = {
+    option: TreeSelectOption;
     checked: boolean;
     selected: boolean;
 };
-export type TreeRenderSwitcherIconParams = {
+export type TreeSelectRenderTagParams = {
+    option: TreeSelectOption;
+    label: string;
+    key?: string | number;
+    close: () => void;
+};
+export type TreeSelectRenderSwitcherIconParams = {
     expanded: boolean;
     selected: boolean;
 };
 
 const _props = (() => {
-    const rest = getRestProps(defaultNTreeProps, 'data');
+    const rest = getRestProps(defaultNTreeSelectProps, 'options');
     return {
         ...rest,
-        data: {
-            type: Array as PropType<TreeOption[]>,
+        options: {
+            type: Array as PropType<TreeSelectOption[]>,
             default: () => []
         },
         emptyText: {
@@ -51,33 +59,36 @@ const _props = (() => {
     } as const;
 })();
 
-export type TreeProps = ExtractPublicPropTypes<typeof _props>;
-export type TreeInstance = NTreeInst;
+export type TreeSelectProps = ExtractPublicPropTypes<typeof _props>;
+export type TreeSelectInstance = NTreeSelectInst;
 
 export default defineComponent({
-    name: 'XNTree',
+    name: 'XNTreeSelect',
 
     components: {
-        NTree,
+        NTreeSelect,
         XNEmpty: ComponentEmpty
     },
 
     props: _props,
 
     slots: Object as SlotsType<{
+        action: NonNullable<unknown>;
+        arrow: NonNullable<unknown>;
         empty: NonNullable<unknown>;
-        renderLabel: TreeRenderLabelParams;
-        renderPrefix: TreeRenderPrefixParams;
-        renderSuffix: TreeRenderSuffixParams;
-        renderSwitcherIcon: TreeRenderSwitcherIconParams;
+        renderLabel: TreeSelectRenderLabelParams;
+        renderPrefix: TreeSelectRenderPrefixParams;
+        renderSuffix: TreeSelectRenderSuffixParams;
+        renderTag: TreeSelectRenderTagParams;
+        renderSwitcherIcon: TreeSelectRenderSwitcherIconParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
-        function getNOptionLabel(option: NTreeOption): string {
+        function getNOptionLabel(option: NTreeSelectOption): string {
             return (props.labelField != null ? option[props.labelField] : option.label) as string;
         }
 
-        function getNOptionKey(option: NTreeOption): string | number {
+        function getNOptionKey(option: NTreeSelectOption): string | number {
             return (props.keyField != null ? option[props.keyField] : option.key) as string | number;
         }
 
@@ -86,7 +97,7 @@ export default defineComponent({
                 return props.renderLabel;
             }
 
-            return ({ option, checked, selected }: Parameters<NTreeRenderLabel>[0]) => {
+            return ({ option, checked, selected }: Parameters<NTreeSelectRenderLabel>[0]) => {
                 return slots.renderLabel!({
                     option: option,
                     label: getNOptionLabel(option),
@@ -102,7 +113,7 @@ export default defineComponent({
                 return props.renderPrefix;
             }
 
-            return ({ option, checked, selected }: Parameters<NTreeRenderPrefix>[0]) => {
+            return ({ option, checked, selected }: Parameters<NTreeSelectRenderPrefix>[0]) => {
                 return slots.renderPrefix!({
                     option: option,
                     checked: checked,
@@ -116,11 +127,26 @@ export default defineComponent({
                 return props.renderSuffix;
             }
 
-            return ({ option, checked, selected }: Parameters<NTreeRenderSuffix>[0]) => {
+            return ({ option, checked, selected }: Parameters<NTreeSelectRenderSuffix>[0]) => {
                 return slots.renderSuffix!({
                     option: option,
                     checked: checked,
                     selected: selected
+                });
+            };
+        });
+
+        const nRenderTag = computed(() => {
+            if (!slots['renderTag']) {
+                return props.renderTag;
+            }
+
+            return ({ option, handleClose }: Parameters<NTreeSelectRenderTag>[0]) => {
+                return slots.renderTag!({
+                    option: option,
+                    label: getNOptionLabel(option),
+                    key: getNOptionKey(option),
+                    close: handleClose
                 });
             };
         });
@@ -130,7 +156,7 @@ export default defineComponent({
                 return props.renderSwitcherIcon;
             }
 
-            return ({ expanded, selected }: Parameters<NTreeRenderSwitcherIcon>[0]) => {
+            return ({ expanded, selected }: Parameters<NTreeSelectRenderSwitcherIcon>[0]) => {
                 return slots.renderSwitcherIcon!({
                     expanded: expanded,
                     selected: selected
@@ -148,21 +174,23 @@ export default defineComponent({
             })
         );
 
-        const nRef = ref<NTreeInst>();
+        const nRef = ref<NTreeSelectInst>();
         expose({
-            scrollTo: (options) => nRef.value?.scrollTo(options),
+            focus: () => nRef.value?.focus(),
+            blur: () => nRef.value?.blur(),
             getCheckedData: () => nRef.value?.getCheckedData(),
             getIndeterminateData: () => nRef.value?.getIndeterminateData()
-        } as TreeInstance);
+        } as TreeSelectInstance);
 
         return () => (
-            <NTree
+            <NTreeSelect
                 ref={nRef}
                 {...attrs}
                 {...props}
                 renderLabel={nRenderLabel.value}
                 renderPrefix={nRenderPrefix.value}
                 renderSuffix={nRenderSuffix.value}
+                renderTag={nRenderTag.value}
                 renderSwitcherIcon={nRenderSwitcherIcon.value}
                 v-slots={nSlots.value}
             />
