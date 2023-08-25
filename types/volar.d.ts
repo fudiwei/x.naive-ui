@@ -18,6 +18,8 @@
         XNSelect: (typeof import('@skit/x.naive-ui'))['XNSelect'];
         XNSelectOption: (typeof import('@skit/x.naive-ui'))['XNSelectOption'];
         XNSelectOptionGroup: (typeof import('@skit/x.naive-ui'))['XNSelectOptionGroup'];
+
+        XNTree: (typeof import('@skit/x.naive-ui'))['XNTree'];
     }
 }
 
