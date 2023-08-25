@@ -48,6 +48,14 @@ const routes: RouteRecordRaw[] = [
             sider: true,
             title: 'Cascader / 级联选择'
         }
+    },
+    {
+        path: '/components/tree',
+        component: () => import('../views/components/tree/index.vue'),
+        meta: {
+            sider: true,
+            title: 'Tree / 树'
+        }
     }
 ];
 
