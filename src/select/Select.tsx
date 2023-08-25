@@ -8,8 +8,9 @@ import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
 import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
-import { renderSlot } from '../_utils/render';
-import * as logger from '../_utils/log';
+import { getSlotRender } from '../_utils/render';
+import * as logger from '../_utils/logger';
+import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
@@ -18,10 +19,7 @@ export type SelectOption = NSelectOption;
 export type SelectOptions = SelectOption[];
 
 const _props = (() => {
-    const {
-        options: __1, // dropped
-        ...rest
-    } = defaultNSelectProps;
+    const rest = getRestProps(defaultNSelectProps, 'options');
     return {
         ...rest,
         options: {
@@ -75,7 +73,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
 
             if (vnode.type === ComponentSelectOption) {
                 // 选项
-                const label = renderSlot(vSlots['default']) || vProps.label;
+                const label = getSlotRender(vSlots['default']) || vProps.label;
                 const value = vProps.value;
                 const disabled = !!vProps.disabled || vProps.disabled === '';
                 temp.push({
@@ -87,7 +85,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
             } else if (vnode.type === ComponentSelectOptionGroup) {
                 // 选项组
                 const key = vKey ?? `__X_SELECT_GROUP_${index}`;
-                const label = renderSlot(vSlots['label']) || vProps.label;
+                const label = getSlotRender(vSlots['label']) || vProps.label;
                 const children = convertVNodesToOptions(vSlots['default']?.() || []);
                 temp.push({
                     ...vProps,

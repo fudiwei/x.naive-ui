@@ -2,7 +2,7 @@
 import { h } from 'vue';
 import { isVNode, isTextVNode } from './vue';
 
-export const renderSlot = <T = any>(slot?: Slot<T>, ...args: any[]): (() => VNodeChild) | string | undefined => {
+export const getSlotRender = <T = any>(slot?: Slot<T>, ...args: any[]): (() => VNodeChild) | string | undefined => {
     if (typeof slot === 'function') {
         let vnode: VNode | VNode[] = slot(...(args as any));
         if (Array.isArray(vnode) && vnode.length === 1) {

@@ -9,25 +9,26 @@ import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
 import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
-import { renderSlot } from '../_utils/render';
-import * as logger from '../_utils/log';
+import { getSlotRender } from '../_utils/render';
+import * as logger from '../_utils/logger';
+import { getRestProps } from '../_utils/internal';
 import ComponentMenuDivider from './MenuDivider';
 import ComponentMenuItem from './MenuItem';
 import ComponentMenuItemGroup from './MenuItemGroup';
 
 const _props = (() => {
-    const {
-        childrenField: __1, // dropped
-        disabledField: __2, // dropped
-        expandIcon: __3, // dropped
-        keyField: __4, // dropped
-        labelField: __5, // dropped
-        options: __6, // dropped
-        renderExtra: __7, // dropped
-        renderIcon: __8, // dropped
-        renderLabel: __9, // dropped
-        ...rest
-    } = defaultNMenuProps;
+    const rest = getRestProps(
+        defaultNMenuProps,
+        'childrenField',
+        'disabledField',
+        'expandIcon',
+        'keyField',
+        'labelField',
+        'options',
+        'renderExtra',
+        'renderIcon',
+        'renderLabel'
+    );
     return {
         ...rest
     } as const;
@@ -52,7 +53,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
             const vKey = vnode.key;
             const vProps = vnode.props || {};
             const vSlots = (vnode.children || {}) as Slots;
-            const { key: __1, type: __2, label: __3, icon: __4, extra: __5, disabled: __6, ...restProps } = vProps;
+            const restProps = getRestProps(vProps, 'key', 'type', 'label', 'icon', 'extra', 'disabled', 'children');
 
             if (vnode.type === ComponentMenuItem) {
                 // 菜单项
@@ -61,9 +62,9 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                     key: vKey ?? `__X_MENU_ITEM_${index}`,
                     props: restProps as HTMLAttributes,
                     disabled: !!vProps.disabled || vProps.disabled === '',
-                    label: renderSlot(vSlots['default']) || vProps.label,
-                    icon: renderSlot(vSlots['icon']),
-                    extra: renderSlot(vSlots['extra']) || vProps.extra,
+                    label: getSlotRender(vSlots['default']) || vProps.label,
+                    icon: getSlotRender(vSlots['icon']),
+                    extra: getSlotRender(vSlots['extra']) || vProps.extra,
                     children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
                 } as NMenuOption);
             } else if (vnode.type === ComponentMenuItemGroup) {
@@ -73,8 +74,8 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                     type: 'group',
                     key: vKey ?? `__X_MENU_GROUP_${index}`,
                     props: restProps as HTMLAttributes,
-                    label: renderSlot(vSlots['label']) || vProps.label,
-                    icon: renderSlot(vSlots['icon']),
+                    label: getSlotRender(vSlots['label']) || vProps.label,
+                    icon: getSlotRender(vSlots['icon']),
                     children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
                 } as NMenuGroupOption);
             } else if (vnode.type === ComponentMenuDivider) {

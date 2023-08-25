@@ -11,6 +11,7 @@ import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
 import { isEmptyVNodes, mergeVSlots } from '../_utils/vue';
+import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 
 export type DataTableRowData = NDataTableRowData;
@@ -32,10 +33,7 @@ export type DataTableRenderExpandParams<T extends DataTableRowData = any> = {
 };
 
 const _propsMakeGeneric = <T extends NDataTableRowData = any>() => {
-    const {
-        columns: __1, // dropped
-        ...rest
-    } = defaultNDataTableProps;
+    const rest = getRestProps(defaultNDataTableProps, 'columns');
     return {
         ...rest,
         columns: {

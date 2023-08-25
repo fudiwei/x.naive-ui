@@ -29,7 +29,7 @@ export default defineComponent({
         extra?: NonNullable<unknown>;
     }>,
 
-    setup(props, { attrs, slots }) {
+    setup(props, { attrs, slots, expose }) {
         const nSlots = computed(() =>
             mergeVSlots(slots, {
                 default: () => (
@@ -56,6 +56,8 @@ export default defineComponent({
                 )
             })
         );
+
+        expose({});
 
         return () => <NEmpty {...attrs} {...props} v-slots={nSlots.value} />;
     }
