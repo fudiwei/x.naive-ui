@@ -8,11 +8,36 @@
 
 更多用法请见 Demo。
 
+#### Template Style:
+
+> 注意：这只是个用于定义 `columns` 属性的语法糖（会带来一定的性能损失），所以你不能用其他组件去包裹 `XNDataTableColumn`。
+
+```html
+<template>
+    <x-n-data-table :data="data">
+        <x-n-data-table-column type="selection" />
+        <x-n-data-table-column key="no" title="NO.">
+            <template #renderCell="{ rowIndex }">
+                <div>{{ rowIndex + 1 }}</div>
+            </template>
+        </x-n-data-table-column>
+        <x-n-data-table-column key="name" title="Name" />
+        <x-n-data-table-column key="age" title="Age" />
+        <x-n-data-table-column key="actions" title="Actions">
+            <template #renderCell="{ column, rowData, rowIndex }">
+                <button>{{ 'Say hello to ' + rowData.name }}</button>
+            </template>
+        </x-n-data-table-column>
+    </x-n-data-table>
+</template>
+```
+
 #### Scoped Slots：
 
 ```html
 <script setup>
     const columns = [
+        { type: 'selection' },
         { key: 'no', title: 'NO.' },
         { key: 'name', title: 'Name' },
         { key: 'age', title: 'Age' },
@@ -55,14 +80,26 @@
 
 #### `XNDataTable` Slots：
 
-| 名称         | 参数                          | 说明               | 版本 |
-| :----------- | :---------------------------- | :----------------- | :--- |
-| renderColumn | `(column)`                    | 自定义列头的内容   |      |
-| renderCell   | `(column, rowData, rowIndex)` | 自定义单元格的内容 |      |
-| renderExpand | `(rowData, rowIndex)`         | 自定义展开行的内容 |      |
+| 名称         | 参数                                   | 说明               | 版本 |
+| :----------- | :------------------------------------- | :----------------- | :--- |
+| renderColumn | `{ column }`                           | 自定义列头的内容   |      |
+| renderCell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
+| renderExpand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |
 
 其他 Slots 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Slots)。
 
 #### `XNDataTable` Methods：
 
 其他 Methods 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Methods)。
+
+#### `XNDataTableColumn` Props：
+
+其他 Props 略，与 `NDataTableColumn` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTableColumn-Properties)。注意 `children`、`render`、`renderExpand` 属性不可用。
+
+#### `XNDataTableColumn` Slots：
+
+| 名称         | 参数                                   | 说明               | 版本 |
+| :----------- | :------------------------------------- | :----------------- | :--- |
+| title        |                                        | 自定义列头的内容   |      |
+| renderCell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
+| renderExpand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |

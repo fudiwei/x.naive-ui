@@ -48,13 +48,13 @@
 
 #### `XNTreeSelect` Slots：
 
-| 名称               | 参数                                      | 说明                 | 版本 |
-| :----------------- | :---------------------------------------- | :------------------- | :--- |
-| renderLabel        | `(option, label, key, checked, selected)` | 自定义节点的内容     |      |
-| renderPrefix       | `(option, checked, selected)`             | 自定义节点的前缀     |      |
-| renderSuffix       | `(option, checked, selected)`             | 自定义节点的后缀     |      |
-| renderSwitcherIcon | `(expanded, selected)`                    | 自定义节点的开关图标 |      |
-| renderTag          | `(option, label, key, close)`             | 自定义标签的内容     |      |
+| 名称               | 参数                                        | 说明                 | 版本 |
+| :----------------- | :------------------------------------------ | :------------------- | :--- |
+| renderLabel        | `{ option, label, key, checked, selected }` | 自定义节点的内容     |      |
+| renderPrefix       | `{ option, checked, selected }`             | 自定义节点的前缀     |      |
+| renderSuffix       | `{ option, checked, selected }`             | 自定义节点的后缀     |      |
+| renderSwitcherIcon | `{ expanded, selected }`                    | 自定义节点的开关图标 |      |
+| renderTag          | `{ option, label, key, close }`             | 自定义标签的内容     |      |
 
 其他 Slots 略，与 `NTreeSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/tree-select#TreeSelect-Slots)。
 

@@ -55,12 +55,12 @@
 
 #### `XNSelect` Slots：
 
-| 名称         | 参数                               | 说明             | 版本 |
-| :----------- | :--------------------------------- | :--------------- | :--- |
-| default      | `()`                               | 弹出的内容       |      |
-| renderLabel  | `(option, label, value, selected)` | 自定义选项的内容 |      |
-| renderOption | `(optionVNode, option, selected)`  | 自定义选项的内容 |      |
-| renderTag    | `(option, close)`                  | 自定义标签的内容 |      |
+| 名称         | 参数                                 | 说明             | 版本 |
+| :----------- | :----------------------------------- | :--------------- | :--- |
+| default      |                                      | 弹出的内容       |      |
+| renderLabel  | `{ option, label, value, selected }` | 自定义选项的内容 |      |
+| renderOption | `{ optionVNode, option, selected }`  | 自定义选项的内容 |      |
+| renderTag    | `{ option, close }`                  | 自定义标签的内容 |      |
 
 其他 Slots 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Slots)。
 
@@ -80,7 +80,7 @@
 
 | 名称    | 参数 | 说明           | 版本 |
 | :------ | :--- | :------------- | :--- |
-| default | `()` | 自定义文本内容 |      |
+| default |      | 自定义文本内容 |      |
 
 #### `XNSelectOptionGroup` Props：
 
@@ -92,5 +92,5 @@
 
 | 名称    | 参数 | 说明                                       | 版本 |
 | :------ | :--- | :----------------------------------------- | :--- |
-| default | `()` | 选项组。仅支持 `XNSelectOption` 作为子组件 |      |
-| label   | `()` | 自定义文本内容                             |      |
+| default |      | 选项组。仅支持 `XNSelectOption` 作为子组件 |      |
+| label   |      | 自定义文本内容                             |      |

@@ -40,7 +40,7 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name    | Type | Description | Version |
 | :------ | :--- | :---------- | :------ |
-| default | `()` | Menu.       |         |
+| default |      | Menu.       |         |
 
 #### `XNMenu` Methods:
 
@@ -58,10 +58,10 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
-| default | `()` | Custom displayed label. |         |
-| extra   | `()` | Custom extra parts.     |         |
-| icon    | `()` | Custom icon.            |         |
-| submenu | `()` | Sub menu.               |         |
+| default |      | Custom displayed label. |         |
+| extra   |      | Custom extra parts.     |         |
+| icon    |      | Custom icon.            |         |
+| submenu |      | Sub menu.               |         |
 
 #### `XNMenuItemGroup` Props:
 
@@ -73,5 +73,5 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
-| default | `()` | Sub menu.               |         |
-| label   | `()` | Custom displayed label. |         |
+| default |      | Sub menu.               |         |
+| label   |      | Custom displayed label. |         |

@@ -35,8 +35,8 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name    | Type | Description                                      | Version |
 | :------ | :--- | :----------------------------------------------- | :------ |
-| default | `()` | The content inside dropdown.                     |         |
-| trigger | `()` | The element or component that triggers dropdown. |         |
+| default |      | The content inside dropdown.                     |         |
+| trigger |      | The element or component that triggers dropdown. |         |
 
 #### `XNDropdownItem` Props:
 
@@ -49,6 +49,6 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
-| default | `()` | Custom displayed label. |         |
-| icon    | `()` | Custom icon.            |         |
-| submenu | `()` | Sub menu.               |         |
+| default |      | Custom displayed label. |         |
+| icon    |      | Custom icon.            |         |
+| submenu |      | Sub menu.               |         |

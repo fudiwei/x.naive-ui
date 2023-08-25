@@ -48,13 +48,13 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNTreeSelect` Slots:
 
-| Name               | Type                                      | Description                  | Version |
-| :----------------- | :---------------------------------------- | :--------------------------- | :------ |
-| renderLabel        | `(option, label, key, checked, selected)` | Custom option label.         |         |
-| renderPrefix       | `(option, checked, selected)`             | Custom option prefix.        |         |
-| renderSuffix       | `(option, checked, selected)`             | Custom option suffix.        |         |
-| renderSwitcherIcon | `(expanded, selected)`                    | Custom option switcher icon. |         |
-| renderTag          | `(option, close)`                         | Custom tag.                  |         |
+| Name               | Type                                        | Description                  | Version |
+| :----------------- | :------------------------------------------ | :--------------------------- | :------ |
+| renderLabel        | `{ option, label, key, checked, selected }` | Custom option label.         |         |
+| renderPrefix       | `{ option, checked, selected }`             | Custom option prefix.        |         |
+| renderSuffix       | `{ option, checked, selected }`             | Custom option suffix.        |         |
+| renderSwitcherIcon | `{ expanded, selected }`                    | Custom option switcher icon. |         |
+| renderTag          | `{ option, close }`                         | Custom tag.                  |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/tree-select#TreeSelect-Slots)。
 
