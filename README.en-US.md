@@ -45,11 +45,12 @@ This project is aimed to provide a solution for these issues above.
 ## Features
 
 -   Almost the same API to Naive-UI. You just need to add `x-` before the original component name (example: `<n-data-table>` → `<x-n-data-table>`).
--   `DataTable`: Slots for **colums**, **cells**, **expandable rows**.
+-   `DataTable`: Scoped slots for **colums**, **cells**, **expandable rows**.
 -   `Dropdown`: Template style API for **options**.
 -   `Menu`: Template style API for **options**.
--   `Select`: Template style API for **options**, **option groups**. Slots for **options**, **tags**.
--   `Cascader`: Slots for **options**.
+-   `Select`: Template style API for **options**, **option groups**.
+-   `Select`: Scoped slots for **options**, **tags**.
+-   `Cascader`: Scoped slots for **options**.
 
 ---
 

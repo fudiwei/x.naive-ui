@@ -1,6 +1,6 @@
 ﻿## XNCascader
 
-This component is based on the NCascader component of Naive-UI.
+This component is based on the `NCascader` component of Naive-UI.
 
 ---
 
@@ -8,7 +8,7 @@ This component is based on the NCascader component of Naive-UI.
 
 For more details, please refer to the Demo.
 
-#### Slots：
+#### Scoped Slots：
 
 ```html
 <script setup>

@@ -1,12 +1,45 @@
 ﻿## XNDataTable
 
-This component is based on the NDataTable component of Naive-UI.
+This component is based on the `NDataTable` component of Naive-UI.
 
 ---
 
 ### Usage
 
 For more details, please refer to the Demo.
+
+#### Scoped Slots：
+
+```html
+<script setup>
+    const columns = [
+        { key: 'no', title: 'NO.' },
+        { key: 'name', title: 'Name' },
+        { key: 'age', title: 'Age' },
+        { key: 'actions', title: 'Actions' }
+    ];
+    const data = [
+        { name: 'Athos', age: 20 },
+        { name: 'Porthos', age: 19 },
+        { name: 'Aramis', age: 18 }
+    ];
+</script>
+<template>
+    <x-n-data-table :columns="columns" :data="data">
+        <template #renderColumn="{ column }">
+            <div>{{ 'Column ' + column.title }}</div>
+        </template>
+        <template #renderCell="{ column, rowData, rowIndex }">
+            <template v-if="column.key === 'no'">
+                <div>{{ rowIndex + 1 }}</div>
+            </template>
+            <template v-else-if="column.key === 'actions'">
+                <button>{{ 'Say hello to ' + rowData.name }}</button>
+            </template>
+        </template>
+    </x-n-data-table>
+</template>
+```
 
 ---
 

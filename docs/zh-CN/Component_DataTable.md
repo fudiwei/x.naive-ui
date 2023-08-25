@@ -1,6 +1,6 @@
 ﻿## 数据表格 XNDataTable
 
-本组件是基于 Naive-UI 的 NDataTable 组件二次封装的。
+本组件是基于 Naive-UI 的 `NDataTable` 组件二次封装的。
 
 ---
 
@@ -8,7 +8,7 @@
 
 更多用法请见 Demo。
 
-#### Slots：
+#### Scoped Slots：
 
 ```html
 <script setup>

@@ -1,6 +1,6 @@
 ﻿## XNSelect
 
-This component is based on the NSelect component of Naive-UI.
+This component is based on the `NSelect` component of Naive-UI.
 
 ---
 
@@ -9,6 +9,8 @@ This component is based on the NSelect component of Naive-UI.
 For more details, please refer to the Demo.
 
 #### Template Style：
+
+> Notes: Since this is just a syntax sugar for the `options` property (there will be a certain performance loss), so that you can't compose `XNSelectOption` and `XNSelectOptionGroup` with other elements.
 
 ```html
 <template>
@@ -20,7 +22,7 @@ For more details, please refer to the Demo.
 </template>
 ```
 
-#### Slots：
+#### Scoped Slots：
 
 ```html
 <script setup>

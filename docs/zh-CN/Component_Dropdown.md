@@ -1,6 +1,6 @@
 ﻿## 下拉菜单 XNDropdown
 
-本组件是基于 Naive-UI 的 NDropdown 组件二次封装的。
+本组件是基于 Naive-UI 的 `NDropdown` 组件二次封装的。
 
 ---
 
@@ -9,6 +9,8 @@
 更多用法请见 Demo。
 
 #### Template Style：
+
+> 注意：这只是个用于定义 `options` 属性的语法糖（会带来一定的性能损失），所以你不能用其他组件去包裹 `XNDropdownItem` 和 `XNDropdownDivider`。
 
 ```html
 <template>

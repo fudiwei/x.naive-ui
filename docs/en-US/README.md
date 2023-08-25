@@ -2,7 +2,7 @@
 
 -   [Getting Started](./GettingStarted.md)
 
--   Components
+-   X Components
 
     -   [`XNDataTable`](./Component_DataTable.md)
 

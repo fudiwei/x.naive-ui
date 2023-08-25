@@ -1,6 +1,6 @@
 ﻿## XNMenu
 
-This component is based on the NMenu component of Naive-UI.
+This component is based on the `NMenu` component of Naive-UI.
 
 ---
 
@@ -9,6 +9,8 @@ This component is based on the NMenu component of Naive-UI.
 For more details, please refer to the Demo.
 
 #### Template Style:
+
+> Notes: Since this is just a syntax sugar for the `options` property (there will be a certain performance loss), so that you can't compose `XNMenuItem`, `XNMenuItemGroup` and `XNMenuDivider` with other elements.
 
 ```html
 <template>

@@ -2,7 +2,7 @@
 
 -   [快速开始](./GettingStarted.md)
 
--   组件
+-   扩展组件
 
     -   [数据表格 `XNDataTable`](./Component_DataTable.md)
 
