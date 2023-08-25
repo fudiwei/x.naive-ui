@@ -44,15 +44,33 @@ export default defineComponent({
 </script>
 
 <template>
-    <x-n-data-table :columns="columns" :data="data" :bordered="false">
-        <template #renderCell="{ column, rowData, rowIndex }">
-            <template v-if="column.key === 'no'">
-                {{ rowIndex + 1 }}
-            </template>
+    <n-space vertical :size="20">
+        <x-n-data-table :data="data" :bordered="false">
+            <x-n-data-table-column key="no" title="No">
+                <template #renderCell="{ rowIndex }">
+                    {{ rowIndex + 1 }}
+                </template>
+            </x-n-data-table-column>
+            <x-n-data-table-column key="title" title="Title"></x-n-data-table-column>
+            <x-n-data-table-column key="length" title="Length"></x-n-data-table-column>
+            <x-n-data-table-column key="actions">
+                <template #title>Actions</template>
+                <template #renderCell="{ rowData }">
+                    <n-button size="small" strong tertiary @click="handleClickPlay(rowData)">Play</n-button>
+                </template>
+            </x-n-data-table-column>
+        </x-n-data-table>
 
-            <template v-else-if="column.key === 'actions'">
-                <n-button size="small" strong tertiary @click="handleClickPlay(rowData)">Play</n-button>
+        <x-n-data-table :columns="columns" :data="data" :bordered="false">
+            <template #renderCell="{ column, rowData, rowIndex }">
+                <template v-if="column.key === 'no'">
+                    {{ rowIndex + 1 }}
+                </template>
+
+                <template v-else-if="column.key === 'actions'">
+                    <n-button size="small" strong tertiary @click="handleClickPlay(rowData)">Play</n-button>
+                </template>
             </template>
-        </template>
-    </x-n-data-table>
+        </x-n-data-table>
+    </n-space>
 </template>

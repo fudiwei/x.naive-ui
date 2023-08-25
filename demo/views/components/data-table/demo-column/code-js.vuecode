@@ -50,20 +50,41 @@ export default defineComponent({
 </script>
 
 <template>
-    <x-n-data-table :columns="columns" :data="data" :pagination="pagination">
-        <template #renderColumn="{ column }">
-            <template v-if="column.key === 'name'">
-                <n-tooltip>
-                    <template #trigger>
-                        <n-gradient-text :size="24" type="danger">Name</n-gradient-text>
-                    </template>
-                    Tooltip Content
-                </n-tooltip>
-            </template>
+    <n-space vertical :size="20">
+        <x-n-data-table :data="data" :pagination="pagination">
+            <x-n-data-table-column key="name" title="Name">
+                <template #title>
+                    <n-tooltip>
+                        <template #trigger>
+                            <n-gradient-text :size="24" type="danger">Name</n-gradient-text>
+                        </template>
+                        Tooltip Content
+                    </n-tooltip>
+                </template>
+            </x-n-data-table-column>
+            <x-n-data-table-column key="age" title="Age">
+                <template #title>
+                    <n-gradient-text :size="20" type="info">Age</n-gradient-text>
+                </template>
+            </x-n-data-table-column>
+            <x-n-data-table-column key="address" title="Address"></x-n-data-table-column>
+        </x-n-data-table>
 
-            <template v-else-if="column.key === 'age'">
-                <n-gradient-text :size="20" type="info">Age</n-gradient-text>
+        <x-n-data-table :columns="columns" :data="data" :pagination="pagination">
+            <template #renderColumn="{ column }">
+                <template v-if="column.key === 'name'">
+                    <n-tooltip>
+                        <template #trigger>
+                            <n-gradient-text :size="24" type="danger">Name</n-gradient-text>
+                        </template>
+                        Tooltip Content
+                    </n-tooltip>
+                </template>
+
+                <template v-else-if="column.key === 'age'">
+                    <n-gradient-text :size="20" type="info">Age</n-gradient-text>
+                </template>
             </template>
-        </template>
-    </x-n-data-table>
+        </x-n-data-table>
+    </n-space>
 </template>

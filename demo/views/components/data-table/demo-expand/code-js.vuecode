@@ -83,27 +83,60 @@ export default defineComponent({
 </script>
 
 <template>
-    <x-n-data-table :columns="columns" :data="data" :pagination="pagination" default-expand-all>
-        <template #renderCell="{ column, rowData }">
-            <template v-if="column.key === 'tags'">
-                <n-tag
-                    v-for="tagKey in rowData.tags"
-                    :key="tagKey"
-                    style="margin-right: 6px"
-                    type="info"
-                    :borderd="false"
-                >
-                    {{ tagKey }}
-                </n-tag>
+    <n-space vertical :size="20">
+        <x-n-data-table :data="data" :pagination="pagination">
+            <x-n-data-table-column type="selection" />
+            <x-n-data-table-column type="expand" :expandable="(rowData) => rowData.name !== 'Jim Green'">
+                <template #renderExpand="{ rowData }">
+                    {{ `${rowData.name} is a good guy.` }}
+                </template>
+            </x-n-data-table-column>
+            <x-n-data-table-column key="key" title="#" :render="(_, index) => index + 1" />
+            <x-n-data-table-column key="name" title="Name" />
+            <x-n-data-table-column key="age" title="Age" />
+            <x-n-data-table-column key="address" title="Address" />
+            <x-n-data-table-column key="tags" title="Tags">
+                <template #renderCell="{ rowData }">
+                    <n-tag
+                        v-for="tagKey in rowData.tags"
+                        :key="tagKey"
+                        style="margin-right: 6px"
+                        type="info"
+                        :borderd="false"
+                    >
+                        {{ tagKey }}
+                    </n-tag>
+                </template>
+            </x-n-data-table-column>
+            <x-n-data-table-column key="actions" title="Actions">
+                <template #renderCell="{ rowData }">
+                    <n-button size="small" @click="handleClickSendMail(rowData)">Send Email</n-button>
+                </template>
+            </x-n-data-table-column>
+        </x-n-data-table>
+
+        <x-n-data-table :columns="columns" :data="data" :pagination="pagination" default-expand-all>
+            <template #renderCell="{ column, rowData }">
+                <template v-if="column.key === 'tags'">
+                    <n-tag
+                        v-for="tagKey in rowData.tags"
+                        :key="tagKey"
+                        style="margin-right: 6px"
+                        type="info"
+                        :borderd="false"
+                    >
+                        {{ tagKey }}
+                    </n-tag>
+                </template>
+
+                <template v-if="column.key === 'actions'">
+                    <n-button size="small" @click="handleClickSendMail(rowData)">Send Email</n-button>
+                </template>
             </template>
 
-            <template v-if="column.key === 'actions'">
-                <n-button size="small" @click="handleClickSendMail(rowData)">Send Email</n-button>
+            <template #renderExpand="{ rowData }">
+                {{ `${rowData.name} is a good guy.` }}
             </template>
-        </template>
-
-        <template #renderExpand="{ rowData }">
-            {{ `${rowData.name} is a good guy.` }}
-        </template>
-    </x-n-data-table>
+        </x-n-data-table>
+    </n-space>
 </template>

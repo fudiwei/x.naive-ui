@@ -18,7 +18,7 @@ import DemoCodeTs from './code-ts.vuecode';
                 <n-a href="//www.naiveui.com/zh-CN/os-theme/components/data-table#render-header.vue" target="blank">
                     自定义渲染列头
                 </n-a>
-                」。以插槽形式改写。
+                」。分别以模板和插槽形式改写。
             </p>
         </template>
 
