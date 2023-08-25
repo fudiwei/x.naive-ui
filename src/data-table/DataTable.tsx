@@ -1,4 +1,4 @@
-﻿import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+﻿import type { VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
     DataTableColumn as NDataTableColumn,
     DataTableBaseColumn as NDataTableBaseColumn,
@@ -10,9 +10,12 @@ import type { RowData as NDataTableRowData } from 'naive-ui/es/data-table/src/in
 import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
-import { isEmptyVNodes, mergeVSlots } from '../_utils/vue';
-import { getRestProps } from '../_utils/internal';
+import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
+import { getSlotRender } from '../_utils/render';
+import * as logger from '../_utils/logger';
+import { getRestProps, getBooleanProp } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
+import ComponentDataTableColumn from './DataTableColumn';
 
 export type DataTableRowData = NDataTableRowData;
 export type DataTableColumn<T extends DataTableRowData = any> = Partial<Omit<NDataTableBaseColumn<T>, 'type'>> &
@@ -50,6 +53,136 @@ const _props = _propsMakeGeneric();
 export type DataTableProps = ExtractPublicPropTypes<typeof _props>;
 export type DataTableInstance = NDataTableInst;
 
+function convertVNodesToColumns<T extends NDataTableRowData = any>(vnodes: VNode[]): NDataTableColumn<T>[] {
+    const temp = [] as NDataTableColumn<T>[];
+
+    vnodes = flattenVNodeChildren(vnodes) as VNode[];
+    vnodes.forEach((vnode, index) => {
+        const vKey = vnode.key as string | number | null;
+        const vProps = vnode.props || {};
+        const vSlots = (vnode.children || {}) as Slots;
+        const restProps = getRestProps(vProps, 'key', 'children', 'render', 'renderExpand');
+
+        if (vnode.type === ComponentDataTableColumn) {
+            const column: NDataTableColumn<T> = {
+                ...restProps,
+                key: vKey ?? `__X_DATATABLE_COLUMN_${index}`,
+                ellipsis: getBooleanProp(vProps, 'ellipsis'),
+                expandable: getBooleanProp(vProps, 'expandable'),
+                filterMultiple: getBooleanProp(vProps, 'filterMultiple'),
+                multiple: getBooleanProp(vProps, 'multiple'),
+                resizable: getBooleanProp(vProps, 'resizable'),
+                sorter: getBooleanProp(vProps, 'sorter'),
+                tree: getBooleanProp(vProps, 'tree'),
+                colSpan:
+                    typeof vProps.colSpan === 'string' || typeof vProps.colSpan === 'number'
+                        ? () => +vProps.colSpan
+                        : vProps.colSpan,
+                rowSpan:
+                    typeof vProps.rowSpan === 'string' || typeof vProps.rowSpan === 'number'
+                        ? () => +vProps.rowSpan
+                        : vProps.rowSpan
+                // TODO: 表头分组
+                // children: undefined
+            };
+
+            (column as NDataTableBaseColumn<T>).title = renderTableColumn(column, vSlots, true);
+            (column as NDataTableBaseColumn<T>).render = renderTableCell(column, vSlots, true);
+            (column as NDataTableExpandColumn<T>).renderExpand = renderTableExpand(column, vSlots, true)!;
+
+            temp.push(column);
+        } else if (!isEmptyVNode(vnode)) {
+            logger.warning('Only "{0}" can be child component in "{0}".', ComponentDataTableColumn.name);
+        }
+    });
+
+    return temp;
+}
+
+function renderTableColumn<T extends NDataTableRowData = any>(
+    column: NDataTableColumn<T>,
+    ctxSlots: Slots,
+    isTemplateStyle = false
+) {
+    const fallback = (column as NDataTableBaseColumn<T>).title;
+    if (isTemplateStyle) {
+        return getSlotRender(ctxSlots['title']) || fallback;
+    } else {
+        return () => {
+            const params: DataTableRenderColumnParams = {
+                column: column as DataTableColumn<T>
+            };
+            const vnodes = ctxSlots['renderColumn']?.(params);
+            if (!isEmptyVNodes(vnodes)) {
+                return vnodes;
+            } else if (typeof fallback === 'function') {
+                return fallback(column as NDataTableBaseColumn);
+            } else {
+                return fallback;
+            }
+        };
+    }
+}
+
+function renderTableCell<T extends NDataTableRowData = any>(
+    column: NDataTableColumn<T>,
+    ctxSlots: Slots,
+    isTemplateStyle = false
+) {
+    const fallback = (column as NDataTableBaseColumn<T>).render;
+    return (rowData: T, rowIndex: number) => {
+        if (ctxSlots['renderCell']) {
+            const params: DataTableRenderCellParams = {
+                column: column as DataTableColumn<T>,
+                rowData: rowData,
+                rowIndex: rowIndex
+            };
+            const vnodes = ctxSlots['renderCell'](params);
+            if (isTemplateStyle || !isEmptyVNodes(vnodes)) {
+                return vnodes;
+            }
+        }
+
+        if (typeof fallback === 'function') {
+            return fallback(rowData, rowIndex);
+        } else {
+            return rowData[(column as NDataTableBaseColumn<T>).key];
+        }
+    };
+}
+
+function renderTableExpand<T extends NDataTableRowData = any>(
+    column: NDataTableColumn<T>,
+    ctxSlots: Slots,
+    isTemplateStyle = false
+) {
+    if ('type' in column && column.type !== 'expand') {
+        return;
+    }
+
+    const fallback = (column as NDataTableExpandColumn<T>).renderExpand;
+    return (rowData: T, rowIndex: number) => (
+        <div class="n-data-table__expand">
+            {(() => {
+                if (ctxSlots['renderExpand']) {
+                    const params: DataTableRenderExpandParams = {
+                        rowData: rowData,
+                        rowIndex: rowIndex
+                    };
+                    const vnodes = ctxSlots['renderExpand'](params);
+                    if (isTemplateStyle || !isEmptyVNodes(vnodes)) {
+                        return vnodes;
+                    }
+                }
+
+                if (typeof fallback === 'function') {
+                    return fallback(rowData, rowIndex);
+                }
+            })()}
+        </div>
+    );
+}
+
 export default (<T extends DataTableRowData = any>() => {
     return defineComponent({
         name: 'XNDataTable',
@@ -62,6 +195,7 @@ export default (<T extends DataTableRowData = any>() => {
         props: _props as ReturnType<typeof _propsMakeGeneric<T>>,
 
         slots: Object as SlotsType<{
+            default: NonNullable<unknown>;
             loading: NonNullable<unknown>;
             empty: NonNullable<unknown>;
             renderColumn: DataTableRenderColumnParams<T>;
@@ -71,73 +205,25 @@ export default (<T extends DataTableRowData = any>() => {
 
         setup(props, { attrs, slots, expose }) {
             const nColumns = computed(() => {
-                return props.columns?.map((col) => {
-                    let renderColumn = (col as NDataTableBaseColumn<T>).title;
-                    let renderCell = (col as NDataTableBaseColumn<T>).render;
-                    let renderExpand = (col as unknown as NDataTableExpandColumn<T>).renderExpand;
+                const vnodes = slots['default']?.({});
+                if (isEmptyVNodes(vnodes)) {
+                    return props.columns?.map((column) => {
+                        const nColumn = column as NDataTableColumn<T>;
+                        return Object.assign(nColumn, {
+                            title: renderTableColumn(nColumn, slots),
+                            render: renderTableCell(nColumn, slots),
+                            renderExpand: renderTableExpand(nColumn, slots)
+                        });
+                    });
+                }
 
-                    if (slots['renderColumn']) {
-                        const temp = renderColumn;
-                        renderColumn = () => {
-                            const vnodes = slots.renderColumn!({
-                                column: col as DataTableColumn<T>
-                            });
-                            if (!isEmptyVNodes(vnodes)) {
-                                return vnodes;
-                            } else if (typeof temp === 'function') {
-                                return temp(col as NDataTableBaseColumn);
-                            } else {
-                                return temp;
-                            }
-                        };
-                    }
-
-                    if (slots['renderCell']) {
-                        const temp = renderCell;
-                        renderCell = (rowData, rowIndex) => {
-                            const vnodes = slots.renderCell!({
-                                column: col as DataTableColumn<T>,
-                                rowData: rowData,
-                                rowIndex: rowIndex
-                            });
-                            if (!isEmptyVNodes(vnodes)) {
-                                return vnodes;
-                            } else if (typeof temp === 'function') {
-                                return temp(rowData, rowIndex);
-                            } else {
-                                return rowData[(col as NDataTableBaseColumn).key];
-                            }
-                        };
-                    }
-
-                    if (slots['renderExpand']) {
-                        const temp = renderExpand;
-                        renderExpand = (rowData, rowIndex) => {
-                            const vnodes = slots.renderExpand!({
-                                rowData: rowData,
-                                rowIndex: rowIndex
-                            });
-                            if (!isEmptyVNodes(vnodes)) {
-                                return vnodes;
-                            } else if (typeof temp === 'function') {
-                                return temp(rowData, rowIndex);
-                            }
-                        };
-                    }
-
-                    return Object.assign(col, {
-                        title: renderColumn,
-                        render: renderCell,
-                        renderExpand: (rowData: T, rowIndex: number) => (
-                            <div class="n-data-table__expand">{renderExpand(rowData, rowIndex)}</div>
-                        )
-                    }) as NDataTableColumn<T>;
-                });
+                return convertVNodesToColumns(vnodes);
             });
 
             const nSlots = computed(() =>
                 mergeVSlots(slots, {
                     empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
+                    default: undefined,
                     renderColumn: undefined,
                     renderCell: undefined,
                     renderExpand: undefined

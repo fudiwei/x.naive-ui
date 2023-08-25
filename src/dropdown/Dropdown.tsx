@@ -8,7 +8,7 @@ import { defineComponent, computed } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
-import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
+import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
 import { getSlotRender } from '../_utils/render';
 import { getRestProps } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';

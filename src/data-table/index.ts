@@ -1,6 +1,7 @@
 ﻿import type { App } from 'vue';
 
 import ComponentDataTable from './DataTable';
+import ComponentDataTableColumn from './DataTableColumn';
 
 export type {
     DataTableProps,
@@ -12,9 +13,13 @@ export type {
     DataTableRenderCellParams,
     DataTableRenderExpandParams
 } from './DataTable';
+export type { DataTableColumnProps } from './DataTableColumn';
 export const XNDataTable = Object.assign(ComponentDataTable, {
+    Column: ComponentDataTableColumn,
     install: (app: App) => {
         app.component(ComponentDataTable.name, ComponentDataTable);
+        app.component(ComponentDataTableColumn.name, ComponentDataTableColumn);
     }
 });
+export const XNComponentDataTableColumn = ComponentDataTableColumn;
 export default XNDataTable;

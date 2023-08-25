@@ -9,7 +9,7 @@ import type {
 import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
-import { isVNode, isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
+import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
 import { getSlotRender } from '../_utils/render';
 import * as logger from '../_utils/logger';
 import { getRestProps } from '../_utils/internal';
