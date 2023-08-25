@@ -39,7 +39,7 @@ function handleClickTitle() {
     >
         <template #header>
             <span style="cursor: pointer" @click="handleClickTitle">
-                {{ title }}
+                {{ '# ' + title }}
             </span>
         </template>
 
