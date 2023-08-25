@@ -1,15 +1,11 @@
-﻿import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+﻿import type { SlotsType, ExtractPublicPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
 import { mergeVSlots } from '../_utils/vue';
 
 const _props = {
-    ...defaultNEmptyProps,
-    description: {
-        type: String as PropType<string>,
-        default: '暂无数据'
-    }
+    ...defaultNEmptyProps
 } as const;
 
 export type EmptyProps = ExtractPublicPropTypes<typeof _props>;
