@@ -69,7 +69,7 @@ function convertVNodesToColumns<T extends NDataTableRowData = any>(vnodes: VNode
         const restProps = getRestProps(vProps, 'key', 'children', 'render', 'renderExpand');
 
         if (vnode.type === ComponentDataTableColumn) {
-            if (!!vProps.type && vKey == null) {
+            if (!vProps.type && vKey == null) {
                 logger.warning('Each "{0}" should have a unique `key` prop.', ComponentDataTableColumn.name);
             }
 
