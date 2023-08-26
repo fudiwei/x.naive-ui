@@ -11,7 +11,7 @@ import type { RenderSwitcherIcon as NTreeSelectRenderSwitcherIcon } from 'naive-
 import { defineComponent, ref, computed } from 'vue';
 import { NTreeSelect, treeSelectProps as defaultNTreeSelectProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/vue';
+import { mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 

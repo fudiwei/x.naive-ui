@@ -13,10 +13,10 @@ import type {
 import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
-import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
-import { getSlotRender } from '../_utils/render';
-import * as logger from '../_utils/logger';
+import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/v-node';
+import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps, getBooleanProp } from '../_utils/internal';
+import * as logger from '../_utils/logger';
 import ComponentEmpty from '../empty/Empty';
 import ComponentDataTableColumn from './DataTableColumn';
 
@@ -120,7 +120,7 @@ function renderTableColumn<T extends NDataTableRowData = any>(
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).title;
     if (isTemplateStyle) {
-        return getSlotRender(ctxSlots['title']) || fallback;
+        return getVSlotRender(ctxSlots['title']) || fallback;
     } else {
         return () => {
             const params: DataTableRenderColumnParams = {

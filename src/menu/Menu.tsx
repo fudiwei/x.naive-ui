@@ -8,10 +8,10 @@ import type {
 import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
 import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
-import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
-import { getSlotRender } from '../_utils/render';
-import * as logger from '../_utils/logger';
+import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/v-node';
+import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
+import * as logger from '../_utils/logger';
 import ComponentMenuDivider from './MenuDivider';
 import ComponentMenuItem from './MenuItem';
 import ComponentMenuItemGroup from './MenuItemGroup';
@@ -54,9 +54,9 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                 key: vKey ?? `__X_MENU_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
                 disabled: !!vProps.disabled || vProps.disabled === '',
-                label: getSlotRender(vSlots['default']) || vProps.label,
-                icon: getSlotRender(vSlots['icon']),
-                extra: getSlotRender(vSlots['extra']) || vProps.extra,
+                label: getVSlotRender(vSlots['default']) || vProps.label,
+                icon: getVSlotRender(vSlots['icon']),
+                extra: getVSlotRender(vSlots['extra']) || vProps.extra,
                 children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
             } as NMenuOption);
         } else if (vnode.type === ComponentMenuItemGroup) {
@@ -66,8 +66,8 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                 type: 'group',
                 key: vKey ?? `__X_MENU_GROUP_${index}`,
                 props: restProps as HTMLAttributes,
-                label: getSlotRender(vSlots['label']) || vProps.label,
-                icon: getSlotRender(vSlots['icon']),
+                label: getVSlotRender(vSlots['label']) || vProps.label,
+                icon: getVSlotRender(vSlots['icon']),
                 children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
             } as NMenuGroupOption);
         } else if (vnode.type === ComponentMenuDivider) {

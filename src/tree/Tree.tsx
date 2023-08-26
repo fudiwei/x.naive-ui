@@ -9,7 +9,7 @@ import type {
 import { defineComponent, ref, computed } from 'vue';
 import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/vue';
+import { mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 

@@ -8,8 +8,8 @@ import { defineComponent, computed } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
-import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren, mergeVSlots } from '../_utils/vue';
-import { getSlotRender } from '../_utils/render';
+import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/v-node';
+import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
@@ -40,8 +40,8 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
                 key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
                 disabled: !!vProps.disabled || vProps.disabled === '',
-                label: getSlotRender(vSlots['default']) || vProps.label,
-                icon: getSlotRender(vSlots['icon']),
+                label: getVSlotRender(vSlots['default']) || vProps.label,
+                icon: getVSlotRender(vSlots['icon']),
                 children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
             } as NDropdownOption);
         } else if (vnode.type === ComponentDropdownDivider) {

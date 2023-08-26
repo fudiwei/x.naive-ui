@@ -1,4 +1,4 @@
-﻿import type { VNode, VNodeChild, VNodeNormalizedChildren, Slot } from 'vue';
+﻿import type { VNode, VNodeChild, VNodeNormalizedChildren } from 'vue';
 import { Fragment, Text, Comment, isVNode } from 'vue';
 
 export { isVNode };
@@ -78,17 +78,5 @@ export const flattenVNodeChildren = (children?: VNodeNormalizedChildren, filterE
         }
     });
 
-    return temp;
-};
-
-declare type VSlot = Slot | ((...args: unknown[]) => JSX.Element);
-declare type VSlots = Record<string, VSlot | undefined>;
-export const mergeVSlots = (...args: VSlots[]): VSlots => {
-    const temp = Object.assign({}, ...args);
-    Object.keys(temp).forEach((k) => {
-        if (temp[k] == null) {
-            delete temp[k];
-        }
-    });
     return temp;
 };

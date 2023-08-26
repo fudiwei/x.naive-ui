@@ -3,7 +3,7 @@ import type { CascaderOption as NCascaderOption, CascaderInst as NCascaderInst }
 import { defineComponent, ref, computed } from 'vue';
 import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/vue';
+import { mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 

@@ -2,7 +2,7 @@
 import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/vue';
+import { mergeVSlots } from '../_utils/v-slot';
 
 const _props = {
     ...defaultNEmptyProps
