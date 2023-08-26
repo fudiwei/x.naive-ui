@@ -3,6 +3,7 @@
         XNCascader: (typeof import('@skit/x.naive-ui'))['XNCascader'];
 
         XNDataTable: (typeof import('@skit/x.naive-ui'))['XNDataTable'];
+        XNDataTableColumn: (typeof import('@skit/x.naive-ui'))['XNDataTableColumn'];
 
         XNDropdown: (typeof import('@skit/x.naive-ui'))['XNDropdown'];
         XNDropdownItem: (typeof import('@skit/x.naive-ui'))['XNDropdownItem'];
@@ -20,6 +21,8 @@
         XNSelectOptionGroup: (typeof import('@skit/x.naive-ui'))['XNSelectOptionGroup'];
 
         XNTree: (typeof import('@skit/x.naive-ui'))['XNTree'];
+
+        XNTreeSelect: (typeof import('@skit/x.naive-ui'))['XNTreeSelect'];
     }
 }
 
