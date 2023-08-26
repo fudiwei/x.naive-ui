@@ -6,7 +6,16 @@ import type {
 } from 'naive-ui';
 import { defineComponent } from 'vue';
 
-import type { DataTableRowData, DataTableRenderCellParams, DataTableRenderExpandParams } from './DataTable';
+import type {
+    DataTableRowData,
+    DataTableRenderCellParams,
+    DataTableRenderExpandParams,
+    DataTableRenderFilterParams,
+    DataTableRenderFilterIconParams,
+    DataTableRenderFilterMenuParams,
+    DataTableRenderSorterParams,
+    DataTableRenderSorterIconParams
+} from './DataTable';
 
 const _props = {
     type: {
@@ -111,6 +120,11 @@ export default (<T extends DataTableRowData = any>() => {
             'title': NonNullable<unknown>;
             'render-cell': DataTableRenderCellParams<T>;
             'render-expand': DataTableRenderExpandParams<T>;
+            'render-filter': DataTableRenderFilterParams<T>;
+            'render-filter-icon': DataTableRenderFilterIconParams<T>;
+            'render-filter-menu': DataTableRenderFilterMenuParams<T>;
+            'render-sorter': DataTableRenderSorterParams<T>;
+            'render-sorter-icon': DataTableRenderSorterIconParams<T>;
         }>,
 
         render() {

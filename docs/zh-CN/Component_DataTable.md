@@ -98,8 +98,8 @@
 
 #### `XNDataTableColumn` Slots：
 
-| 名称          | 参数                                   | 说明               | 版本 |
-| :------------ | :------------------------------------- | :----------------- | :--- |
-| title         |                                        | 自定义列头的内容   |      |
-| render-cell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
-| render-expand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |
+| 名称          | 参数                           | 说明               | 版本 |
+| :------------ | :----------------------------- | :----------------- | :--- |
+| title         |                                | 自定义列头的内容   |      |
+| render-cell   | `{ rowData, rowIndex, value }` | 自定义单元格的内容 |      |
+| render-expand | `{ rowData, rowIndex }`        | 自定义展开行的内容 |      |

@@ -95,8 +95,8 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNDataTableColumn` Slots：
 
-| 名称          | 参数                                   | 说明                   | 版本 |
-| :------------ | :------------------------------------- | :--------------------- | :--- |
-| title         |                                        | Custom column title.   |      |
-| render-cell   | `{ column, rowData, rowIndex, value }` | Custom cell content.   |      |
-| render-expand | `{ rowData, rowIndex }`                | Custom expandable row. |      |
+| 名称          | 参数                           | 说明                   | 版本 |
+| :------------ | :----------------------------- | :--------------------- | :--- |
+| title         |                                | Custom column title.   |      |
+| render-cell   | `{ rowData, rowIndex, value }` | Custom cell content.   |      |
+| render-expand | `{ rowData, rowIndex }`        | Custom expandable row. |      |

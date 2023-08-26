@@ -11,7 +11,12 @@ export type {
     DataTableColumns,
     DataTableRenderColumnParams,
     DataTableRenderCellParams,
-    DataTableRenderExpandParams
+    DataTableRenderExpandParams,
+    DataTableRenderFilterParams,
+    DataTableRenderFilterIconParams,
+    DataTableRenderFilterMenuParams,
+    DataTableRenderSorterParams,
+    DataTableRenderSorterIconParams
 } from './DataTable';
 export type { DataTableColumnProps } from './DataTableColumn';
 export const XNDataTable = Object.assign(ComponentDataTable, {
