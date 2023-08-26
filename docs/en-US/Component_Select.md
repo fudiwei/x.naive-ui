@@ -34,7 +34,7 @@ For more details, please refer to the Demo.
 </script>
 <template>
     <x-n-select :options="options">
-        <template #renderLabel="{ option }">
+        <template #render-label="{ option }">
             <div>{{ 'Option' + option.label }}</div>
         </template>
     </x-n-select>
@@ -47,20 +47,20 @@ For more details, please refer to the Demo.
 
 #### `XNSelect` Props:
 
-| Name      | Type     | Default     | Description                               | Version |
-| :-------- | :------- | :---------- | :---------------------------------------- | :------ |
-| emptyText | `string` | `'No Data'` | Description when data of select is empty. |         |
+| Name       | Type     | Default     | Description                               | Version |
+| :--------- | :------- | :---------- | :---------------------------------------- | :------ |
+| empty-text | `string` | `'No Data'` | Description when data of select is empty. |         |
 
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Props).
 
 #### `XNSelect` Slots:
 
-| Name         | Type                                 | Description                | Version |
-| :----------- | :----------------------------------- | :------------------------- | :------ |
-| default      |                                      | The content inside select. |         |
-| renderLabel  | `{ option, label, value, selected }` | Custom option label.       |         |
-| renderOption | `{ optionVNode, option, selected }`  | Custom option node.        |         |
-| renderTag    | `{ option, close }`                  | Custom tag.                |         |
+| Name          | Type                                 | Description                | Version |
+| :------------ | :----------------------------------- | :------------------------- | :------ |
+| default       |                                      | The content inside select. |         |
+| render-label  | `{ option, label, value, selected }` | Custom option label.       |         |
+| render-option | `{ optionVNode, option, selected }`  | Custom option node.        |         |
+| render-tag    | `{ option, close }`                  | Custom tag.                |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Slots)。
 

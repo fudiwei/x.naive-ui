@@ -52,7 +52,7 @@ export default defineComponent({
         :filterable="true"
         @update:value="handleUpdateValue"
     >
-        <template #renderLabel="{ option, checked }">
+        <template #render-label="{ option, checked }">
             <n-icon style="vertical-align: -0.15em; margin-right: 4px">
                 <MusicIcon />
             </n-icon>

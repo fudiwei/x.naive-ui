@@ -1,11 +1,20 @@
 ﻿import type { VNode, VNodeChild, Slot } from 'vue';
 import { isVNode, h } from 'vue';
+import { camelCase, kebabCase } from 'lodash-es';
 
 import { isTextVNode } from './v-node';
 
 declare type VSlot<T = any> = Slot<T> | ((...args: any[]) => JSX.Element);
 declare type VSlots<T = any> = Record<string, VSlot<T> | undefined>;
 declare type VSlotRender = (() => VNodeChild) | string;
+
+export const getVSlot = <T extends VSlots, K extends keyof T>(slots: T, name: K): T[K] | VSlot | undefined => {
+    if (!slots || !name) {
+        return;
+    }
+
+    return slots[name] || slots[kebabCase(name as string)] || slots[camelCase(name as string)];
+};
 
 export const getVSlotRender = <T = any>(slot?: VSlot<T>, ...args: any[]): VSlotRender | undefined => {
     if (typeof slot === 'function') {

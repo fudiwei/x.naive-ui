@@ -9,7 +9,7 @@ import type {
 import { defineComponent, ref, computed } from 'vue';
 import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/v-slot';
+import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 
@@ -65,11 +65,11 @@ export default defineComponent({
     props: _props,
 
     slots: Object as SlotsType<{
-        empty: NonNullable<unknown>;
-        renderLabel: TreeRenderLabelParams;
-        renderPrefix: TreeRenderPrefixParams;
-        renderSuffix: TreeRenderSuffixParams;
-        renderSwitcherIcon: TreeRenderSwitcherIconParams;
+        'empty': NonNullable<unknown>;
+        'render-label': TreeRenderLabelParams;
+        'render-prefix': TreeRenderPrefixParams;
+        'render-suffix': TreeRenderSuffixParams;
+        'render-switcher-icon': TreeRenderSwitcherIconParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
@@ -82,12 +82,13 @@ export default defineComponent({
         }
 
         const nRenderLabel = computed(() => {
-            if (!slots['renderLabel']) {
+            const slot = getVSlot(slots, 'render-label');
+            if (!slot) {
                 return props.renderLabel;
             }
 
             return ({ option, checked, selected }: Parameters<NTreeRenderLabel>[0]) => {
-                return slots.renderLabel!({
+                return slot({
                     option: option,
                     label: getNOptionLabel(option),
                     key: getNOptionKey(option),
@@ -98,12 +99,13 @@ export default defineComponent({
         });
 
         const nRenderPrefix = computed(() => {
-            if (!slots['renderPrefix']) {
+            const slot = getVSlot(slots, 'render-prefix');
+            if (!slot) {
                 return props.renderPrefix;
             }
 
             return ({ option, checked, selected }: Parameters<NTreeRenderPrefix>[0]) => {
-                return slots.renderPrefix!({
+                return slot({
                     option: option,
                     checked: checked,
                     selected: selected
@@ -112,12 +114,13 @@ export default defineComponent({
         });
 
         const nRenderSuffix = computed(() => {
-            if (!slots['renderSuffix']) {
+            const slot = getVSlot(slots, 'render-suffix');
+            if (!slot) {
                 return props.renderSuffix;
             }
 
             return ({ option, checked, selected }: Parameters<NTreeRenderSuffix>[0]) => {
-                return slots.renderSuffix!({
+                return slot({
                     option: option,
                     checked: checked,
                     selected: selected
@@ -126,12 +129,13 @@ export default defineComponent({
         });
 
         const nRenderSwitcherIcon = computed(() => {
-            if (!slots['renderSwitcherIcon']) {
+            const slot = getVSlot(slots, 'render-switcher-icon');
+            if (!slot) {
                 return props.renderSwitcherIcon;
             }
 
             return ({ expanded, selected }: Parameters<NTreeRenderSwitcherIcon>[0]) => {
-                return slots.renderSwitcherIcon!({
+                return slot({
                     expanded: expanded,
                     selected: selected
                 });
@@ -140,11 +144,11 @@ export default defineComponent({
 
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
-                renderPrefix: undefined,
-                renderSuffix: undefined,
-                renderLabel: undefined,
-                renderSwitcherIcon: undefined
+                'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
+                'render-prefix': undefined,
+                'render-suffix': undefined,
+                'render-label': undefined,
+                'render-switcher-icon': undefined
             })
         );
 

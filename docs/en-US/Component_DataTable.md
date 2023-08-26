@@ -17,14 +17,14 @@ For more details, please refer to the Demo.
     <x-n-data-table :data="data">
         <x-n-data-table-column type="selection" />
         <x-n-data-table-column key="no" title="Title">
-            <template #renderCell="{ rowIndex }">
+            <template #render-cell="{ rowIndex }">
                 <div>{{ rowIndex + 1 }}</div>
             </template>
         </x-n-data-table-column>
         <x-n-data-table-column key="name" title="Name" />
         <x-n-data-table-column key="age" title="Age" />
         <x-n-data-table-column key="actions" title="Actions">
-            <template #renderCell="{ column, rowData, rowIndex }">
+            <template #render-cell="{ column, rowData, rowIndex }">
                 <button>{{ 'Say hello to ' + rowData.name }}</button>
             </template>
         </x-n-data-table-column>
@@ -51,7 +51,7 @@ For more details, please refer to the Demo.
 </script>
 <template>
     <x-n-data-table :columns="columns" :data="data">
-        <template #renderCell="{ column, rowData, rowIndex }">
+        <template #render-cell="{ column, rowData, rowIndex }">
             <template v-if="column.key === 'no'">
                 <div>{{ rowIndex + 1 }}</div>
             </template>
@@ -69,19 +69,19 @@ For more details, please refer to the Demo.
 
 #### `XNDataTable` Props:
 
-| Name      | Type     | Default     | Description                              | Version |
-| :-------- | :------- | :---------- | :--------------------------------------- | :------ |
-| emptyText | `string` | `'No Data'` | Description when data of table is empty. |         |
+| Name       | Type     | Default     | Description                              | Version |
+| :--------- | :------- | :---------- | :--------------------------------------- | :------ |
+| empty-text | `string` | `'No Data'` | Description when data of table is empty. |         |
 
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Props).
 
 #### `XNDataTable` Slots:
 
-| Name         | Type                                   | Description            | Version |
-| :----------- | :------------------------------------- | :--------------------- | :------ |
-| renderColumn | `{ column }`                           | Custom column title.   |         |
-| renderCell   | `{ column, rowData, rowIndex, value }` | Custom cell content.   |         |
-| renderExpand | `{ rowData, rowIndex }`                | Custom expandable row. |         |
+| Name          | Type                                   | Description            | Version |
+| :------------ | :------------------------------------- | :--------------------- | :------ |
+| render-column | `{ column }`                           | Custom column title.   |         |
+| render-cell   | `{ column, rowData, rowIndex, value }` | Custom cell content.   |         |
+| render-expand | `{ rowData, rowIndex }`                | Custom expandable row. |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Slots).
 
@@ -91,12 +91,12 @@ For other methods, please see [Naive-UI documentation](https://www.naiveui.com/e
 
 #### `XNDataTableColumn` Props:
 
-For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTableColumn-Properties). Note that `children`, `render`, `renderExpand` are not available.
+For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTableColumn-Properties). Note that `children`, `render`, `render-expand` are not available.
 
 #### `XNDataTableColumn` Slots：
 
-| 名称         | 参数                                   | 说明                   | 版本 |
-| :----------- | :------------------------------------- | :--------------------- | :--- |
-| title        |                                        | Custom column title.   |      |
-| renderCell   | `{ column, rowData, rowIndex, value }` | Custom cell content.   |      |
-| renderExpand | `{ rowData, rowIndex }`                | Custom expandable row. |      |
+| 名称          | 参数                                   | 说明                   | 版本 |
+| :------------ | :------------------------------------- | :--------------------- | :--- |
+| title         |                                        | Custom column title.   |      |
+| render-cell   | `{ column, rowData, rowIndex, value }` | Custom cell content.   |      |
+| render-expand | `{ rowData, rowIndex }`                | Custom expandable row. |      |

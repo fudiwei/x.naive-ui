@@ -17,14 +17,14 @@
     <x-n-data-table :data="data">
         <x-n-data-table-column type="selection" />
         <x-n-data-table-column key="no" title="NO.">
-            <template #renderCell="{ rowIndex }">
+            <template #render-cell="{ rowIndex }">
                 <div>{{ rowIndex + 1 }}</div>
             </template>
         </x-n-data-table-column>
         <x-n-data-table-column key="name" title="Name" />
         <x-n-data-table-column key="age" title="Age" />
         <x-n-data-table-column key="actions" title="Actions">
-            <template #renderCell="{ column, rowData, rowIndex }">
+            <template #render-cell="{ column, rowData, rowIndex }">
                 <button>{{ 'Say hello to ' + rowData.name }}</button>
             </template>
         </x-n-data-table-column>
@@ -51,10 +51,10 @@
 </script>
 <template>
     <x-n-data-table :columns="columns" :data="data">
-        <template #renderColumn="{ column }">
+        <template #render-column="{ column }">
             <div>{{ 'Column ' + column.title }}</div>
         </template>
-        <template #renderCell="{ column, rowData, rowIndex }">
+        <template #render-cell="{ column, rowData, rowIndex }">
             <template v-if="column.key === 'no'">
                 <div>{{ rowIndex + 1 }}</div>
             </template>
@@ -72,19 +72,19 @@
 
 #### `XNDataTable` Props：
 
-| 名称      | 类型     | 默认值       | 说明                                                      | 版本 |
-| :-------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
-| emptyText | `string` | `'暂无数据'` | 表格数据为空时的展示文案。当使用 `empty` 插槽时该属性无效 |      |
+| 名称       | 类型     | 默认值       | 说明                                                      | 版本 |
+| :--------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
+| empty-text | `string` | `'暂无数据'` | 表格数据为空时的展示文案。当使用 `empty` 插槽时该属性无效 |      |
 
 其他 Props 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
 
 #### `XNDataTable` Slots：
 
-| 名称         | 参数                                   | 说明               | 版本 |
-| :----------- | :------------------------------------- | :----------------- | :--- |
-| renderColumn | `{ column }`                           | 自定义列头的内容   |      |
-| renderCell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
-| renderExpand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |
+| 名称          | 参数                                   | 说明               | 版本 |
+| :------------ | :------------------------------------- | :----------------- | :--- |
+| render-column | `{ column }`                           | 自定义列头的内容   |      |
+| render-cell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
+| render-expand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |
 
 其他 Slots 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Slots)。
 
@@ -94,12 +94,12 @@
 
 #### `XNDataTableColumn` Props：
 
-其他 Props 略，与 `NDataTableColumn` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTableColumn-Properties)。注意 `children`、`render`、`renderExpand` 属性不可用。
+其他 Props 略，与 `NDataTableColumn` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTableColumn-Properties)。注意 `children`、`render`、`render-expand` 属性不可用。
 
 #### `XNDataTableColumn` Slots：
 
-| 名称         | 参数                                   | 说明               | 版本 |
-| :----------- | :------------------------------------- | :----------------- | :--- |
-| title        |                                        | 自定义列头的内容   |      |
-| renderCell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
-| renderExpand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |
+| 名称          | 参数                                   | 说明               | 版本 |
+| :------------ | :------------------------------------- | :----------------- | :--- |
+| title         |                                        | 自定义列头的内容   |      |
+| render-cell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
+| render-expand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |

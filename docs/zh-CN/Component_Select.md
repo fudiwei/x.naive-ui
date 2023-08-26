@@ -34,7 +34,7 @@
 </script>
 <template>
     <x-n-select :options="options">
-        <template #renderLabel="{ option }">
+        <template #render-label="{ option }">
             <div>{{ 'Option ' + option.label }}</div>
         </template>
     </x-n-select>
@@ -47,20 +47,20 @@
 
 #### `XNSelect` Props：
 
-| 名称      | 类型     | 默认值       | 说明                                                      | 版本 |
-| :-------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
-| emptyText | `string` | `'暂无数据'` | 选项数据为空时的展示文案。当使用 `empty` 插槽时该属性无效 |      |
+| 名称       | 类型     | 默认值       | 说明                                                      | 版本 |
+| :--------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
+| empty-text | `string` | `'暂无数据'` | 选项数据为空时的展示文案。当使用 `empty` 插槽时该属性无效 |      |
 
 其他 Props 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Props)。
 
 #### `XNSelect` Slots：
 
-| 名称         | 参数                                 | 说明             | 版本 |
-| :----------- | :----------------------------------- | :--------------- | :--- |
-| default      |                                      | 弹出的内容       |      |
-| renderLabel  | `{ option, label, value, selected }` | 自定义选项的内容 |      |
-| renderOption | `{ optionVNode, option, selected }`  | 自定义选项的内容 |      |
-| renderTag    | `{ option, close }`                  | 自定义标签的内容 |      |
+| 名称          | 参数                                 | 说明             | 版本 |
+| :------------ | :----------------------------------- | :--------------- | :--- |
+| default       |                                      | 弹出的内容       |      |
+| render-label  | `{ option, label, value, selected }` | 自定义选项的内容 |      |
+| render-option | `{ optionVNode, option, selected }`  | 自定义选项的内容 |      |
+| render-tag    | `{ option, close }`                  | 自定义标签的内容 |      |
 
 其他 Slots 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Slots)。
 

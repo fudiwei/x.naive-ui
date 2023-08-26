@@ -7,9 +7,13 @@ export const isTextVNode = (vnode?: VNode): boolean => {
     return isVNode(vnode) && vnode.type === Text && typeof vnode.children === 'string';
 };
 
-export const isEmptyVNode = (vnode?: VNode): boolean => {
+export const isEmptyVNode = (vnode?: VNode | VNode[]): boolean => {
     if (!vnode) {
         return true;
+    }
+
+    if (Array.isArray(vnode)) {
+        return vnode.length > 0 && vnode.every((v) => isEmptyVNode(v));
     }
 
     if (vnode.type === Comment) {
@@ -21,11 +25,11 @@ export const isEmptyVNode = (vnode?: VNode): boolean => {
     }
 
     if (vnode.type === Fragment) {
-        return Array.isArray(vnode.children) && isEmptyVNodes(vnode.children as VNode[]);
+        return Array.isArray(vnode.children) && isEmptyVNode(vnode.children as VNode[]);
     }
 
     if (typeof vnode.type === 'symbol') {
-        return isEmptyVNodes(vnode.children as VNode[]);
+        return isEmptyVNode(vnode.children as VNode[]);
     }
 
     if (typeof vnode.type === 'string' || typeof vnode.type === 'number') {
@@ -37,14 +41,6 @@ export const isEmptyVNode = (vnode?: VNode): boolean => {
     }
 
     return vnode.el == null && vnode.children == null;
-};
-
-export const isEmptyVNodes = (vnodes?: VNode[]): boolean => {
-    if (!vnodes || vnodes.length === 0) {
-        return true;
-    }
-
-    return vnodes.every((vnode) => isEmptyVNode(vnode));
 };
 
 export const SKIPPED_FLATTEN_KEY = Symbol('SKIPPED_FLATTEN_KEY');

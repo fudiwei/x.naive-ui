@@ -72,7 +72,7 @@ export default defineComponent({
         </x-n-data-table>
 
         <x-n-data-table :columns="columns" :data="data" :pagination="pagination">
-            <template #renderColumn="{ column }: DataTableRenderColumnParams">
+            <template #render-column="{ column }: DataTableRenderColumnParams">
                 <template v-if="column.key === 'name'">
                     <n-tooltip>
                         <template #trigger>

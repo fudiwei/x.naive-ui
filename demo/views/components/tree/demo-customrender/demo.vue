@@ -40,17 +40,17 @@ export default defineComponent({
 
 <template>
     <x-n-tree block-line :data="data" :default-expanded-keys="defaultExpandedKeys" :selectable="false">
-        <template #renderLabel="{ option }: TreeRenderLabelParams">
+        <template #render-label="{ option }: TreeRenderLabelParams">
             {{ `${option.label} :)` }}
         </template>
 
-        <template #renderPrefix="{ option }: TreeRenderPrefixParams">
+        <template #render-prefix="{ option }: TreeRenderPrefixParams">
             <n-button type="primary" text>
                 {{ `Prefix-${option.level}` }}
             </n-button>
         </template>
 
-        <template #renderSuffix="{ option }: TreeRenderSuffixParams">
+        <template #render-suffix="{ option }: TreeRenderSuffixParams">
             <n-button type="primary" text>
                 {{ `Suffix-${option.level}` }}
             </n-button>

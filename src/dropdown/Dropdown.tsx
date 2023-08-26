@@ -8,7 +8,7 @@ import { defineComponent, computed } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
-import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/v-node';
+import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
@@ -84,7 +84,7 @@ export default defineComponent({
     setup(props, { attrs, slots, expose }) {
         const nOptions = computed<NDropdownOption[]>(() => {
             const vnodes = slots['default']?.({});
-            if (isEmptyVNodes(vnodes)) {
+            if (isEmptyVNode(vnodes)) {
                 return [];
             }
 

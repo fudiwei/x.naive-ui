@@ -13,8 +13,8 @@ import type {
 import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
-import { isEmptyVNode, isEmptyVNodes, flattenVNodeChildren } from '../_utils/v-node';
-import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
+import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
+import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps, getBooleanProp } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentEmpty from '../empty/Empty';
@@ -123,11 +123,12 @@ function renderTableColumn<T extends NDataTableRowData = any>(
         return getVSlotRender(ctxSlots['title']) || fallback;
     } else {
         return () => {
+            const slot = getVSlot(ctxSlots, 'render-column');
             const params: DataTableRenderColumnParams = {
                 column: column as DataTableColumn<T>
             };
-            const vnodes = ctxSlots['renderColumn']?.(params);
-            if (!isEmptyVNodes(vnodes)) {
+            const vnodes = slot?.(params);
+            if (!isEmptyVNode(vnodes)) {
                 return vnodes;
             } else if (typeof fallback === 'function') {
                 return fallback(column as NDataTableBaseColumn);
@@ -145,15 +146,16 @@ function renderTableCell<T extends NDataTableRowData = any>(
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).render;
     return (rowData: T, rowIndex: number) => {
-        if (ctxSlots['renderCell']) {
+        const slot = getVSlot(ctxSlots, 'render-cell');
+        if (slot) {
             const params: DataTableRenderCellParams = {
                 column: column as DataTableColumn<T>,
                 rowData: rowData,
                 rowIndex: rowIndex,
                 value: rowData?.[(column as NDataTableBaseColumn<T>).key]
             };
-            const vnodes = ctxSlots['renderCell'](params);
-            if (isTemplateStyle || !isEmptyVNodes(vnodes)) {
+            const vnodes = slot(params);
+            if (isTemplateStyle || !isEmptyVNode(vnodes)) {
                 return vnodes;
             }
         }
@@ -179,13 +181,14 @@ function renderTableExpand<T extends NDataTableRowData = any>(
     return (rowData: T, rowIndex: number) => (
         <div class="n-data-table__expand">
             {(() => {
-                if (ctxSlots['renderExpand']) {
+                const slot = getVSlot(ctxSlots, 'render-expand');
+                if (slot) {
                     const params: DataTableRenderExpandParams = {
                         rowData: rowData,
                         rowIndex: rowIndex
                     };
-                    const vnodes = ctxSlots['renderExpand'](params);
-                    if (isTemplateStyle || !isEmptyVNodes(vnodes)) {
+                    const vnodes = slot(params);
+                    if (isTemplateStyle || !isEmptyVNode(vnodes)) {
                         return vnodes;
                     }
                 }
@@ -210,16 +213,16 @@ export default (<T extends DataTableRowData = any>() => {
         props: _props as ReturnType<typeof _propsMakeGeneric<T>>,
 
         slots: Object as SlotsType<{
-            default: NonNullable<unknown>;
-            loading: NonNullable<unknown>;
-            empty: NonNullable<unknown>;
-            renderColumn: DataTableRenderColumnParams<T>;
-            renderCell: DataTableRenderCellParams<T>;
-            renderExpand: DataTableRenderExpandParams<T>;
+            'default': NonNullable<unknown>;
+            'loading': NonNullable<unknown>;
+            'empty': NonNullable<unknown>;
+            'render-column': DataTableRenderColumnParams<T>;
+            'render-cell': DataTableRenderCellParams<T>;
+            'render-expand': DataTableRenderExpandParams<T>;
         }>,
 
         setup(props, { attrs, slots, expose }) {
-            function populateColumns(columns?: NDataTableColumn<T>[]): NDataTableColumn<T>[] | undefined {
+            function populateColumnsProps(columns?: NDataTableColumn<T>[]): NDataTableColumn<T>[] | undefined {
                 const result = columns?.map((column) => {
                     column = Object.assign(column, {
                         title: renderTableColumn<T>(column, slots),
@@ -228,7 +231,7 @@ export default (<T extends DataTableRowData = any>() => {
                     });
 
                     if ('children' in column) {
-                        const children = populateColumns(column.children);
+                        const children = populateColumnsProps(column.children);
                         if (children) {
                             column.children = children as NDataTableBaseColumn<T>[];
                         }
@@ -241,8 +244,8 @@ export default (<T extends DataTableRowData = any>() => {
 
             const nColumns = computed(() => {
                 const vnodes = slots['default']?.({});
-                if (isEmptyVNodes(vnodes)) {
-                    return populateColumns(props.columns as NDataTableColumn<T>[]);
+                if (isEmptyVNode(vnodes)) {
+                    return populateColumnsProps(props.columns as NDataTableColumn<T>[]);
                 }
 
                 return convertVNodesToColumns(vnodes);
@@ -250,11 +253,11 @@ export default (<T extends DataTableRowData = any>() => {
 
             const nSlots = computed(() =>
                 mergeVSlots(slots, {
-                    empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
-                    default: undefined,
-                    renderColumn: undefined,
-                    renderCell: undefined,
-                    renderExpand: undefined
+                    'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
+                    'default': undefined,
+                    'render-column': undefined,
+                    'render-cell': undefined,
+                    'render-expand': undefined
                 })
             );
 

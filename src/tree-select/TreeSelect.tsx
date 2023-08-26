@@ -11,7 +11,7 @@ import type { RenderSwitcherIcon as NTreeSelectRenderSwitcherIcon } from 'naive-
 import { defineComponent, ref, computed } from 'vue';
 import { NTreeSelect, treeSelectProps as defaultNTreeSelectProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/v-slot';
+import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 
@@ -71,14 +71,14 @@ export default defineComponent({
     props: _props,
 
     slots: Object as SlotsType<{
-        action: NonNullable<unknown>;
-        arrow: NonNullable<unknown>;
-        empty: NonNullable<unknown>;
-        renderLabel: TreeSelectRenderLabelParams;
-        renderPrefix: TreeSelectRenderPrefixParams;
-        renderSuffix: TreeSelectRenderSuffixParams;
-        renderTag: TreeSelectRenderTagParams;
-        renderSwitcherIcon: TreeSelectRenderSwitcherIconParams;
+        'action': NonNullable<unknown>;
+        'arrow': NonNullable<unknown>;
+        'empty': NonNullable<unknown>;
+        'render-label': TreeSelectRenderLabelParams;
+        'render-prefix': TreeSelectRenderPrefixParams;
+        'render-suffix': TreeSelectRenderSuffixParams;
+        'render-tag': TreeSelectRenderTagParams;
+        'render-switcher-icon': TreeSelectRenderSwitcherIconParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
@@ -91,12 +91,13 @@ export default defineComponent({
         }
 
         const nRenderLabel = computed(() => {
-            if (!slots['renderLabel']) {
+            const slot = getVSlot(slots, 'render-label');
+            if (!slot) {
                 return props.renderLabel;
             }
 
             return ({ option, checked, selected }: Parameters<NTreeSelectRenderLabel>[0]) => {
-                return slots.renderLabel!({
+                return slot({
                     option: option,
                     label: getNOptionLabel(option),
                     key: getNOptionKey(option),
@@ -107,12 +108,13 @@ export default defineComponent({
         });
 
         const nRenderPrefix = computed(() => {
-            if (!slots['renderPrefix']) {
+            const slot = getVSlot(slots, 'render-prefix');
+            if (!slot) {
                 return props.renderPrefix;
             }
 
             return ({ option, checked, selected }: Parameters<NTreeSelectRenderPrefix>[0]) => {
-                return slots.renderPrefix!({
+                return slot({
                     option: option,
                     checked: checked,
                     selected: selected
@@ -121,12 +123,13 @@ export default defineComponent({
         });
 
         const nRenderSuffix = computed(() => {
-            if (!slots['renderSuffix']) {
+            const slot = getVSlot(slots, 'render-suffix');
+            if (!slot) {
                 return props.renderSuffix;
             }
 
             return ({ option, checked, selected }: Parameters<NTreeSelectRenderSuffix>[0]) => {
-                return slots.renderSuffix!({
+                return slot({
                     option: option,
                     checked: checked,
                     selected: selected
@@ -135,12 +138,13 @@ export default defineComponent({
         });
 
         const nRenderSwitcherIcon = computed(() => {
-            if (!slots['renderSwitcherIcon']) {
+            const slot = getVSlot(slots, 'render-switcher-icon');
+            if (!slot) {
                 return props.renderSwitcherIcon;
             }
 
             return ({ expanded, selected }: Parameters<NTreeSelectRenderSwitcherIcon>[0]) => {
-                return slots.renderSwitcherIcon!({
+                return slot({
                     expanded: expanded,
                     selected: selected
                 });
@@ -148,12 +152,13 @@ export default defineComponent({
         });
 
         const nRenderTag = computed(() => {
-            if (!slots['renderTag']) {
+            const slot = getVSlot(slots, 'render-tag');
+            if (!slot) {
                 return props.renderTag;
             }
 
             return ({ option, handleClose }: Parameters<NTreeSelectRenderTag>[0]) => {
-                return slots.renderTag!({
+                return slot({
                     option: option,
                     close: handleClose
                 });
@@ -162,11 +167,11 @@ export default defineComponent({
 
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                empty: slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
-                renderPrefix: undefined,
-                renderSuffix: undefined,
-                renderLabel: undefined,
-                renderSwitcherIcon: undefined
+                'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
+                'render-prefix': undefined,
+                'render-suffix': undefined,
+                'render-label': undefined,
+                'render-switcher-icon': undefined
             })
         );
 

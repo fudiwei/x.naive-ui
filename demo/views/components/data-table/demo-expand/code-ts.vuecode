@@ -96,7 +96,7 @@ export default defineComponent({
         <x-n-data-table :data="data" :pagination="pagination">
             <x-n-data-table-column type="selection" />
             <x-n-data-table-column type="expand" :expandable="(rowData) => rowData.name !== 'Jim Green'">
-                <template #renderExpand="{ rowData }: DataTableRenderExpandParams<RowData>">
+                <template #render-expand="{ rowData }: DataTableRenderExpandParams<RowData>">
                     {{ `${rowData.name} is a good guy.` }}
                 </template>
             </x-n-data-table-column>
@@ -105,7 +105,7 @@ export default defineComponent({
             <x-n-data-table-column key="age" title="Age" />
             <x-n-data-table-column key="address" title="Address" />
             <x-n-data-table-column key="tags" title="Tags">
-                <template #renderCell="{ rowData }: DataTableRenderCellParams<RowData>">
+                <template #render-cell="{ rowData }: DataTableRenderCellParams<RowData>">
                     <n-tag
                         v-for="tagKey in rowData.tags"
                         :key="tagKey"
@@ -118,14 +118,14 @@ export default defineComponent({
                 </template>
             </x-n-data-table-column>
             <x-n-data-table-column key="actions" title="Actions">
-                <template #renderCell="{ rowData }: DataTableRenderCellParams<RowData>">
+                <template #render-cell="{ rowData }: DataTableRenderCellParams<RowData>">
                     <n-button size="small" @click="handleClickSendMail(rowData)">Send Email</n-button>
                 </template>
             </x-n-data-table-column>
         </x-n-data-table>
 
         <x-n-data-table :columns="columns" :data="data" :pagination="pagination" default-expand-all>
-            <template #renderCell="{ column, rowData }: DataTableRenderCellParams<RowData>">
+            <template #render-cell="{ column, rowData }: DataTableRenderCellParams<RowData>">
                 <template v-if="column.key === 'tags'">
                     <n-tag
                         v-for="tagKey in rowData.tags"
@@ -143,7 +143,7 @@ export default defineComponent({
                 </template>
             </template>
 
-            <template #renderExpand="{ rowData }: DataTableRenderExpandParams<RowData>">
+            <template #render-expand="{ rowData }: DataTableRenderExpandParams<RowData>">
                 {{ `${rowData.name} is a good guy.` }}
             </template>
         </x-n-data-table>

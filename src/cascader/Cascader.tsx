@@ -3,7 +3,7 @@ import type { CascaderOption as NCascaderOption, CascaderInst as NCascaderInst }
 import { defineComponent, ref, computed } from 'vue';
 import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/v-slot';
+import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
 import ComponentEmpty from '../empty/Empty';
 
@@ -44,10 +44,10 @@ export default defineComponent({
     props: _props,
 
     slots: Object as SlotsType<{
-        action: NonNullable<unknown>;
-        arrow: NonNullable<unknown>;
-        empty: NonNullable<unknown>;
-        renderLabel: CascaderRenderLabelParams;
+        'action': NonNullable<unknown>;
+        'arrow': NonNullable<unknown>;
+        'empty': NonNullable<unknown>;
+        'render-label': CascaderRenderLabelParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
@@ -60,12 +60,13 @@ export default defineComponent({
         }
 
         const nRenderLabel = computed(() => {
-            if (!slots['renderLabel']) {
+            const slot = getVSlot(slots, 'render-label');
+            if (!slot) {
                 return props.renderLabel;
             }
 
             return (option: NCascaderOption, checked: boolean) => {
-                return slots.renderLabel!({
+                return slot({
                     option: option,
                     label: getNOptionLabel(option),
                     value: getNOptionValue(option),
@@ -78,8 +79,7 @@ export default defineComponent({
             mergeVSlots(slots, {
                 'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                 'not-found': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
-                'notFound': undefined,
-                'renderLabel': undefined
+                'render-label': undefined
             })
         );
 

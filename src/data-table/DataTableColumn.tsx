@@ -107,10 +107,10 @@ export default (<T extends DataTableRowData = any>() => {
         props: _props,
 
         slots: Object as SlotsType<{
-            default: NonNullable<unknown>;
-            title: NonNullable<unknown>;
-            renderCell: DataTableRenderCellParams<T>;
-            renderExpand: DataTableRenderExpandParams<T>;
+            'default': NonNullable<unknown>;
+            'title': NonNullable<unknown>;
+            'render-cell': DataTableRenderCellParams<T>;
+            'render-expand': DataTableRenderExpandParams<T>;
         }>,
 
         render() {

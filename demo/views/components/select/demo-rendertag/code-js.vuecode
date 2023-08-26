@@ -30,7 +30,7 @@ export default defineComponent({
 
 <template>
     <x-n-select v-model:value="value" multiple :options="options">
-        <template #renderTag="{ option, close }: SelectRenderTagParams">
+        <template #render-tag="{ option, close }: SelectRenderTagParams">
             <n-tag :type="option.type" closable @close.stop="() => close()">
                 {{ option.label }}
             </n-tag>

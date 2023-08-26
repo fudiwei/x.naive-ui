@@ -40,23 +40,23 @@ export default defineComponent({
 
 <template>
     <x-n-tree-select :options="options" multiple>
-        <template #renderLabel="{ option }: TreeSelectRenderLabelParams">
+        <template #render-label="{ option }: TreeSelectRenderLabelParams">
             {{ `${option.label} :)` }}
         </template>
 
-        <template #renderPrefix="{ option }: TreeSelectRenderPrefixParams">
+        <template #render-prefix="{ option }: TreeSelectRenderPrefixParams">
             <n-button type="primary" text>
                 {{ `Prefix-${option.level}` }}
             </n-button>
         </template>
 
-        <template #renderSuffix="{ option }: TreeSelectRenderSuffixParams">
+        <template #render-suffix="{ option }: TreeSelectRenderSuffixParams">
             <n-button type="primary" text>
                 {{ `Suffix-${option.level}` }}
             </n-button>
         </template>
 
-        <template #renderTag="{ option, close }: TreeSelectRenderTagParams">
+        <template #render-tag="{ option, close }: TreeSelectRenderTagParams">
             <n-tag type="info" closable @close.stop="() => close()">
                 {{ option.label }}
             </n-tag>

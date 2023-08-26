@@ -27,7 +27,7 @@ For more details, please refer to the Demo.
 </script>
 <template>
     <x-n-tree :data="data">
-        <template #renderLabel="{ option }">
+        <template #render-label="{ option }">
             <div>{{ 'Option ' + option.label }}</div>
         </template>
     </x-n-tree>
@@ -40,20 +40,20 @@ For more details, please refer to the Demo.
 
 #### `XNTree` Props:
 
-| Name      | Type     | Default     | Description                               | Version |
-| :-------- | :------- | :---------- | :---------------------------------------- | :------ |
-| emptyText | `string` | `'No Data'` | Description when data of select is empty. |         |
+| Name       | Type     | Default     | Description                               | Version |
+| :--------- | :------- | :---------- | :---------------------------------------- | :------ |
+| empty-text | `string` | `'No Data'` | Description when data of select is empty. |         |
 
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/tree#Tree-Props).
 
 #### `XNTree` Slots:
 
-| Name               | Type                                        | Description                  | Version |
-| :----------------- | :------------------------------------------ | :--------------------------- | :------ |
-| renderLabel        | `{ option, label, key, checked, selected }` | Custom option label.         |         |
-| renderPrefix       | `{ option, checked, selected }`             | Custom option prefix.        |         |
-| renderSuffix       | `{ option, checked, selected }`             | Custom option suffix.        |         |
-| renderSwitcherIcon | `{ expanded, selected }`                    | Custom option switcher icon. |         |
+| Name                 | Type                                        | Description                  | Version |
+| :------------------- | :------------------------------------------ | :--------------------------- | :------ |
+| render-label         | `{ option, label, key, checked, selected }` | Custom option label.         |         |
+| render-prefix        | `{ option, checked, selected }`             | Custom option prefix.        |         |
+| render-suffix        | `{ option, checked, selected }`             | Custom option suffix.        |         |
+| render-switcher-icon | `{ expanded, selected }`                    | Custom option switcher icon. |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/tree#Tree-Slots)。
 

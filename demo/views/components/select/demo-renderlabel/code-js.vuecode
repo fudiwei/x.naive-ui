@@ -135,7 +135,7 @@ export default defineComponent({
 
 <template>
     <x-n-select :options="options">
-        <template #renderLabel="{ option, selected }">
+        <template #render-label="{ option, selected }">
             <template v-if="option.type === 'group'">
                 {{ option.label + '(Cool!)' }}
             </template>

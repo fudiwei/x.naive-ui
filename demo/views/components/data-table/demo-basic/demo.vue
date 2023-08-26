@@ -53,7 +53,7 @@ export default defineComponent({
     <n-space vertical :size="20">
         <x-n-data-table :data="data" :bordered="false">
             <x-n-data-table-column key="no" title="No">
-                <template #renderCell="{ rowIndex }: DataTableRenderCellParams<Song>">
+                <template #render-cell="{ rowIndex }: DataTableRenderCellParams<Song>">
                     {{ rowIndex + 1 }}
                 </template>
             </x-n-data-table-column>
@@ -61,14 +61,14 @@ export default defineComponent({
             <x-n-data-table-column key="length" title="Length"></x-n-data-table-column>
             <x-n-data-table-column key="actions">
                 <template #title>Actions</template>
-                <template #renderCell="{ rowData }: DataTableRenderCellParams<Song>">
+                <template #render-cell="{ rowData }: DataTableRenderCellParams<Song>">
                     <n-button size="small" strong tertiary @click="handleClickPlay(rowData)">Play</n-button>
                 </template>
             </x-n-data-table-column>
         </x-n-data-table>
 
         <x-n-data-table :columns="columns" :data="data" :bordered="false">
-            <template #renderCell="{ column, rowData, rowIndex }: DataTableRenderCellParams<Song>">
+            <template #render-cell="{ column, rowData, rowIndex }: DataTableRenderCellParams<Song>">
                 <template v-if="column.key === 'no'">
                     {{ rowIndex + 1 }}
                 </template>

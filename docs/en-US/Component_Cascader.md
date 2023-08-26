@@ -27,7 +27,7 @@ For more details, please refer to the Demo.
 </script>
 <template>
     <x-n-cascader :options="options">
-        <template #renderLabel="{ option }">
+        <template #render-label="{ option }">
             <div>{{ 'Option' + option.label }}</div>
         </template>
     </x-n-cascader>
@@ -40,17 +40,17 @@ For more details, please refer to the Demo.
 
 #### `XNCascader` Props:
 
-| Name      | Type     | Default     | Description                                 | Version |
-| :-------- | :------- | :---------- | :------------------------------------------ | :------ |
-| emptyText | `string` | `'No Data'` | Description when data of cascader is empty. |         |
+| Name       | Type     | Default     | Description                                 | Version |
+| :--------- | :------- | :---------- | :------------------------------------------ | :------ |
+| empty-text | `string` | `'No Data'` | Description when data of cascader is empty. |         |
 
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/cascader#Cascader-Props).
 
 #### `XNCascader` Slots:
 
-| Name        | Type                                | Description          | Version |
-| :---------- | :---------------------------------- | :------------------- | :------ |
-| renderLabel | `{ option, label, value, checked }` | Custom option label. |         |
+| Name         | Type                                | Description          | Version |
+| :----------- | :---------------------------------- | :------------------- | :------ |
+| render-label | `{ option, label, value, checked }` | Custom option label. |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/cascader#Cascader-Slots)。
 

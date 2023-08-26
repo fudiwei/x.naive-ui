@@ -69,7 +69,7 @@ export default defineComponent({
 
 <template>
     <x-n-select :options="options">
-        <template #renderOption="{ optionVNode, option }">
+        <template #render-option="{ optionVNode, option }">
             <n-tooltip>
                 <template #trigger>
                     <component :is="optionVNode" />

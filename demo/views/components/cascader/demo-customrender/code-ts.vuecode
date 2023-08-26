@@ -53,7 +53,7 @@ export default defineComponent({
         :filterable="true"
         @update:value="handleUpdateValue"
     >
-        <template #renderLabel="{ option, checked }: CascaderRenderLabelParams">
+        <template #render-label="{ option, checked }: CascaderRenderLabelParams">
             <n-icon style="vertical-align: -0.15em; margin-right: 4px">
                 <MusicIcon />
             </n-icon>
