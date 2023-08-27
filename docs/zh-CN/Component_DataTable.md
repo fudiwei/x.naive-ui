@@ -82,6 +82,8 @@
 
 | 名称          | 参数                                   | 说明               | 版本 |
 | :------------ | :------------------------------------- | :----------------- | :--- |
+| default       |                                        | 表格的内容         |      |
+| summary       |                                        | 总结栏行           |      |
 | render-column | `{ column }`                           | 自定义列头的内容   |      |
 | render-cell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
 | render-expand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |
@@ -103,3 +105,24 @@
 | title         |                                | 自定义列头的内容   |      |
 | render-cell   | `{ rowData, rowIndex, value }` | 自定义单元格的内容 |      |
 | render-expand | `{ rowData, rowIndex }`        | 自定义展开行的内容 |      |
+
+#### `XNDataTableSummaryRow` Slots：
+
+| 名称    | 参数           | 说明         | 版本 |
+| :------ | :------------- | :----------- | :--- |
+| default | `{ pageData }` | 总结栏单元格 |      |
+
+#### `XNDataTableSummaryCell` Props：
+
+| 名称     | 类型              | 默认值 | 说明                                    | 版本 |
+| :------- | :---------------- | :----- | :-------------------------------------- | :--- |
+| key      | `string \|number` |        | 与列属性对应的唯一 Key 值               |      |
+| row-span | `number`          |        | 行合并                                  |      |
+| col-span | `number`          |        | 列合并                                  |      |
+| value    | `string`          |        | 内容。当使用 `default` 插槽时该属性无效 |      |
+
+#### `XNDataTableSummaryCell` Slots：
+
+| 名称    | 参数           | 说明             | 版本 |
+| :------ | :------------- | :--------------- | :--- |
+| default | `{ pageData }` | 自定义总结栏内容 |      |

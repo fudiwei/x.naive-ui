@@ -12,6 +12,11 @@ export default defineConfig({
         }
     },
 
+    define: {
+        '__DEV__': JSON.stringify(true),
+        'process.env.NODE_ENV': JSON.stringify('development')
+    },
+
     plugins: [
         vitePluginVue(),
 

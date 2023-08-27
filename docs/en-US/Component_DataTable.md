@@ -79,6 +79,8 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name          | Type                                   | Description            | Version |
 | :------------ | :------------------------------------- | :--------------------- | :------ |
+| default       |                                        | Table content.         |         |
+| summary       |                                        | Summary rows.          |         |
 | render-column | `{ column }`                           | Custom column title.   |         |
 | render-cell   | `{ column, rowData, rowIndex, value }` | Custom cell content.   |         |
 | render-expand | `{ rowData, rowIndex }`                | Custom expandable row. |         |
@@ -100,3 +102,24 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | title         |                                | Custom column title.   |      |
 | render-cell   | `{ rowData, rowIndex, value }` | Custom cell content.   |      |
 | render-expand | `{ rowData, rowIndex }`        | Custom expandable row. |      |
+
+#### `XNDataTableSummaryRow` Slots:
+
+| Name    | Type           | Description    | Version |
+| :------ | :------------- | :------------- | :------ |
+| default | `{ pageData }` | Summary cells. |         |
+
+#### `XNDataTableSummaryCell` Props:
+
+| Name     | Type              | Default | Description           | Version |
+| :------- | :---------------- | :------ | :-------------------- | :------ |
+| key      | `string \|number` |         | Unique key of column. |         |
+| row-span | `number`          |         | Row Span.             |         |
+| col-span | `number`          |         | Column span.          |         |
+| value    | `string`          |         | Summary content.      |         |
+
+#### `XNDataTableSummaryCell` Slots:
+
+| Name    | Type           | Description                  | Version |
+| :------ | :------------- | :--------------------------- | :------ |
+| default | `{ pageData }` | Custom summary cell content. |         |
