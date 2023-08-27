@@ -39,7 +39,10 @@ function handleUpdateMenuActiveKey(key: string) {
                 <n-layout-sider style="height: 100%" bordered>
                     <n-menu :options="menuOptions" :value="menuActiveKey" @update:value="handleUpdateMenuActiveKey" />
                 </n-layout-sider>
-                <n-layout-content content-style="padding: 24px; max-height: 100vh; overflow-y: auto">
+                <n-layout-content
+                    class="main-container"
+                    content-style="padding: 24px; max-height: 100vh; overflow-y: auto"
+                >
                     <router-view />
                 </n-layout-content>
             </n-layout>
