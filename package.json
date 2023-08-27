@@ -36,15 +36,18 @@
             "types": "./es/index.d.ts"
         }
     },
-    "sideEffects": false,
     "engines": {
         "node": ">=18.12",
         "npm": ">=8",
         "pnpm": ">=8"
     },
     "scripts": {
-        "build": "rollup -c && vue-tsc -p tsconfig.dts-cjs.json && vue-tsc -p tsconfig.dts-esm.json",
-        "demo": "vite --config demo/vite.config.ts"
+        "build": "pnpm run gen-dist && pnpm run gen-dts && pnpm run gen-volar",
+        "gen-dist": "rollup -c",
+        "gen-dts": "vue-tsc -p tsconfig.dts-cjs.json && vue-tsc -p tsconfig.dts-esm.json",
+        "gen-volar": "esbuild scripts/gen-volar.js --bundle --platform=node --tsconfig=tsconfig.esbuild.json | node",
+        "demo": "vite --config demo/vite.config.ts",
+        "prepublishOnly": "pnpm run build"
     },
     "devDependencies": {
         "@babel/core": "^7.22.10",
@@ -67,6 +70,7 @@
         "@vue/eslint-config-typescript": "^11.0.3",
         "@vue/runtime-core": "^3.3.4",
         "deepmerge": "^4.3.1",
+        "esbuild": "^0.19.2",
         "eslint": "^8.47.0",
         "eslint-plugin-prettier": "^5.0.0",
         "eslint-plugin-vue": "^9.17.0",
@@ -87,5 +91,8 @@
     "peerDependencies": {
         "naive-ui": "^2.34.0",
         "vue": "^3.2.0"
-    }
+    },
+    "sideEffects": false,
+    "unpkg": "dist/index.prod.js",
+    "jsdelivr": "dist/index.prod.js"
 }

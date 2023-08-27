@@ -56,3 +56,17 @@ app.use(XNDataTable);
     };
 </script>
 ```
+
+---
+
+### Volar 支持
+
+如果你在使用 Volar，那么可以在 `tsconfig.json` 中配置 `compilerOptions.types` 来指定全局组件类型。
+
+```json
+{
+    "compilerOptions": {
+        "types": ["@skit/x.naive-ui/types/volar.d.ts"]
+    }
+}
+```

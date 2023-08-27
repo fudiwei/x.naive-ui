@@ -1,4 +1,4 @@
-﻿import type { App } from 'vue';
+﻿import type { App as srcComponents } from 'vue';
 
 import XNCascader from './cascader';
 import XNDataTable from './data-table';
@@ -26,7 +26,7 @@ export * from './select';
 export * from './tree';
 export * from './tree-select';
 export default {
-    install: (app: App) => {
+    install: (app: srcComponents) => {
         app.use(XNCascader);
         app.use(XNDataTable);
         app.use(XNDropdown);

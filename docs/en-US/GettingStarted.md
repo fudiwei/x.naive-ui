@@ -56,3 +56,17 @@ app.use(XNDataTable);
     };
 </script>
 ```
+
+---
+
+### Volar Support
+
+If you are using Volar, you can specify global component types by configuring `compilerOptions.types` in `tsconfig.json`.
+
+```json
+{
+    "compilerOptions": {
+        "types": ["@skit/x.naive-ui/types/volar.d.ts"]
+    }
+}
+```
