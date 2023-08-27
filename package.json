@@ -45,9 +45,6 @@
         "build": "rollup -c && vue-tsc -p tsconfig.dts-cjs.json && vue-tsc -p tsconfig.dts-esm.json",
         "demo": "vite --config demo/vite.config.ts"
     },
-    "dependencies": {
-        "lodash-es": "^4.17.21"
-    },
     "devDependencies": {
         "@babel/core": "^7.22.10",
         "@babel/preset-env": "^7.22.10",

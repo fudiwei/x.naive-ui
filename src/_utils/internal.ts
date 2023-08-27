@@ -2,18 +2,18 @@
     obj: T,
     ...excludes: (K | K[])[]
 ): Omit<T, K extends string[] ? K[number] : K> => {
-    const props: string[] = [];
+    const keys: string[] = [];
     excludes?.forEach((p) => {
         if (Array.isArray(p)) {
-            p.forEach((k) => props.push(k as string));
+            p.forEach((k) => keys.push(k as string));
         } else {
-            props.push(p as string);
+            keys.push(p as string);
         }
     });
 
     const rest: Record<string, unknown> = {};
     Object.entries(obj).forEach(([k, v]) => {
-        !props.includes(k) && (rest[k] = v);
+        !keys.includes(k) && (rest[k] = v);
     });
 
     return rest as T;

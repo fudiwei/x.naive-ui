@@ -1,8 +1,20 @@
-﻿export const getVPropAsBoolean = <T extends object, K extends keyof T>(
+﻿import { mergeProps, camelize } from 'vue';
+
+export const getVProp = <T extends object, K extends keyof T>(props: T, name: K): T[K] | undefined => {
+    if (!props || !name) {
+        return;
+    }
+
+    // NOTICE: You must use kebab-case prop names in the source codes of components.
+    const r = props[name] ?? props[camelize(name as string) as keyof T];
+    return r;
+};
+
+export const getVPropAsBoolean = <T extends object, K extends keyof T>(
     props: T,
     name: K
 ): T[K] | boolean | undefined => {
-    const r = props[name];
+    const r = getVProp(props, name);
     if (typeof r === 'string') {
         if (r === '') {
             return true; // boolean props casting
@@ -12,7 +24,7 @@
 };
 
 export const getVPropAsNumber = <T extends object, K extends keyof T>(props: T, name: K): T[K] | number | undefined => {
-    const r = props[name];
+    const r = getVProp(props, name);
     if (typeof r === 'string') {
         if (r === '') {
             return;
@@ -21,3 +33,5 @@ export const getVPropAsNumber = <T extends object, K extends keyof T>(props: T, 
     }
     return r;
 };
+
+export const mergeVProps = mergeProps;

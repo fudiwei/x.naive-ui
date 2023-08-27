@@ -1,6 +1,5 @@
 ﻿import type { VNode, VNodeChild, Slot } from 'vue';
-import { isVNode, h } from 'vue';
-import { camelCase, kebabCase } from 'lodash-es';
+import { isVNode, h, camelize } from 'vue';
 
 import { isTextVNode } from './v-node';
 
@@ -13,7 +12,8 @@ export const getVSlot = <T extends VSlots, K extends keyof T>(slots: T, name: K)
         return;
     }
 
-    return slots[name] || slots[kebabCase(name as string)] || slots[camelCase(name as string)];
+    // NOTICE: You must use kebab-case slot names in the source codes of components.
+    return slots[name] ?? slots[camelize(name as string)];
 };
 
 export const getVSlotRender = <T = any>(slot?: VSlot<T>, ...args: any[]): VSlotRender | undefined => {

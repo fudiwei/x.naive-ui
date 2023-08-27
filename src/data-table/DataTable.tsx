@@ -113,7 +113,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
                 key: vKey ?? `__X_DATATABLE_COLUMN_${index}`,
                 ellipsis: getVPropAsBoolean(vProps, 'ellipsis'),
                 expandable: getVPropAsBoolean(vProps, 'expandable'),
-                filterMultiple: getVPropAsBoolean(vProps, 'filterMultiple'),
+                filterMultiple: getVPropAsBoolean(vProps, 'filter-multiple'),
                 multiple: getVPropAsBoolean(vProps, 'multiple'),
                 resizable: getVPropAsBoolean(vProps, 'resizable'),
                 sorter: getVPropAsBoolean(vProps, 'sorter'),
@@ -182,8 +182,8 @@ function convertVNodesToSummaries<T extends NDataTableRowData>(
 
                         summary[vKey as string] = {
                             ...restProps,
-                            rowSpan: getVPropAsNumber(vProps, 'rowSpan'),
-                            colSpan: getVPropAsNumber(vProps, 'colSpan'),
+                            rowSpan: getVPropAsNumber(vProps, 'row-span'),
+                            colSpan: getVPropAsNumber(vProps, 'col-span'),
                             value: vSlots['default']?.({ pageData }) || vProps.value
                         };
                     } else if (!isEmptyVNode(child)) {
