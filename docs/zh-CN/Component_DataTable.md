@@ -13,6 +13,13 @@
 > 注意：这只是个用于定义 `columns` 属性的语法糖（会带来一定的性能损失），所以你不能用其他组件去包裹 `XNDataTableColumn`。
 
 ```html
+<script setup>
+    const data = [
+        { name: 'Athos', age: 20 },
+        { name: 'Porthos', age: 19 },
+        { name: 'Aramis', age: 18 }
+    ];
+</script>
 <template>
     <x-n-data-table :data="data">
         <x-n-data-table-column type="selection" />
@@ -114,12 +121,12 @@
 
 #### `XNDataTableSummaryCell` Props：
 
-| 名称     | 类型              | 默认值 | 说明                                    | 版本 |
-| :------- | :---------------- | :----- | :-------------------------------------- | :--- |
-| key      | `string \|number` |        | 与列属性对应的唯一 Key 值               |      |
-| row-span | `number`          |        | 行合并                                  |      |
-| col-span | `number`          |        | 列合并                                  |      |
-| value    | `string`          |        | 内容。当使用 `default` 插槽时该属性无效 |      |
+| 名称     | 类型               | 默认值 | 说明                                    | 版本 |
+| :------- | :----------------- | :----- | :-------------------------------------- | :--- |
+| key      | `string \| number` |        | 与列属性对应的唯一 Key 值               |      |
+| row-span | `number`           |        | 行合并                                  |      |
+| col-span | `number`           |        | 列合并                                  |      |
+| value    | `string`           |        | 内容。当使用 `default` 插槽时该属性无效 |      |
 
 #### `XNDataTableSummaryCell` Slots：
 

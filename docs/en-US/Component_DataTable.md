@@ -13,6 +13,13 @@ For more details, please refer to the Demo.
 > Notes: Since this is just a syntax sugar for the `columns` property (there will be a certain performance loss), so that you can't compose `XNDataTableColumn` with other elements.
 
 ```html
+<script setup>
+    const data = [
+        { name: 'Athos', age: 20 },
+        { name: 'Porthos', age: 19 },
+        { name: 'Aramis', age: 18 }
+    ];
+</script>
 <template>
     <x-n-data-table :data="data">
         <x-n-data-table-column type="selection" />
@@ -111,12 +118,12 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNDataTableSummaryCell` Props:
 
-| Name     | Type              | Default | Description           | Version |
-| :------- | :---------------- | :------ | :-------------------- | :------ |
-| key      | `string \|number` |         | Unique key of column. |         |
-| row-span | `number`          |         | Row Span.             |         |
-| col-span | `number`          |         | Column span.          |         |
-| value    | `string`          |         | Summary content.      |         |
+| Name     | Type               | Default | Description           | Version |
+| :------- | :----------------- | :------ | :-------------------- | :------ |
+| key      | `string \| number` |         | Unique key of column. |         |
+| row-span | `number`           |         | Row Span.             |         |
+| col-span | `number`           |         | Column span.          |         |
+| value    | `string`           |         | Summary content.      |         |
 
 #### `XNDataTableSummaryCell` Slots:
 

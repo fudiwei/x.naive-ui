@@ -46,7 +46,7 @@ This project is aimed to provide a solution for these issues above.
 
 -   Almost the same API to Naive-UI. You just need to add `x-` before the original component name (example: `<n-data-table>` → `<x-n-data-table>`).
 -   `DataTable`: Scoped slots for **columns**, **cells**, **expandable rows**.
--   `DataTable`: Template style API for **columns**.
+-   `DataTable`: Template style API for **columns**, **summary**.
 -   `Dropdown`: Template style API for **options**.
 -   `Menu`: Template style API for **options**.
 -   `Select`: Template style API for **options**, **option groups**.
