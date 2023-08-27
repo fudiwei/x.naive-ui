@@ -9,6 +9,7 @@ import type {
 import type {
     RowData as NDataTableRowData,
     TableColumnGroup as NDataTableGroupColumn,
+    SummaryRowData as NDataTableSummaryRowData,
     SortOrder as NDataTableSortOrders,
     RenderFilter as NDataTableRenderFilter,
     RenderFilterIcon as NDataTableRenderFilterIcon,
@@ -21,16 +22,19 @@ import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
-import { getRestProps, getBooleanProp } from '../_utils/internal';
+import { getVPropAsBoolean, getVPropAsNumber } from '../_utils/v-prop';
+import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentEmpty from '../empty/Empty';
 import ComponentDataTableColumn from './DataTableColumn';
+import ComponentDataTableSummaryRow from './DataTableSummaryRow';
+import ComponentDataTableSummaryCell from './DataTableSummaryCell';
 
 export type DataTableRowData = NDataTableRowData;
 export type DataTableColumn<T extends DataTableRowData = any> = Partial<Omit<NDataTableBaseColumn<T>, 'type'>> &
     Partial<Omit<NDataTableSelectionColumn<T>, 'type'>> &
     Partial<Omit<NDataTableExpandColumn<T>, 'type'>> &
-    Partial<NDataTableGroupColumn<T>> & { type?: 'selection' | 'expand' };
+    Partial<Omit<NDataTableGroupColumn<T>, 'type'>> & { type?: 'selection' | 'expand' };
 export type DataTableColumns<T extends DataTableRowData = any> = DataTableColumn<T>[];
 export type DataTableRenderColumnParams<T extends DataTableRowData = any> = {
     column: DataTableColumn<T>;
@@ -67,6 +71,9 @@ export type DataTableRenderSorterIconParams<T extends DataTableRowData = any> = 
     column: DataTableColumn<T>;
     order: NDataTableSortOrders;
 };
+export type DataTableRenderSummaryParams<T extends DataTableRowData = any> = {
+    pageData: T[];
+};
 
 const _propsMakeGeneric = <T extends NDataTableRowData = any>() => {
     const rest = getRestProps(defaultNDataTableProps, 'columns');
@@ -86,7 +93,7 @@ const _props = _propsMakeGeneric();
 export type DataTableProps = ExtractPublicPropTypes<typeof _props>;
 export type DataTableInstance = NDataTableInst;
 
-function convertVNodesToColumns<T extends NDataTableRowData = any>(vnodes: VNode[]): NDataTableColumn<T>[] {
+function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): NDataTableColumn<T>[] {
     const temp = [] as NDataTableColumn<T>[];
 
     vnodes = flattenVNodeChildren(vnodes) as VNode[];
@@ -98,19 +105,19 @@ function convertVNodesToColumns<T extends NDataTableRowData = any>(vnodes: VNode
 
         if (vnode.type === ComponentDataTableColumn) {
             if (!vProps.type && vKey == null) {
-                logger.warning('Each "{0}" should have a unique `key` prop.', ComponentDataTableColumn.name);
+                logger.warning('Each {0} should have a unique `key` prop.', ComponentDataTableColumn.name);
             }
 
             const column: NDataTableColumn<T> = {
                 ...restProps,
                 key: vKey ?? `__X_DATATABLE_COLUMN_${index}`,
-                ellipsis: getBooleanProp(vProps, 'ellipsis'),
-                expandable: getBooleanProp(vProps, 'expandable'),
-                filterMultiple: getBooleanProp(vProps, 'filterMultiple'),
-                multiple: getBooleanProp(vProps, 'multiple'),
-                resizable: getBooleanProp(vProps, 'resizable'),
-                sorter: getBooleanProp(vProps, 'sorter'),
-                tree: getBooleanProp(vProps, 'tree'),
+                ellipsis: getVPropAsBoolean(vProps, 'ellipsis'),
+                expandable: getVPropAsBoolean(vProps, 'expandable'),
+                filterMultiple: getVPropAsBoolean(vProps, 'filterMultiple'),
+                multiple: getVPropAsBoolean(vProps, 'multiple'),
+                resizable: getVPropAsBoolean(vProps, 'resizable'),
+                sorter: getVPropAsBoolean(vProps, 'sorter'),
+                tree: getVPropAsBoolean(vProps, 'tree'),
                 colSpan:
                     typeof vProps.colSpan === 'string' || typeof vProps.colSpan === 'number'
                         ? () => +vProps.colSpan
@@ -132,14 +139,77 @@ function convertVNodesToColumns<T extends NDataTableRowData = any>(vnodes: VNode
 
             temp.push(column);
         } else if (!isEmptyVNode(vnode)) {
-            logger.warning('Each child component in "{0}" should be "{0}".', ComponentDataTableColumn.name);
+            logger.warning(
+                'Each child component in {0} should be {1}.',
+                ComponentDataTable.name,
+                ComponentDataTableColumn.name
+            );
         }
     });
 
     return temp;
 }
 
-function populateColumnRenders<T extends NDataTableRowData = any>(
+function convertVNodesToSummaries<T extends NDataTableRowData>(
+    vnodes: VNode[],
+    options: { pageData: T[] }
+): NDataTableSummaryRowData | NDataTableSummaryRowData[] | undefined {
+    const temp = [] as NDataTableSummaryRowData[];
+
+    vnodes = flattenVNodeChildren(vnodes) as VNode[];
+    vnodes.forEach((vnode) => {
+        const vSlots = (vnode.children || {}) as Slots;
+
+        if (vnode.type === ComponentDataTableSummaryRow) {
+            const { pageData } = options;
+            const summary: NDataTableSummaryRowData = {};
+
+            if (vSlots['default']) {
+                const children = flattenVNodeChildren(vSlots['default']({ pageData })) as VNode[];
+                children.forEach((child) => {
+                    const vKey = child.key as string | number | null;
+                    const vProps = child.props || {};
+                    const vSlots = (child.children || {}) as Slots;
+                    const restProps = getRestProps(vProps, 'key', 'rowSpan', 'colSpan', 'value');
+
+                    if (child.type === ComponentDataTableSummaryCell) {
+                        if (vKey == null) {
+                            logger.warning(
+                                'Each {0} should have a `key` prop related to a column.',
+                                ComponentDataTableSummaryCell.name
+                            );
+                        }
+
+                        summary[vKey as string] = {
+                            ...restProps,
+                            rowSpan: getVPropAsNumber(vProps, 'rowSpan'),
+                            colSpan: getVPropAsNumber(vProps, 'colSpan'),
+                            value: vSlots['default']?.({ pageData }) || vProps.value
+                        };
+                    } else if (!isEmptyVNode(child)) {
+                        logger.warning(
+                            'Each child component in {0} should be {1}.',
+                            ComponentDataTableSummaryRow.name,
+                            ComponentDataTableSummaryCell.name
+                        );
+                    }
+                });
+            }
+
+            temp.push(summary);
+        } else if (!isEmptyVNode(vnode)) {
+            logger.warning(
+                'Each child component in `summary` slot of {0} should be {1}.',
+                ComponentDataTable.name,
+                ComponentDataTableSummaryRow.name
+            );
+        }
+    });
+
+    return temp;
+}
+
+function populateColumnRenders<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -155,7 +225,7 @@ function populateColumnRenders<T extends NDataTableRowData = any>(
     return column;
 }
 
-function renderTableColumn<T extends NDataTableRowData = any>(
+function renderTableColumn<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -181,11 +251,7 @@ function renderTableColumn<T extends NDataTableRowData = any>(
     }
 }
 
-function renderTableCell<T extends NDataTableRowData = any>(
-    column: NDataTableColumn<T>,
-    ctxSlots: Slots,
-    ctxScoped = false
-) {
+function renderTableCell<T extends NDataTableRowData>(column: NDataTableColumn<T>, ctxSlots: Slots, ctxScoped = false) {
     const fallback = (column as NDataTableBaseColumn<T>).render;
     return (rowData: T, rowIndex: number) => {
         const slot = getVSlot(ctxSlots, 'render-cell');
@@ -210,7 +276,7 @@ function renderTableCell<T extends NDataTableRowData = any>(
     };
 }
 
-function renderTableExpand<T extends NDataTableRowData = any>(
+function renderTableExpand<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -243,7 +309,7 @@ function renderTableExpand<T extends NDataTableRowData = any>(
     );
 }
 
-function renderTableFilter<T extends NDataTableRowData = any>(
+function renderTableFilter<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -269,7 +335,7 @@ function renderTableFilter<T extends NDataTableRowData = any>(
     };
 }
 
-function renderTableFilterIcon<T extends NDataTableRowData = any>(
+function renderTableFilterIcon<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -295,7 +361,7 @@ function renderTableFilterIcon<T extends NDataTableRowData = any>(
     };
 }
 
-function renderTableFilterMenu<T extends NDataTableRowData = any>(
+function renderTableFilterMenu<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -320,7 +386,7 @@ function renderTableFilterMenu<T extends NDataTableRowData = any>(
     };
 }
 
-function renderTableSorter<T extends NDataTableRowData = any>(
+function renderTableSorter<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -345,7 +411,7 @@ function renderTableSorter<T extends NDataTableRowData = any>(
     };
 }
 
-function renderTableSorterIcon<T extends NDataTableRowData = any>(
+function renderTableSorterIcon<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
     ctxScoped = false
@@ -370,7 +436,7 @@ function renderTableSorterIcon<T extends NDataTableRowData = any>(
     };
 }
 
-export default (<T extends DataTableRowData = any>() => {
+const ComponentDataTable = (<T extends DataTableRowData = any>() => {
     return defineComponent({
         name: 'XNDataTable',
 
@@ -385,6 +451,7 @@ export default (<T extends DataTableRowData = any>() => {
             'default': NonNullable<unknown>;
             'loading': NonNullable<unknown>;
             'empty': NonNullable<unknown>;
+            'summary': NonNullable<unknown>;
             'render-column': DataTableRenderColumnParams<T>;
             'render-cell': DataTableRenderCellParams<T>;
             'render-expand': DataTableRenderExpandParams<T>;
@@ -420,6 +487,15 @@ export default (<T extends DataTableRowData = any>() => {
                 return convertVNodesToColumns(vnodes);
             });
 
+            const nSummary = computed(() => {
+                const vnodes = slots['summary']?.({});
+                if (isEmptyVNode(vnodes)) {
+                    return props.summary;
+                }
+
+                return (pageData: T[]) => convertVNodesToSummaries(vnodes, { pageData });
+            });
+
             const nSlots = computed(() =>
                 mergeVSlots(slots, {
                     'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
@@ -448,8 +524,17 @@ export default (<T extends DataTableRowData = any>() => {
             } as DataTableInstance);
 
             return () => (
-                <NDataTable ref={nRef} {...attrs} {...props} columns={nColumns.value} v-slots={nSlots.value} />
+                <NDataTable
+                    ref={nRef}
+                    {...attrs}
+                    {...props}
+                    columns={nColumns.value}
+                    summary={nSummary.value}
+                    v-slots={nSlots.value}
+                />
             );
         }
     });
 })();
+
+export default ComponentDataTable;

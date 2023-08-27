@@ -10,6 +10,7 @@ import type {} from 'treemate';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
+import { getVPropAsBoolean } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
@@ -39,7 +40,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
                 ...vProps,
                 key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
-                disabled: !!vProps.disabled || vProps.disabled === '',
+                disabled: getVPropAsBoolean(vProps, 'disabled'),
                 label: getVSlotRender(vSlots['default']) || vProps.label,
                 icon: getVSlotRender(vSlots['icon']),
                 children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined

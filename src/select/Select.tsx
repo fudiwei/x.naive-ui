@@ -6,11 +6,12 @@ import type {
     SelectRenderOption as NSelectRenderOption,
     SelectRenderTag as NSelectRenderTag
 } from 'naive-ui';
-import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
+import { getVPropAsBoolean } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentEmpty from '../empty/Empty';
@@ -63,31 +64,25 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
 
         if (vnode.type === ComponentSelectOption) {
             // 选项
-            const label = getVSlotRender(vSlots['default']) || vProps.label;
-            const value = vProps.value;
-            const disabled = !!vProps.disabled || vProps.disabled === '';
             temp.push({
                 ...vProps,
-                label,
-                value,
-                disabled
+                label: getVSlotRender(vSlots['default']) || vProps.label,
+                value: vProps.value,
+                disabled: getVPropAsBoolean(vProps, 'disabled')
             } as SelectOption);
         } else if (vnode.type === ComponentSelectOptionGroup) {
             // 选项组
-            const key = vKey ?? `__X_SELECT_GROUP_${index}`;
-            const label = getVSlotRender(vSlots['label']) || vProps.label;
-            const children = convertVNodesToOptions(vSlots['default']?.() || []);
             temp.push({
                 ...vProps,
                 type: 'group',
-                key,
-                label,
-                children
+                key: vKey ?? `__X_SELECT_GROUP_${index}`,
+                label: getVSlotRender(vSlots['label']) || vProps.label,
+                children: convertVNodesToOptions(vSlots['default']?.() || [])
             } as SelectOption);
         } else if (!isEmptyVNode(vnode)) {
             logger.warning(
                 'Each child component in {0} should be {1}.',
-                getCurrentInstance()?.type?.name,
+                ComponentSelect.name,
                 [ComponentSelectOption.name, ComponentSelectOptionGroup.name].join(', ')
             );
         }
@@ -96,7 +91,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
     return temp;
 }
 
-export default defineComponent({
+const ComponentSelect = defineComponent({
     name: 'XNSelect',
 
     components: {
@@ -218,3 +213,5 @@ export default defineComponent({
         );
     }
 });
+
+export default ComponentSelect;

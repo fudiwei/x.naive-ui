@@ -3,6 +3,7 @@ import DemoBasic from './demo-basic/index.vue';
 import DemoColumn from './demo-column/index.vue';
 import DemoExpand from './demo-expand/index.vue';
 import DemoGroup from './demo-group/index.vue';
+import DemoSummary from './demo-summary/index.vue';
 import DemoEmpty from './demo-empty/index.vue';
 </script>
 
@@ -12,6 +13,7 @@ import DemoEmpty from './demo-empty/index.vue';
         <DemoColumn />
         <DemoExpand />
         <DemoGroup />
+        <DemoSummary />
         <DemoEmpty />
     </n-space>
 </template>

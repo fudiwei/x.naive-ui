@@ -18,13 +18,3 @@
 
     return rest as T;
 };
-
-export const getBooleanProp = <T extends object, K extends keyof T>(obj: T, prop: K): T[K] | boolean => {
-    const r = obj[prop];
-    if (typeof r === 'string') {
-        if (r === '') {
-            return true; // boolean props casting
-        }
-    }
-    return r;
-};

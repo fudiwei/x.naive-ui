@@ -5,11 +5,12 @@ import type {
     MenuDividerOption as NMenuDividerOption,
     MenuInst as NMenuInst
 } from 'naive-ui';
-import { defineComponent, ref, computed, getCurrentInstance } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
+import { getVPropAsBoolean } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentMenuDivider from './MenuDivider';
@@ -53,7 +54,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                 ...vProps,
                 key: vKey ?? `__X_MENU_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
-                disabled: !!vProps.disabled || vProps.disabled === '',
+                disabled: getVPropAsBoolean(vProps, 'disabled'),
                 label: getVSlotRender(vSlots['default']) || vProps.label,
                 icon: getVSlotRender(vSlots['icon']),
                 extra: getVSlotRender(vSlots['extra']) || vProps.extra,
@@ -81,7 +82,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
         } else if (!isEmptyVNode(vnode)) {
             logger.warning(
                 'Each child component in {0} should be {1}.',
-                getCurrentInstance()?.type?.name,
+                ComponentMenu.name,
                 [ComponentMenuItem.name, ComponentMenuItemGroup.name, ComponentMenuDivider.name].join(', ')
             );
         }
@@ -90,7 +91,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
     return temp;
 }
 
-export default defineComponent({
+const ComponentMenu = defineComponent({
     name: 'XNMenu',
 
     components: {
@@ -143,3 +144,5 @@ export default defineComponent({
         );
     }
 });
+
+export default ComponentMenu;

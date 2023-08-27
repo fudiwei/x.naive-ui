@@ -4,6 +4,8 @@
 
         XNDataTable: (typeof import('@skit/x.naive-ui'))['XNDataTable'];
         XNDataTableColumn: (typeof import('@skit/x.naive-ui'))['XNDataTableColumn'];
+        XNDataTableSummaryRow: (typeof import('@skit/x.naive-ui'))['XNDataTableSummaryRow'];
+        XNDataTableSummaryCell: (typeof import('@skit/x.naive-ui'))['XNDataTableSummaryCell'];
 
         XNDropdown: (typeof import('@skit/x.naive-ui'))['XNDropdown'];
         XNDropdownItem: (typeof import('@skit/x.naive-ui'))['XNDropdownItem'];
