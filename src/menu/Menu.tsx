@@ -79,7 +79,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                 key: vnode.key ?? `__X_MENU_DIVIDER_${index}`,
                 props: restProps as HTMLAttributes
             } as NMenuDividerOption);
-        } else if (!isEmptyVNode(vnode)) {
+        } else if (__DEV__ && !isEmptyVNode(vnode)) {
             logger.warning(
                 'Each child component in {0} should be {1}.',
                 ComponentMenu.name,

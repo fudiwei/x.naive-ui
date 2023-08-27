@@ -12,6 +12,9 @@ module.exports = {
         '@vue/eslint-config-typescript/recommended',
         '@vue/eslint-config-prettier'
     ],
+    globals: {
+        __DEV__: 'readonly'
+    },
     parserOptions: {
         ecmaVersion: 'latest'
     },

@@ -36,6 +36,7 @@
             "types": "./es/index.d.ts"
         }
     },
+    "sideEffects": false,
     "engines": {
         "node": ">=18.12",
         "npm": ">=8",

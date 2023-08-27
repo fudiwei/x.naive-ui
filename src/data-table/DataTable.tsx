@@ -104,7 +104,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
         const restProps = getRestProps(vProps, 'key', 'children', 'render', 'renderExpand');
 
         if (vnode.type === ComponentDataTableColumn) {
-            if (!vProps.type && vKey == null) {
+            if (__DEV__ && !vProps.type && vKey == null) {
                 logger.warning('Each {0} should have a unique `key` prop.', ComponentDataTableColumn.name);
             }
 
@@ -138,7 +138,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
             populateColumnRenders<T>(column, vSlots, true);
 
             temp.push(column);
-        } else if (!isEmptyVNode(vnode)) {
+        } else if (__DEV__ && !isEmptyVNode(vnode)) {
             logger.warning(
                 'Each child component in {0} should be {1}.',
                 ComponentDataTable.name,
@@ -153,7 +153,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
 function convertVNodesToSummaries<T extends NDataTableRowData>(
     vnodes: VNode[],
     options: { pageData: T[] }
-): NDataTableSummaryRowData | NDataTableSummaryRowData[] | undefined {
+): NDataTableSummaryRowData[] {
     const temp = [] as NDataTableSummaryRowData[];
 
     vnodes = flattenVNodeChildren(vnodes) as VNode[];
@@ -173,7 +173,7 @@ function convertVNodesToSummaries<T extends NDataTableRowData>(
                     const restProps = getRestProps(vProps, 'key', 'rowSpan', 'colSpan', 'value');
 
                     if (child.type === ComponentDataTableSummaryCell) {
-                        if (vKey == null) {
+                        if (__DEV__ && vKey == null) {
                             logger.warning(
                                 'Each {0} should have a `key` prop related to a column.',
                                 ComponentDataTableSummaryCell.name
@@ -186,7 +186,7 @@ function convertVNodesToSummaries<T extends NDataTableRowData>(
                             colSpan: getVPropAsNumber(vProps, 'col-span'),
                             value: vSlots['default']?.({ pageData }) || vProps.value
                         };
-                    } else if (!isEmptyVNode(child)) {
+                    } else if (__DEV__ && !isEmptyVNode(child)) {
                         logger.warning(
                             'Each child component in {0} should be {1}.',
                             ComponentDataTableSummaryRow.name,
@@ -197,7 +197,7 @@ function convertVNodesToSummaries<T extends NDataTableRowData>(
             }
 
             temp.push(summary);
-        } else if (!isEmptyVNode(vnode)) {
+        } else if (__DEV__ && !isEmptyVNode(vnode)) {
             logger.warning(
                 'Each child component in `summary` slot of {0} should be {1}.',
                 ComponentDataTable.name,
