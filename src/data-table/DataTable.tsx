@@ -22,7 +22,7 @@ import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
-import { getVPropAsBoolean, getVPropAsNumber } from '../_utils/v-prop';
+import { getVProp, getVPropAsBoolean, getVPropAsNumber, normalizeVProps } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentEmpty from '../empty/Empty';
@@ -109,7 +109,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
             }
 
             const column: NDataTableColumn<T> = {
-                ...restProps,
+                ...normalizeVProps(restProps),
                 key: vKey ?? `__X_DATATABLE_COLUMN_${index}`,
                 ellipsis: getVPropAsBoolean(vProps, 'ellipsis'),
                 expandable: getVPropAsBoolean(vProps, 'expandable'),
@@ -118,14 +118,14 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
                 resizable: getVPropAsBoolean(vProps, 'resizable'),
                 sorter: getVPropAsBoolean(vProps, 'sorter'),
                 tree: getVPropAsBoolean(vProps, 'tree'),
-                colSpan:
-                    typeof vProps.colSpan === 'string' || typeof vProps.colSpan === 'number'
-                        ? () => +vProps.colSpan
-                        : vProps.colSpan,
-                rowSpan:
-                    typeof vProps.rowSpan === 'string' || typeof vProps.rowSpan === 'number'
-                        ? () => +vProps.rowSpan
-                        : vProps.rowSpan
+                colSpan: (() => {
+                    const colSpan = getVProp(vProps, 'col-span');
+                    return typeof colSpan === 'string' || typeof colSpan === 'number' ? () => +colSpan : colSpan;
+                })(),
+                rowSpan: (() => {
+                    const rowSpan = getVProp(vProps, 'row-span');
+                    return typeof rowSpan === 'string' || typeof rowSpan === 'number' ? () => +rowSpan : rowSpan;
+                })()
             };
 
             if (vSlots['default']) {
@@ -181,7 +181,7 @@ function convertVNodesToSummaries<T extends NDataTableRowData>(
                         }
 
                         summary[vKey as string] = {
-                            ...restProps,
+                            ...normalizeVProps(restProps),
                             rowSpan: getVPropAsNumber(vProps, 'row-span'),
                             colSpan: getVPropAsNumber(vProps, 'col-span'),
                             value: vSlots['default']?.({ pageData }) || vProps.value

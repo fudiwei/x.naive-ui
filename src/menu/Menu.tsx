@@ -10,7 +10,7 @@ import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
-import { getVPropAsBoolean } from '../_utils/v-prop';
+import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentMenuDivider from './MenuDivider';
@@ -51,7 +51,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
         if (vnode.type === ComponentMenuItem) {
             // 菜单项
             temp.push({
-                ...vProps,
+                ...normalizeVProps(restProps),
                 key: vKey ?? `__X_MENU_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
                 disabled: getVPropAsBoolean(vProps, 'disabled'),
@@ -63,7 +63,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
         } else if (vnode.type === ComponentMenuItemGroup) {
             // 菜单分组
             temp.push({
-                ...vProps,
+                ...normalizeVProps(restProps),
                 type: 'group',
                 key: vKey ?? `__X_MENU_GROUP_${index}`,
                 props: restProps as HTMLAttributes,
@@ -74,7 +74,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
         } else if (vnode.type === ComponentMenuDivider) {
             // 分割线
             temp.push({
-                ...vProps,
+                ...normalizeVProps(restProps),
                 type: 'divider',
                 key: vnode.key ?? `__X_MENU_DIVIDER_${index}`,
                 props: restProps as HTMLAttributes

@@ -11,7 +11,7 @@ import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
-import { getVPropAsBoolean } from '../_utils/v-prop';
+import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentEmpty from '../empty/Empty';
@@ -61,11 +61,12 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
+        const restProps = getRestProps(vProps, 'key', 'type', 'label', 'disabled', 'children');
 
         if (vnode.type === ComponentSelectOption) {
             // 选项
             temp.push({
-                ...vProps,
+                ...normalizeVProps(restProps),
                 label: getVSlotRender(vSlots['default']) || vProps.label,
                 value: vProps.value,
                 disabled: getVPropAsBoolean(vProps, 'disabled')
@@ -73,7 +74,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
         } else if (vnode.type === ComponentSelectOptionGroup) {
             // 选项组
             temp.push({
-                ...vProps,
+                ...normalizeVProps(restProps),
                 type: 'group',
                 key: vKey ?? `__X_SELECT_GROUP_${index}`,
                 label: getVSlotRender(vSlots['label']) || vProps.label,

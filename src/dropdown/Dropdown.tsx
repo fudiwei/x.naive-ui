@@ -10,7 +10,7 @@ import type {} from 'treemate';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
-import { getVPropAsBoolean } from '../_utils/v-prop';
+import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
@@ -37,7 +37,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
         if (vnode.type === ComponentDropdownItem) {
             // 菜单项
             temp.push({
-                ...vProps,
+                ...normalizeVProps(restProps),
                 key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
                 disabled: getVPropAsBoolean(vProps, 'disabled'),
@@ -48,7 +48,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
         } else if (vnode.type === ComponentDropdownDivider) {
             // 分割线
             temp.push({
-                ...vProps,
+                ...normalizeVProps(restProps),
                 type: 'divider',
                 key: vnode.key ?? `__X_DROPDOWN_DIVIDER_${index}`,
                 props: restProps as HTMLAttributes
@@ -57,6 +57,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
             // 纯渲染的内容
             temp.push({
                 ...vProps,
+                ...normalizeVProps(restProps),
                 type: 'render',
                 key: vnode.key ?? `__X_DROPDOWN_RENDER_${index}`,
                 props: restProps as HTMLAttributes,

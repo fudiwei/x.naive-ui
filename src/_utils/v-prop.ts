@@ -35,3 +35,11 @@ export const getVPropAsNumber = <T extends object, K extends keyof T>(props: T, 
 };
 
 export const mergeVProps = mergeProps;
+
+export const normalizeVProps = (props: any): object => {
+    const temp = {} as any;
+    for (const [k, v] of Object.entries(props || {})) {
+        temp[camelize(k)] = v;
+    }
+    return temp;
+};
