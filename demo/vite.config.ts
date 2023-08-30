@@ -8,7 +8,7 @@ import { string as rollupPluginString } from 'rollup-plugin-string';
 export default defineConfig({
     build: {
         rollupOptions: {
-            input: '/demo/index.html'
+            input: './index.html'
         }
     },
 
@@ -29,7 +29,7 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            '@skit/x.naive-ui': fileURLToPath(new URL('/src', import.meta.url))
+            '@skit/x.naive-ui': fileURLToPath(new URL('../src', import.meta.url))
         }
     },
 

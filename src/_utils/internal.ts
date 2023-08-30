@@ -18,3 +18,28 @@
 
     return temp as T;
 };
+
+export const globalThisGetter = <T = any>(key: string, getter?: () => T): T | undefined => {
+    let o = (globalThis as any) || {};
+    let p = 'XNaiveUI';
+
+    if (typeof o[p] !== 'object') {
+        o[p] = {};
+        Object.defineProperty(o, p, {
+            configurable: false,
+            enumerable: false,
+            writable: false
+        });
+    }
+
+    o = o[p];
+    p = `$__${key}`;
+    if (!Object.prototype.hasOwnProperty.call(o, p)) {
+        if (getter) {
+            o[p] = getter();
+            Object.defineProperty(o, p, { enumerable: false });
+        }
+    }
+
+    return o[p] as T;
+};

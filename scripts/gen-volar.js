@@ -22,21 +22,18 @@ function parseComponentsDeclaration(code) {
 
 function generateComponentsType() {
     const components = {};
-    Object.keys(srcComponents)
-        .sort()
-        .forEach((key) => {
-            const entry = `(typeof import('@skit/x.naive-ui'))['${key}']`;
-            if (key.startsWith(componentPrefix) && !componentExcludes.includes(key)) {
-                components[key] = entry;
-            }
-        });
+    Object.keys(srcComponents).forEach((key) => {
+        const entry = `(typeof import('@skit/x.naive-ui'))['${key}']`;
+        if (key.startsWith(componentPrefix) && !componentExcludes.includes(key)) {
+            components[key] = entry;
+        }
+    });
 
     const originalContent = fs.existsSync(OUTPUT) ? fs.readFileSync(OUTPUT, 'utf-8') : '';
     const originalImports = parseComponentsDeclaration(originalContent);
     const lines = Object.entries({ ...originalImports, ...components })
-        .filter(([name]) => {
-            return components[name];
-        })
+        .filter(([key]) => !!components[key])
+        .sort((a, b) => a[0].localeCompare(b[0]))
         .map(([name, v]) => {
             if (!/^\w+$/.test(name)) {
                 name = `'${name}'`;
