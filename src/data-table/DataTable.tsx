@@ -74,22 +74,21 @@ export type DataTableRenderSummaryParams<T extends DataTableRowData = any> = {
     pageData: T[];
 };
 
-const _propsMakeGeneric = <T extends NDataTableRowData = any>() => {
+const _propsMakeGeneric = <T extends DataTableRowData = any>() => {
     const restProps = rest(defaultNDataTableProps, 'columns');
     return {
         ...restProps,
         columns: {
-            type: Array as PropType<DataTableColumn<T>[]>,
+            type: Array as PropType<DataTableColumn<T>[] | NDataTableColumn<T>[]>,
             default: () => [] as T[]
-        },
-        emptyText: {
-            type: String as PropType<string>
         }
     } as const;
 };
 const _props = _propsMakeGeneric();
 
-export type DataTableProps = ExtractPublicPropTypes<typeof _props>;
+export type DataTableProps<T extends DataTableRowData = any> = ExtractPublicPropTypes<
+    ReturnType<typeof _propsMakeGeneric<T>>
+>;
 export type DataTableInstance = NDataTableInst;
 
 function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): NDataTableColumn<T>[] {

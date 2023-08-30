@@ -76,10 +76,6 @@ For more details, please refer to the Demo.
 
 #### `XNDataTable` Props:
 
-| Name       | Type     | Default     | Description                              | Version |
-| :--------- | :------- | :---------- | :--------------------------------------- | :------ |
-| empty-text | `string` | `'No Data'` | Description when data of table is empty. |         |
-
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Props).
 
 #### `XNDataTable` Slots:

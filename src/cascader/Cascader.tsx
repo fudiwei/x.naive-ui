@@ -16,9 +16,6 @@ const _props = (() => {
         options: {
             type: Array as PropType<CascaderOption[]>,
             default: () => []
-        },
-        emptyText: {
-            type: String as PropType<string>
         }
     } as const;
 })();

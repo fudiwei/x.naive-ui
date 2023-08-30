@@ -27,9 +27,6 @@ const _props = (() => {
         options: {
             type: Array as PropType<SelectOption[]>,
             default: () => []
-        },
-        emptyText: {
-            type: String as PropType<string>
         }
     } as const;
 })();

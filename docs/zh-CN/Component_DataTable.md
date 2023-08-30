@@ -79,10 +79,6 @@
 
 #### `XNDataTable` Props：
 
-| 名称       | 类型     | 默认值       | 说明                                                      | 版本 |
-| :--------- | :------- | :----------- | :-------------------------------------------------------- | :--- |
-| empty-text | `string` | `'暂无数据'` | 表格数据为空时的展示文案。当使用 `empty` 插槽时该属性无效 |      |
-
 其他 Props 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
 
 #### `XNDataTable` Slots：

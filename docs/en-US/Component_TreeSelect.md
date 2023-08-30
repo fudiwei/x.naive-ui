@@ -40,10 +40,6 @@ For more details, please refer to the Demo.
 
 #### `XNTreeSelect` Props:
 
-| Name       | Type     | Default     | Description                               | Version |
-| :--------- | :------- | :---------- | :---------------------------------------- | :------ |
-| empty-text | `string` | `'No Data'` | Description when data of select is empty. |         |
-
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/tree-select#TreeSelect-Props).
 
 #### `XNTreeSelect` Slots:

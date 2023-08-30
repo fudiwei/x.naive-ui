@@ -49,9 +49,6 @@ const _props = (() => {
         options: {
             type: Array as PropType<TreeSelectOption[]>,
             default: () => []
-        },
-        emptyText: {
-            type: String as PropType<string>
         }
     } as const;
 })();
