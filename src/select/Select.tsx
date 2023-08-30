@@ -12,7 +12,7 @@ import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { getRestProps } from '../_utils/internal';
+import { rest } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
@@ -21,9 +21,9 @@ export type SelectOption = NSelectOption;
 export type SelectOptions = SelectOption[];
 
 const _props = (() => {
-    const rest = getRestProps(defaultNSelectProps, 'options');
+    const restProps = rest(defaultNSelectProps, 'options');
     return {
-        ...rest,
+        ...restProps,
         options: {
             type: Array as PropType<SelectOption[]>,
             default: () => []
@@ -60,7 +60,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = getRestProps(vProps, 'key', 'type', 'label', 'disabled', 'children');
+        const restProps = rest(vProps, 'key', 'type', 'label', 'disabled', 'children');
 
         if (vnode.type === ComponentSelectOption) {
             // 选项

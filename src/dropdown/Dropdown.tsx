@@ -11,14 +11,14 @@ import type {} from 'treemate';
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { getRestProps } from '../_utils/internal';
+import { rest } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
 
 const _props = (() => {
-    const rest = getRestProps(defaultNDropdownProps, 'keyField', 'labelField', 'options');
+    const restProps = rest(defaultNDropdownProps, 'keyField', 'labelField', 'options');
     return {
-        ...rest
+        ...restProps
     } as const;
 })();
 
@@ -32,7 +32,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = getRestProps(vProps, 'key', 'type', 'label', 'icon', 'disabled', 'children');
+        const restProps = rest(vProps, 'key', 'type', 'label', 'icon', 'disabled', 'children');
 
         if (vnode.type === ComponentDropdownItem) {
             // 菜单项

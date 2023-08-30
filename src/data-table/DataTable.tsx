@@ -23,7 +23,7 @@ import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVProp, getVPropAsBoolean, getVPropAsNumber, normalizeVProps } from '../_utils/v-prop';
-import { getRestProps } from '../_utils/internal';
+import { rest } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentDataTableColumn from './DataTableColumn';
 import ComponentDataTableSummaryRow from './DataTableSummaryRow';
@@ -75,9 +75,9 @@ export type DataTableRenderSummaryParams<T extends DataTableRowData = any> = {
 };
 
 const _propsMakeGeneric = <T extends NDataTableRowData = any>() => {
-    const rest = getRestProps(defaultNDataTableProps, 'columns');
+    const restProps = rest(defaultNDataTableProps, 'columns');
     return {
-        ...rest,
+        ...restProps,
         columns: {
             type: Array as PropType<DataTableColumn<T>[]>,
             default: () => [] as T[]
@@ -100,7 +100,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
         const vKey = vnode.key as string | number | null;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = getRestProps(vProps, 'key', 'children', 'render', 'renderExpand');
+        const restProps = rest(vProps, 'key', 'children', 'render', 'renderExpand');
 
         if (vnode.type === ComponentDataTableColumn) {
             if (__DEV__ && !vProps.type && vKey == null) {
@@ -169,7 +169,7 @@ function convertVNodesToSummaries<T extends NDataTableRowData>(
                     const vKey = child.key as string | number | null;
                     const vProps = child.props || {};
                     const vSlots = (child.children || {}) as Slots;
-                    const restProps = getRestProps(vProps, 'key', 'rowSpan', 'colSpan', 'value');
+                    const restProps = rest(vProps, 'key', 'rowSpan', 'colSpan', 'value');
 
                     if (child.type === ComponentDataTableSummaryCell) {
                         if (__DEV__ && vKey == null) {

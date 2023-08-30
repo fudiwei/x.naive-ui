@@ -3,13 +3,13 @@ import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
 import { mergeVSlots } from '../_utils/v-slot';
-import { getRestProps } from '../_utils/internal';
+import { rest } from '../_utils/internal';
 import ComponentEmptyIcon from './EmptyIcon';
 
 const _props = (() => {
-    const rest = getRestProps(defaultNEmptyProps, 'description');
+    const restProps = rest(defaultNEmptyProps, 'description');
     return {
-        ...rest,
+        ...restProps,
         description: {
             type: String as PropType<string>,
             default: '暂无数据'

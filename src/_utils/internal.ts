@@ -1,4 +1,4 @@
-﻿export const getRestProps = <T extends object, K extends keyof T>(
+﻿export const rest = <T extends object, K extends keyof T>(
     obj: T,
     ...excludes: (K | K[])[]
 ): Omit<T, K extends string[] ? K[number] : K> => {
@@ -11,10 +11,10 @@
         }
     });
 
-    const rest: Record<string, unknown> = {};
+    const temp: Record<string, any> = {};
     Object.entries(obj).forEach(([k, v]) => {
-        !keys.includes(k) && (rest[k] = v);
+        !keys.includes(k) && (temp[k] = v);
     });
 
-    return rest as T;
+    return temp as T;
 };

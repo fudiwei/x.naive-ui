@@ -10,7 +10,7 @@ import { defineComponent, ref, computed } from 'vue';
 import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
 
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
-import { getRestProps } from '../_utils/internal';
+import { rest } from '../_utils/internal';
 
 export type TreeOption = Omit<NTreeOption, 'prefix' | 'suffix'>;
 export type TreeOptions = TreeOption[];
@@ -37,9 +37,9 @@ export type TreeRenderSwitcherIconParams = {
 };
 
 const _props = (() => {
-    const rest = getRestProps(defaultNTreeProps, 'data');
+    const restProps = rest(defaultNTreeProps, 'data');
     return {
-        ...rest,
+        ...restProps,
         data: {
             type: Array as PropType<TreeOption[]>,
             default: () => []

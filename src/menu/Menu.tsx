@@ -11,14 +11,14 @@ import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { getRestProps } from '../_utils/internal';
+import { rest } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentMenuDivider from './MenuDivider';
 import ComponentMenuItem from './MenuItem';
 import ComponentMenuItemGroup from './MenuItemGroup';
 
 const _props = (() => {
-    const rest = getRestProps(
+    const restProps = rest(
         defaultNMenuProps,
         'childrenField',
         'disabledField',
@@ -31,7 +31,7 @@ const _props = (() => {
         'renderLabel'
     );
     return {
-        ...rest
+        ...restProps
     } as const;
 })();
 
@@ -46,7 +46,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = getRestProps(vProps, 'key', 'type', 'label', 'icon', 'extra', 'disabled', 'children');
+        const restProps = rest(vProps, 'key', 'type', 'label', 'icon', 'extra', 'disabled', 'children');
 
         if (vnode.type === ComponentMenuItem) {
             // 菜单项

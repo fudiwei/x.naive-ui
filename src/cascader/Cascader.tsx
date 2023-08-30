@@ -4,15 +4,15 @@ import { defineComponent, ref, computed } from 'vue';
 import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
 
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
-import { getRestProps } from '../_utils/internal';
+import { rest } from '../_utils/internal';
 
 export type CascaderOption = NCascaderOption;
 export type CascaderOptions = CascaderOption[];
 
 const _props = (() => {
-    const rest = getRestProps(defaultNCascaderProps, 'options');
+    const restProps = rest(defaultNCascaderProps, 'options');
     return {
-        ...rest,
+        ...restProps,
         options: {
             type: Array as PropType<CascaderOption[]>,
             default: () => []
