@@ -14,7 +14,6 @@ import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
-import ComponentEmpty from '../empty/Empty';
 import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
 
@@ -96,8 +95,7 @@ const ComponentSelect = defineComponent({
     name: 'XNSelect',
 
     components: {
-        NSelect,
-        XNEmpty: ComponentEmpty
+        NSelect
     },
 
     props: _props,
@@ -186,7 +184,6 @@ const ComponentSelect = defineComponent({
 
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                 'default': undefined,
                 'render-label': undefined,
                 'render-option': undefined,

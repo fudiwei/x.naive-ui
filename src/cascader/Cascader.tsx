@@ -5,7 +5,6 @@ import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
 
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
-import ComponentEmpty from '../empty/Empty';
 
 export type CascaderOption = NCascaderOption;
 export type CascaderOptions = CascaderOption[];
@@ -37,8 +36,7 @@ export default defineComponent({
     name: 'XNCascader',
 
     components: {
-        NCascader,
-        XNEmpty: ComponentEmpty
+        NCascader
     },
 
     props: _props,
@@ -77,8 +75,7 @@ export default defineComponent({
 
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
-                'not-found': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
+                'not-found': slots['empty'],
                 'render-label': undefined
             })
         );

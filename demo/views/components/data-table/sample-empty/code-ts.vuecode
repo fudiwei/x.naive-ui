@@ -37,5 +37,9 @@ export default defineComponent({
 </script>
 
 <template>
-    <x-n-data-table :columns="columns" :data="data" />
+    <x-n-data-table :columns="columns" :data="data">
+        <template #empty>
+            <x-n-empty />
+        </template>
+    </x-n-data-table>
 </template>

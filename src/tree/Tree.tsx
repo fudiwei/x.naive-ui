@@ -11,7 +11,6 @@ import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
 
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
-import ComponentEmpty from '../empty/Empty';
 
 export type TreeOption = Omit<NTreeOption, 'prefix' | 'suffix'>;
 export type TreeOptions = TreeOption[];
@@ -58,8 +57,7 @@ export default defineComponent({
     name: 'XNTree',
 
     components: {
-        NTree,
-        XNEmpty: ComponentEmpty
+        NTree
     },
 
     props: _props,
@@ -144,7 +142,6 @@ export default defineComponent({
 
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                 'render-prefix': undefined,
                 'render-suffix': undefined,
                 'render-label': undefined,

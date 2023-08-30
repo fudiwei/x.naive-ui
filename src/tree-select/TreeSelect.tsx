@@ -13,7 +13,6 @@ import { NTreeSelect, treeSelectProps as defaultNTreeSelectProps } from 'naive-u
 
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
-import ComponentEmpty from '../empty/Empty';
 
 export type TreeSelectOption = Omit<NTreeSelectOption, 'prefix' | 'suffix'>;
 export type TreeSelectOptions = TreeSelectOption[];
@@ -64,8 +63,7 @@ export default defineComponent({
     name: 'XNTreeSelect',
 
     components: {
-        NTreeSelect,
-        XNEmpty: ComponentEmpty
+        NTreeSelect
     },
 
     props: _props,
@@ -167,7 +165,6 @@ export default defineComponent({
 
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                 'render-prefix': undefined,
                 'render-suffix': undefined,
                 'render-label': undefined,

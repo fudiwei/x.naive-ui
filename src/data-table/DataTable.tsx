@@ -25,7 +25,6 @@ import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVProp, getVPropAsBoolean, getVPropAsNumber, normalizeVProps } from '../_utils/v-prop';
 import { getRestProps } from '../_utils/internal';
 import * as logger from '../_utils/logger';
-import ComponentEmpty from '../empty/Empty';
 import ComponentDataTableColumn from './DataTableColumn';
 import ComponentDataTableSummaryRow from './DataTableSummaryRow';
 import ComponentDataTableSummaryCell from './DataTableSummaryCell';
@@ -441,8 +440,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
         name: 'XNDataTable',
 
         components: {
-            NDataTable,
-            XNEmpty: ComponentEmpty
+            NDataTable
         },
 
         props: _props as ReturnType<typeof _propsMakeGeneric<T>>,
@@ -498,7 +496,6 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
 
             const nSlots = computed(() =>
                 mergeVSlots(slots, {
-                    'empty': slots['empty'] || (() => <ComponentEmpty description={props.emptyText} />),
                     'default': undefined,
                     'render-column': undefined,
                     'render-cell': undefined,
