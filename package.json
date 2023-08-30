@@ -30,10 +30,20 @@
     ],
     "exports": {
         ".": {
-            "default": "./es/index.mjs",
-            "import": "./es/index.mjs",
+            "default": "./dist/index.js",
             "require": "./lib/index.cjs",
+            "import": "./es/index.mjs",
             "types": "./es/index.d.ts"
+        },
+        "./unplugin": {
+            "default": "./dist/unplugin.js",
+            "require": "./lib/unplugin.cjs",
+            "import": "./es/unplugin.mjs",
+            "types": "./es/unplugin.d.ts"
+        },
+        "./*": {
+            "require": "./lib/*",
+            "import": "./es/*"
         }
     },
     "engines": {

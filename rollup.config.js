@@ -9,110 +9,200 @@ import rollupPluginReplace from '@rollup/plugin-replace';
 import rollupPluginTerser from '@rollup/plugin-terser';
 import rollupPluginVue from 'rollup-plugin-vue';
 
-const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+const EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
+const EXTERNALS = { 'vue': 'Vue', 'naive-ui': 'naive' };
+const OUTPUT_UMD = path.resolve('./dist');
+const OUTPUT_CJS = path.resolve('./lib');
+const OUTPUT_ESM = path.resolve('./es');
 
-const rollupBaseConfig = defineConfig({
-    input: path.resolve('./src/index.ts'),
+function configureMain() {
+    const baseConfig = (dev = true) => {
+        return defineConfig({
+            input: path.resolve('./src/index.ts'),
 
-    plugins: [
-        rollupPluginNodeResolve({
-            extensions: extensions
-        }),
+            plugins: [
+                rollupPluginNodeResolve({
+                    extensions: EXTENSIONS
+                }),
 
-        rollupPluginESBuild({
-            tsconfig: path.resolve('./tsconfig.json'),
-            target: 'ESNext',
-            sourceMap: true
-        }),
+                rollupPluginESBuild({
+                    tsconfig: path.resolve('./tsconfig.json'),
+                    target: 'ESNext',
+                    sourceMap: true
+                }),
 
-        rollupPluginVue(),
+                rollupPluginVue(),
 
-        rollupPluginBabel({
-            babelHelpers: 'bundled',
-            extensions: extensions,
-            exclude: /[\\/]node_modules[\\/]/
-        }),
+                rollupPluginBabel({
+                    babelHelpers: 'bundled',
+                    extensions: EXTENSIONS,
+                    exclude: /[\\/]node_modules[\\/]/
+                }),
 
-        rollupPluginCommonJS()
-    ],
+                rollupPluginCommonJS(),
 
-    external: ['vue', 'naive-ui'],
+                rollupPluginReplace({
+                    values: {
+                        '__DEV__': JSON.stringify(dev),
+                        'process.env.NODE_ENV': JSON.stringify(dev ? 'development' : 'production')
+                    },
+                    preventAssignment: true
+                })
+            ],
 
-    output: [
-        {
-            format: 'umd',
-            file: path.resolve('./dist/index.js'),
-            exports: 'named',
-            name: 'XNaiveUI',
-            globals: {
-                'vue': 'Vue',
-                'naive-ui': 'naive'
-            }
-        },
-        {
-            format: 'cjs',
-            dir: path.resolve('./lib'),
-            exports: 'named',
-            preserveModules: true,
-            entryFileNames: '[name].cjs'
-        },
-        {
-            format: 'es',
-            dir: path.resolve('./es'),
-            exports: undefined,
-            preserveModules: true,
-            entryFileNames: '[name].mjs'
-        }
-    ]
-});
+            external: Object.keys(EXTERNALS)
+        });
+    };
 
-const rollupDevBuildConfig = defineConfig({
-    plugins: [
-        rollupPluginReplace({
-            values: {
-                '__DEV__': JSON.stringify(true),
-                'process.env.NODE_ENV': JSON.stringify('development')
-            },
-            preventAssignment: true
-        })
-    ]
-});
+    return [
+        // dist/index.js
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'umd',
+                    file: path.resolve(OUTPUT_UMD, 'index.js'),
+                    exports: 'named',
+                    name: 'XNaiveUI',
+                    globals: EXTERNALS
+                }
+            })
+        ),
+        // dist/index.prod.js
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'umd',
+                    file: path.resolve(OUTPUT_UMD, 'index.prod.js'),
+                    exports: 'named',
+                    name: 'XNaiveUI',
+                    globals: EXTERNALS,
+                    plugins: [rollupPluginTerser()]
+                }
+            })
+        ),
+        // lib/index.cjs
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'cjs',
+                    dir: OUTPUT_CJS,
+                    exports: 'named',
+                    preserveModules: true,
+                    entryFileNames: '[name].cjs'
+                }
+            })
+        ),
+        // es/index.mjs
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'esm',
+                    dir: OUTPUT_ESM,
+                    exports: undefined,
+                    preserveModules: true,
+                    entryFileNames: '[name].mjs'
+                }
+            })
+        )
+    ];
+}
 
-const rollupProdBuildConfig = defineConfig({
-    plugins: [
-        rollupPluginReplace({
-            values: {
-                '__DEV__': JSON.stringify(false),
-                'process.env.NODE_ENV': JSON.stringify('production')
-            },
-            preventAssignment: true
-        }),
-        rollupPluginTerser()
-    ],
-    output: [
-        {
-            file: path.resolve('./dist/index.prod.js')
-        },
-        {},
-        {}
-    ]
-});
+function configureUnplugin() {
+    const baseConfig = (dev = true) => {
+        return defineConfig({
+            input: path.resolve('./src/unplugin.ts'),
 
-const combineArrayMerge = (target, source, options) => {
-    const destination = target.slice();
-    source.forEach((item, index) => {
-        if (typeof destination[index] === 'undefined') {
-            destination[index] = options.cloneUnlessOtherwiseSpecified(item, options);
-        } else if (options.isMergeableObject(item)) {
-            destination[index] = deepmerge(target[index], item, options);
-        } else if (target.indexOf(item) === -1) {
-            destination.push(item);
-        }
-    });
-    return destination;
-};
+            plugins: [
+                rollupPluginNodeResolve({
+                    extensions: EXTENSIONS
+                }),
 
-export default [
-    deepmerge(rollupBaseConfig, rollupProdBuildConfig, { arrayMerge: combineArrayMerge }),
-    deepmerge(rollupBaseConfig, rollupDevBuildConfig, { arrayMerge: combineArrayMerge })
-];
+                rollupPluginESBuild({
+                    tsconfig: path.resolve('./tsconfig.json'),
+                    target: 'ESNext',
+                    sourceMap: true
+                }),
+
+                rollupPluginBabel({
+                    babelHelpers: 'bundled',
+                    extensions: EXTENSIONS,
+                    exclude: /[\\/]node_modules[\\/]/
+                }),
+
+                rollupPluginCommonJS(),
+
+                rollupPluginReplace({
+                    values: {
+                        '__DEV__': JSON.stringify(dev),
+                        'process.env.NODE_ENV': JSON.stringify(dev ? 'development' : 'production')
+                    },
+                    preventAssignment: true
+                })
+            ],
+
+            external: Object.keys(EXTERNALS)
+        });
+    };
+
+    return [
+        // dist/unplugin.js
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'umd',
+                    file: path.resolve(OUTPUT_UMD, 'unplugin.js'),
+                    exports: 'named',
+                    name: 'XNaiveUIUnplugin',
+                    globals: EXTERNALS
+                }
+            })
+        ),
+        // dist/unplugin.prod.js
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'umd',
+                    file: path.resolve(OUTPUT_UMD, 'unplugin.prod.js'),
+                    exports: 'named',
+                    name: 'XNaiveUIUnplugin',
+                    globals: EXTERNALS,
+                    plugins: [rollupPluginTerser()]
+                }
+            })
+        ),
+        // lib/unplugin.cjs
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'cjs',
+                    dir: OUTPUT_CJS,
+                    exports: 'named',
+                    preserveModules: true,
+                    entryFileNames: '[name].cjs'
+                }
+            })
+        ),
+        // es/unplugin.mjs
+        deepmerge(
+            baseConfig(),
+            defineConfig({
+                output: {
+                    format: 'esm',
+                    dir: OUTPUT_ESM,
+                    exports: undefined,
+                    preserveModules: true,
+                    entryFileNames: '[name].mjs'
+                }
+            })
+        )
+    ];
+}
+
+export default [...configureMain(), ...configureUnplugin()];
