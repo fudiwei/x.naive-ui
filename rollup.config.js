@@ -70,7 +70,7 @@ function configureMain() {
         ),
         // dist/index.prod.js
         deepmerge(
-            baseConfig(),
+            baseConfig(false),
             defineConfig({
                 output: {
                     format: 'umd',
@@ -164,7 +164,7 @@ function configureUnplugin() {
         ),
         // dist/unplugin.prod.js
         deepmerge(
-            baseConfig(),
+            baseConfig(false),
             defineConfig({
                 output: {
                     format: 'umd',
