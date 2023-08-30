@@ -59,6 +59,29 @@ app.use(XNDataTable);
 
 ---
 
+### Use `unplugin-vue-components`
+
+If you are using `unplugin-vue-components`, you can automatically import components on demand by configuring plugins in `vite.config.ts`.
+
+```js
+// vite.config.ts
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import unpluginVueComponents from 'unplugin-vue-components/vite';
+import { XNaiveUIResolver } from '@skit/x.naive-ui/unplugin';
+
+export default defineConfig({
+    plugins: [
+        vue(),
+        unpluginVueComponents({
+            resolvers: [XNaiveUIResolver()]
+        })
+    ]
+});
+```
+
+---
+
 ### Volar Support
 
 If you are using Volar, you can specify global component types by configuring `compilerOptions.types` in `tsconfig.json`.

@@ -59,6 +59,29 @@ app.use(XNDataTable);
 
 ---
 
+### 使用 `unplugin-vue-components` 自动按需加载
+
+如果你在使用 `unplugin-vue-components` 插件，那么可以在 `vite.config.ts` 中配置插件来按需自动加载组件。
+
+```js
+// vite.config.ts
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import unpluginVueComponents from 'unplugin-vue-components/vite';
+import { XNaiveUIResolver } from '@skit/x.naive-ui/unplugin';
+
+export default defineConfig({
+    plugins: [
+        vue(),
+        unpluginVueComponents({
+            resolvers: [XNaiveUIResolver()]
+        })
+    ]
+});
+```
+
+---
+
 ### Volar 支持
 
 如果你在使用 Volar，那么可以在 `tsconfig.json` 中配置 `compilerOptions.types` 来指定全局组件类型。
