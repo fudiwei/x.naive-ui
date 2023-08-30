@@ -1,7 +1,6 @@
 ﻿import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
-import { useLocale } from 'naive-ui/es/_mixins';
 
 import { mergeVSlots } from '../_utils/v-slot';
 import { getRestProps } from '../_utils/internal';
@@ -11,7 +10,8 @@ const _props = (() => {
     return {
         ...rest,
         description: {
-            type: String as PropType<string>
+            type: String as PropType<string>,
+            default: '暂无数据'
         }
     } as const;
 })();
@@ -35,13 +35,11 @@ export default defineComponent({
     }>,
 
     setup(props, { attrs, slots, expose }) {
-        const { localeRef: nLocale } = useLocale('Empty');
-
         const nSlots = computed(() =>
             mergeVSlots(slots, {
                 default: () => (
                     <div style="font-size: 0.75rem; line-height: 1rem;">
-                        {slots['default']?.() || (props.description ?? nLocale.value.description)}
+                        {slots['default']?.() || props.description}
                     </div>
                 ),
 
