@@ -11,6 +11,7 @@ import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
 import { resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import { isVShowFalse } from '../_utils/v-dir';
 import { objectOmitter } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentMenuDivider from './MenuDivider';
@@ -46,7 +47,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = objectOmitter(vProps, 'type', 'label', 'icon', 'extra', 'disabled', 'children');
+        const restProps = objectOmitter(vProps, 'type', 'label', 'icon', 'extra', 'show', 'disabled', 'children');
 
         if (vnode.type === ComponentMenuItem) {
             // 菜单项
@@ -54,6 +55,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                 ...normalizeVProps(restProps),
                 key: vKey ?? `__X_MENU_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
+                show: !isVShowFalse(vnode),
                 disabled: getVPropAsBoolean(vProps, 'disabled'),
                 label: resolveVSlot(vSlots['default']) || vProps.label,
                 icon: resolveVSlot(vSlots['icon']),
@@ -67,6 +69,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                 type: 'group',
                 key: vKey ?? `__X_MENU_GROUP_${index}`,
                 props: restProps as HTMLAttributes,
+                show: !isVShowFalse(vnode),
                 label: resolveVSlot(vSlots['label']) || vProps.label,
                 icon: resolveVSlot(vSlots['icon']),
                 children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
@@ -77,7 +80,8 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
                 ...normalizeVProps(restProps),
                 type: 'divider',
                 key: vnode.key ?? `__X_MENU_DIVIDER_${index}`,
-                props: restProps as HTMLAttributes
+                props: restProps as HTMLAttributes,
+                show: !isVShowFalse(vnode)
             } as NMenuDividerOption);
         } else if (__DEV__ && !isEmptyVNode(vnode)) {
             logger.warning(

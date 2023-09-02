@@ -11,6 +11,7 @@ import type {} from 'treemate';
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
 import { resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import { isVShowFalse } from '../_utils/v-dir';
 import { objectOmitter } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
@@ -32,7 +33,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = objectOmitter(vProps, 'type', 'label', 'icon', 'disabled', 'children');
+        const restProps = objectOmitter(vProps, 'type', 'label', 'icon', 'show', 'disabled', 'children');
 
         if (vnode.type === ComponentDropdownItem) {
             // 菜单项
@@ -40,8 +41,9 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
                 ...normalizeVProps(restProps),
                 key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
+                show: !isVShowFalse(vnode),
                 disabled: getVPropAsBoolean(vProps, 'disabled'),
-                label: resolveVSlot(vSlots['default']) || vProps.label,
+                label: resolveVSlot(vSlots['default']) || (vProps.label as string),
                 icon: resolveVSlot(vSlots['icon']),
                 children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
             } as NDropdownOption);
