@@ -10,9 +10,9 @@ import { defineComponent, ref, computed } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
-import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { rest } from '../_utils/internal';
+import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import { objectOmitter } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
@@ -21,7 +21,7 @@ export type SelectOption = NSelectOption;
 export type SelectOptions = SelectOption[];
 
 const _props = (() => {
-    const restProps = rest(defaultNSelectProps, 'options');
+    const restProps = objectOmitter(defaultNSelectProps, 'options');
     return {
         ...restProps,
         options: {
@@ -57,13 +57,13 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = rest(vProps, 'key', 'type', 'label', 'disabled', 'children');
+        const restProps = objectOmitter(vProps, 'type', 'label', 'disabled', 'children');
 
         if (vnode.type === ComponentSelectOption) {
             // 选项
             temp.push({
                 ...normalizeVProps(restProps),
-                label: getVSlotRender(vSlots['default']) || vProps.label,
+                label: resolveVSlot(vSlots['default']) || vProps.label,
                 value: vProps.value,
                 disabled: getVPropAsBoolean(vProps, 'disabled')
             } as SelectOption);
@@ -73,7 +73,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
                 ...normalizeVProps(restProps),
                 type: 'group',
                 key: vKey ?? `__X_SELECT_GROUP_${index}`,
-                label: getVSlotRender(vSlots['label']) || vProps.label,
+                label: resolveVSlot(vSlots['label']) || vProps.label,
                 children: convertVNodesToOptions(vSlots['default']?.() || [])
             } as SelectOption);
         } else if (__DEV__ && !isEmptyVNode(vnode)) {

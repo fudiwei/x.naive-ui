@@ -9,7 +9,8 @@ import type {
 import type {
     RowData as NDataTableRowData,
     TableColumnGroup as NDataTableGroupColumn,
-    SummaryRowData as NDataTableSummaryRowData,
+    SummaryRowData as NDataTableSummaryRow,
+    SummaryCell as NDataTableSummaryCell,
     SortOrder as NDataTableSortOrders,
     RenderFilter as NDataTableRenderFilter,
     RenderFilterIcon as NDataTableRenderFilterIcon,
@@ -21,9 +22,9 @@ import { defineComponent, ref, computed } from 'vue';
 import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
-import { getVSlot, getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVProp, getVPropAsBoolean, getVPropAsNumber, normalizeVProps } from '../_utils/v-prop';
-import { rest } from '../_utils/internal';
+import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import { objectOmitter } from '../_utils/internal';
 import * as logger from '../_utils/logger';
 import ComponentDataTableColumn from './DataTableColumn';
 import ComponentDataTableSummaryRow from './DataTableSummaryRow';
@@ -75,7 +76,7 @@ export type DataTableRenderSummaryParams<T extends DataTableRowData = any> = {
 };
 
 const _propsMakeGeneric = <T extends DataTableRowData = any>() => {
-    const restProps = rest(defaultNDataTableProps, 'columns');
+    const restProps = objectOmitter(defaultNDataTableProps, 'columns');
     return {
         ...restProps,
         columns: {
@@ -99,7 +100,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
         const vKey = vnode.key as string | number | null;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = rest(vProps, 'key', 'children', 'render', 'renderExpand');
+        const restProps = objectOmitter(vProps, 'children', 'render', 'renderExpand');
 
         if (vnode.type === ComponentDataTableColumn) {
             if (__DEV__ && !vProps.type && vKey == null) {
@@ -148,53 +149,26 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
     return temp;
 }
 
-function convertVNodesToSummaries<T extends NDataTableRowData>(
+function convertVNodesToSummaryRows<T extends NDataTableRowData>(
     vnodes: VNode[],
     options: { pageData: T[] }
-): NDataTableSummaryRowData[] {
-    const temp = [] as NDataTableSummaryRowData[];
+): NDataTableSummaryRow[] {
+    const temp = [] as NDataTableSummaryRow[];
 
     vnodes = flattenVNodeChildren(vnodes) as VNode[];
     vnodes.forEach((vnode) => {
         const vSlots = (vnode.children || {}) as Slots;
 
         if (vnode.type === ComponentDataTableSummaryRow) {
+            const summaryRow: NDataTableSummaryRow = {};
             const { pageData } = options;
-            const summary: NDataTableSummaryRowData = {};
 
             if (vSlots['default']) {
                 const children = flattenVNodeChildren(vSlots['default']({ pageData })) as VNode[];
-                children.forEach((child) => {
-                    const vKey = child.key as string | number | null;
-                    const vProps = child.props || {};
-                    const vSlots = (child.children || {}) as Slots;
-                    const restProps = rest(vProps, 'key', 'rowSpan', 'colSpan', 'value');
-
-                    if (child.type === ComponentDataTableSummaryCell) {
-                        if (__DEV__ && vKey == null) {
-                            logger.warning(
-                                'Each {0} should have a `key` prop related to a column.',
-                                ComponentDataTableSummaryCell.name
-                            );
-                        }
-
-                        summary[vKey as string] = {
-                            ...normalizeVProps(restProps),
-                            rowSpan: getVPropAsNumber(vProps, 'row-span'),
-                            colSpan: getVPropAsNumber(vProps, 'col-span'),
-                            value: vSlots['default']?.({ pageData }) || vProps.value
-                        };
-                    } else if (__DEV__ && !isEmptyVNode(child)) {
-                        logger.warning(
-                            'Each child component in {0} should be {1}.',
-                            ComponentDataTableSummaryRow.name,
-                            ComponentDataTableSummaryCell.name
-                        );
-                    }
-                });
+                convertVNodesToSummaryCells(children, { summaryRow, pageData });
             }
 
-            temp.push(summary);
+            temp.push(summaryRow);
         } else if (__DEV__ && !isEmptyVNode(vnode)) {
             logger.warning(
                 'Each child component in `summary` slot of {0} should be {1}.',
@@ -207,30 +181,86 @@ function convertVNodesToSummaries<T extends NDataTableRowData>(
     return temp;
 }
 
+function convertVNodesToSummaryCells<T extends NDataTableRowData>(
+    vnodes: VNode[],
+    options: { summaryRow: NDataTableSummaryRow; pageData: T[] }
+): NDataTableSummaryCell[] {
+    const temp = [] as NDataTableSummaryCell[];
+
+    // vnodes = flattenVNodeChildren(vnodes) as VNode[];
+    vnodes.forEach((vnode) => {
+        const vKey = vnode.key as string | number | null;
+        const vProps = vnode.props || {};
+        const vSlots = (vnode.children || {}) as Slots;
+        const restProps = objectOmitter(vProps, 'rowSpan', 'colSpan', 'value');
+
+        if (vnode.type === ComponentDataTableSummaryCell) {
+            if (__DEV__ && vKey == null) {
+                logger.warning(
+                    'Each {0} should have a `key` prop related to a column.',
+                    ComponentDataTableSummaryCell.name
+                );
+            }
+
+            const { summaryRow, pageData } = options;
+            summaryRow[vKey as string] = {
+                ...normalizeVProps(restProps),
+                rowSpan: getVPropAsNumber(vProps, 'row-span'),
+                colSpan: getVPropAsNumber(vProps, 'col-span'),
+                value: vSlots['default']?.({ pageData }) ?? vProps.value
+            };
+        } else if (__DEV__ && !isEmptyVNode(vnode)) {
+            logger.warning(
+                'Each child component in {0} should be {1}.',
+                ComponentDataTableSummaryRow.name,
+                ComponentDataTableSummaryCell.name
+            );
+        }
+    });
+
+    return temp;
+}
+
 function populateColumnRenders<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ): NDataTableColumn<T> {
-    (column as NDataTableBaseColumn<T>).title = renderTableColumn<T>(column, ctxSlots, ctxScoped);
-    (column as NDataTableBaseColumn<T>).render = renderTableCell<T>(column, ctxSlots, ctxScoped);
-    (column as NDataTableExpandColumn<T>).renderExpand = renderTableExpand<T>(column, ctxSlots, ctxScoped)!;
-    (column as NDataTableBaseColumn<T>).renderFilter = renderTableFilter<T>(column, ctxSlots, ctxScoped);
-    (column as NDataTableBaseColumn<T>).renderFilterIcon = renderTableFilterIcon<T>(column, ctxSlots, ctxScoped);
-    (column as NDataTableBaseColumn<T>).renderFilterMenu = renderTableFilterMenu<T>(column, ctxSlots, ctxScoped);
-    (column as NDataTableBaseColumn<T>).renderSorter = renderTableSorter<T>(column, ctxSlots, ctxScoped);
-    (column as NDataTableBaseColumn<T>).renderSorterIcon = renderTableSorterIcon<T>(column, ctxSlots, ctxScoped);
+    (column as NDataTableBaseColumn<T>).title = resolveTableColumnRender<T>(column, ctxSlots, ctxSingleColumn);
+    (column as NDataTableBaseColumn<T>).render = resolveTableCellRender<T>(column, ctxSlots, ctxSingleColumn);
+    (column as NDataTableExpandColumn<T>).renderExpand = resolveTableExpandRender<T>(
+        column,
+        ctxSlots,
+        ctxSingleColumn
+    )!;
+    (column as NDataTableBaseColumn<T>).renderFilter = resolveTableFilterRender<T>(column, ctxSlots, ctxSingleColumn);
+    (column as NDataTableBaseColumn<T>).renderFilterIcon = resolveTableFilterIconRender<T>(
+        column,
+        ctxSlots,
+        ctxSingleColumn
+    );
+    (column as NDataTableBaseColumn<T>).renderFilterMenu = resolveTableFilterMenuRender<T>(
+        column,
+        ctxSlots,
+        ctxSingleColumn
+    );
+    (column as NDataTableBaseColumn<T>).renderSorter = resolveTableSorterRender<T>(column, ctxSlots, ctxSingleColumn);
+    (column as NDataTableBaseColumn<T>).renderSorterIcon = resolveTableSorterIconRender<T>(
+        column,
+        ctxSlots,
+        ctxSingleColumn
+    );
     return column;
 }
 
-function renderTableColumn<T extends NDataTableRowData>(
+function resolveTableColumnRender<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).title;
-    if (ctxScoped) {
-        return getVSlotRender(ctxSlots['title']) || fallback;
+    if (ctxSingleColumn) {
+        return resolveVSlot(ctxSlots['title']) || fallback;
     } else {
         return () => {
             const slot = getVSlot(ctxSlots, 'render-column');
@@ -249,7 +279,11 @@ function renderTableColumn<T extends NDataTableRowData>(
     }
 }
 
-function renderTableCell<T extends NDataTableRowData>(column: NDataTableColumn<T>, ctxSlots: Slots, ctxScoped = false) {
+function resolveTableCellRender<T extends NDataTableRowData>(
+    column: NDataTableColumn<T>,
+    ctxSlots: Slots,
+    ctxSingleColumn = false
+) {
     const fallback = (column as NDataTableBaseColumn<T>).render;
     return (rowData: T, rowIndex: number) => {
         const slot = getVSlot(ctxSlots, 'render-cell');
@@ -261,7 +295,7 @@ function renderTableCell<T extends NDataTableRowData>(column: NDataTableColumn<T
                 value: rowData?.[(column as NDataTableBaseColumn<T>).key]
             };
             const vnodes = slot(params);
-            if (ctxScoped || !isEmptyVNode(vnodes)) {
+            if (ctxSingleColumn || !isEmptyVNode(vnodes)) {
                 return vnodes;
             }
         }
@@ -274,10 +308,10 @@ function renderTableCell<T extends NDataTableRowData>(column: NDataTableColumn<T
     };
 }
 
-function renderTableExpand<T extends NDataTableRowData>(
+function resolveTableExpandRender<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ) {
     if ('type' in column && column.type !== 'expand') {
         return;
@@ -294,7 +328,7 @@ function renderTableExpand<T extends NDataTableRowData>(
                         rowIndex: rowIndex
                     };
                     const vnodes = slot(params);
-                    if (ctxScoped || !isEmptyVNode(vnodes)) {
+                    if (ctxSingleColumn || !isEmptyVNode(vnodes)) {
                         return vnodes;
                     }
                 }
@@ -307,14 +341,14 @@ function renderTableExpand<T extends NDataTableRowData>(
     );
 }
 
-function renderTableFilter<T extends NDataTableRowData>(
+function resolveTableFilterRender<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).renderFilter;
     const slot = getVSlot(ctxSlots, 'render-filter');
-    if (!slot && ctxScoped) {
+    if (!slot && ctxSingleColumn) {
         return fallback;
     }
 
@@ -325,7 +359,7 @@ function renderTableFilter<T extends NDataTableRowData>(
             show: e.show
         };
         const vnodes = slot?.(params);
-        if (ctxScoped || !isEmptyVNode(vnodes)) {
+        if (ctxSingleColumn || !isEmptyVNode(vnodes)) {
             return vnodes;
         }
 
@@ -333,14 +367,14 @@ function renderTableFilter<T extends NDataTableRowData>(
     };
 }
 
-function renderTableFilterIcon<T extends NDataTableRowData>(
+function resolveTableFilterIconRender<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).renderFilterIcon;
     const slot = getVSlot(ctxSlots, 'render-filter-icon');
-    if (!slot && ctxScoped) {
+    if (!slot && ctxSingleColumn) {
         return fallback;
     }
 
@@ -351,7 +385,7 @@ function renderTableFilterIcon<T extends NDataTableRowData>(
             show: e.show
         };
         const vnodes = slot?.(params);
-        if (ctxScoped || !isEmptyVNode(vnodes)) {
+        if (ctxSingleColumn || !isEmptyVNode(vnodes)) {
             return vnodes;
         }
 
@@ -359,14 +393,14 @@ function renderTableFilterIcon<T extends NDataTableRowData>(
     };
 }
 
-function renderTableFilterMenu<T extends NDataTableRowData>(
+function resolveTableFilterMenuRender<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).renderFilterMenu;
     const slot = getVSlot(ctxSlots, 'render-filter-menu');
-    if (!slot && ctxScoped) {
+    if (!slot && ctxSingleColumn) {
         return fallback;
     }
 
@@ -376,7 +410,7 @@ function renderTableFilterMenu<T extends NDataTableRowData>(
             hide: e.hide
         };
         const vnodes = slot?.(params);
-        if (ctxScoped || !isEmptyVNode(vnodes)) {
+        if (ctxSingleColumn || !isEmptyVNode(vnodes)) {
             return vnodes;
         }
 
@@ -384,14 +418,14 @@ function renderTableFilterMenu<T extends NDataTableRowData>(
     };
 }
 
-function renderTableSorter<T extends NDataTableRowData>(
+function resolveTableSorterRender<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).renderSorter;
     const slot = getVSlot(ctxSlots, 'render-sorter');
-    if (!slot && ctxScoped) {
+    if (!slot && ctxSingleColumn) {
         return fallback;
     }
 
@@ -401,7 +435,7 @@ function renderTableSorter<T extends NDataTableRowData>(
             order: e.order
         };
         const vnodes = slot?.(params);
-        if (ctxScoped || !isEmptyVNode(vnodes)) {
+        if (ctxSingleColumn || !isEmptyVNode(vnodes)) {
             return vnodes;
         }
 
@@ -409,14 +443,14 @@ function renderTableSorter<T extends NDataTableRowData>(
     };
 }
 
-function renderTableSorterIcon<T extends NDataTableRowData>(
+function resolveTableSorterIconRender<T extends NDataTableRowData>(
     column: NDataTableColumn<T>,
     ctxSlots: Slots,
-    ctxScoped = false
+    ctxSingleColumn = false
 ) {
     const fallback = (column as NDataTableBaseColumn<T>).renderSorterIcon;
     const slot = getVSlot(ctxSlots, 'render-sorter-icon');
-    if (!slot && ctxScoped) {
+    if (!slot && ctxSingleColumn) {
         return fallback;
     }
 
@@ -426,7 +460,7 @@ function renderTableSorterIcon<T extends NDataTableRowData>(
             order: e.order
         };
         const vnodes = slot?.(params);
-        if (ctxScoped || !isEmptyVNode(vnodes)) {
+        if (ctxSingleColumn || !isEmptyVNode(vnodes)) {
             return vnodes;
         }
 
@@ -490,7 +524,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
                     return props.summary;
                 }
 
-                return (pageData: T[]) => convertVNodesToSummaries(vnodes, { pageData });
+                return (pageData: T[]) => convertVNodesToSummaryRows(vnodes, { pageData });
             });
 
             const nSlots = computed(() =>

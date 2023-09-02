@@ -16,7 +16,7 @@ export const getVSlot = <T extends VSlots, K extends keyof T>(slots: T, name: K)
     return slots[name] ?? slots[camelize(name as string)];
 };
 
-export const getVSlotRender = <T = any>(slot?: VSlot<T>, ...args: any[]): VSlotRender | undefined => {
+export const resolveVSlot = <T = any>(slot?: VSlot<T>, ...args: any[]): VSlotRender | undefined => {
     if (typeof slot === 'function') {
         let vnode: VNode | VNode[] = slot(...(args as any));
         if (Array.isArray(vnode) && vnode.length === 1) {
@@ -36,11 +36,12 @@ export const getVSlotRender = <T = any>(slot?: VSlot<T>, ...args: any[]): VSlotR
     }
 };
 
-export const mergeVSlots = (...args: VSlots[]): VSlots => {
-    const temp = Object.assign({}, ...args);
+export const mergeVSlots = (...slots: VSlots[]): VSlots => {
+    const temp = Object.assign({}, ...slots);
     Object.keys(temp).forEach((k) => {
         if (temp[k] == null) {
             delete temp[k];
+            delete temp[camelize(k)];
         }
     });
     return temp;

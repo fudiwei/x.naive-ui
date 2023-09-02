@@ -3,11 +3,11 @@ import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
 import { mergeVSlots } from '../_utils/v-slot';
-import { rest } from '../_utils/internal';
+import { objectOmitter } from '../_utils/internal';
 import ComponentEmptyIcon from './EmptyIcon';
 
 const _props = (() => {
-    const restProps = rest(defaultNEmptyProps, 'description');
+    const restProps = objectOmitter(defaultNEmptyProps, 'description');
     return {
         ...restProps,
         description: {

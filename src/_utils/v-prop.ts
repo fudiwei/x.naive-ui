@@ -34,7 +34,7 @@ export const getVPropAsNumber = <T extends object, K extends keyof T>(props: T, 
     return r;
 };
 
-export const mergeVProps = mergeProps;
+export { mergeProps as mergeVProps };
 
 export const normalizeVProps = (props: any): object => {
     const temp = {} as any;

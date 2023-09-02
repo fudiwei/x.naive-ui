@@ -9,14 +9,14 @@ import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 import type {} from 'treemate';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
-import { getVSlotRender, mergeVSlots } from '../_utils/v-slot';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { rest } from '../_utils/internal';
+import { resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import { objectOmitter } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
 
 const _props = (() => {
-    const restProps = rest(defaultNDropdownProps, 'keyField', 'labelField', 'options');
+    const restProps = objectOmitter(defaultNDropdownProps, 'keyField', 'labelField', 'options');
     return {
         ...restProps
     } as const;
@@ -32,7 +32,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
         const vKey = vnode.key;
         const vProps = vnode.props || {};
         const vSlots = (vnode.children || {}) as Slots;
-        const restProps = rest(vProps, 'key', 'type', 'label', 'icon', 'disabled', 'children');
+        const restProps = objectOmitter(vProps, 'type', 'label', 'icon', 'disabled', 'children');
 
         if (vnode.type === ComponentDropdownItem) {
             // 菜单项
@@ -41,8 +41,8 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
                 key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
                 props: restProps as HTMLAttributes,
                 disabled: getVPropAsBoolean(vProps, 'disabled'),
-                label: getVSlotRender(vSlots['default']) || vProps.label,
-                icon: getVSlotRender(vSlots['icon']),
+                label: resolveVSlot(vSlots['default']) || vProps.label,
+                icon: resolveVSlot(vSlots['icon']),
                 children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
             } as NDropdownOption);
         } else if (vnode.type === ComponentDropdownDivider) {

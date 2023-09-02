@@ -12,7 +12,7 @@ import { defineComponent, ref, computed } from 'vue';
 import { NTreeSelect, treeSelectProps as defaultNTreeSelectProps } from 'naive-ui';
 
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
-import { rest } from '../_utils/internal';
+import { objectOmitter } from '../_utils/internal';
 
 export type TreeSelectOption = Omit<NTreeSelectOption, 'prefix' | 'suffix'>;
 export type TreeSelectOptions = TreeSelectOption[];
@@ -43,7 +43,7 @@ export type TreeSelectRenderTagParams = {
 };
 
 const _props = (() => {
-    const restProps = rest(defaultNTreeSelectProps, 'options');
+    const restProps = objectOmitter(defaultNTreeSelectProps, 'options');
     return {
         ...restProps,
         options: {

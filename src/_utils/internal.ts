@@ -1,4 +1,4 @@
-﻿export const rest = <T extends object, K extends keyof T>(
+﻿export const objectOmitter = <T extends object, K extends keyof T>(
     obj: T,
     ...excludes: (K | K[])[]
 ): Omit<T, K extends string[] ? K[number] : K> => {
