@@ -50,6 +50,7 @@ export type MenuRenderExtraParams = {
 export type MenuRenderIconParams = {
     option: MenuOption;
 };
+export type MenuRenderExpandIconParams = MenuRenderIconParams;
 
 function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
     const temp = [] as NMenuOption[];
@@ -121,6 +122,7 @@ const ComponentMenu = defineComponent({
         'render-label': MenuRenderLabelParams;
         'render-extra': MenuRenderExtraParams;
         'render-icon': MenuRenderIconParams;
+        'render-expand-icon': MenuRenderExpandIconParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
@@ -183,12 +185,26 @@ const ComponentMenu = defineComponent({
             };
         });
 
+        const nRenderExpandIcon = computed(() => {
+            const slot = getVSlot(slots, 'render-expand-icon');
+            if (!slot) {
+                return props.expandIcon;
+            }
+
+            return (option: NMenuOption) => {
+                return slot({
+                    option: option
+                });
+            };
+        });
+
         const nSlots = computed(() =>
             mergeVSlots(slots, {
                 'default': undefined,
                 'render-label': undefined,
                 'render-extra': undefined,
-                'render-icon': undefined
+                'render-icon': undefined,
+                'render-expand-icon': undefined
             })
         );
 
@@ -206,6 +222,7 @@ const ComponentMenu = defineComponent({
                 renderLabel={nRenderLabel.value}
                 renderExtra={nRenderExtra.value}
                 renderIcon={nRenderIcon.value}
+                expandIcon={nRenderExpandIcon.value}
                 v-slots={nSlots.value}
             />
         );

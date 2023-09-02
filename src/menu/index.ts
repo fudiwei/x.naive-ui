@@ -12,7 +12,8 @@ export type {
     MenuOptions,
     MenuRenderLabelParams,
     MenuRenderExtraParams,
-    MenuRenderIconParams
+    MenuRenderIconParams,
+    MenuRenderExpandIconParams
 } from './Menu';
 export type { MenuItemProps } from './MenuItem';
 export type { MenuItemGroupProps } from './MenuItemGroup';
