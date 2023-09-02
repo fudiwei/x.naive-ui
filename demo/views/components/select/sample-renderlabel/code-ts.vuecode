@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4';
+import { MusicalNoteOutline } from '@vicons/ionicons5';
 import type { SelectOptions, SelectRenderLabelParams } from '@skit/x.naive-ui';
 
 export default defineComponent({
@@ -142,7 +142,7 @@ export default defineComponent({
             </template>
             <template v-else>
                 <n-icon style="vertical-align: -0.15em; margin-right: 4px">
-                    <MusicIcon />
+                    <MusicalNoteOutline />
                 </n-icon>
                 <span :style="{ color: selected ? 'green' : undefined }">
                     {{ option.label }}

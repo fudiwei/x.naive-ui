@@ -21,7 +21,7 @@ export default defineComponent({
         </template>
 
         <div style="display: flex; align-items: center; padding: 8px 12px">
-            <n-avatar style="margin-right: 12px" src="https://07akioni.oss-cn-beijing.aliyuncs.com/demo1.JPG" round />
+            <n-avatar style="margin-right: 12px" src="../../../../assets/images/avatar.png" round />
             <div>
                 <div>
                     <n-text :depth="2">打工仔</n-text>

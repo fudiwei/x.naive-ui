@@ -2,6 +2,9 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "paths": {
+            "~@/*": [
+                "../demo/*"
+            ],
             "@skit/x.naive-ui": [
                 "../src"
             ]

@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4';
+import { MusicalNoteOutline } from '@vicons/ionicons5';
 import type { CascaderOption, CascaderRenderLabelParams } from '@skit/x.naive-ui';
 
 function createOptions(depth = 3, iterator = 1, prefix = '') {
@@ -55,7 +55,7 @@ export default defineComponent({
     >
         <template #render-label="{ option, checked }: CascaderRenderLabelParams">
             <n-icon style="vertical-align: -0.15em; margin-right: 4px">
-                <MusicIcon />
+                <MusicalNoteOutline />
             </n-icon>
             <span :style="{ color: checked ? 'green' : undefined }">
                 {{ 'prefix ' + option.label }}

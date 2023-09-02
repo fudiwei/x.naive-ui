@@ -1,6 +1,6 @@
 ﻿<script>
 import { defineComponent } from 'vue';
-import { PersonCircleOutline as UserIcon, Pencil as EditIcon, LogOutOutline as LogoutIcon } from '@vicons/ionicons5';
+import { PersonCircleOutline, PencilOutline, LogOutOutline } from '@vicons/ionicons5';
 
 export default defineComponent({});
 </script>
@@ -14,7 +14,7 @@ export default defineComponent({});
         <x-n-dropdown-item key="profile" @click="() => console.log('profile')">
             <template #icon>
                 <n-icon>
-                    <UserIcon />
+                    <PersonCircleOutline />
                 </n-icon>
             </template>
             用户资料
@@ -22,7 +22,7 @@ export default defineComponent({});
         <x-n-dropdown-item key="editProfile" @click="() => console.log('editProfile')">
             <template #icon>
                 <n-icon>
-                    <EditIcon />
+                    <PencilOutline />
                 </n-icon>
             </template>
             编辑用户资料
@@ -30,7 +30,7 @@ export default defineComponent({});
         <x-n-dropdown-item key="logout" @click="() => console.log('logout')">
             <template #icon>
                 <n-icon>
-                    <LogoutIcon />
+                    <LogOutOutline />
                 </n-icon>
             </template>
             退出登录

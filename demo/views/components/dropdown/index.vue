@@ -13,6 +13,9 @@ import SampleCascadeCodeTs from './sample-cascade/code-ts.vuecode';
 import SamplePureContentDemo from './sample-purecontent/demo.vue';
 import SamplePureContentCodeJs from './sample-purecontent/code-js.vuecode';
 import SamplePureContentCodeTs from './sample-purecontent/code-ts.vuecode';
+import SampleBatchRenderDemo from './sample-batchrender/demo.vue';
+import SampleBatchRenderCodeJs from './sample-batchrender/code-js.vuecode';
+import SampleBatchRenderCodeTs from './sample-batchrender/code-ts.vuecode';
 
 const $encode = window.encodeURIComponent;
 </script>
@@ -35,6 +38,14 @@ const $encode = window.encodeURIComponent;
             {
                 title: '纯渲染的内容',
                 anchor: 'pure-content'
+            },
+            {
+                title: '纯渲染的内容',
+                anchor: 'pure-content'
+            },
+            {
+                title: '批量渲染',
+                anchor: 'batch-render'
             }
         ]"
     >
@@ -100,26 +111,6 @@ const $encode = window.encodeURIComponent;
             </DemoCard>
 
             <DemoCard
-                title="Cascade / 多级"
-                anchor="cascade"
-                :js-code="$encode(SampleCascadeCodeJs)"
-                :ts-code="$encode(SampleCascadeCodeTs)"
-            >
-                <template #content>
-                    <p>
-                        以模板形式改写 Naive-UI 官方文档示例「
-                        <n-a href="//www.naiveui.com/zh-CN/os-theme/components/dropdown#cascade.vue" target="blank">
-                            Dropdown - 多级
-                        </n-a>
-                        」。
-                    </p>
-                </template>
-                <template #demo>
-                    <SampleCascadeDemo />
-                </template>
-            </DemoCard>
-
-            <DemoCard
                 title="Pure Rendering Content / 纯渲染的内容"
                 anchor="pure-content"
                 :js-code="$encode(SamplePureContentCodeJs)"
@@ -143,6 +134,29 @@ const $encode = window.encodeURIComponent;
                 </template>
                 <template #demo>
                     <SamplePureContentDemo />
+                </template>
+            </DemoCard>
+
+            <DemoCard
+                title="Batch Rendering / 批量渲染"
+                anchor="batchrender"
+                :js-code="$encode(SampleBatchRenderCodeJs)"
+                :ts-code="$encode(SampleBatchRenderCodeTs)"
+            >
+                <template #content>
+                    <p>
+                        以模板形式改写 Naive-UI 官方文档示例「
+                        <n-a
+                            href="//www.naiveui.com/zh-CN/os-theme/components/dropdown#batch-render.vue"
+                            target="blank"
+                        >
+                            Dropdown - 批量渲染
+                        </n-a>
+                        」。
+                    </p>
+                </template>
+                <template #demo>
+                    <SampleBatchRenderDemo />
                 </template>
             </DemoCard>
         </n-space>

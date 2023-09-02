@@ -1,6 +1,6 @@
 ﻿<script>
 import { defineComponent, ref } from 'vue';
-import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4';
+import { MusicalNoteOutline } from '@vicons/ionicons5';
 
 export default defineComponent({
     setup() {
@@ -141,7 +141,7 @@ export default defineComponent({
             </template>
             <template v-else>
                 <n-icon style="vertical-align: -0.15em; margin-right: 4px"></n-icon>
-                    <MusicIcon />
+                    <MusicalNoteOutline />
                 </n-icon>
                 <span :style="{ color: selected ? 'green' : undefined }">
                     {{ option.label }}

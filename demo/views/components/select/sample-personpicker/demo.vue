@@ -9,17 +9,17 @@ export default defineComponent({
                 {
                     label: '07akioni',
                     value: '07akioni',
-                    avatar: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+                    avatar: '../../../../assets/images/avatar.png'
                 },
                 {
                     label: '08akioni',
                     value: '08akioni',
-                    avatar: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+                    avatar: '../../../../assets/images/avatar.png'
                 },
                 {
                     label: '09akioni',
                     value: '09akioni',
-                    avatar: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+                    avatar: '../../../../assets/images/avatar.png'
                 }
             ]
         };

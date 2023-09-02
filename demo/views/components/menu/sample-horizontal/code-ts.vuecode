@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { BookOutline as BookIcon, PersonOutline as PersonIcon, WineOutline as WineIcon } from '@vicons/ionicons5';
+import { BookOutline, PersonOutline, WineOutline } from '@vicons/ionicons5';
 
 export default defineComponent({
     setup() {
@@ -24,7 +24,7 @@ export default defineComponent({
 
             <template #icon>
                 <n-icon>
-                    <BookIcon />
+                    <BookOutline />
                 </n-icon>
             </template>
         </x-n-menu-item>
@@ -34,7 +34,7 @@ export default defineComponent({
 
             <template #icon>
                 <n-icon>
-                    <BookIcon />
+                    <BookOutline />
                 </n-icon>
             </template>
 
@@ -46,7 +46,7 @@ export default defineComponent({
         <x-n-menu-item key="a-wild-sheep-chase" label="寻羊冒险记" disabled>
             <template #icon>
                 <n-icon>
-                    <BookIcon />
+                    <BookOutline />
                 </n-icon>
             </template>
         </x-n-menu-item>
@@ -56,7 +56,7 @@ export default defineComponent({
 
             <template #icon>
                 <n-icon>
-                    <BookIcon />
+                    <BookOutline />
                 </n-icon>
             </template>
 
@@ -67,7 +67,7 @@ export default defineComponent({
 
                         <template #icon>
                             <n-icon>
-                                <PersonIcon />
+                                <PersonOutline />
                             </n-icon>
                         </template>
                     </x-n-menu-item>
@@ -77,7 +77,7 @@ export default defineComponent({
 
                         <template #icon>
                             <n-icon>
-                                <PersonIcon />
+                                <PersonOutline />
                             </n-icon>
                         </template>
                     </x-n-menu-item>
@@ -88,7 +88,7 @@ export default defineComponent({
 
                     <template #icon>
                         <n-icon>
-                            <WineIcon />
+                            <WineOutline />
                         </n-icon>
                     </template>
 

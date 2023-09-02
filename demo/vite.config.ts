@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vitePluginVue from '@vitejs/plugin-vue';
 import vitePluginVueJsx from '@vitejs/plugin-vue-jsx';
+import vitePluginSvg from 'vite-svg-loader';
 import { string as rollupPluginString } from 'rollup-plugin-string';
 
 // https://vitejs.dev/config/
@@ -22,6 +23,10 @@ export default defineConfig({
 
         vitePluginVueJsx(),
 
+        vitePluginSvg({
+            defaultImport: 'component'
+        }),
+
         rollupPluginString({
             include: '**/*.vuecode'
         })
@@ -29,6 +34,7 @@ export default defineConfig({
 
     resolve: {
         alias: {
+            '~@': fileURLToPath(new URL('../demo', import.meta.url)),
             '@skit/x.naive-ui': fileURLToPath(new URL('../src', import.meta.url))
         }
     },
