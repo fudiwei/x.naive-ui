@@ -9,6 +9,7 @@ declare module 'vue' {
         XNDropdown: (typeof import('@skit/x.naive-ui'))['XNDropdown'];
         XNDropdownDivider: (typeof import('@skit/x.naive-ui'))['XNDropdownDivider'];
         XNDropdownItem: (typeof import('@skit/x.naive-ui'))['XNDropdownItem'];
+        XNDropdownItemGroup: (typeof import('@skit/x.naive-ui'))['XNDropdownItemGroup'];
         XNEmpty: (typeof import('@skit/x.naive-ui'))['XNEmpty'];
         XNEmptyIcon: (typeof import('@skit/x.naive-ui'))['XNEmptyIcon'];
         XNMenu: (typeof import('@skit/x.naive-ui'))['XNMenu'];

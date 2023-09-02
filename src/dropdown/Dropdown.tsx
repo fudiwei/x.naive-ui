@@ -1,6 +1,7 @@
 ﻿import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
     DropdownOption as NDropdownOption,
+    DropdownGroupOption as NDropdownGroupOption,
     DropdownDividerOption as NDropdownDividerOption,
     DropdownRenderOption as NDropdownRenderOption
 } from 'naive-ui';
@@ -15,8 +16,15 @@ import { isVShowFalse } from '../_utils/v-dir';
 import { objectOmitter } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
+import ComponentDropdownItemGroup from './DropdownItemGroup';
 
-export type DropdownOption = NDropdownOption;
+export type DropdownOption = Partial<NDropdownOption> &
+    Partial<Omit<NDropdownGroupOption, 'type' | 'children'>> &
+    Partial<Omit<NDropdownDividerOption, 'type'>> &
+    Partial<Omit<NDropdownRenderOption, 'type'>> & {
+        type?: 'group' | 'divider' | 'render';
+        children?: DropdownOption[];
+    };
 export type DropdownOptions = DropdownOption[];
 
 const _props = (() => {
@@ -65,6 +73,18 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
                 icon: resolveVSlot(vSlots['icon']),
                 children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
             } as NDropdownOption);
+        } else if (vnode.type === ComponentDropdownItemGroup) {
+            // 菜单分组
+            temp.push({
+                ...normalizeVProps(restProps),
+                type: 'group',
+                key: vKey ?? `__X_DROPDOWN_GROUP_${index}`,
+                props: restProps as HTMLAttributes,
+                show: !isVShowFalse(vnode),
+                label: resolveVSlot(vSlots['label']) || (vProps.label as string),
+                icon: resolveVSlot(vSlots['icon']),
+                children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
+            } as NDropdownGroupOption);
         } else if (vnode.type === ComponentDropdownDivider) {
             // 分割线
             temp.push({
