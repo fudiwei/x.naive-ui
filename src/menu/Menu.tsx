@@ -137,7 +137,7 @@ const ComponentMenu = defineComponent({
         const nOptions = computed<NMenuOption[]>(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNode(vnodes)) {
-                return [];
+                return props.options;
             }
 
             const temp = convertVNodesToOptions(vnodes);
@@ -179,9 +179,10 @@ const ComponentMenu = defineComponent({
             }
 
             return (option: NMenuOption) => {
-                return slot({
+                const vnode = slot({
                     option: option
                 });
+                return isEmptyVNode(vnode) ? false : vnode;
             };
         });
 

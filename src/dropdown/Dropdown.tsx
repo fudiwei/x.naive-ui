@@ -182,9 +182,10 @@ export default defineComponent({
             }
 
             return (option: NDropdownOption) => {
-                return slot({
+                const vnode = slot({
                     option: option
                 });
+                return isEmptyVNode(vnode) ? false : vnode;
             };
         });
 
