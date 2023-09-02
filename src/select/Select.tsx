@@ -17,8 +17,11 @@ import * as logger from '../_utils/logger';
 import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
 
-export type SelectOption = Partial<NSelectOption> &
-    Partial<Omit<NSelectGroupOption, 'type' | 'children'>> & { type?: 'group'; children?: SelectOption[] };
+export type SelectOption = {
+    type?: 'group';
+    children?: SelectOption[];
+} & Partial<NSelectOption> &
+    Partial<Omit<NSelectGroupOption, 'type' | 'children'>>;
 export type SelectOptions = SelectOption[];
 
 const _props = (() => {

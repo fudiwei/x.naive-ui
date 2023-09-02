@@ -18,13 +18,13 @@ import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
 import ComponentDropdownItemGroup from './DropdownItemGroup';
 
-export type DropdownOption = Partial<NDropdownOption> &
+export type DropdownOption = {
+    type?: 'group' | 'divider' | 'render';
+    children?: DropdownOption[];
+} & Partial<NDropdownOption> &
     Partial<Omit<NDropdownGroupOption, 'type' | 'children'>> &
     Partial<Omit<NDropdownDividerOption, 'type'>> &
-    Partial<Omit<NDropdownRenderOption, 'type'>> & {
-        type?: 'group' | 'divider' | 'render';
-        children?: DropdownOption[];
-    };
+    Partial<Omit<NDropdownRenderOption, 'type'>>;
 export type DropdownOptions = DropdownOption[];
 
 const _props = (() => {
@@ -42,6 +42,7 @@ export type DropdownProps = ExtractPublicPropTypes<typeof _props>;
 export type DropdownRenderLabelParams = {
     option: DropdownOption;
     label: string;
+    key?: string | number;
 };
 export type DropdownRenderOptionParams = {
     vnode: VNode;
@@ -131,6 +132,10 @@ export default defineComponent({
             return (props.labelField != null ? option[props.labelField] : option.label) as string;
         }
 
+        function getNOptionKey(option: NDropdownOption): string | number {
+            return (props.keyField != null ? option[props.keyField] : option.key) as string | number;
+        }
+
         const nOptions = computed<NDropdownOption[]>(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNode(vnodes)) {
@@ -150,7 +155,8 @@ export default defineComponent({
             return (option: NDropdownOption) => {
                 return slot({
                     option: option,
-                    label: getNOptionLabel(option)
+                    label: getNOptionLabel(option),
+                    key: getNOptionKey(option)
                 });
             };
         });

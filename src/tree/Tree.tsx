@@ -12,7 +12,9 @@ import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { objectOmitter } from '../_utils/internal';
 
-export type TreeOption = Omit<NTreeOption, 'prefix' | 'suffix'>;
+export type TreeOption = {
+    children?: TreeOption[];
+} & Partial<Omit<NTreeOption, 'children'>>;
 export type TreeOptions = TreeOption[];
 export type TreeRenderLabelParams = {
     option: TreeOption;

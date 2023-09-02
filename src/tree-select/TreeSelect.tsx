@@ -14,7 +14,9 @@ import { NTreeSelect, treeSelectProps as defaultNTreeSelectProps } from 'naive-u
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { objectOmitter } from '../_utils/internal';
 
-export type TreeSelectOption = Omit<NTreeSelectOption, 'prefix' | 'suffix'>;
+export type TreeSelectOption = {
+    children?: TreeSelectOption[];
+} & Partial<Omit<NTreeSelectOption, 'children'>>;
 export type TreeSelectOptions = TreeSelectOption[];
 export type TreeSelectRenderLabelParams = {
     option: TreeSelectOption;

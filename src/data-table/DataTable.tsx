@@ -31,13 +31,13 @@ import ComponentDataTableSummaryRow from './DataTableSummaryRow';
 import ComponentDataTableSummaryCell from './DataTableSummaryCell';
 
 export type DataTableRowData = NDataTableRowData;
-export type DataTableColumn<T extends DataTableRowData = any> = Partial<Omit<NDataTableBaseColumn<T>, 'type'>> &
+export type DataTableColumn<T extends DataTableRowData = any> = {
+    type?: 'selection' | 'expand';
+    children?: DataTableColumn<T>[];
+} & Partial<Omit<NDataTableBaseColumn<T>, 'type'>> &
     Partial<Omit<NDataTableSelectionColumn<T>, 'type'>> &
     Partial<Omit<NDataTableExpandColumn<T>, 'type'>> &
-    Partial<Omit<NDataTableGroupColumn<T>, 'type' | 'children'>> & {
-        type?: 'selection' | 'expand';
-        children?: DataTableColumn<T>[];
-    };
+    Partial<Omit<NDataTableGroupColumn<T>, 'type' | 'children'>>;
 export type DataTableColumns<T extends DataTableRowData = any> = DataTableColumn<T>[];
 export type DataTableRenderColumnParams<T extends DataTableRowData = any> = {
     column: DataTableColumn<T>;

@@ -5,7 +5,15 @@ import ComponentMenuDivider from './MenuDivider';
 import ComponentMenuItem from './MenuItem';
 import ComponentMenuItemGroup from './MenuItemGroup';
 
-export type { MenuProps, MenuInstance } from './Menu';
+export type {
+    MenuProps,
+    MenuInstance,
+    MenuOption,
+    MenuOptions,
+    MenuRenderLabelParams,
+    MenuRenderExtraParams,
+    MenuRenderIconParams
+} from './Menu';
 export type { MenuItemProps } from './MenuItem';
 export type { MenuItemGroupProps } from './MenuItemGroup';
 export const XNMenu = Object.assign(ComponentMenu, {

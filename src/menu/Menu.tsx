@@ -1,4 +1,4 @@
-﻿import type { HTMLAttributes, VNode, Slots, SlotsType, ExtractPublicPropTypes } from 'vue';
+﻿import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
     MenuOption as NMenuOption,
     MenuGroupOption as NMenuGroupOption,
@@ -10,7 +10,7 @@ import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
 import { isVShowFalse } from '../_utils/v-dir';
 import { objectOmitter } from '../_utils/internal';
 import * as logger from '../_utils/logger';
@@ -18,26 +18,38 @@ import ComponentMenuDivider from './MenuDivider';
 import ComponentMenuItem from './MenuItem';
 import ComponentMenuItemGroup from './MenuItemGroup';
 
+export type MenuOption = {
+    type?: 'group' | 'divider';
+    children?: MenuOption[];
+} & Partial<NMenuOption> &
+    Partial<Omit<NMenuGroupOption, 'type' | 'children'>> &
+    Partial<Omit<NMenuDividerOption, 'type'>>;
+export type MenuOptions = MenuOptions[];
+
 const _props = (() => {
-    const restProps = objectOmitter(
-        defaultNMenuProps,
-        'childrenField',
-        'disabledField',
-        'expandIcon',
-        'keyField',
-        'labelField',
-        'options',
-        'renderExtra',
-        'renderIcon',
-        'renderLabel'
-    );
+    const restProps = objectOmitter(defaultNMenuProps, 'options');
     return {
-        ...restProps
+        ...restProps,
+        options: {
+            type: Array as PropType<MenuOption[]>,
+            default: () => []
+        }
     } as const;
 })();
 
 export type MenuProps = ExtractPublicPropTypes<typeof _props>;
 export type MenuInstance = NMenuInst;
+export type MenuRenderLabelParams = {
+    option: MenuOption;
+    label: string;
+    key?: string | number;
+};
+export type MenuRenderExtraParams = {
+    option: MenuOption;
+};
+export type MenuRenderIconParams = {
+    option: MenuOption;
+};
 
 function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
     const temp = [] as NMenuOption[];
@@ -105,10 +117,21 @@ const ComponentMenu = defineComponent({
     props: _props,
 
     slots: Object as SlotsType<{
-        default: NonNullable<unknown>;
+        'default': NonNullable<unknown>;
+        'render-label': MenuRenderLabelParams;
+        'render-extra': MenuRenderExtraParams;
+        'render-icon': MenuRenderIconParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
+        function getNOptionLabel(option: NMenuOption): string {
+            return (props.labelField != null ? option[props.labelField] : option.label) as string;
+        }
+
+        function getNOptionKey(option: NMenuOption): string | number {
+            return (props.keyField != null ? option[props.keyField] : option.key) as string | number;
+        }
+
         const nOptions = computed<NMenuOption[]>(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNode(vnodes)) {
@@ -119,9 +142,53 @@ const ComponentMenu = defineComponent({
             return temp;
         });
 
+        const nRenderLabel = computed(() => {
+            const slot = getVSlot(slots, 'render-label');
+            if (!slot) {
+                return props.renderLabel;
+            }
+
+            return (option: NMenuOption) => {
+                return slot({
+                    option: option,
+                    label: getNOptionLabel(option),
+                    key: getNOptionKey(option)
+                });
+            };
+        });
+
+        const nRenderExtra = computed(() => {
+            const slot = getVSlot(slots, 'render-extra');
+            if (!slot) {
+                return props.renderExtra;
+            }
+
+            return (option: NMenuOption) => {
+                return slot({
+                    option: option
+                });
+            };
+        });
+
+        const nRenderIcon = computed(() => {
+            const slot = getVSlot(slots, 'render-icon');
+            if (!slot) {
+                return props.renderIcon;
+            }
+
+            return (option: NMenuOption) => {
+                return slot({
+                    option: option
+                });
+            };
+        });
+
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                default: undefined
+                'default': undefined,
+                'render-label': undefined,
+                'render-extra': undefined,
+                'render-icon': undefined
             })
         );
 
@@ -135,14 +202,10 @@ const ComponentMenu = defineComponent({
                 ref={nRef}
                 {...attrs}
                 {...props}
-                childrenField={undefined}
-                disabledField={undefined}
-                keyField={undefined}
-                labelField={undefined}
                 options={nOptions.value}
-                renderExtra={undefined}
-                renderIcon={undefined}
-                renderLabel={undefined}
+                renderLabel={nRenderLabel.value}
+                renderExtra={nRenderExtra.value}
+                renderIcon={nRenderIcon.value}
                 v-slots={nSlots.value}
             />
         );

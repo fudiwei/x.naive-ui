@@ -6,7 +6,9 @@ import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
 import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { objectOmitter } from '../_utils/internal';
 
-export type CascaderOption = NCascaderOption;
+export type CascaderOption = {
+    children?: CascaderOption[];
+} & Partial<Omit<NCascaderOption, 'children'>>;
 export type CascaderOptions = CascaderOption[];
 
 const _props = (() => {
