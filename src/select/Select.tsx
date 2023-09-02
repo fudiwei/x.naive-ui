@@ -40,7 +40,7 @@ export type SelectRenderLabelParams = {
     selected?: boolean;
 };
 export type SelectRenderOptionParams = {
-    optionVNode: VNode;
+    vnode: VNode;
     option: SelectOption;
     selected?: boolean;
 };
@@ -158,7 +158,7 @@ const ComponentSelect = defineComponent({
 
             return ({ node, option, selected }: Parameters<NSelectRenderOption>[0]) => {
                 return slot({
-                    optionVNode: node,
+                    vnode: node,
                     option: option as NSelectOption,
                     selected: selected
                 });

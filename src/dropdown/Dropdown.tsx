@@ -1,4 +1,4 @@
-﻿import type { HTMLAttributes, VNode, Slots, SlotsType, ExtractPublicPropTypes } from 'vue';
+﻿import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
     DropdownOption as NDropdownOption,
     DropdownDividerOption as NDropdownDividerOption,
@@ -10,20 +10,38 @@ import type {} from 'treemate';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
 import { isVShowFalse } from '../_utils/v-dir';
 import { objectOmitter } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
 
+export type DropdownOption = NDropdownOption;
+export type DropdownOptions = DropdownOption[];
+
 const _props = (() => {
-    const restProps = objectOmitter(defaultNDropdownProps, 'keyField', 'labelField', 'options');
+    const restProps = objectOmitter(defaultNDropdownProps, 'options');
     return {
-        ...restProps
+        ...restProps,
+        options: {
+            type: Array as PropType<DropdownOption[]>,
+            default: () => []
+        }
     } as const;
 })();
 
 export type DropdownProps = ExtractPublicPropTypes<typeof _props>;
+export type DropdownRenderLabelParams = {
+    option: DropdownOption;
+    label: string;
+};
+export type DropdownRenderOptionParams = {
+    vnode: VNode;
+    option: DropdownOption;
+};
+export type DropdownRenderIconParams = {
+    option: DropdownOption;
+};
 
 function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
     const temp = [] as NDropdownOption[];
@@ -81,25 +99,76 @@ export default defineComponent({
     props: _props,
 
     slots: Object as SlotsType<{
-        default: NonNullable<unknown>;
-        trigger: NonNullable<unknown>;
+        'default': NonNullable<unknown>;
+        'trigger': NonNullable<unknown>;
+        'render-label': DropdownRenderLabelParams;
+        'render-option': DropdownRenderOptionParams;
+        'render-icon': DropdownRenderIconParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
+        function getNOptionLabel(option: NDropdownOption): string {
+            return (props.labelField != null ? option[props.labelField] : option.label) as string;
+        }
+
         const nOptions = computed<NDropdownOption[]>(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNode(vnodes)) {
-                return [];
+                return props.options;
             }
 
             const temp = convertVNodesToOptions(vnodes);
             return temp;
         });
 
+        const nRenderLabel = computed(() => {
+            const slot = getVSlot(slots, 'render-label');
+            if (!slot) {
+                return props.renderLabel;
+            }
+
+            return (option: NDropdownOption) => {
+                return slot({
+                    option: option,
+                    label: getNOptionLabel(option)
+                });
+            };
+        });
+
+        const nRenderOption = computed(() => {
+            const slot = getVSlot(slots, 'render-option');
+            if (!slot) {
+                return props.renderOption;
+            }
+
+            return ({ node, option }: { node: VNode; option: NDropdownOption }) => {
+                return slot({
+                    vnode: node,
+                    option: option
+                });
+            };
+        });
+
+        const nRenderIcon = computed(() => {
+            const slot = getVSlot(slots, 'render-icon');
+            if (!slot) {
+                return props.renderIcon;
+            }
+
+            return (option: NDropdownOption) => {
+                return slot({
+                    option: option
+                });
+            };
+        });
+
         const nSlots = computed(() =>
             mergeVSlots(slots, {
-                default: slots['trigger'],
-                trigger: undefined
+                'default': slots['trigger'],
+                'trigger': undefined,
+                'render-label': undefined,
+                'render-option': undefined,
+                'render-icon': undefined
             })
         );
 
@@ -109,9 +178,10 @@ export default defineComponent({
             <NDropdown
                 {...attrs}
                 {...props}
-                keyField={undefined}
-                labelField={undefined}
                 options={nOptions.value}
+                renderLabel={nRenderLabel.value}
+                renderOption={nRenderOption.value}
+                renderIcon={nRenderIcon.value}
                 v-slots={nSlots.value}
             />
         );

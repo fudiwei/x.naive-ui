@@ -4,7 +4,14 @@ import ComponentDropdown from './Dropdown';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
 
-export type { DropdownProps } from './Dropdown';
+export type {
+    DropdownProps,
+    DropdownOption,
+    DropdownOptions,
+    DropdownRenderLabelParams,
+    DropdownRenderOptionParams,
+    DropdownRenderIconParams
+} from './Dropdown';
 export type { DropdownItemProps } from './DropdownItem';
 export const XNDropdown = Object.assign(ComponentDropdown, {
     Divider: ComponentDropdownDivider,
