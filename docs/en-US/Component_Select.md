@@ -15,9 +15,9 @@ For more details, please refer to the Demo.
 ```html
 <template>
     <x-n-select>
-        <x-n-select-option value="1">Option 1</x-n-select-option>
-        <x-n-select-option value="2">Option 2</x-n-select-option>
-        <x-n-select-option value="3">Option 3</x-n-select-option>
+        <x-n-select-option value="1">Option A</x-n-select-option>
+        <x-n-select-option value="2">Option B</x-n-select-option>
+        <x-n-select-option value="3">Option C</x-n-select-option>
     </x-n-select>
 </template>
 ```
@@ -27,15 +27,15 @@ For more details, please refer to the Demo.
 ```html
 <script setup>
     const options = [
-        { value: 1, label: '1' },
-        { value: 2, label: '2' },
-        { value: 3, label: '3' }
+        { value: '1', label: 'A' },
+        { value: '2', label: 'B' },
+        { value: '3', label: 'C' }
     ];
 </script>
 <template>
     <x-n-select :options="options">
         <template #render-label="{ option }">
-            <div>{{ 'Option' + option.label }}</div>
+            <div>{{ 'Option ' + option.label }}</div>
         </template>
     </x-n-select>
 </template>
@@ -55,7 +55,7 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | :------------ | :----------------------------------- | :------------------------- | :------ |
 | default       |                                      | The content inside select. |         |
 | render-label  | `{ option, label, value, selected }` | Custom option label.       |         |
-| render-option | `{ optionVNode, option, selected }`  | Custom option node.        |         |
+| render-option | `{ vnode, option, selected }`        | Custom option node.        |         |
 | render-tag    | `{ option, close }`                  | Custom tag.                |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Slots)。

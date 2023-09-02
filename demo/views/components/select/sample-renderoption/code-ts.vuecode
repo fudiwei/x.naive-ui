@@ -70,10 +70,10 @@ export default defineComponent({
 
 <template>
     <x-n-select :options="options">
-        <template #render-option="{ optionVNode, option }: SelectRenderOptionParams">
+        <template #render-option="{ vnode, option }: SelectRenderOptionParams">
             <n-tooltip>
                 <template #trigger>
-                    <component :is="optionVNode" />
+                    <component :is="vnode" />
                 </template>
                 {{ 'Rubber Soul -' + option.label }}
             </n-tooltip>

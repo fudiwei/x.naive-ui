@@ -15,15 +15,41 @@ For more details, please refer to the Demo.
 ```html
 <template>
     <x-n-menu>
-        <x-n-menu-item key="1">Menu 1</x-n-menu-item>
-        <x-n-menu-item key="1">Menu 2</x-n-menu-item>
+        <x-n-menu-item key="1">Menu A</x-n-menu-item>
+        <x-n-menu-item key="1">Menu B</x-n-menu-item>
         <x-n-menu-divider />
-        <x-n-menu-item key="3" label="Menu 3">
+        <x-n-menu-item key="3" label="Menu C">
             <template #submenu>
-                <x-n-menu-item key="3-1">Sub Menu 1</x-n-menu-item>
-                <x-n-menu-item key="3-2">Sub Menu 2</x-n-menu-item>
+                <x-n-menu-item key="3-1">Menu C1</x-n-menu-item>
+                <x-n-menu-item key="3-2">Menu C2</x-n-menu-item>
             </template>
         </x-n-menu-item>
+    </x-n-menu>
+</template>
+```
+
+#### Scoped Slots：
+
+```html
+<script setup>
+    const options = [
+        { key: '1', label: 'A' },
+        { key: '2', label: 'B' },
+        {
+            key: '3',
+            label: 'C',
+            children: [
+                { key: '3-1', label: 'C1' },
+                { key: '3-2', label: 'C2' }
+            ]
+        }
+    ];
+</script>
+<template>
+    <x-n-menu :options="options">
+        <template #render-label="{ option }">
+            <div>{{ 'Menu ' + option.label }}</div>
+        </template>
     </x-n-menu>
 </template>
 ```
@@ -34,13 +60,16 @@ For more details, please refer to the Demo.
 
 #### `XNMenu` Props:
 
-For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/menu#Menu-Props). Note that `children-field`, `disabled-field`, `expand-icon`, `key-field`, `label-field`, `options`, `render-extra`, `render-icon`, `render-label` are not available.
+For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/menu#Menu-Props).
 
 #### `XNMenu` Slots:
 
-| Name    | Type | Description | Version |
-| :------ | :--- | :---------- | :------ |
-| default |      | Menu.       |         |
+| Name         | Type                     | Description                     | Version |
+| :----------- | :----------------------- | :------------------------------ | :------ |
+| default      |                          | Menu.                           |         |
+| render-label | `{ option, label, key }` | Custom menu item label.         |         |
+| render-extra | `{ option }`             | Custom menu item extra content. |         |
+| render-icon  | `{ option }`             | Custom menu item icon.          |         |
 
 #### `XNMenu` Methods:
 

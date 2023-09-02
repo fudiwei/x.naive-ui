@@ -15,15 +15,41 @@
 ```html
 <template>
     <x-n-menu>
-        <x-n-menu-item key="1">Menu 1</x-n-menu-item>
-        <x-n-menu-item key="1">Menu 2</x-n-menu-item>
+        <x-n-menu-item key="1">Menu A</x-n-menu-item>
+        <x-n-menu-item key="1">Menu B</x-n-menu-item>
         <x-n-menu-divider />
-        <x-n-menu-item key="3" label="Menu 3">
+        <x-n-menu-item key="3" label="Menu C">
             <template #submenu>
-                <x-n-menu-item key="3-1">Sub Menu 1</x-n-menu-item>
-                <x-n-menu-item key="3-2">Sub Menu 2</x-n-menu-item>
+                <x-n-menu-item key="3-1">Menu C1</x-n-menu-item>
+                <x-n-menu-item key="3-2">Menu C2</x-n-menu-item>
             </template>
         </x-n-menu-item>
+    </x-n-menu>
+</template>
+```
+
+#### Scoped Slots：
+
+```html
+<script setup>
+    const options = [
+        { key: '1', label: 'A' },
+        { key: '2', label: 'B' },
+        {
+            value: '3',
+            label: 'C',
+            children: [
+                { key: '3-1', label: 'C1' },
+                { key: '3-2', label: 'C2' }
+            ]
+        }
+    ];
+</script>
+<template>
+    <x-n-menu :options="options">
+        <template #render-label="{ option }">
+            <div>{{ 'Menu ' + option.label }}</div>
+        </template>
     </x-n-menu>
 </template>
 ```
@@ -34,13 +60,16 @@
 
 #### `XNMenu` Props：
 
-其他 Props 略，与 `NMenu` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/menu#Menu-Props)。注意 `children-field`、`disabled-field`、`expand-icon`、`key-field`、`label-field`、`options`、`render-extra`、`render-icon`、`render-label` 属性不可用。
+其他 Props 略，与 `NMenu` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/menu#Menu-Props)。
 
 #### `XNMenu` Slots：
 
-| 名称    | 参数 | 说明                                                                     | 版本 |
-| :------ | :--- | :----------------------------------------------------------------------- | :--- |
-| default |      | 菜单。仅支持 `XNMenuItem`、`XNMenuItemGroup`、`XNMenuDivider` 作为子组件 |      |
+| 名称         | 参数                     | 说明                                                                     | 版本 |
+| :----------- | :----------------------- | :----------------------------------------------------------------------- | :--- |
+| default      |                          | 菜单。仅支持 `XNMenuItem`、`XNMenuItemGroup`、`XNMenuDivider` 作为子组件 |      |
+| render-label | `{ option, label, key }` | 自定义菜单项的内容                                                       |      |
+| render-extra | `{ option }`             | 自定义菜单项的额外内容                                                   |      |
+| render-icon  | `{ option }`             | 自定义菜单项的图标                                                       |      |
 
 #### `XNMenu` Methods：
 

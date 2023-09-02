@@ -15,9 +15,9 @@
 ```html
 <template>
     <x-n-select>
-        <x-n-select-option value="1">Option 1</x-n-select-option>
-        <x-n-select-option value="2">Option 2</x-n-select-option>
-        <x-n-select-option value="3">Option 3</x-n-select-option>
+        <x-n-select-option value="1">Option A</x-n-select-option>
+        <x-n-select-option value="2">Option B</x-n-select-option>
+        <x-n-select-option value="3">Option C</x-n-select-option>
     </x-n-select>
 </template>
 ```
@@ -27,9 +27,9 @@
 ```html
 <script setup>
     const options = [
-        { value: 1, label: '1' },
-        { value: 2, label: '2' },
-        { value: 3, label: '3' }
+        { value: '1', label: 'A' },
+        { value: '2', label: 'B' },
+        { value: '3', label: 'C' }
     ];
 </script>
 <template>
@@ -55,7 +55,7 @@
 | :------------ | :----------------------------------- | :--------------- | :--- |
 | default       |                                      | 弹出的内容       |      |
 | render-label  | `{ option, label, value, selected }` | 自定义选项的内容 |      |
-| render-option | `{ optionVNode, option, selected }`  | 自定义选项的内容 |      |
+| render-option | `{ vnode, option, selected }`        | 自定义选项的内容 |      |
 | render-tag    | `{ option, close }`                  | 自定义标签的内容 |      |
 
 其他 Slots 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Slots)。
