@@ -6,7 +6,7 @@ export const getVProp = <T extends object, K extends keyof T>(props: T, name: K)
     }
 
     // NOTICE: You must use kebab-case prop names in the source codes of components.
-    const r = props[name] ?? props[camelize(name as string) as keyof T];
+    const r = props[name] ?? (props[camelize(name as string) as keyof T] as T[K] | undefined);
     return r;
 };
 

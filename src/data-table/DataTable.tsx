@@ -93,7 +93,10 @@ const _props = _propsMakeGeneric();
 export type DataTableProps<T extends DataTableRowData = any> = ExtractPublicPropTypes<
     ReturnType<typeof _propsMakeGeneric<T>>
 >;
-export type DataTableInstance = NDataTableInst;
+export type DataTableInstance = Pick<
+    NDataTableInst,
+    'clearFilters' | 'clearSorter' | 'filter' | 'filters' | 'page' | 'scrollTo' | 'sort'
+>;
 
 function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): NDataTableColumn<T>[] {
     const temp = [] as NDataTableColumn<T>[];
@@ -190,7 +193,6 @@ function convertVNodesToSummaryCells<T extends NDataTableRowData>(
 ): NDataTableSummaryCell[] {
     const temp = [] as NDataTableSummaryCell[];
 
-    // vnodes = flattenVNodeChildren(vnodes) as VNode[];
     vnodes.forEach((vnode) => {
         const vKey = vnode.key as string | number | null;
         const vProps = vnode.props || {};
@@ -548,7 +550,6 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
             expose({
                 filter: (filters) => nRef.value?.filter(filters),
                 filters: (filters) => nRef.value?.filters(filters),
-                clearFilter: () => nRef.value?.clearFilter(),
                 clearFilters: () => nRef.value?.clearFilters(),
                 sort: (columnKey, order) => nRef.value?.sort(columnKey, order),
                 clearSorter: () => nRef.value?.clearSorter(),

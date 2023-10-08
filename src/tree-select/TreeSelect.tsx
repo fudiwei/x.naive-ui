@@ -56,7 +56,10 @@ const _props = (() => {
 })();
 
 export type TreeSelectProps = ExtractPublicPropTypes<typeof _props>;
-export type TreeSelectInstance = NTreeSelectInst;
+export type TreeSelectInstance = Pick<
+    NTreeSelectInst,
+    'blur' | 'blurInput' | 'focus' | 'focusInput' | 'getCheckedData' | 'getIndeterminateData'
+>;
 
 export default defineComponent({
     name: 'XNTreeSelect',
@@ -174,7 +177,9 @@ export default defineComponent({
         const nRef = ref<NTreeSelectInst>();
         expose({
             focus: () => nRef.value?.focus(),
+            focusInput: () => nRef.value?.focusInput(),
             blur: () => nRef.value?.blur(),
+            blurInput: () => nRef.value?.blurInput(),
             getCheckedData: () => nRef.value?.getCheckedData(),
             getIndeterminateData: () => nRef.value?.getIndeterminateData()
         } as TreeSelectInstance);

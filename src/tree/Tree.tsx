@@ -50,7 +50,7 @@ const _props = (() => {
 })();
 
 export type TreeProps = ExtractPublicPropTypes<typeof _props>;
-export type TreeInstance = NTreeInst;
+export type TreeInstance = Pick<NTreeInst, 'getCheckedData' | 'getIndeterminateData' | 'scrollTo'>;
 
 export default defineComponent({
     name: 'XNTree',

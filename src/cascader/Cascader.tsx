@@ -23,7 +23,7 @@ const _props = (() => {
 })();
 
 export type CascaderProps = ExtractPublicPropTypes<typeof _props>;
-export type CascaderInstance = NCascaderInst;
+export type CascaderInstance = Pick<NCascaderInst, 'blur' | 'focus' | 'getCheckedData' | 'getIndeterminateData'>;
 export type CascaderRenderLabelParams = {
     option: CascaderOption;
     label: string;

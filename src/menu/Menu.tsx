@@ -38,7 +38,7 @@ const _props = (() => {
 })();
 
 export type MenuProps = ExtractPublicPropTypes<typeof _props>;
-export type MenuInstance = NMenuInst;
+export type MenuInstance = Pick<NMenuInst, 'showOption'>;
 export type MenuRenderLabelParams = {
     option: MenuOption;
     label: string;
