@@ -37,7 +37,11 @@ export const isEmptyVNode = (vnode?: VNode | VNode[]): boolean => {
     }
 
     if (typeof vnode.type === 'object') {
-        return !('render' in vnode.type);
+        return !(
+            ('render' in vnode.type && vnode.type.render != null) ||
+            ('template' in vnode.type && vnode.type.template != null) ||
+            ('setup' in vnode.type && typeof vnode.type.setup === 'function')
+        );
     }
 
     return vnode.el == null && vnode.children == null;
