@@ -16,6 +16,9 @@ import SampleColumnGroupCodeTs from './sample-columngroup/code-ts.vuecode';
 import SampleSummaryDemo from './sample-summary/demo.vue';
 import SampleSummaryCodeJs from './sample-summary/code-js.vuecode';
 import SampleSummaryCodeTs from './sample-summary/code-ts.vuecode';
+import SampleNestedDemo from './sample-nested/demo.vue';
+import SampleNestedCodeJs from './sample-nested/code-js.vuecode';
+import SampleNestedCodeTs from './sample-nested/code-ts.vuecode';
 import SampleEmptyDemo from './sample-empty/demo.vue';
 import SampleEmptyCodeJs from './sample-empty/code-js.vuecode';
 import SampleEmptyCodeTs from './sample-empty/code-ts.vuecode';
@@ -45,6 +48,10 @@ const $encode = window.encodeURIComponent;
             {
                 title: '总结栏',
                 anchor: 'summary'
+            },
+            {
+                title: '嵌套表格',
+                anchor: 'nested-table'
             },
             {
                 title: '空表格',
@@ -156,6 +163,17 @@ const $encode = window.encodeURIComponent;
                 </template>
                 <template #demo>
                     <SampleSummaryDemo />
+                </template>
+            </DemoCard>
+
+            <DemoCard
+                title="Nested Table / 嵌套表格"
+                anchor="nested-table"
+                :js-code="$encode(SampleNestedCodeJs)"
+                :ts-code="$encode(SampleNestedCodeTs)"
+            >
+                <template #demo>
+                    <SampleNestedDemo />
                 </template>
             </DemoCard>
 
