@@ -30,14 +30,27 @@
     ],
     "exports": {
         ".": {
-            "require": "./lib/index.cjs",
-            "import": "./es/index.mjs",
-            "types": "./es/index.d.ts"
+            "require": {
+                "default": "./lib/index.cjs",
+                "types": "./lib/index.d.ts"
+            },
+            "import": {
+                "default": "./es/index.mjs",
+                "types": "./es/index.d.ts"
+            }
         },
         "./unplugin": {
-            "require": "./lib/unplugin.cjs",
-            "import": "./es/unplugin.mjs",
-            "types": "./es/unplugin.d.ts"
+            "require": {
+                "default": "./lib/unplugin.cjs",
+                "types": "./lib/unplugin.d.ts"
+            },
+            "import": {
+                "default": "./es/unplugin.mjs",
+                "types": "./es/unplugin.d.ts"
+            }
+        },
+        "./types/*": {
+            "default": "./types/*"
         },
         "./*": {
             "require": "./lib/*",
