@@ -16,6 +16,9 @@ import SampleColumnGroupCodeTs from './sample-columngroup/code-ts.vuecode';
 import SampleSummaryDemo from './sample-summary/demo.vue';
 import SampleSummaryCodeJs from './sample-summary/code-js.vuecode';
 import SampleSummaryCodeTs from './sample-summary/code-ts.vuecode';
+import SampleIconsDemo from './sample-icons/demo.vue';
+import SampleIconsCodeJs from './sample-icons/code-js.vuecode';
+import SampleIconsCodeTs from './sample-icons/code-ts.vuecode';
 import SampleNestedDemo from './sample-nested/demo.vue';
 import SampleNestedCodeJs from './sample-nested/code-js.vuecode';
 import SampleNestedCodeTs from './sample-nested/code-ts.vuecode';
@@ -48,6 +51,10 @@ const $encode = window.encodeURIComponent;
             {
                 title: '总结栏',
                 anchor: 'summary'
+            },
+            {
+                title: '自定义图标',
+                anchor: 'icons'
             },
             {
                 title: '嵌套表格',
@@ -163,6 +170,29 @@ const $encode = window.encodeURIComponent;
                 </template>
                 <template #demo>
                     <SampleSummaryDemo />
+                </template>
+            </DemoCard>
+
+            <DemoCard
+                title="Customized Icons / 自定义图标"
+                anchor="icons"
+                :js-code="$encode(SampleIconsCodeJs)"
+                :ts-code="$encode(SampleIconsCodeTs)"
+            >
+                <template #content>
+                    <p>
+                        以模板形式改写 Naive-UI 官方文档示例「
+                        <n-a
+                            href="//www.naiveui.com/zh-CN/os-theme/components/data-table#custom-filter-menu.vue"
+                            target="blank"
+                        >
+                            DataTable - 自定义图标
+                        </n-a>
+                        」。
+                    </p>
+                </template>
+                <template #demo>
+                    <SampleIconsDemo />
                 </template>
             </DemoCard>
 
