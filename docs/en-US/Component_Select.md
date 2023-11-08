@@ -62,6 +62,10 @@ For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNSelect` Methods:
 
+| Name    | Type                                   | Description | Version |
+| :------ | :------------------------------------- | :---------- | :------ |
+| getData | () => { options: Array<SelectOption> } | Get data.   |         |
+
 For other methods, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Methods).
 
 #### `XNSelectOption` Props:

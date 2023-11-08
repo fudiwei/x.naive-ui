@@ -75,15 +75,3 @@ You can run the demo to view more details.
 > pnpm run build  # build
 > pnpm run demo   # run demo, then visit http://localhost:8888/
 ```
-
----
-
-## Road Map
-
--   [x] `DataTable`
--   [x] `Dropdown`
--   [x] `Menu`
--   [x] `Select`
--   [x] `Cascader`
--   [x] `Tree`
--   [x] `TreeSelect`

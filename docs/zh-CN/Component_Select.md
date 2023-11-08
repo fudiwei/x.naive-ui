@@ -62,6 +62,10 @@
 
 #### `XNSelect` Methods：
 
+| 名称    | 类型                                   | 说明     | 版本 |
+| :------ | :------------------------------------- | :------- | :--- |
+| getData | () => { options: Array<SelectOption> } | 获取数据 |      |
+
 其他 Methods 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Methods)。
 
 #### `XNSelectOption` Props：

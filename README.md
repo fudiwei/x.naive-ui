@@ -76,15 +76,3 @@
 > pnpm run build  # 构建项目
 > pnpm run demo   # 运行示例，访问 http://localhost:8888/
 ```
-
----
-
-## 迭代计划
-
--   [x] `DataTable`
--   [x] `Dropdown`
--   [x] `Menu`
--   [x] `Select`
--   [x] `Cascader`
--   [x] `Tree`
--   [x] `TreeSelect`
