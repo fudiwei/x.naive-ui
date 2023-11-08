@@ -36,7 +36,9 @@ const _props = (() => {
 })();
 
 export type SelectProps = ExtractPublicPropTypes<typeof _props>;
-export type SelectInstance = Pick<NSelectInst, 'blur' | 'blurInput' | 'focus' | 'focusInput'>;
+export type SelectInstance = Pick<NSelectInst, 'blur' | 'blurInput' | 'focus' | 'focusInput'> & {
+    getData: () => { options: SelectOptions };
+};
 export type SelectRenderLabelParams = {
     option: SelectOption;
     label: string;
@@ -131,7 +133,16 @@ const ComponentSelect = defineComponent({
         const nOptions = computed(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNode(vnodes)) {
-                return props.options;
+                return props.options.map((option) => {
+                    if (typeof option === 'string' || typeof option === 'number') {
+                        return {
+                            [props.labelField ?? 'label']: '' + option,
+                            [props.valueField ?? 'value']: option
+                        };
+                    }
+
+                    return option;
+                });
             }
 
             const temp = convertVNodesToOptions(vnodes);
@@ -197,7 +208,8 @@ const ComponentSelect = defineComponent({
             focus: () => nRef.value?.focus(),
             focusInput: () => nRef.value?.focusInput(),
             blur: () => nRef.value?.blur(),
-            blurInput: () => nRef.value?.blurInput()
+            blurInput: () => nRef.value?.blurInput(),
+            getData: () => ({ options: [...nOptions.value] })
         } as SelectInstance);
 
         return () => (
