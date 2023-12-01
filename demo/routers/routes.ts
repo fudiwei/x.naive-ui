@@ -42,6 +42,14 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
+        path: '/components/popselect',
+        component: () => import('../views/components/popselect/index.vue'),
+        meta: {
+            sider: true,
+            title: 'Popselect / 弹出选择'
+        }
+    },
+    {
         path: '/components/cascader',
         component: () => import('../views/components/cascader/index.vue'),
         meta: {
