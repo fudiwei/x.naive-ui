@@ -5,7 +5,14 @@ import * as logger from '../_utils/logger';
 
 const { notification: nNotification } = createNDiscreteApi(['notification']);
 
+/**
+ * @deprecated
+ */
 export type NotificationApi = ReturnType<typeof useNNotification>;
+
+/**
+ * @deprecated
+ */
 export default function useNotification(throwOnNoProvider = false): NotificationApi {
     try {
         return globalThisGetter('notification', useNNotification)!;

@@ -5,7 +5,14 @@ import * as logger from '../_utils/logger';
 
 const { loadingBar: nLoadingBar } = createNDiscreteApi(['loadingBar']);
 
+/**
+ * @deprecated
+ */
 export type LoadingBarApi = ReturnType<typeof useNLoadingBar>;
+
+/**
+ * @deprecated
+ */
 export default function useLoadingBar(throwOnNoProvider = false): LoadingBarApi {
     try {
         return globalThisGetter('loadingBar', useNLoadingBar)!;

@@ -5,7 +5,14 @@ import * as logger from '../_utils/logger';
 
 const { message: nMessage } = createNDiscreteApi(['message']);
 
+/**
+ * @deprecated
+ */
 export type MessageApi = ReturnType<typeof useNMessage>;
+
+/**
+ * @deprecated
+ */
 export default function useMessage(throwOnNoProvider = false): MessageApi {
     try {
         return globalThisGetter('message', useNMessage)!;

@@ -5,7 +5,14 @@ import * as logger from '../_utils/logger';
 
 const { dialog: nDialog } = createNDiscreteApi(['dialog']);
 
+/**
+ * @deprecated
+ */
 export type DialogApi = ReturnType<typeof useNDialog>;
+
+/**
+ * @deprecated
+ */
 export default function useDialog(throwOnNoProvider = false): DialogApi {
     try {
         return globalThisGetter('dialog', useNDialog)!;
