@@ -12,6 +12,8 @@
 
     -   [`XNSelect`](./Component_Select.md)
 
+    -   [`XNPopselect`](./Component_Popselect.md)
+
     -   [`XNCascader`](./Component_Cascader.md)
 
     -   [`XNTree`](./Component_Tree.md)

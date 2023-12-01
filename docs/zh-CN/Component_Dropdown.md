@@ -15,6 +15,10 @@
 ```html
 <template>
     <x-n-dropdown>
+        <template #trigger>
+            <n-button>Dropdown</n-button>
+        </template>
+
         <x-n-dropdown-item key="1">Menu A</x-n-dropdown-item>
         <x-n-dropdown-item key="2">Menu B</x-n-dropdown-item>
         <x-n-dropdown-divider />
@@ -35,6 +39,10 @@
 </script>
 <template>
     <x-n-dropdown :options="options">
+        <template #trigger>
+            <n-button>Dropdown</n-button>
+        </template>
+
         <template #render-label="{ option }">
             <div>{{ 'Menu ' + option.label }}</div>
         </template>
@@ -55,10 +63,10 @@
 | 名称          | 参数                     | 说明                     | 版本 |
 | :------------ | :----------------------- | :----------------------- | :--- |
 | default       |                          | 弹出的内容               |      |
-| trigger       |                          | 触发弹出信息的组件或元素 |      |
 | render-label  | `{ option, label, key }` | 自定义菜单项的内容       |      |
 | render-option | `{ vnode, option }`      | 自定义菜单项的内容       |      |
 | render-icon   | `{ option }`             | 自定义菜单项的图标       |      |
+| trigger       |                          | 触发弹出信息的组件或元素 |      |
 
 #### `XNDropdownItem` Props：
 

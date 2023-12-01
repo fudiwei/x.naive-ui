@@ -54,6 +54,8 @@ This project is aimed to provide a solution for these issues above.
 -   `Menu`: Scoped slots for **options**, **icons**.
 -   `Select`: Template style API for **options**, **option groups**.
 -   `Select`: Scoped slots for **options**, **tags**.
+-   `Popselect`: Template style API for **options**, **option groups**.
+-   `Popselect`: Scoped slots for **options**.
 -   `Cascader`: Scoped slots for **options**.
 -   `Tree`: Scoped slots for **options**, **switcher icon**.
 -   `TreeSelect`: Scoped slots for **options**, **tags**, **switcher icon**.

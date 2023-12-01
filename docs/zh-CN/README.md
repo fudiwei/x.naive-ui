@@ -12,6 +12,8 @@
 
     -   [选择器 `XNSelect`](./Component_Select.md)
 
+    -   [弹出选择 `XNPopselect`](./Component_Popselect.md)
+
     -   [级联选择 `XNCascader`](./Component_Cascader.md)
 
     -   [树 `XNTree`](./Component_Tree.md)

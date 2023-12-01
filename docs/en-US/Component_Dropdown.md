@@ -15,6 +15,10 @@ For more details, please refer to the Demo.
 ```html
 <template>
     <x-n-dropdown>
+        <template #trigger>
+            <n-button>Dropdown</n-button>
+        </template>
+
         <x-n-dropdown-item key="1">Menu A</x-n-dropdown-item>
         <x-n-dropdown-item key="2">Menu B</x-n-dropdown-item>
         <x-n-dropdown-divider />
@@ -35,6 +39,10 @@ For more details, please refer to the Demo.
 </script>
 <template>
     <x-n-dropdown :options="options">
+        <template #trigger>
+            <n-button>Dropdown</n-button>
+        </template>
+
         <template #render-label="{ option }">
             <div>{{ 'Menu ' + option.label }}</div>
         </template>
@@ -55,10 +63,10 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | Name          | Type                     | Description                                      | Version |
 | :------------ | :----------------------- | :----------------------------------------------- | :------ |
 | default       |                          | The content inside dropdown.                     |         |
-| trigger       |                          | The element or component that triggers dropdown. |         |
 | render-label  | `{ option, label, key }` | Custom menu item label.                          |         |
 | render-option | `{ vnode, option }`      | Custom menu item node.                           |         |
 | render-icon   | `{ option }`             | Custom menu item icon.                           |         |
+| trigger       |                          | The element or component that triggers dropdown. |         |
 
 #### `XNDropdownItem` Props:
 
