@@ -121,10 +121,10 @@ export default defineComponent({
 
     slots: Object as SlotsType<{
         'default': NonNullable<unknown>;
-        'trigger': NonNullable<unknown>;
         'render-label': DropdownRenderLabelParams;
         'render-option': DropdownRenderOptionParams;
         'render-icon': DropdownRenderIconParams;
+        'trigger': NonNullable<unknown>;
     }>,
 
     setup(props, { attrs, slots, expose }) {
@@ -192,10 +192,10 @@ export default defineComponent({
         const nSlots = computed(() =>
             mergeVSlots(slots, {
                 'default': slots['trigger'],
-                'trigger': undefined,
                 'render-label': undefined,
                 'render-option': undefined,
-                'render-icon': undefined
+                'render-icon': undefined,
+                'trigger': undefined
             })
         );
 

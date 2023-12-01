@@ -16,6 +16,7 @@ declare module 'vue' {
         XNMenuDivider: (typeof import('@skit/x.naive-ui'))['XNMenuDivider'];
         XNMenuItem: (typeof import('@skit/x.naive-ui'))['XNMenuItem'];
         XNMenuItemGroup: (typeof import('@skit/x.naive-ui'))['XNMenuItemGroup'];
+        XNPopselect: (typeof import('@skit/x.naive-ui'))['XNPopselect'];
         XNSelect: (typeof import('@skit/x.naive-ui'))['XNSelect'];
         XNSelectOption: (typeof import('@skit/x.naive-ui'))['XNSelectOption'];
         XNSelectOptionGroup: (typeof import('@skit/x.naive-ui'))['XNSelectOptionGroup'];
