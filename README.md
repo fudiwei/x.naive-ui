@@ -41,7 +41,7 @@
 
 本项目旨在为上述问题提供解决方案。
 
-本项目已加入 [Awesome Naive UI](https://github.com/naive-ui/awesome-naive) 系列。
+🚀 已加入 [Awesome Naive-UI](https://github.com/naive-ui/awesome-naive) 系列。
 
 ---
 

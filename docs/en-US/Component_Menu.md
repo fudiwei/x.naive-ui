@@ -64,12 +64,13 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNMenu` Slots:
 
-| Name         | Type                     | Description                     | Version |
-| :----------- | :----------------------- | :------------------------------ | :------ |
-| default      |                          | Menu.                           |         |
-| render-label | `{ option, label, key }` | Custom menu item label.         |         |
-| render-extra | `{ option }`             | Custom menu item extra content. |         |
-| render-icon  | `{ option }`             | Custom menu item icon.          |         |
+| Name               | Type                     | Description                     | Version |
+| :----------------- | :----------------------- | :------------------------------ | :------ |
+| default            |                          | Menu.                           |         |
+| render-label       | `{ option, label, key }` | Custom menu item label.         |         |
+| render-expand-icon | `{ option }`             | Custom menu expand icon.        |         |
+| render-extra       | `{ option }`             | Custom menu item extra content. |         |
+| render-icon        | `{ option }`             | Custom menu item icon.          |         |
 
 #### `XNMenu` Methods:
 

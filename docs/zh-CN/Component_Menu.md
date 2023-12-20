@@ -64,12 +64,13 @@
 
 #### `XNMenu` Slots：
 
-| 名称         | 参数                     | 说明                                                                     | 版本 |
-| :----------- | :----------------------- | :----------------------------------------------------------------------- | :--- |
-| default      |                          | 菜单。仅支持 `XNMenuItem`、`XNMenuItemGroup`、`XNMenuDivider` 作为子组件 |      |
-| render-label | `{ option, label, key }` | 自定义菜单项的内容                                                       |      |
-| render-extra | `{ option }`             | 自定义菜单项的额外内容                                                   |      |
-| render-icon  | `{ option }`             | 自定义菜单项的图标                                                       |      |
+| 名称               | 参数                     | 说明                                                                     | 版本 |
+| :----------------- | :----------------------- | :----------------------------------------------------------------------- | :--- |
+| default            |                          | 菜单。仅支持 `XNMenuItem`、`XNMenuItemGroup`、`XNMenuDivider` 作为子组件 |      |
+| render-label       | `{ option, label, key }` | 自定义菜单项的内容                                                       |      |
+| render-expand-icon | `{ option }`             | 自定义菜单展开图标                                                       |      |
+| render-extra       | `{ option }`             | 自定义菜单项的额外内容                                                   |      |
+| render-icon        | `{ option }`             | 自定义菜单项的图标                                                       |      |
 
 #### `XNMenu` Methods：
 

@@ -83,13 +83,19 @@
 
 #### `XNDataTable` Slots：
 
-| 名称          | 参数                                   | 说明               | 版本 |
-| :------------ | :------------------------------------- | :----------------- | :--- |
-| default       |                                        | 表格的内容         |      |
-| summary       |                                        | 总结栏行           |      |
-| render-column | `{ column }`                           | 自定义列头的内容   |      |
-| render-cell   | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容 |      |
-| render-expand | `{ rowData, rowIndex }`                | 自定义展开行的内容 |      |
+| 名称               | 参数                                   | 说明                 | 版本 |
+| :----------------- | :------------------------------------- | :------------------- | :--- |
+| default            |                                        | 表格的内容           |      |
+| summary            |                                        | 总结栏行             |      |
+| render-column      | `{ column }`                           | 自定义列头的内容     |      |
+| render-cell        | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容   |      |
+| render-expand      | `{ rowData, rowIndex }`                | 自定义展开行的内容   |      |
+| render-expand-icon | `{ expanded }`                         | 自定义展开图标       |      |
+| render-filter      | `{ column, active, show }`             | 自定义过滤器触发元素 |      |
+| render-filter-icon | `{ column, active, show }`             | 自定义过滤器图标     |      |
+| render-filter-menu | `{ column, hide }`                     | 自定义过滤器菜单     |      |
+| render-sorter      | `{ column, order }`                    | 自定义排序触发元素   |      |
+| render-sorter-icon | `{ column, order }`                    | 自定义排序图标       |      |
 
 其他 Slots 略，与 `NDataTable` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Slots)。
 

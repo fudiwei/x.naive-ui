@@ -80,13 +80,19 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNDataTable` Slots:
 
-| Name          | Type                                   | Description            | Version |
-| :------------ | :------------------------------------- | :--------------------- | :------ |
-| default       |                                        | Table content.         |         |
-| summary       |                                        | Summary rows.          |         |
-| render-column | `{ column }`                           | Custom column title.   |         |
-| render-cell   | `{ column, rowData, rowIndex, value }` | Custom cell content.   |         |
-| render-expand | `{ rowData, rowIndex }`                | Custom expandable row. |         |
+| Name               | Type                                   | Description            | Version |
+| :----------------- | :------------------------------------- | :--------------------- | :------ |
+| default            |                                        | Table content.         |         |
+| summary            |                                        | Summary rows.          |         |
+| render-column      | `{ column }`                           | Custom column title.   |         |
+| render-cell        | `{ column, rowData, rowIndex, value }` | Custom cell content.   |         |
+| render-expand      | `{ rowData, rowIndex }`                | Custom expandable row. |         |
+| render-expand-icon | `{ expanded }`                         | Custom expand icon.    |         |
+| render-filter      | `{ column, active, show }`             | Custom filter trigger. |         |
+| render-filter-icon | `{ column, active, show }`             | Custom filter icon.    |         |
+| render-filter-menu | `{ column, hide }`                     | Custom filter icon.    |         |
+| render-sorter      | `{ column, order }`                    | Custom sorter trigger. |         |
+| render-sorter-icon | `{ column, order }`                    | Custom sorter icon.    |         |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Slots).
 

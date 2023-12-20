@@ -41,7 +41,7 @@ Here are some related issues on GitHub:
 
 This project is aimed to provide a solution for these issues above.
 
-This project has been added to [Awesome Naive UI](https://github.com/naive-ui/awesome-naive).
+🚀 This has been added to [Awesome Naive-UI](https://github.com/naive-ui/awesome-naive).
 
 ---
 
