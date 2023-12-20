@@ -12,6 +12,7 @@ import type {
     SummaryRowData as NDataTableSummaryRow,
     SummaryCell as NDataTableSummaryCell,
     SortOrder as NDataTableSortOrders,
+    RenderExpandIcon as NDataTableRenderExpandIcon,
     RenderFilter as NDataTableRenderFilter,
     RenderFilterIcon as NDataTableRenderFilterIcon,
     RenderFilterMenu as NDataTableRenderFilterMenu,
@@ -51,6 +52,9 @@ export type DataTableRenderCellParams<T extends DataTableRowData = any> = {
 export type DataTableRenderExpandParams<T extends DataTableRowData = any> = {
     rowData: T;
     rowIndex: number;
+};
+export type DataTableRenderExpandIconParams = {
+    expanded: boolean;
 };
 export type DataTableRenderFilterParams<T extends DataTableRowData = any> = {
     column: DataTableColumn<T>;
@@ -491,6 +495,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
             'render-column': DataTableRenderColumnParams<T>;
             'render-cell': DataTableRenderCellParams<T>;
             'render-expand': DataTableRenderExpandParams<T>;
+            'render-expand-icon': DataTableRenderExpandIconParams;
             'render-filter': DataTableRenderFilterParams<T>;
             'render-filter-icon': DataTableRenderFilterIconParams<T>;
             'render-filter-menu': DataTableRenderFilterMenuParams<T>;
@@ -532,12 +537,23 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
                 return (pageData: T[]) => convertVNodesToSummaryRows(vnodes, { pageData });
             });
 
+            const nRenderExpandIcon = computed(() => {
+                const slot = getVSlot(slots, 'render-expand-icon');
+                if (!slot) {
+                    return props.renderExpandIcon;
+                }
+
+                type Params = Parameters<NDataTableRenderExpandIcon>[0];
+                return (params: Params) => slot(params);
+            });
+
             const nSlots = computed(() =>
                 mergeVSlots(slots, {
                     'default': undefined,
                     'render-column': undefined,
                     'render-cell': undefined,
                     'render-expand': undefined,
+                    'render-expand-icon': undefined,
                     'render-filter': undefined,
                     'render-filter-icon': undefined,
                     'render-filter-menu': undefined,
@@ -564,6 +580,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
                     {...props}
                     columns={nColumns.value}
                     summary={nSummary.value}
+                    renderExpandIcon={nRenderExpandIcon.value}
                     v-slots={nSlots.value}
                 />
             );

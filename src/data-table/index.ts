@@ -14,6 +14,7 @@ export type {
     DataTableRenderColumnParams,
     DataTableRenderCellParams,
     DataTableRenderExpandParams,
+    DataTableRenderExpandIconParams,
     DataTableRenderFilterParams,
     DataTableRenderFilterIconParams,
     DataTableRenderFilterMenuParams,
