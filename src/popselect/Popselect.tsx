@@ -99,6 +99,7 @@ const ComponentPopselect = defineComponent({
         'default': NonNullable<unknown>;
         'action': NonNullable<unknown>;
         'empty': NonNullable<unknown>;
+        'header': NonNullable<unknown>;
         'render-label': PopselectRenderLabelParams;
         'trigger': NonNullable<unknown>;
     }>,
