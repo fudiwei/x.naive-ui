@@ -99,7 +99,7 @@ export type DataTableProps<T extends DataTableRowData = any> = ExtractPublicProp
 >;
 export type DataTableInstance = Pick<
     NDataTableInst,
-    'clearFilters' | 'clearSorter' | 'filter' | 'filters' | 'page' | 'scrollTo' | 'sort'
+    'clearFilters' | 'clearSorter' | 'downloadCsv' | 'filter' | 'filters' | 'page' | 'scrollTo' | 'sort'
 >;
 
 function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): NDataTableColumn<T>[] {
@@ -564,13 +564,14 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
 
             const nRef = ref<NDataTableInst>();
             expose({
+                clearFilters: () => nRef.value?.clearFilters(),
+                clearSorter: () => nRef.value?.clearSorter(),
+                downloadCsv: (options) => nRef.value?.downloadCsv(options),
                 filter: (filters) => nRef.value?.filter(filters),
                 filters: (filters) => nRef.value?.filters(filters),
-                clearFilters: () => nRef.value?.clearFilters(),
-                sort: (columnKey, order) => nRef.value?.sort(columnKey, order),
-                clearSorter: () => nRef.value?.clearSorter(),
                 page: (page: number) => nRef.value?.page(page),
-                scrollTo: (x, y) => nRef.value?.scrollTo(x, y)
+                scrollTo: (x, y) => nRef.value?.scrollTo(x, y),
+                sort: (columnKey, order) => nRef.value?.sort(columnKey, order)
             } as DataTableInstance);
 
             return () => (

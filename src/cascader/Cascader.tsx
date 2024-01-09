@@ -81,8 +81,8 @@ export default defineComponent({
 
         const nRef = ref<NCascaderInst>();
         expose({
-            focus: () => nRef.value?.focus(),
             blur: () => nRef.value?.blur(),
+            focus: () => nRef.value?.focus(),
             getCheckedData: () => nRef.value?.getCheckedData(),
             getIndeterminateData: () => nRef.value?.getIndeterminateData()
         } as CascaderInstance);

@@ -176,10 +176,10 @@ export default defineComponent({
 
         const nRef = ref<NTreeSelectInst>();
         expose({
-            focus: () => nRef.value?.focus(),
-            focusInput: () => nRef.value?.focusInput(),
             blur: () => nRef.value?.blur(),
             blurInput: () => nRef.value?.blurInput(),
+            focus: () => nRef.value?.focus(),
+            focusInput: () => nRef.value?.focusInput(),
             getCheckedData: () => nRef.value?.getCheckedData(),
             getIndeterminateData: () => nRef.value?.getIndeterminateData()
         } as TreeSelectInstance);

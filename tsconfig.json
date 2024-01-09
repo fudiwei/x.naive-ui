@@ -2,6 +2,7 @@
     "compilerOptions": {
         "esModuleInterop": true,
         "jsx": "preserve",
+        "jsxImportSource": "vue",
         "lib": [
             "DOM",
             "ESNext"

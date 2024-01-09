@@ -108,6 +108,7 @@ const ComponentSelect = defineComponent({
         'action': NonNullable<unknown>;
         'arrow': NonNullable<unknown>;
         'empty': NonNullable<unknown>;
+        'header': NonNullable<unknown>;
         'render-label': SelectRenderLabelParams;
         'render-option': SelectRenderOptionParams;
         'render-tag': SelectRenderTagParams;
@@ -205,10 +206,10 @@ const ComponentSelect = defineComponent({
 
         const nRef = ref<NSelectInst>();
         expose({
-            focus: () => nRef.value?.focus(),
-            focusInput: () => nRef.value?.focusInput(),
             blur: () => nRef.value?.blur(),
             blurInput: () => nRef.value?.blurInput(),
+            focus: () => nRef.value?.focus(),
+            focusInput: () => nRef.value?.focusInput(),
             getData: () => ({ options: [...nOptions.value] })
         } as SelectInstance);
 
