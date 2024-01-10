@@ -205,13 +205,14 @@ const ComponentSelect = defineComponent({
         );
 
         const nRef = ref<NSelectInst>();
-        expose({
-            blur: () => nRef.value?.blur(),
-            blurInput: () => nRef.value?.blurInput(),
-            focus: () => nRef.value?.focus(),
-            focusInput: () => nRef.value?.focusInput(),
+        const nRefExposed: SelectInstance = {
+            blur: (...args) => nRef.value?.blur(...args),
+            blurInput: (...args) => nRef.value?.blurInput(...args),
+            focus: (...args) => nRef.value?.focus(...args),
+            focusInput: (...args) => nRef.value?.focusInput(...args),
             getData: () => ({ options: [...nOptions.value] })
-        } as SelectInstance);
+        };
+        expose(nRefExposed);
 
         return () => (
             <NSelect

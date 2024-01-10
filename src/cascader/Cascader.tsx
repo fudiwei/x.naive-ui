@@ -80,12 +80,13 @@ export default defineComponent({
         );
 
         const nRef = ref<NCascaderInst>();
-        expose({
-            blur: () => nRef.value?.blur(),
-            focus: () => nRef.value?.focus(),
-            getCheckedData: () => nRef.value?.getCheckedData(),
-            getIndeterminateData: () => nRef.value?.getIndeterminateData()
-        } as CascaderInstance);
+        const nRefExposed: CascaderInstance = {
+            blur: (...args) => nRef.value!.blur(...args),
+            focus: (...args) => nRef.value!.focus(...args),
+            getCheckedData: (...args) => nRef.value!.getCheckedData(...args),
+            getIndeterminateData: (...args) => nRef.value!.getIndeterminateData(...args)
+        };
+        expose(nRefExposed);
 
         return () => (
             <NCascader ref={nRef} {...attrs} {...props} renderLabel={nRenderLabel.value} v-slots={nSlots.value} />

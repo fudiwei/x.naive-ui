@@ -210,10 +210,11 @@ const ComponentMenu = defineComponent({
         );
 
         const nRef = ref<NMenuInst>();
-        expose({
-            deriveResponsiveState: () => nRef.value?.deriveResponsiveState(),
-            showOption: (key) => nRef.value?.showOption(key)
-        } as MenuInstance);
+        const nRefExposed: MenuInstance = {
+            deriveResponsiveState: (...args) => nRef.value?.deriveResponsiveState(...args),
+            showOption: (...args) => nRef.value?.showOption(...args)
+        };
+        expose(nRefExposed);
 
         return () => (
             <NMenu

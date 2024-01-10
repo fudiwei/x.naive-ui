@@ -149,12 +149,13 @@ export default defineComponent({
         );
 
         const nRef = ref<NTreeInst>();
-        expose({
-            // @ts-ignore
-            scrollTo: (...args) => nRef.value?.scrollTo(...args),
-            getCheckedData: () => nRef.value?.getCheckedData(),
-            getIndeterminateData: () => nRef.value?.getIndeterminateData()
-        } as TreeInstance);
+        const nRefExposed: TreeInstance = {
+            // @ts-ignore: Function overloading
+            scrollTo: (...args) => nRef.value!.scrollTo(...args),
+            getCheckedData: () => nRef.value!.getCheckedData(),
+            getIndeterminateData: () => nRef.value!.getIndeterminateData()
+        };
+        expose(nRefExposed);
 
         return () => (
             <NTree

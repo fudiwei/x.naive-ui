@@ -563,16 +563,18 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
             );
 
             const nRef = ref<NDataTableInst>();
-            expose({
-                clearFilters: () => nRef.value?.clearFilters(),
-                clearSorter: () => nRef.value?.clearSorter(),
-                downloadCsv: (options) => nRef.value?.downloadCsv(options),
-                filter: (filters) => nRef.value?.filter(filters),
-                filters: (filters) => nRef.value?.filters(filters),
-                page: (page: number) => nRef.value?.page(page),
-                scrollTo: (x, y) => nRef.value?.scrollTo(x, y),
-                sort: (columnKey, order) => nRef.value?.sort(columnKey, order)
-            } as DataTableInstance);
+            const nRefExposed: DataTableInstance = {
+                clearFilters: (...args) => nRef.value!.clearFilters(...args),
+                clearSorter: (...args) => nRef.value!.clearSorter(...args),
+                downloadCsv: (...args) => nRef.value!.downloadCsv(...args),
+                filter: (...args) => nRef.value!.filter(...args),
+                filters: (...args) => nRef.value!.filters(...args),
+                page: (...args) => nRef.value!.page(...args),
+                // @ts-ignore: Function overloading
+                scrollTo: (...args) => nRef.value!.scrollTo(...args),
+                sort: (...args) => nRef.value!.sort(...args)
+            };
+            expose(nRefExposed);
 
             return () => (
                 <NDataTable

@@ -40,7 +40,9 @@ const _props = (() => {
 })();
 
 export type PopselectProps = ExtractPublicPropTypes<typeof _props>;
-export type PopselectInstance = Pick<NPopselectInst, 'setShow' | 'syncPosition'>;
+export type PopselectInstance = Pick<NPopselectInst, 'setShow' | 'syncPosition'> & {
+    getData: () => { options: SelectOptions };
+};
 export type PopselectRenderLabelParams = {
     option: SelectOption;
     label: string;
@@ -168,10 +170,12 @@ const ComponentPopselect = defineComponent({
         );
 
         const nRef = ref<NPopselectInst>();
-        expose({
-            setShow: (show) => nRef.value?.setShow(show),
-            syncPosition: () => nRef.value?.syncPosition()
-        } as PopselectInstance);
+        const nRefExposed: PopselectInstance = {
+            setShow: (...args) => nRef.value!.setShow(...args),
+            syncPosition: (...args) => nRef.value!.syncPosition(...args),
+            getData: () => ({ options: [...nOptions.value] })
+        };
+        expose(nRefExposed);
 
         return () => (
             <NPopselect
