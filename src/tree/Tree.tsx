@@ -50,7 +50,9 @@ const _props = (() => {
 })();
 
 export type TreeProps = ExtractPublicPropTypes<typeof _props>;
-export type TreeInstance = Pick<NTreeInst, 'getCheckedData' | 'getIndeterminateData' | 'scrollTo'>;
+export type TreeInstance = NTreeInst & {
+    $forwardComponent: NTreeInst;
+};
 
 export default defineComponent({
     name: 'XNTree',
@@ -153,7 +155,10 @@ export default defineComponent({
             // @ts-ignore: Function overloading
             scrollTo: (...args) => nRef.value!.scrollTo(...args),
             getCheckedData: () => nRef.value!.getCheckedData(),
-            getIndeterminateData: () => nRef.value!.getIndeterminateData()
+            getIndeterminateData: () => nRef.value!.getIndeterminateData(),
+            get $forwardComponent() {
+                return nRef.value!;
+            }
         };
         expose(nRefExposed);
 

@@ -38,7 +38,9 @@ const _props = (() => {
 })();
 
 export type MenuProps = ExtractPublicPropTypes<typeof _props>;
-export type MenuInstance = Pick<NMenuInst, 'deriveResponsiveState' | 'showOption'>;
+export type MenuInstance = NMenuInst & {
+    $forwardComponent: NMenuInst;
+};
 export type MenuRenderLabelParams = {
     option: MenuOption;
     label: string;
@@ -212,7 +214,10 @@ const ComponentMenu = defineComponent({
         const nRef = ref<NMenuInst>();
         const nRefExposed: MenuInstance = {
             deriveResponsiveState: (...args) => nRef.value?.deriveResponsiveState(...args),
-            showOption: (...args) => nRef.value?.showOption(...args)
+            showOption: (...args) => nRef.value?.showOption(...args),
+            get $forwardComponent() {
+                return nRef.value!;
+            }
         };
         expose(nRefExposed);
 

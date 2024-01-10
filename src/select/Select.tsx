@@ -36,8 +36,9 @@ const _props = (() => {
 })();
 
 export type SelectProps = ExtractPublicPropTypes<typeof _props>;
-export type SelectInstance = Pick<NSelectInst, 'blur' | 'blurInput' | 'focus' | 'focusInput'> & {
+export type SelectInstance = NSelectInst & {
     getData: () => { options: SelectOptions };
+    $forwardComponent: NSelectInst;
 };
 export type SelectRenderLabelParams = {
     option: SelectOption;
@@ -210,7 +211,10 @@ const ComponentSelect = defineComponent({
             blurInput: (...args) => nRef.value?.blurInput(...args),
             focus: (...args) => nRef.value?.focus(...args),
             focusInput: (...args) => nRef.value?.focusInput(...args),
-            getData: () => ({ options: [...nOptions.value] })
+            getData: () => ({ options: [...nOptions.value] }),
+            get $forwardComponent() {
+                return nRef.value!;
+            }
         };
         expose(nRefExposed);
 

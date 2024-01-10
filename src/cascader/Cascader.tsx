@@ -23,7 +23,9 @@ const _props = (() => {
 })();
 
 export type CascaderProps = ExtractPublicPropTypes<typeof _props>;
-export type CascaderInstance = Pick<NCascaderInst, 'blur' | 'focus' | 'getCheckedData' | 'getIndeterminateData'>;
+export type CascaderInstance = NCascaderInst & {
+    $forwardComponent: NCascaderInst;
+};
 export type CascaderRenderLabelParams = {
     option: CascaderOption;
     label: string;
@@ -84,7 +86,10 @@ export default defineComponent({
             blur: (...args) => nRef.value!.blur(...args),
             focus: (...args) => nRef.value!.focus(...args),
             getCheckedData: (...args) => nRef.value!.getCheckedData(...args),
-            getIndeterminateData: (...args) => nRef.value!.getIndeterminateData(...args)
+            getIndeterminateData: (...args) => nRef.value!.getIndeterminateData(...args),
+            get $forwardComponent() {
+                return nRef.value!;
+            }
         };
         expose(nRefExposed);
 

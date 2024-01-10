@@ -97,10 +97,9 @@ const _props = _propsMakeGeneric();
 export type DataTableProps<T extends DataTableRowData = any> = ExtractPublicPropTypes<
     ReturnType<typeof _propsMakeGeneric<T>>
 >;
-export type DataTableInstance = Pick<
-    NDataTableInst,
-    'clearFilters' | 'clearSorter' | 'downloadCsv' | 'filter' | 'filters' | 'page' | 'scrollTo' | 'sort'
->;
+export type DataTableInstance = NDataTableInst & {
+    $forwardComponent: NDataTableInst;
+};
 
 function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): NDataTableColumn<T>[] {
     const temp = [] as NDataTableColumn<T>[];
@@ -572,7 +571,10 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
                 page: (...args) => nRef.value!.page(...args),
                 // @ts-ignore: Function overloading
                 scrollTo: (...args) => nRef.value!.scrollTo(...args),
-                sort: (...args) => nRef.value!.sort(...args)
+                sort: (...args) => nRef.value!.sort(...args),
+                get $forwardComponent() {
+                    return nRef.value!;
+                }
             };
             expose(nRefExposed);
 
