@@ -23,7 +23,7 @@ For more details, please refer to the Demo.
 <template>
     <x-n-data-table :data="data">
         <x-n-data-table-column type="selection" />
-        <x-n-data-table-column key="no" title="Title">
+        <x-n-data-table-column key="no" title="NO.">
             <template #render-cell="{ rowIndex }">
                 <div>{{ rowIndex + 1 }}</div>
             </template>
