@@ -1,6 +1,7 @@
 // Auto generated component declarations
 declare module 'vue' {
     export interface GlobalComponents {
+        XNButton: (typeof import('@skit/x.naive-ui'))['XNButton'];
         XNCascader: (typeof import('@skit/x.naive-ui'))['XNCascader'];
         XNDataTable: (typeof import('@skit/x.naive-ui'))['XNDataTable'];
         XNDataTableColumn: (typeof import('@skit/x.naive-ui'))['XNDataTableColumn'];
