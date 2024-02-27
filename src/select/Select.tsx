@@ -135,7 +135,7 @@ const ComponentSelect = defineComponent({
         const nOptions = computed(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNode(vnodes)) {
-                return props.options.map((option) => {
+                return (props.options ?? []).map((option) => {
                     if (typeof option === 'string' || typeof option === 'number') {
                         return {
                             [props.labelField ?? 'label']: '' + option,
@@ -151,60 +151,6 @@ const ComponentSelect = defineComponent({
             return temp;
         });
 
-        const nRenderLabel = computed(() => {
-            const slot = getVSlot(slots, 'render-label');
-            if (!slot) {
-                return props.renderLabel;
-            }
-
-            return (option: NSelectOption, selected: boolean) => {
-                return slot({
-                    option: option,
-                    label: getNOptionLabel(option),
-                    value: getNOptionValue(option),
-                    selected: selected
-                });
-            };
-        });
-
-        const nRenderOption = computed(() => {
-            const slot = getVSlot(slots, 'render-option');
-            if (!slot) {
-                return props.renderOption;
-            }
-
-            return ({ node, option, selected }: Parameters<NSelectRenderOption>[0]) => {
-                return slot({
-                    vnode: node,
-                    option: option as NSelectOption,
-                    selected: selected
-                });
-            };
-        });
-
-        const nRenderTag = computed(() => {
-            const slot = getVSlot(slots, 'render-tag');
-            if (!slot) {
-                return props.renderTag;
-            }
-
-            return ({ option, handleClose }: Parameters<NSelectRenderTag>[0]) => {
-                return slot({
-                    option: option,
-                    close: handleClose
-                });
-            };
-        });
-
-        const nSlots = computed(() =>
-            mergeVSlots(slots, {
-                'default': undefined,
-                'render-label': undefined,
-                'render-option': undefined,
-                'render-tag': undefined
-            })
-        );
-
         const nRef = ref<NSelectInst>();
         const nRefExposed: SelectInstance = {
             blur: (...args) => nRef.value?.blur(...args),
@@ -218,18 +164,74 @@ const ComponentSelect = defineComponent({
         };
         expose(nRefExposed);
 
-        return () => (
-            <NSelect
-                ref={nRef}
-                {...attrs}
-                {...props}
-                renderLabel={nRenderLabel.value}
-                renderOption={nRenderOption.value}
-                renderTag={nRenderTag.value}
-                options={nOptions.value}
-                v-slots={nSlots.value}
-            />
-        );
+        return () => {
+            const mergedRenderLabel = computed(() => {
+                const slot = getVSlot(slots, 'render-label');
+                if (!slot) {
+                    return props.renderLabel;
+                }
+
+                return (option: NSelectOption, selected: boolean) => {
+                    return slot({
+                        option: option,
+                        label: getNOptionLabel(option),
+                        value: getNOptionValue(option),
+                        selected: selected
+                    });
+                };
+            });
+
+            const mergedRenderOption = computed(() => {
+                const slot = getVSlot(slots, 'render-option');
+                if (!slot) {
+                    return props.renderOption;
+                }
+
+                return ({ node, option, selected }: Parameters<NSelectRenderOption>[0]) => {
+                    return slot({
+                        vnode: node,
+                        option: option as NSelectOption,
+                        selected: selected
+                    });
+                };
+            });
+
+            const mergedRenderTag = computed(() => {
+                const slot = getVSlot(slots, 'render-tag');
+                if (!slot) {
+                    return props.renderTag;
+                }
+
+                return ({ option, handleClose }: Parameters<NSelectRenderTag>[0]) => {
+                    return slot({
+                        option: option,
+                        close: handleClose
+                    });
+                };
+            });
+
+            const mergedOptions = computed(() => nOptions.value);
+
+            const mergedSlots = mergeVSlots(slots, {
+                'default': undefined,
+                'render-label': undefined,
+                'render-option': undefined,
+                'render-tag': undefined
+            });
+
+            return (
+                <NSelect
+                    ref={nRef}
+                    {...attrs}
+                    {...props}
+                    renderLabel={mergedRenderLabel.value}
+                    renderOption={mergedRenderOption.value}
+                    renderTag={mergedRenderTag.value}
+                    options={mergedOptions.value}
+                    v-slots={mergedSlots}
+                />
+            );
+        };
     }
 });
 

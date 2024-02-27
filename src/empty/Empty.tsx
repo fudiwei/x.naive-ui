@@ -37,20 +37,22 @@ export default defineComponent({
     }>,
 
     setup(props, { attrs, slots, expose }) {
-        const nSlots = computed(() =>
-            mergeVSlots(slots, {
-                default: () => (
-                    <div style="font-size: 0.75rem; line-height: 1rem;">
-                        {slots['default']?.() || props.description}
-                    </div>
-                ),
-
-                icon: slots['icon'] || (() => <ComponentEmptyIcon />)
-            })
-        );
-
         expose({});
 
-        return () => <NEmpty {...attrs} {...props} v-slots={nSlots.value} />;
+        return () => {
+            const mergedSlots = computed(() =>
+                mergeVSlots(slots, {
+                    default: () => (
+                        <div style="font-size: 0.75rem; line-height: 1rem;">
+                            {slots['default']?.() ?? props.description}
+                        </div>
+                    ),
+
+                    icon: slots['icon'] || (() => <ComponentEmptyIcon />)
+                })
+            );
+
+            return <NEmpty {...attrs} {...props} v-slots={mergedSlots.value} />;
+        };
     }
 });

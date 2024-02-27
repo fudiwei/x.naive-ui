@@ -58,29 +58,6 @@ export default defineComponent({
             return (props.valueField != null ? option[props.valueField] : option.value) as string | number;
         }
 
-        const nRenderLabel = computed(() => {
-            const slot = getVSlot(slots, 'render-label');
-            if (!slot) {
-                return props.renderLabel;
-            }
-
-            return (option: NCascaderOption, checked: boolean) => {
-                return slot({
-                    option: option,
-                    label: getNOptionLabel(option),
-                    value: getNOptionValue(option),
-                    checked: checked
-                });
-            };
-        });
-
-        const nSlots = computed(() =>
-            mergeVSlots(slots, {
-                'not-found': slots['empty'],
-                'render-label': undefined
-            })
-        );
-
         const nRef = ref<NCascaderInst>();
         const nRefExposed: CascaderInstance = {
             blur: (...args) => nRef.value!.blur(...args),
@@ -93,8 +70,37 @@ export default defineComponent({
         };
         expose(nRefExposed);
 
-        return () => (
-            <NCascader ref={nRef} {...attrs} {...props} renderLabel={nRenderLabel.value} v-slots={nSlots.value} />
-        );
+        return () => {
+            const mergedRenderLabel = computed(() => {
+                const slot = getVSlot(slots, 'render-label');
+                if (!slot) {
+                    return props.renderLabel;
+                }
+
+                return (option: NCascaderOption, checked: boolean) => {
+                    return slot({
+                        option: option,
+                        label: getNOptionLabel(option),
+                        value: getNOptionValue(option),
+                        checked: checked
+                    });
+                };
+            });
+
+            const mergedSlots = mergeVSlots(slots, {
+                'not-found': slots['empty'],
+                'render-label': undefined
+            });
+
+            return (
+                <NCascader
+                    ref={nRef}
+                    {...attrs}
+                    {...props}
+                    renderLabel={mergedRenderLabel.value}
+                    v-slots={mergedSlots}
+                />
+            );
+        };
     }
 });

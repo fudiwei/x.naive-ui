@@ -136,81 +136,81 @@ export default defineComponent({
             return (props.keyField != null ? option[props.keyField] : option.key) as string | number;
         }
 
-        const nOptions = computed<NDropdownOption[]>(() => {
-            const vnodes = slots['default']?.({});
-            if (isEmptyVNode(vnodes)) {
-                return props.options;
-            }
+        expose({});
 
-            const temp = convertVNodesToOptions(vnodes);
-            return temp;
-        });
+        return () => {
+            const mergedOptions = computed<NDropdownOption[]>(() => {
+                const vnodes = slots['default']?.({});
+                if (isEmptyVNode(vnodes)) {
+                    return props.options;
+                }
 
-        const nRenderLabel = computed(() => {
-            const slot = getVSlot(slots, 'render-label');
-            if (!slot) {
-                return props.renderLabel;
-            }
+                const temp = convertVNodesToOptions(vnodes);
+                return temp;
+            });
 
-            return (option: NDropdownOption) => {
-                return slot({
-                    option: option,
-                    label: getNOptionLabel(option),
-                    key: getNOptionKey(option)
-                });
-            };
-        });
+            const mergedRenderLabel = computed(() => {
+                const slot = getVSlot(slots, 'render-label');
+                if (!slot) {
+                    return props.renderLabel;
+                }
 
-        const nRenderOption = computed(() => {
-            const slot = getVSlot(slots, 'render-option');
-            if (!slot) {
-                return props.renderOption;
-            }
+                return (option: NDropdownOption) => {
+                    return slot({
+                        option: option,
+                        label: getNOptionLabel(option),
+                        key: getNOptionKey(option)
+                    });
+                };
+            });
 
-            return ({ node, option }: { node: VNode; option: NDropdownOption }) => {
-                return slot({
-                    vnode: node,
-                    option: option
-                });
-            };
-        });
+            const mergedRenderOption = computed(() => {
+                const slot = getVSlot(slots, 'render-option');
+                if (!slot) {
+                    return props.renderOption;
+                }
 
-        const nRenderIcon = computed(() => {
-            const slot = getVSlot(slots, 'render-icon');
-            if (!slot) {
-                return props.renderIcon;
-            }
+                return ({ node, option }: { node: VNode; option: NDropdownOption }) => {
+                    return slot({
+                        vnode: node,
+                        option: option
+                    });
+                };
+            });
 
-            return (option: NDropdownOption) => {
-                const vnode = slot({
-                    option: option
-                });
-                return isEmptyVNode(vnode) ? false : vnode;
-            };
-        });
+            const mergedRenderIcon = computed(() => {
+                const slot = getVSlot(slots, 'render-icon');
+                if (!slot) {
+                    return props.renderIcon;
+                }
 
-        const nSlots = computed(() =>
-            mergeVSlots(slots, {
+                return (option: NDropdownOption) => {
+                    const vnode = slot({
+                        option: option
+                    });
+                    return isEmptyVNode(vnode) ? false : vnode;
+                };
+            });
+
+            const mergedSlots = mergeVSlots(slots, {
                 'default': slots['trigger'],
                 'render-label': undefined,
                 'render-option': undefined,
                 'render-icon': undefined,
                 'trigger': undefined
-            })
-        );
+            });
 
-        expose({});
-
-        return () => (
-            <NDropdown
-                {...attrs}
-                {...props}
-                options={nOptions.value}
-                renderLabel={nRenderLabel.value}
-                renderOption={nRenderOption.value}
-                renderIcon={nRenderIcon.value}
-                v-slots={nSlots.value}
-            />
-        );
+            return (
+                <NDropdown
+                    {...attrs}
+                    {...props}
+                    options={mergedOptions.value}
+                    renderLabel={mergedRenderLabel.value}
+                    renderOption={mergedRenderOption.value}
+                    renderIcon={mergedRenderIcon.value}
+                    v-slots={mergedSlots}
+                />
+            );
+        };
     }
 });

@@ -89,90 +89,6 @@ export default defineComponent({
             return (props.keyField != null ? option[props.keyField] : option.key) as string | number;
         }
 
-        const nRenderLabel = computed(() => {
-            const slot = getVSlot(slots, 'render-label');
-            if (!slot) {
-                return props.renderLabel;
-            }
-
-            return ({ option, checked, selected }: Parameters<NTreeSelectRenderLabel>[0]) => {
-                return slot({
-                    option: option,
-                    label: getNOptionLabel(option),
-                    key: getNOptionKey(option),
-                    checked: checked,
-                    selected: selected
-                });
-            };
-        });
-
-        const nRenderPrefix = computed(() => {
-            const slot = getVSlot(slots, 'render-prefix');
-            if (!slot) {
-                return props.renderPrefix;
-            }
-
-            return ({ option, checked, selected }: Parameters<NTreeSelectRenderPrefix>[0]) => {
-                return slot({
-                    option: option,
-                    checked: checked,
-                    selected: selected
-                });
-            };
-        });
-
-        const nRenderSuffix = computed(() => {
-            const slot = getVSlot(slots, 'render-suffix');
-            if (!slot) {
-                return props.renderSuffix;
-            }
-
-            return ({ option, checked, selected }: Parameters<NTreeSelectRenderSuffix>[0]) => {
-                return slot({
-                    option: option,
-                    checked: checked,
-                    selected: selected
-                });
-            };
-        });
-
-        const nRenderSwitcherIcon = computed(() => {
-            const slot = getVSlot(slots, 'render-switcher-icon');
-            if (!slot) {
-                return props.renderSwitcherIcon;
-            }
-
-            return ({ expanded, selected }: Parameters<NTreeSelectRenderSwitcherIcon>[0]) => {
-                return slot({
-                    expanded: expanded,
-                    selected: selected
-                });
-            };
-        });
-
-        const nRenderTag = computed(() => {
-            const slot = getVSlot(slots, 'render-tag');
-            if (!slot) {
-                return props.renderTag;
-            }
-
-            return ({ option, handleClose }: Parameters<NTreeSelectRenderTag>[0]) => {
-                return slot({
-                    option: option,
-                    close: handleClose
-                });
-            };
-        });
-
-        const nSlots = computed(() =>
-            mergeVSlots(slots, {
-                'render-prefix': undefined,
-                'render-suffix': undefined,
-                'render-label': undefined,
-                'render-switcher-icon': undefined
-            })
-        );
-
         const nRef = ref<NTreeSelectInst>();
         const nRefExposed: TreeSelectInstance = {
             blur: (...args) => nRef.value!.blur(...args),
@@ -187,18 +103,102 @@ export default defineComponent({
         };
         expose(nRefExposed);
 
-        return () => (
-            <NTreeSelect
-                ref={nRef}
-                {...attrs}
-                {...props}
-                renderLabel={nRenderLabel.value}
-                renderPrefix={nRenderPrefix.value}
-                renderSuffix={nRenderSuffix.value}
-                renderSwitcherIcon={nRenderSwitcherIcon.value}
-                renderTag={nRenderTag.value}
-                v-slots={nSlots.value}
-            />
-        );
+        return () => {
+            const mergedRenderLabel = computed(() => {
+                const slot = getVSlot(slots, 'render-label');
+                if (!slot) {
+                    return props.renderLabel;
+                }
+
+                return ({ option, checked, selected }: Parameters<NTreeSelectRenderLabel>[0]) => {
+                    return slot({
+                        option: option,
+                        label: getNOptionLabel(option),
+                        key: getNOptionKey(option),
+                        checked: checked,
+                        selected: selected
+                    });
+                };
+            });
+
+            const mergedRenderPrefix = computed(() => {
+                const slot = getVSlot(slots, 'render-prefix');
+                if (!slot) {
+                    return props.renderPrefix;
+                }
+
+                return ({ option, checked, selected }: Parameters<NTreeSelectRenderPrefix>[0]) => {
+                    return slot({
+                        option: option,
+                        checked: checked,
+                        selected: selected
+                    });
+                };
+            });
+
+            const mergedRenderSuffix = computed(() => {
+                const slot = getVSlot(slots, 'render-suffix');
+                if (!slot) {
+                    return props.renderSuffix;
+                }
+
+                return ({ option, checked, selected }: Parameters<NTreeSelectRenderSuffix>[0]) => {
+                    return slot({
+                        option: option,
+                        checked: checked,
+                        selected: selected
+                    });
+                };
+            });
+
+            const mergedRenderSwitcherIcon = computed(() => {
+                const slot = getVSlot(slots, 'render-switcher-icon');
+                if (!slot) {
+                    return props.renderSwitcherIcon;
+                }
+
+                return ({ expanded, selected }: Parameters<NTreeSelectRenderSwitcherIcon>[0]) => {
+                    return slot({
+                        expanded: expanded,
+                        selected: selected
+                    });
+                };
+            });
+
+            const mergedRenderTag = computed(() => {
+                const slot = getVSlot(slots, 'render-tag');
+                if (!slot) {
+                    return props.renderTag;
+                }
+
+                return ({ option, handleClose }: Parameters<NTreeSelectRenderTag>[0]) => {
+                    return slot({
+                        option: option,
+                        close: handleClose
+                    });
+                };
+            });
+
+            const mergedSlots = mergeVSlots(slots, {
+                'render-prefix': undefined,
+                'render-suffix': undefined,
+                'render-label': undefined,
+                'render-switcher-icon': undefined
+            });
+
+            return (
+                <NTreeSelect
+                    ref={nRef}
+                    {...attrs}
+                    {...props}
+                    renderLabel={mergedRenderLabel.value}
+                    renderPrefix={mergedRenderPrefix.value}
+                    renderSuffix={mergedRenderSuffix.value}
+                    renderSwitcherIcon={mergedRenderSwitcherIcon.value}
+                    renderTag={mergedRenderTag.value}
+                    v-slots={mergedSlots}
+                />
+            );
+        };
     }
 });

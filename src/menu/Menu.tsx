@@ -136,81 +136,6 @@ const ComponentMenu = defineComponent({
             return (props.keyField != null ? option[props.keyField] : option.key) as string | number;
         }
 
-        const nOptions = computed<NMenuOption[]>(() => {
-            const vnodes = slots['default']?.({});
-            if (isEmptyVNode(vnodes)) {
-                return props.options;
-            }
-
-            const temp = convertVNodesToOptions(vnodes);
-            return temp;
-        });
-
-        const nRenderLabel = computed(() => {
-            const slot = getVSlot(slots, 'render-label');
-            if (!slot) {
-                return props.renderLabel;
-            }
-
-            return (option: NMenuOption) => {
-                return slot({
-                    option: option,
-                    label: getNOptionLabel(option),
-                    key: getNOptionKey(option)
-                });
-            };
-        });
-
-        const nRenderExtra = computed(() => {
-            const slot = getVSlot(slots, 'render-extra');
-            if (!slot) {
-                return props.renderExtra;
-            }
-
-            return (option: NMenuOption) => {
-                return slot({
-                    option: option
-                });
-            };
-        });
-
-        const nRenderIcon = computed(() => {
-            const slot = getVSlot(slots, 'render-icon');
-            if (!slot) {
-                return props.renderIcon;
-            }
-
-            return (option: NMenuOption) => {
-                const vnode = slot({
-                    option: option
-                });
-                return isEmptyVNode(vnode) ? false : vnode;
-            };
-        });
-
-        const nRenderExpandIcon = computed(() => {
-            const slot = getVSlot(slots, 'render-expand-icon');
-            if (!slot) {
-                return props.expandIcon;
-            }
-
-            return (option: NMenuOption) => {
-                return slot({
-                    option: option
-                });
-            };
-        });
-
-        const nSlots = computed(() =>
-            mergeVSlots(slots, {
-                'default': undefined,
-                'render-label': undefined,
-                'render-extra': undefined,
-                'render-icon': undefined,
-                'render-expand-icon': undefined
-            })
-        );
-
         const nRef = ref<NMenuInst>();
         const nRefExposed: MenuInstance = {
             deriveResponsiveState: (...args) => nRef.value?.deriveResponsiveState(...args),
@@ -221,19 +146,94 @@ const ComponentMenu = defineComponent({
         };
         expose(nRefExposed);
 
-        return () => (
-            <NMenu
-                ref={nRef}
-                {...attrs}
-                {...props}
-                options={nOptions.value}
-                renderLabel={nRenderLabel.value}
-                renderExtra={nRenderExtra.value}
-                renderIcon={nRenderIcon.value}
-                expandIcon={nRenderExpandIcon.value}
-                v-slots={nSlots.value}
-            />
-        );
+        return () => {
+            const mergedOptions = computed<NMenuOption[]>(() => {
+                const vnodes = slots['default']?.({});
+                if (isEmptyVNode(vnodes)) {
+                    return props.options;
+                }
+
+                const temp = convertVNodesToOptions(vnodes);
+                return temp;
+            });
+
+            const mergedRenderLabel = computed(() => {
+                const slot = getVSlot(slots, 'render-label');
+                if (!slot) {
+                    return props.renderLabel;
+                }
+
+                return (option: NMenuOption) => {
+                    return slot({
+                        option: option,
+                        label: getNOptionLabel(option),
+                        key: getNOptionKey(option)
+                    });
+                };
+            });
+
+            const mergedRenderExtra = computed(() => {
+                const slot = getVSlot(slots, 'render-extra');
+                if (!slot) {
+                    return props.renderExtra;
+                }
+
+                return (option: NMenuOption) => {
+                    return slot({
+                        option: option
+                    });
+                };
+            });
+
+            const mergedRenderIcon = computed(() => {
+                const slot = getVSlot(slots, 'render-icon');
+                if (!slot) {
+                    return props.renderIcon;
+                }
+
+                return (option: NMenuOption) => {
+                    const vnode = slot({
+                        option: option
+                    });
+                    return isEmptyVNode(vnode) ? false : vnode;
+                };
+            });
+
+            const mergedRenderExpandIcon = computed(() => {
+                const slot = getVSlot(slots, 'render-expand-icon');
+                if (!slot) {
+                    return props.expandIcon;
+                }
+
+                return (option: NMenuOption) => {
+                    return slot({
+                        option: option
+                    });
+                };
+            });
+
+            const mergedSlots = mergeVSlots(slots, {
+                'default': undefined,
+                'render-label': undefined,
+                'render-extra': undefined,
+                'render-icon': undefined,
+                'render-expand-icon': undefined
+            });
+
+            return (
+                <NMenu
+                    ref={nRef}
+                    {...attrs}
+                    {...props}
+                    options={mergedOptions.value}
+                    renderLabel={mergedRenderLabel.value}
+                    renderExtra={mergedRenderExtra.value}
+                    renderIcon={mergedRenderIcon.value}
+                    expandIcon={mergedRenderExpandIcon.value}
+                    v-slots={mergedSlots}
+                />
+            );
+        };
     }
 });
 

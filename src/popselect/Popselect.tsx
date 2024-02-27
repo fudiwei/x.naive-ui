@@ -127,7 +127,7 @@ const ComponentPopselect = defineComponent({
         const nOptions = computed(() => {
             const vnodes = slots['default']?.({});
             if (isEmptyVNode(vnodes)) {
-                return props.options.map((option) => {
+                return (props.options ?? []).map((option) => {
                     if (typeof option === 'string' || typeof option === 'number') {
                         return {
                             label: '' + option,
@@ -147,29 +147,6 @@ const ComponentPopselect = defineComponent({
             return temp;
         });
 
-        const nRenderLabel = computed(() => {
-            const slot = getVSlot(slots, 'render-label');
-            if (!slot) {
-                return props.renderLabel;
-            }
-
-            return (option: NSelectOption) => {
-                return slot({
-                    option: option,
-                    label: getNOptionLabel(option),
-                    value: getNOptionValue(option)
-                });
-            };
-        });
-
-        const nSlots = computed(() =>
-            mergeVSlots(slots, {
-                'default': slots['trigger'],
-                'render-label': undefined,
-                'trigger': undefined
-            })
-        );
-
         const nRef = ref<NPopselectInst>();
         const nRefExposed: PopselectInstance = {
             getData: () => ({ options: [...nOptions.value] }),
@@ -181,16 +158,41 @@ const ComponentPopselect = defineComponent({
         };
         expose(nRefExposed);
 
-        return () => (
-            <NPopselect
-                ref={nRef}
-                {...attrs}
-                {...props}
-                renderLabel={nRenderLabel.value}
-                options={nOptions.value}
-                v-slots={nSlots.value}
-            />
-        );
+        return () => {
+            const mergedRenderLabel = computed(() => {
+                const slot = getVSlot(slots, 'render-label');
+                if (!slot) {
+                    return props.renderLabel;
+                }
+
+                return (option: NSelectOption) => {
+                    return slot({
+                        option: option,
+                        label: getNOptionLabel(option),
+                        value: getNOptionValue(option)
+                    });
+                };
+            });
+
+            const mergedOptions = computed(() => nOptions.value);
+
+            const mergedSlots = mergeVSlots(slots, {
+                'default': slots['trigger'],
+                'render-label': undefined,
+                'trigger': undefined
+            });
+
+            return (
+                <NPopselect
+                    ref={nRef}
+                    {...attrs}
+                    {...props}
+                    renderLabel={mergedRenderLabel.value}
+                    options={mergedOptions.value}
+                    v-slots={mergedSlots}
+                />
+            );
+        };
     }
 });
 
