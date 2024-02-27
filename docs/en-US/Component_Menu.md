@@ -66,11 +66,11 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name               | Type                     | Description                     | Version |
 | :----------------- | :----------------------- | :------------------------------ | :------ |
-| default            |                          | Menu.                           |         |
-| render-label       | `{ option, label, key }` | Custom menu item label.         |         |
-| render-expand-icon | `{ option }`             | Custom menu expand icon.        |         |
-| render-extra       | `{ option }`             | Custom menu item extra content. |         |
-| render-icon        | `{ option }`             | Custom menu item icon.          |         |
+| default            |                          | Menu.                           | 0.4.0   |
+| render-label       | `{ option, label, key }` | Custom menu item label.         | 0.9.0   |
+| render-expand-icon | `{ option }`             | Custom menu expand icon.        | 0.9.0   |
+| render-extra       | `{ option }`             | Custom menu item extra content. | 0.9.0   |
+| render-icon        | `{ option }`             | Custom menu item icon.          | 0.9.0   |
 
 #### `XNMenu` Methods:
 
@@ -80,28 +80,28 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name     | Type      | Default | Description                       | Version |
 | :------- | :-------- | :------ | :-------------------------------- | :------ |
-| label    | `string`  |         | Label.                            |         |
-| extra    | `string`  |         | Extra parts.                      |         |
-| disabled | `boolean` | `false` | Whether to disable the menu item. |         |
+| label    | `string`  |         | Label.                            | 0.4.0   |
+| extra    | `string`  |         | Extra parts.                      | 0.4.0   |
+| disabled | `boolean` | `false` | Whether to disable the menu item. | 0.4.0   |
 
 #### `XNMenuItem` Slots:
 
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
-| default |      | Custom displayed label. |         |
-| extra   |      | Custom extra parts.     |         |
-| icon    |      | Custom icon.            |         |
-| submenu |      | Sub menu.               |         |
+| default |      | Custom displayed label. | 0.4.0   |
+| extra   |      | Custom extra parts.     | 0.4.0   |
+| icon    |      | Custom icon.            | 0.4.0   |
+| submenu |      | Sub menu.               | 0.7.0   |
 
 #### `XNMenuItemGroup` Props:
 
 | Name  | Type     | Default | Description | Version |
 | :---- | :------- | :------ | :---------- | :------ |
-| label | `string` |         | Label.      |         |
+| label | `string` |         | Label.      | 0.9.0   |
 
 #### `XNMenuItemGroup` Slots:
 
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
-| default |      | Sub menu.               |         |
-| label   |      | Custom displayed label. |         |
+| default |      | Sub menu.               | 0.9.0   |
+| label   |      | Custom displayed label. | 0.9.0   |

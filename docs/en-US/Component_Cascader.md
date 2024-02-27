@@ -46,7 +46,7 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name         | Type                                | Description          | Version |
 | :----------- | :---------------------------------- | :------------------- | :------ |
-| render-label | `{ option, label, value, checked }` | Custom option label. |         |
+| render-label | `{ option, label, value, checked }` | Custom option label. | 0.3.0   |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/cascader#Cascader-Slots)。
 

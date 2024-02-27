@@ -83,16 +83,16 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | Name               | Type                                   | Description            | Version |
 | :----------------- | :------------------------------------- | :--------------------- | :------ |
 | default            |                                        | Table content.         |         |
-| summary            |                                        | Summary rows.          |         |
+| summary            |                                        | Summary rows.          | 0.6.0   |
 | render-column      | `{ column }`                           | Custom column title.   |         |
 | render-cell        | `{ column, rowData, rowIndex, value }` | Custom cell content.   |         |
 | render-expand      | `{ rowData, rowIndex }`                | Custom expandable row. |         |
-| render-expand-icon | `{ expanded }`                         | Custom expand icon.    |         |
-| render-filter      | `{ column, active, show }`             | Custom filter trigger. |         |
-| render-filter-icon | `{ column, active, show }`             | Custom filter icon.    |         |
-| render-filter-menu | `{ column, hide }`                     | Custom filter icon.    |         |
-| render-sorter      | `{ column, order }`                    | Custom sorter trigger. |         |
-| render-sorter-icon | `{ column, order }`                    | Custom sorter icon.    |         |
+| render-expand-icon | `{ expanded }`                         | Custom expand icon.    | 0.14.0  |
+| render-filter      | `{ column, active, show }`             | Custom filter trigger. | 0.6.0   |
+| render-filter-icon | `{ column, active, show }`             | Custom filter icon.    | 0.6.0   |
+| render-filter-menu | `{ column, hide }`                     | Custom filter icon.    | 0.6.0   |
+| render-sorter      | `{ column, order }`                    | Custom sorter trigger. | 0.6.0   |
+| render-sorter-icon | `{ column, order }`                    | Custom sorter icon.    | 0.6.0   |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/data-table#DataTable-Slots).
 
@@ -116,19 +116,19 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name    | Type           | Description    | Version |
 | :------ | :------------- | :------------- | :------ |
-| default | `{ pageData }` | Summary cells. |         |
+| default | `{ pageData }` | Summary cells. | 0.6.0   |
 
 #### `XNDataTableSummaryCell` Props:
 
 | Name     | Type               | Default | Description           | Version |
 | :------- | :----------------- | :------ | :-------------------- | :------ |
-| key      | `string \| number` |         | Unique key of column. |         |
-| row-span | `number`           |         | Row Span.             |         |
-| col-span | `number`           |         | Column span.          |         |
-| value    | `string`           |         | Summary content.      |         |
+| key      | `string \| number` |         | Unique key of column. | 0.6.0   |
+| row-span | `number`           |         | Row Span.             | 0.6.0   |
+| col-span | `number`           |         | Column span.          | 0.6.0   |
+| value    | `string`           |         | Summary content.      | 0.6.0   |
 
 #### `XNDataTableSummaryCell` Slots:
 
 | Name    | Type           | Description                  | Version |
 | :------ | :------------- | :--------------------------- | :------ |
-| default | `{ pageData }` | Custom summary cell content. |         |
+| default | `{ pageData }` | Custom summary cell content. | 0.6.0   |

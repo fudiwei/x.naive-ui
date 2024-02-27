@@ -46,10 +46,10 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name                 | Type                                        | Description                  | Version |
 | :------------------- | :------------------------------------------ | :--------------------------- | :------ |
-| render-label         | `{ option, label, key, checked, selected }` | Custom option label.         |         |
-| render-prefix        | `{ option, checked, selected }`             | Custom option prefix.        |         |
-| render-suffix        | `{ option, checked, selected }`             | Custom option suffix.        |         |
-| render-switcher-icon | `{ expanded, selected }`                    | Custom option switcher icon. |         |
+| render-label         | `{ option, label, key, checked, selected }` | Custom option label.         | 0.5.0   |
+| render-prefix        | `{ option, checked, selected }`             | Custom option prefix.        | 0.5.0   |
+| render-suffix        | `{ option, checked, selected }`             | Custom option suffix.        | 0.5.0   |
+| render-switcher-icon | `{ expanded, selected }`                    | Custom option switcher icon. | 0.5.0   |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/tree#Tree-Slots)。
 

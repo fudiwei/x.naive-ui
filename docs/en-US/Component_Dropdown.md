@@ -63,9 +63,9 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | Name          | Type                     | Description                                      | Version |
 | :------------ | :----------------------- | :----------------------------------------------- | :------ |
 | default       |                          | The content inside dropdown.                     |         |
-| render-label  | `{ option, label, key }` | Custom menu item label.                          |         |
-| render-option | `{ vnode, option }`      | Custom menu item node.                           |         |
-| render-icon   | `{ option }`             | Custom menu item icon.                           |         |
+| render-label  | `{ option, label, key }` | Custom menu item label.                          | 0.9.0   |
+| render-option | `{ vnode, option }`      | Custom menu item node.                           | 0.9.0   |
+| render-icon   | `{ option }`             | Custom menu item icon.                           | 0.9.0   |
 | trigger       |                          | The element or component that triggers dropdown. |         |
 
 #### `XNDropdownItem` Props:
@@ -81,7 +81,7 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | :------ | :--- | :---------------------- | :------ |
 | default |      | Custom displayed label. |         |
 | icon    |      | Custom icon.            |         |
-| submenu |      | Sub menu.               |         |
+| submenu |      | Sub menu.               | 0.3.0   |
 
 #### `XNDropdownItemGroup` Props:
 

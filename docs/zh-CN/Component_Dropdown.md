@@ -60,13 +60,13 @@
 
 #### `XNDropdown` Slots：
 
-| 名称          | 参数                     | 说明                     | 版本 |
-| :------------ | :----------------------- | :----------------------- | :--- |
-| default       |                          | 弹出的内容               |      |
-| render-label  | `{ option, label, key }` | 自定义菜单项的内容       |      |
-| render-option | `{ vnode, option }`      | 自定义菜单项的内容       |      |
-| render-icon   | `{ option }`             | 自定义菜单项的图标       |      |
-| trigger       |                          | 触发弹出信息的组件或元素 |      |
+| 名称          | 参数                     | 说明                     | 版本  |
+| :------------ | :----------------------- | :----------------------- | :---- |
+| default       |                          | 弹出的内容               |       |
+| render-label  | `{ option, label, key }` | 自定义菜单项的内容       | 0.9.0 |
+| render-option | `{ vnode, option }`      | 自定义菜单项的内容       | 0.9.0 |
+| render-icon   | `{ option }`             | 自定义菜单项的图标       | 0.9.0 |
+| trigger       |                          | 触发弹出信息的组件或元素 |       |
 
 #### `XNDropdownItem` Props：
 
@@ -77,11 +77,11 @@
 
 #### `XNDropdownItem` Slots：
 
-| 名称    | 参数 | 说明           | 版本 |
-| :------ | :--- | :------------- | :--- |
-| default |      | 自定义文本内容 |      |
-| icon    |      | 自定义图标     |      |
-| submenu |      | 子菜单         |      |
+| 名称    | 参数 | 说明           | 版本  |
+| :------ | :--- | :------------- | :---- |
+| default |      | 自定义文本内容 |       |
+| icon    |      | 自定义图标     |       |
+| submenu |      | 子菜单         | 0.3.0 |
 
 #### `XNDropdownItemGroup` Props：
 

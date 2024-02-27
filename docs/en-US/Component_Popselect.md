@@ -57,8 +57,8 @@ For more details, please refer to the Demo.
 
 | Name       | Type     | Default   | Description                 | Version |
 | :--------- | :------- | :-------- | :-------------------------- | :------ |
-| labelField | `string` | `'label'` | Field name of option label. |         |
-| valueField | `string` | `'value'` | Field name of option value. |         |
+| labelField | `string` | `'label'` | Field name of option label. | 0.13.0  |
+| valueField | `string` | `'value'` | Field name of option value. | 0.13.0  |
 
 For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/popselect#Popselect-Props).
 
@@ -66,9 +66,9 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name         | Type                       | Description                                     | Version |
 | :----------- | :------------------------- | :---------------------------------------------- | :------ |
-| default      |                            | The content inside select.                      |         |
-| render-label | `{ option, label, value }` | Custom option label.                            |         |
-| trigger      |                            | The element or component that triggers popover. |         |
+| default      |                            | The content inside select.                      | 0.13.0  |
+| render-label | `{ option, label, value }` | Custom option label.                            | 0.13.0  |
+| trigger      |                            | The element or component that triggers popover. | 0.13.0  |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/popselect#Popselect-Slots)。
 

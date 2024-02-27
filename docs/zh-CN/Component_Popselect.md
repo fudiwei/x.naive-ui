@@ -55,20 +55,20 @@
 
 #### `XNPopselect` Props：
 
-| 名称       | 类型     | 默认值    | 说明                | 版本 |
-| :--------- | :------- | :-------- | :------------------ | :--- |
-| labelField | `string` | `'label'` | 选项 label 的字段名 |      |
-| valueField | `string` | `'value'` | 选项 value 的字段名 |      |
+| 名称       | 类型     | 默认值    | 说明                | 版本   |
+| :--------- | :------- | :-------- | :------------------ | :----- |
+| labelField | `string` | `'label'` | 选项 label 的字段名 | 0.13.0 |
+| valueField | `string` | `'value'` | 选项 value 的字段名 | 0.13.0 |
 
 其他 Props 略，与 `NPopselect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/popselect#Popselect-Props)。
 
 #### `XNPopselect` Slots：
 
-| 名称         | 参数                       | 说明                     | 版本 |
-| :----------- | :------------------------- | :----------------------- | :--- |
-| default      |                            | 弹出的内容               |      |
-| render-label | `{ option, label, value }` | 自定义选项的内容         |      |
-| trigger      |                            | 触发弹出信息的组件或元素 |      |
+| 名称         | 参数                       | 说明                     | 版本   |
+| :----------- | :------------------------- | :----------------------- | :----- |
+| default      |                            | 弹出的内容               | 0.13.0 |
+| render-label | `{ option, label, value }` | 自定义选项的内容         | 0.13.0 |
+| trigger      |                            | 触发弹出信息的组件或元素 | 0.13.0 |
 
 其他 Slots 略，与 `NPopselect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/popselect#Popselect-Slots)。
 

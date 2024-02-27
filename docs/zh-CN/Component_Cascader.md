@@ -44,9 +44,9 @@
 
 #### `XNCascader` Slots：
 
-| 名称         | 参数                                | 说明             | 版本 |
-| :----------- | :---------------------------------- | :--------------- | :--- |
-| render-label | `{ option, label, value, checked }` | 自定义选项的内容 |      |
+| 名称         | 参数                                | 说明             | 版本  |
+| :----------- | :---------------------------------- | :--------------- | :---- |
+| render-label | `{ option, label, value, checked }` | 自定义选项的内容 | 0.3.0 |
 
 其他 Slots 略，与 `NCascader` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/dropdown#Cascader-Slots)。
 

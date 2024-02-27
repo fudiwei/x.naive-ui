@@ -53,10 +53,10 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name          | Type                                 | Description                | Version |
 | :------------ | :----------------------------------- | :------------------------- | :------ |
-| default       |                                      | The content inside select. |         |
-| render-label  | `{ option, label, value, selected }` | Custom option label.       |         |
-| render-option | `{ vnode, option, selected }`        | Custom option node.        |         |
-| render-tag    | `{ option, close }`                  | Custom tag.                |         |
+| default       |                                      | The content inside select. | 0.2.0   |
+| render-label  | `{ option, label, value, selected }` | Custom option label.       | 0.2.0   |
+| render-option | `{ vnode, option, selected }`        | Custom option node.        | 0.2.0   |
+| render-tag    | `{ option, close }`                  | Custom tag.                | 0.2.0   |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Slots)。
 
@@ -64,7 +64,7 @@ For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 | Name    | Type                                   | Description | Version |
 | :------ | :------------------------------------- | :---------- | :------ |
-| getData | () => { options: Array<SelectOption> } | Get data.   |         |
+| getData | () => { options: Array<SelectOption> } | Get data.   | 0.7.0   |
 
 For other methods, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Methods).
 
@@ -72,25 +72,25 @@ For other methods, please see [Naive-UI documentation](https://www.naiveui.com/e
 
 | Name     | Type               | Default | Description                    | Version |
 | :------- | :----------------- | :------ | :----------------------------- | :------ |
-| label    | `string`           |         | Label of the option.           |         |
-| value    | `string \| number` |         | Value of the option.           |         |
-| disabled | `boolean`          | `false` | Whether to disable the option. |         |
+| label    | `string`           |         | Label of the option.           | 0.7.0   |
+| value    | `string \| number` |         | Value of the option.           | 0.7.0   |
+| disabled | `boolean`          | `false` | Whether to disable the option. | 0.7.0   |
 
 #### `XNSelectOption` Slots:
 
 | Name    | Type | Description             | Version |
 | :------ | :--- | :---------------------- | :------ |
-| default |      | Custom displayed label. |         |
+| default |      | Custom displayed label. | 0.7.0   |
 
 #### `XNSelectOptionGroup` Props:
 
 | Name  | Type     | Default | Description         | Version |
 | :---- | :------- | :------ | :------------------ | :------ |
-| label | `string` |         | Label of the group. |         |
+| label | `string` |         | Label of the group. | 0.7.0   |
 
 #### `XNSelectOptionGroup` Slots:
 
 | Name    | Type | Description               | Version |
 | :------ | :--- | :------------------------ | :------ |
-| default |      | The content inside group. |         |
-| label   |      | Custom displayed label.   |         |
+| default |      | The content inside group. | 0.7.0   |
+| label   |      | Custom displayed label.   | 0.7.0   |
