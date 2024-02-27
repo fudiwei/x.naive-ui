@@ -10,6 +10,14 @@ const routes: RouteRecordRaw[] = [
         redirect: { path: '/components/data-table' }
     },
     {
+        path: '/components/button',
+        component: () => import('../views/components/button/index.vue'),
+        meta: {
+            sider: true,
+            title: 'Button / 按钮'
+        }
+    },
+    {
         path: '/components/data-table',
         component: () => import('../views/components/data-table/index.vue'),
         meta: {

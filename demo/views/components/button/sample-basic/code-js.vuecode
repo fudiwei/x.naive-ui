@@ -1,0 +1,34 @@
+﻿<script>
+import { defineComponent } from 'vue';
+import { CashOutline } from '@vicons/ionicons5';
+
+export default defineComponent({});
+</script>
+
+<template>
+    <n-space>
+        <x-n-button>No Icon</x-n-button>
+
+        <x-n-button>
+            <template #icon>
+                <n-icon><CashOutline /></n-icon>
+            </template>
+        </x-n-button>
+
+        <x-n-button>
+            <n-icon><CashOutline /></n-icon>
+        </x-n-button>
+
+        <x-n-button>
+            <template #icon>
+                <n-icon><CashOutline /></n-icon>
+            </template>
+            Icon in Slot
+        </x-n-button>
+
+        <x-n-button>
+            <n-icon><CashOutline /></n-icon>
+            Icon
+        </x-n-button>
+    </n-space>
+</template>

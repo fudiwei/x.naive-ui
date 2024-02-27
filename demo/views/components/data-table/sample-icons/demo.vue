@@ -1,9 +1,8 @@
 ﻿<script lang="ts">
 import { defineComponent, ref, h } from 'vue';
-import { NIcon, useMessage } from 'naive-ui';
+import { NIcon } from 'naive-ui';
 import PawOutline from '~@/assets/icons/PawOutline.svg';
 import SearchOutline from '~@/assets/icons/SearchOutline.svg';
-import type { DataTableColumns } from '@skit/x.naive-ui';
 
 const data = [
     {
