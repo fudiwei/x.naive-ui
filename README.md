@@ -47,7 +47,7 @@
 
 ## 特性
 
--   与 Naive-UI 组件几乎完全一致的 API（最新适配版本：`v2.37.3`）。只需在原来的组件名前增加 `x-` 前缀（例如：`<n-data-table>` → `<x-n-data-table>`）。
+-   与 Naive-UI 组件几乎完全一致的 API（最新适配版本：`v2.38.1`）。只需在原来的组件名前增加 `x-` 前缀（例如：`<n-data-table>` → `<x-n-data-table>`）。
 -   配合 [vue-tsc](https://github.com/vuejs/language-tools)，在模板中使用插槽也可享受到 TypeScript 的类型约束。
 -   `DataTable`：提供了**列头**、**单元格**、**展开行**的作用域插槽写法支持。
 -   `DataTable`：提供了**列**、**总结栏**的模板写法支持（即在模板中定义 `columns`、`summary` prop）。
