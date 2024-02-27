@@ -1,4 +1,5 @@
-﻿import type { SlotsType, ExtractPublicPropTypes } from 'vue';
+﻿/* @jsxImportSource vue */
+import type { SlotsType, ExtractPublicPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import { NButton, buttonProps as defaultNButtonProps } from 'naive-ui';
 

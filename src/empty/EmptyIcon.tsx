@@ -1,4 +1,5 @@
-﻿import type { PropType, ExtractPublicPropTypes } from 'vue';
+﻿/* @jsxImportSource vue */
+import type { PropType, ExtractPublicPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import { NIcon } from 'naive-ui';
 

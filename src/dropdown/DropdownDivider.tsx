@@ -1,4 +1,5 @@
-﻿import { defineComponent } from 'vue';
+﻿/* @jsxImportSource vue */
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'XNDropdownDivider',

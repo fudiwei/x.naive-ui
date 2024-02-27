@@ -1,4 +1,5 @@
-﻿import type { PropType, SlotsType, ExtractPropTypes } from 'vue';
+﻿/* @jsxImportSource vue */
+import type { PropType, SlotsType, ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 
 import type { DataTableRowData, DataTableRenderSummaryParams } from './DataTable';

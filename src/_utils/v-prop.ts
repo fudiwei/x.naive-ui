@@ -1,4 +1,4 @@
-﻿import { mergeProps, camelize } from 'vue';
+﻿import { camelize } from 'vue';
 
 export const getVProp = <T extends object, K extends keyof T>(props: T, name: K): T[K] | undefined => {
     if (!props || !name) {
@@ -33,8 +33,6 @@ export const getVPropAsNumber = <T extends object, K extends keyof T>(props: T, 
     }
     return r;
 };
-
-export { mergeProps as mergeVProps };
 
 export const normalizeVProps = (props: any): object => {
     const temp = {} as any;

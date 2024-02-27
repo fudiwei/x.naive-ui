@@ -1,4 +1,5 @@
-﻿import type { SlotsType } from 'vue';
+﻿/* @jsxImportSource vue */
+import type { SlotsType } from 'vue';
 import { defineComponent } from 'vue';
 
 import type { DataTableRowData, DataTableRenderSummaryParams } from './DataTable';

@@ -1,4 +1,5 @@
-﻿import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+﻿/* @jsxImportSource vue */
+import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 

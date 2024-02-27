@@ -26,9 +26,13 @@ function configureMain() {
                 }),
 
                 rollupPluginESBuild({
-                    tsconfig: path.resolve('./tsconfig.json'),
+                    tsconfig: path.resolve('./tsconfig.esbuild.json'),
                     target: 'ESNext',
-                    sourceMap: true
+                    sourceMap: true,
+                    jsx: 'preserve',
+                    jsxFactory: 'h',
+                    jsxFragment: 'Fragment',
+                    jsxImportSource: 'vue'
                 }),
 
                 rollupPluginVue(),

@@ -1,4 +1,5 @@
-﻿import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+﻿/* @jsxImportSource vue */
+import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
     MenuOption as NMenuOption,
     MenuGroupOption as NMenuGroupOption,
