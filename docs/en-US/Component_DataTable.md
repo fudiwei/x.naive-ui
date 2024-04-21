@@ -15,9 +15,9 @@ For more details, please refer to the Demo.
 ```html
 <script setup>
     const data = [
-        { name: 'Athos', age: 20 },
-        { name: 'Porthos', age: 19 },
-        { name: 'Aramis', age: 18 }
+        { key: 1, name: 'Athos', age: 20 },
+        { key: 2, name: 'Porthos', age: 19 },
+        { key: 3, name: 'Aramis', age: 18 }
     ];
 </script>
 <template>
@@ -51,9 +51,9 @@ For more details, please refer to the Demo.
         { key: 'actions', title: 'Actions' }
     ];
     const data = [
-        { name: 'Athos', age: 20 },
-        { name: 'Porthos', age: 19 },
-        { name: 'Aramis', age: 18 }
+        { key: 1, name: 'Athos', age: 20 },
+        { key: 2, name: 'Porthos', age: 19 },
+        { key: 3, name: 'Aramis', age: 18 }
     ];
 </script>
 <template>

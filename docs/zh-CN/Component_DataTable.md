@@ -15,9 +15,9 @@
 ```html
 <script setup>
     const data = [
-        { name: 'Athos', age: 20 },
-        { name: 'Porthos', age: 19 },
-        { name: 'Aramis', age: 18 }
+        { key: 1, name: 'Athos', age: 20 },
+        { key: 2, name: 'Porthos', age: 19 },
+        { key: 3, name: 'Aramis', age: 18 }
     ];
 </script>
 <template>
@@ -51,16 +51,13 @@
         { key: 'actions', title: 'Actions' }
     ];
     const data = [
-        { name: 'Athos', age: 20 },
-        { name: 'Porthos', age: 19 },
-        { name: 'Aramis', age: 18 }
+        { key: 1, name: 'Athos', age: 20 },
+        { key: 2, name: 'Porthos', age: 19 },
+        { key: 3, name: 'Aramis', age: 18 }
     ];
 </script>
 <template>
     <x-n-data-table :columns="columns" :data="data">
-        <template #render-column="{ column }">
-            <div>{{ 'Column ' + column.title }}</div>
-        </template>
         <template #render-cell="{ column, rowData, rowIndex }">
             <template v-if="column.key === 'no'">
                 <div>{{ rowIndex + 1 }}</div>
