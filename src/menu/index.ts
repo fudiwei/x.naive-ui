@@ -22,10 +22,10 @@ export const XNMenu = Object.assign(ComponentMenu, {
     Item: ComponentMenuItem,
     ItemGroup: ComponentMenuItemGroup,
     install: (app: App) => {
-        app.component(ComponentMenu.name, ComponentMenu);
-        app.component(ComponentMenuDivider.name, ComponentMenuDivider);
-        app.component(ComponentMenuItem.name, ComponentMenuItem);
-        app.component(ComponentMenuItemGroup.name, ComponentMenuItemGroup);
+        app.component(ComponentMenu.name!, ComponentMenu);
+        app.component(ComponentMenuDivider.name!, ComponentMenuDivider);
+        app.component(ComponentMenuItem.name!, ComponentMenuItem);
+        app.component(ComponentMenuItemGroup.name!, ComponentMenuItemGroup);
     }
 });
 export const XNMenuDivider = ComponentMenuDivider;

@@ -19,9 +19,9 @@ export const XNSelect = Object.assign(ComponentSelect, {
     Option: ComponentSelectOption,
     OptionGroup: ComponentSelectOptionGroup,
     install: (app: App) => {
-        app.component(ComponentSelect.name, ComponentSelect);
-        app.component(ComponentSelectOption.name, ComponentSelectOption);
-        app.component(ComponentSelectOptionGroup.name, ComponentSelectOptionGroup);
+        app.component(ComponentSelect.name!, ComponentSelect);
+        app.component(ComponentSelectOption.name!, ComponentSelectOption);
+        app.component(ComponentSelectOptionGroup.name!, ComponentSelectOptionGroup);
     }
 });
 export const XNSelectOption = ComponentSelectOption;

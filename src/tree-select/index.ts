@@ -15,7 +15,7 @@ export type {
 } from './TreeSelect';
 export const XNTreeSelect = Object.assign(ComponentTreeSelect, {
     install: (app: App) => {
-        app.component(ComponentTreeSelect.name, ComponentTreeSelect);
+        app.component(ComponentTreeSelect.name!, ComponentTreeSelect);
     }
 });
 export default XNTreeSelect;

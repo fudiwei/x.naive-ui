@@ -7,11 +7,13 @@ export type {
     CascaderInstance,
     CascaderOption,
     CascaderOptions,
-    CascaderRenderLabelParams
+    CascaderRenderLabelParams,
+    CascaderRenderPrefixParams,
+    CascaderRenderSuffixParams
 } from './Cascader';
 export const XNCascader = Object.assign(ComponentCascader, {
     install: (app: App) => {
-        app.component(XNCascader.name, XNCascader);
+        app.component(XNCascader.name!, XNCascader);
     }
 });
 export default XNCascader;

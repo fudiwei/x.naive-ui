@@ -44,9 +44,11 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 
 #### `XNCascader` Slots:
 
-| Name         | Type                                | Description          | Version |
-| :----------- | :---------------------------------- | :------------------- | :------ |
-| render-label | `{ option, label, value, checked }` | Custom option label. | 0.3.0   |
+| Name          | Type                                | Description          | Version |
+| :------------ | :---------------------------------- | :------------------- | :------ |
+| render-label  | `{ option, label, value, checked }` | Custom option label. | 0.3.0   |
+| render-prefix | `{ node, option, checked }`         | Custom option prefix | 0.17.0  |
+| render-suffix | `{ node, option, checked }`         | Custom option suffix | 0.17.0  |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/cascader#Cascader-Slots)。
 

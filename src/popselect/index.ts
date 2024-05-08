@@ -7,7 +7,7 @@ export type { PopselectProps, PopselectInstance, PopselectRenderLabelParams } fr
 export const XNPopselect = Object.assign(ComponentPopselect, {
     install: (app: App) => {
         app.use(ComponentSelect);
-        app.component(ComponentPopselect.name, ComponentPopselect);
+        app.component(ComponentPopselect.name!, ComponentPopselect);
     }
 });
 export default XNPopselect;

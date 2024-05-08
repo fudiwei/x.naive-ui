@@ -29,10 +29,10 @@ export const XNDataTable = Object.assign(ComponentDataTable, {
     SummaryRow: ComponentDataTableSummaryRow,
     SummaryCell: ComponentDataTableSummaryCell,
     install: (app: App) => {
-        app.component(ComponentDataTable.name, ComponentDataTable);
-        app.component(ComponentDataTableColumn.name, ComponentDataTableColumn);
-        app.component(ComponentDataTableSummaryRow.name, ComponentDataTableSummaryRow);
-        app.component(ComponentDataTableSummaryCell.name, ComponentDataTableSummaryCell);
+        app.component(ComponentDataTable.name!, ComponentDataTable);
+        app.component(ComponentDataTableColumn.name!, ComponentDataTableColumn);
+        app.component(ComponentDataTableSummaryRow.name!, ComponentDataTableSummaryRow);
+        app.component(ComponentDataTableSummaryCell.name!, ComponentDataTableSummaryCell);
     }
 });
 export const XNDataTableColumn = ComponentDataTableColumn;

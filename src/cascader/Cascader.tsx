@@ -1,5 +1,5 @@
 ﻿/* @jsxImportSource vue */
-import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+import type { VNode, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type { CascaderOption as NCascaderOption, CascaderInst as NCascaderInst } from 'naive-ui';
 import { defineComponent, ref, computed } from 'vue';
 import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
@@ -33,6 +33,16 @@ export type CascaderRenderLabelParams = {
     value: string | number;
     checked: boolean;
 };
+export type CascaderRenderPrefixParams = {
+    node: VNode | null;
+    option: CascaderOption;
+    checked: boolean;
+};
+export type CascaderRenderSuffixParams = {
+    node: VNode | null;
+    option: CascaderOption;
+    checked: boolean;
+};
 
 export default defineComponent({
     name: 'XNCascader',
@@ -48,6 +58,8 @@ export default defineComponent({
         'arrow': NonNullable<unknown>;
         'empty': NonNullable<unknown>;
         'render-label': CascaderRenderLabelParams;
+        'render-prefix': CascaderRenderPrefixParams;
+        'render-suffix': CascaderRenderSuffixParams;
     }>,
 
     setup(props, { attrs, slots, expose }) {
@@ -88,9 +100,41 @@ export default defineComponent({
                 };
             });
 
+            const mergedRenderPrefix = computed(() => {
+                const slot = getVSlot(slots, 'render-prefix');
+                if (!slot) {
+                    return props.renderPrefix;
+                }
+
+                return (info: { node: VNode | null; option: NCascaderOption; checked: boolean }) => {
+                    return slot({
+                        node: info.node,
+                        option: info.option,
+                        checked: info.checked
+                    });
+                };
+            });
+
+            const mergedRenderSuffix = computed(() => {
+                const slot = getVSlot(slots, 'render-suffix');
+                if (!slot) {
+                    return props.renderSuffix;
+                }
+
+                return (info: { node: VNode | null; option: NCascaderOption; checked: boolean }) => {
+                    return slot({
+                        node: info.node,
+                        option: info.option,
+                        checked: info.checked
+                    });
+                };
+            });
+
             const mergedSlots = mergeVSlots(slots, {
                 'not-found': slots['empty'],
-                'render-label': undefined
+                'render-label': undefined,
+                'render-prefix': undefined,
+                'render-suffix': undefined
             });
 
             return (
@@ -99,6 +143,8 @@ export default defineComponent({
                     {...attrs}
                     {...props}
                     renderLabel={mergedRenderLabel.value}
+                    renderPrefix={mergedRenderPrefix.value}
+                    renderSuffix={mergedRenderSuffix.value}
                     v-slots={mergedSlots}
                 />
             );

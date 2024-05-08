@@ -19,10 +19,10 @@ export const XNDropdown = Object.assign(ComponentDropdown, {
     Divider: ComponentDropdownDivider,
     Item: ComponentDropdownItem,
     install: (app: App) => {
-        app.component(ComponentDropdown.name, ComponentDropdown);
-        app.component(ComponentDropdownDivider.name, ComponentDropdownDivider);
-        app.component(ComponentDropdownItem.name, ComponentDropdownItem);
-        app.component(ComponentDropdownItemGroup.name, ComponentDropdownItemGroup);
+        app.component(ComponentDropdown.name!, ComponentDropdown);
+        app.component(ComponentDropdownDivider.name!, ComponentDropdownDivider);
+        app.component(ComponentDropdownItem.name!, ComponentDropdownItem);
+        app.component(ComponentDropdownItemGroup.name!, ComponentDropdownItemGroup);
     }
 });
 export const XNDropdownDivider = ComponentDropdownDivider;
