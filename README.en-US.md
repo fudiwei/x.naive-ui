@@ -60,7 +60,7 @@ This project is aimed to provide a solution for these issues above.
 -   `Popselect`: Scoped slots for **options**.
 -   `Cascader`: Scoped slots for **options**.
 -   `Tree`: Scoped slots for **options**, **switcher icon**.
--   `TreeSelect`: Scoped slots for **options**, **tags**, **switcher icon**.
+-   `TreeSelect`: Display as a square when only icon.
 
 ---
 
