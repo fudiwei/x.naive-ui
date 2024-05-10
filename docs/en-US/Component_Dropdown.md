@@ -64,7 +64,7 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | :------------ | :----------------------- | :----------------------------------------------- | :------ |
 | default       |                          | The content inside dropdown.                     |         |
 | render-label  | `{ option, label, key }` | Custom menu item label.                          | 0.9.0   |
-| render-option | `{ vnode, option }`      | Custom menu item node.                           | 0.9.0   |
+| render-option | `{ node, option }`       | Custom menu item node.                           | 0.9.0   |
 | render-icon   | `{ option }`             | Custom menu item icon.                           | 0.9.0   |
 | trigger       |                          | The element or component that triggers dropdown. |         |
 

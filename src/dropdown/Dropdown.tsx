@@ -46,7 +46,7 @@ export type DropdownRenderLabelParams = {
     key?: string | number;
 };
 export type DropdownRenderOptionParams = {
-    vnode: VNode;
+    node: VNode;
     option: DropdownOption;
 };
 export type DropdownRenderIconParams = {
@@ -173,7 +173,7 @@ export default defineComponent({
 
                 return ({ node, option }: { node: VNode; option: NDropdownOption }) => {
                     return slot({
-                        vnode: node,
+                        node: node,
                         option: option
                     });
                 };

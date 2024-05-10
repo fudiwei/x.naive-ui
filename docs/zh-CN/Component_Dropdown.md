@@ -64,7 +64,7 @@
 | :------------ | :----------------------- | :----------------------- | :---- |
 | default       |                          | 弹出的内容               |       |
 | render-label  | `{ option, label, key }` | 自定义菜单项的内容       | 0.9.0 |
-| render-option | `{ vnode, option }`      | 自定义菜单项的内容       | 0.9.0 |
+| render-option | `{ node, option }`       | 自定义菜单项的内容       | 0.9.0 |
 | render-icon   | `{ option }`             | 自定义菜单项的图标       | 0.9.0 |
 | trigger       |                          | 触发弹出信息的组件或元素 |       |
 
