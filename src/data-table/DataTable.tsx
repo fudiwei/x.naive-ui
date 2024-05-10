@@ -1,7 +1,7 @@
 ﻿/* @jsxImportSource vue */
 import type { VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
-    DataTableColumn as NDataTableColumn,
+    DataTableColumn as _NDataTableColumn,
     DataTableBaseColumn as NDataTableBaseColumn,
     DataTableSelectionColumn as NDataTableSelectionColumn,
     DataTableExpandColumn as NDataTableExpandColumn,
@@ -31,6 +31,8 @@ import * as logger from '../_utils/logger';
 import ComponentDataTableColumn from './DataTableColumn';
 import ComponentDataTableSummaryRow from './DataTableSummaryRow';
 import ComponentDataTableSummaryCell from './DataTableSummaryCell';
+
+type NDataTableColumn<T = any> = _NDataTableColumn<T> & { __X_COLUMN?: NDataTableColumn<T> };
 
 export type DataTableRowData = NDataTableRowData;
 export type DataTableColumn<T extends DataTableRowData = any> = {
@@ -235,6 +237,12 @@ function populateColumnRenders<T extends NDataTableRowData>(
     ctxSlots: Slots,
     ctxSingle = false
 ): NDataTableColumn<T> {
+    if (!column.__X_COLUMN) {
+        const copy = column;
+        column = { ...copy };
+        column.__X_COLUMN = copy;
+    }
+
     (column as NDataTableBaseColumn<T>).title = resolveColumnRender<T>(column, ctxSlots, ctxSingle);
     (column as NDataTableBaseColumn<T>).render = resolveCellRender<T>(column, ctxSlots, ctxSingle);
     (column as NDataTableExpandColumn<T>).renderExpand = resolveExpandRender<T>(column, ctxSlots, ctxSingle)!;
@@ -258,7 +266,7 @@ function resolveColumnRender<T extends NDataTableRowData>(
         return () => {
             const slot = getVSlot(ctxSlots, 'render-column');
             const params: DataTableRenderColumnParams = {
-                column: column as DataTableColumn<T>
+                column: (column.__X_COLUMN ?? column) as DataTableColumn<T>
             };
             const vnodes = slot?.(params);
             if (!isEmptyVNode(vnodes)) {
@@ -282,7 +290,7 @@ function resolveCellRender<T extends NDataTableRowData>(
         const slot = getVSlot(ctxSlots, 'render-cell');
         if (slot) {
             const params: DataTableRenderCellParams = {
-                column: column as DataTableColumn<T>,
+                column: (column.__X_COLUMN ?? column) as DataTableColumn<T>,
                 rowData: rowData,
                 rowIndex: rowIndex,
                 value: rowData?.[(column as NDataTableBaseColumn<T>).key]
@@ -347,7 +355,7 @@ function resolveFilterRender<T extends NDataTableRowData>(
 
     return (e: Parameters<NDataTableRenderFilter>[0]) => {
         const params: DataTableRenderFilterParams = {
-            column: column as DataTableColumn<T>,
+            column: (column.__X_COLUMN ?? column) as DataTableColumn<T>,
             active: e.active,
             show: e.show
         };
@@ -373,7 +381,7 @@ function resolveFilterIconRender<T extends NDataTableRowData>(
 
     return (e: Parameters<NDataTableRenderFilterIcon>[0]) => {
         const params: DataTableRenderFilterIconParams = {
-            column: column as DataTableColumn<T>,
+            column: (column.__X_COLUMN ?? column) as DataTableColumn<T>,
             active: e.active,
             show: e.show
         };
@@ -399,7 +407,7 @@ function resolveFilterMenuRender<T extends NDataTableRowData>(
 
     return (e: Parameters<NDataTableRenderFilterMenu>[0]) => {
         const params: DataTableRenderFilterMenuParams = {
-            column: column as DataTableColumn<T>,
+            column: (column.__X_COLUMN ?? column) as DataTableColumn<T>,
             hide: e.hide
         };
         const vnodes = slot?.(params);
@@ -424,7 +432,7 @@ function resolveSorterRender<T extends NDataTableRowData>(
 
     return (e: Parameters<NDataTableRenderSorter>[0]) => {
         const params: DataTableRenderSorterParams = {
-            column: column as DataTableColumn<T>,
+            column: (column.__X_COLUMN ?? column) as DataTableColumn<T>,
             order: e.order
         };
         const vnodes = slot?.(params);
@@ -449,7 +457,7 @@ function resolveSorterIconRender<T extends NDataTableRowData>(
 
     return (e: Parameters<NDataTableRenderSorterIcon>[0]) => {
         const params: DataTableRenderSorterParams = {
-            column: column as DataTableColumn<T>,
+            column: (column.__X_COLUMN ?? column) as DataTableColumn<T>,
             order: e.order
         };
         const vnodes = slot?.(params);
