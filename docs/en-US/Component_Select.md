@@ -55,7 +55,7 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | :------------ | :----------------------------------- | :------------------------- | :------ |
 | default       |                                      | The content inside select. | 0.2.0   |
 | render-label  | `{ option, label, value, selected }` | Custom option label.       | 0.2.0   |
-| render-option | `{ vnode, option, selected }`        | Custom option node.        | 0.2.0   |
+| render-option | `{ node, option, selected }`         | Custom option node.        | 0.2.0   |
 | render-tag    | `{ option, close }`                  | Custom tag.                | 0.2.0   |
 
 For other slots, please see [Naive-UI documentation](https://www.naiveui.com/en-US/os-theme/components/select#Select-Slots)。

@@ -55,7 +55,7 @@
 | :------------ | :----------------------------------- | :--------------- | :---- |
 | default       |                                      | 弹出的内容       | 0.2.0 |
 | render-label  | `{ option, label, value, selected }` | 自定义选项的内容 | 0.2.0 |
-| render-option | `{ vnode, option, selected }`        | 自定义选项的内容 | 0.2.0 |
+| render-option | `{ node, option, selected }`         | 自定义选项的内容 | 0.2.0 |
 | render-tag    | `{ option, close }`                  | 自定义标签的内容 | 0.2.0 |
 
 其他 Slots 略，与 `NSelect` 保持一致，请参考 [Naive-UI 文档](https://www.naiveui.com/zh-CN/os-theme/components/select#Select-Slots)。
