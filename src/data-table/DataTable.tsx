@@ -119,7 +119,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
                 logger.warning('Each {0} should have a unique `key` prop.', ComponentDataTableColumn.name);
             }
 
-            const column: NDataTableColumn<T> = {
+            let column: NDataTableColumn<T> = {
                 ...normalizeVProps(restProps),
                 key: vKey ?? `__X_DATATABLE_COLUMN_${index}`,
                 ellipsis: getVPropAsBoolean(vProps, 'ellipsis'),
@@ -146,8 +146,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
                 }
             }
 
-            populateColumnRenders<T>(column, vSlots, true);
-
+            column = populateColumnRenders<T>(column, vSlots, true);
             temp.push(column);
         } else if (__DEV__ && !isEmptyVNode(vnode)) {
             logger.warning(
