@@ -2,6 +2,14 @@
 
 ---
 
+## 0.17.1 (2024-05-13)
+
+### Fixes
+
+-   修复 `x-n-data-table` 组件使用模板写法时不能正确渲染的问题。关闭 [#9](https://github.com/fudiwei/x.naive-ui/issues/9)。
+
+### Fixes
+
 ## 0.17.0 (2024-05-08)
 
 ### Features
