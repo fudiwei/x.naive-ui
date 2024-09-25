@@ -55,7 +55,7 @@ export type MenuRenderIconParams = {
 };
 export type MenuRenderExpandIconParams = MenuRenderIconParams;
 
-function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
+function convertVNodesToOptions(vnodes: VNode[], depth: number = 1): NMenuOption[] {
     const temp = [] as NMenuOption[];
 
     vnodes = flattenVNodeChildren(vnodes) as VNode[];
@@ -69,33 +69,33 @@ function convertVNodesToOptions(vnodes: VNode[]): NMenuOption[] {
             // 菜单项
             temp.push({
                 ...normalizeVProps(restProps),
-                key: vKey ?? `__X_MENU_ITEM_${index}`,
+                key: vKey ?? `__X_MENU_ITEM_${depth}_${index}`,
                 props: restProps as HTMLAttributes,
                 show: !isVShowFalse(vnode),
                 disabled: getVPropAsBoolean(vProps, 'disabled'),
                 label: resolveVSlot(vSlots['default']) || vProps.label,
                 icon: resolveVSlot(vSlots['icon']),
                 extra: resolveVSlot(vSlots['extra']) || vProps.extra,
-                children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
+                children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu'](), depth + 1) : undefined
             } as NMenuOption);
         } else if (vnode.type === ComponentMenuItemGroup) {
             // 菜单分组
             temp.push({
                 ...normalizeVProps(restProps),
                 type: 'group',
-                key: vKey ?? `__X_MENU_GROUP_${index}`,
+                key: vKey ?? `__X_MENU_GROUP_${depth}_${index}`,
                 props: restProps as HTMLAttributes,
                 show: !isVShowFalse(vnode),
                 label: resolveVSlot(vSlots['label']) || vProps.label,
                 icon: resolveVSlot(vSlots['icon']),
-                children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
+                children: vSlots['default'] ? convertVNodesToOptions(vSlots['default'](), depth + 1) : undefined
             } as NMenuGroupOption);
         } else if (vnode.type === ComponentMenuDivider) {
             // 分割线
             temp.push({
                 ...normalizeVProps(restProps),
                 type: 'divider',
-                key: vnode.key ?? `__X_MENU_DIVIDER_${index}`,
+                key: vKey ?? `__X_MENU_DIVIDER_${depth}_${index}`,
                 props: restProps as HTMLAttributes,
                 show: !isVShowFalse(vnode)
             } as NMenuDividerOption);

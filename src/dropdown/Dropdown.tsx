@@ -53,7 +53,7 @@ export type DropdownRenderIconParams = {
     option: DropdownOption;
 };
 
-function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
+function convertVNodesToOptions(vnodes: VNode[], depth: number = 1): NDropdownOption[] {
     const temp = [] as NDropdownOption[];
 
     vnodes = flattenVNodeChildren(vnodes) as VNode[];
@@ -67,32 +67,32 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
             // 菜单项
             temp.push({
                 ...normalizeVProps(restProps),
-                key: vKey ?? `__X_DROPDOWN_ITEM_${index}`,
+                key: vKey ?? `__X_DROPDOWN_ITEM_${depth}_${index}`,
                 props: restProps as HTMLAttributes,
                 show: !isVShowFalse(vnode),
                 disabled: getVPropAsBoolean(vProps, 'disabled'),
                 label: resolveVSlot(vSlots['default']) || (vProps.label as string),
                 icon: resolveVSlot(vSlots['icon']),
-                children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu']()) : undefined
+                children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu'](), depth + 1) : undefined
             } as NDropdownOption);
         } else if (vnode.type === ComponentDropdownItemGroup) {
             // 菜单分组
             temp.push({
                 ...normalizeVProps(restProps),
                 type: 'group',
-                key: vKey ?? `__X_DROPDOWN_GROUP_${index}`,
+                key: vKey ?? `__X_DROPDOWN_GROUP_${depth}_${index}`,
                 props: restProps as HTMLAttributes,
                 show: !isVShowFalse(vnode),
                 label: resolveVSlot(vSlots['label']) || (vProps.label as string),
                 icon: resolveVSlot(vSlots['icon']),
-                children: vSlots['default'] ? convertVNodesToOptions(vSlots['default']()) : undefined
+                children: vSlots['default'] ? convertVNodesToOptions(vSlots['default'](), depth + 1) : undefined
             } as NDropdownGroupOption);
         } else if (vnode.type === ComponentDropdownDivider) {
             // 分割线
             temp.push({
                 ...normalizeVProps(restProps),
                 type: 'divider',
-                key: vnode.key ?? `__X_DROPDOWN_DIVIDER_${index}`,
+                key: vKey ?? `__X_DROPDOWN_DIVIDER_${depth}_${index}`,
                 props: restProps as HTMLAttributes
             } as NDropdownDividerOption);
         } else if (!isEmptyVNode(vnode)) {
@@ -101,7 +101,7 @@ function convertVNodesToOptions(vnodes: VNode[]): NDropdownOption[] {
                 ...vProps,
                 ...normalizeVProps(restProps),
                 type: 'render',
-                key: vnode.key ?? `__X_DROPDOWN_RENDER_${index}`,
+                key: vKey ?? `__X_DROPDOWN_RENDER_${depth}_${index}`,
                 props: restProps as HTMLAttributes,
                 render: () => <>{vnode}</>
             } as NDropdownRenderOption);

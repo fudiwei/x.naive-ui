@@ -104,7 +104,10 @@ export type DataTableInstance = NDataTableInst & {
     $forwardComponent: NDataTableInst;
 };
 
-function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): NDataTableColumn<T>[] {
+function convertVNodesToColumns<T extends NDataTableRowData>(
+    vnodes: VNode[],
+    depth: number = 1
+): NDataTableColumn<T>[] {
     const temp = [] as NDataTableColumn<T>[];
 
     vnodes = flattenVNodeChildren(vnodes) as VNode[];
@@ -121,7 +124,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
 
             let column: NDataTableColumn<T> = {
                 ...normalizeVProps(restProps),
-                key: vKey ?? `__X_DATATABLE_COLUMN_${index}`,
+                key: vKey ?? `__X_DATATABLE_COLUMN_${depth}_${index}`,
                 ellipsis: getVPropAsBoolean(vProps, 'ellipsis'),
                 expandable: getVPropAsBoolean(vProps, 'expandable'),
                 filterMultiple: getVPropAsBoolean(vProps, 'filter-multiple'),
@@ -140,7 +143,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(vnodes: VNode[]): N
             };
 
             if (vSlots['default']) {
-                const children = convertVNodesToColumns<T>(vSlots['default']());
+                const children = convertVNodesToColumns<T>(vSlots['default'](), depth + 1);
                 if (children && children.length > 0) {
                     (column as NDataTableGroupColumn<T>).children = children as NDataTableBaseColumn<T>[];
                 }

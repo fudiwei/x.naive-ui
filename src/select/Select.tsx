@@ -57,7 +57,7 @@ export type SelectRenderTagParams = {
     close: () => void;
 };
 
-function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
+function convertVNodesToOptions(vnodes: VNode[], depth: number = 1): NSelectOption[] {
     const temp = [] as NSelectOption[];
 
     vnodes = flattenVNodeChildren(vnodes) as VNode[];
@@ -80,9 +80,9 @@ function convertVNodesToOptions(vnodes: VNode[]): NSelectOption[] {
             temp.push({
                 ...normalizeVProps(restProps),
                 type: 'group',
-                key: vKey ?? `__X_SELECT_GROUP_${index}`,
+                key: vKey ?? `__X_SELECT_GROUP_${depth}_${index}`,
                 label: resolveVSlot(vSlots['label']) || vProps.label,
-                children: convertVNodesToOptions(vSlots['default']?.() || [])
+                children: convertVNodesToOptions(vSlots['default']?.() || [], depth + 1)
             } as SelectOption);
         } else if (__DEV__ && !isEmptyVNode(vnode)) {
             logger.warning(
