@@ -74,6 +74,7 @@ export default defineComponent({
         'action': NonNullable<unknown>;
         'arrow': NonNullable<unknown>;
         'empty': NonNullable<unknown>;
+        'header': NonNullable<unknown>;
         'render-label': TreeSelectRenderLabelParams;
         'render-prefix': TreeSelectRenderPrefixParams;
         'render-suffix': TreeSelectRenderSuffixParams;

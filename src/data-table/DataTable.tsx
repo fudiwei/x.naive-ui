@@ -56,7 +56,8 @@ export type DataTableRenderExpandParams<T extends DataTableRowData = any> = {
     rowData: T;
     rowIndex: number;
 };
-export type DataTableRenderExpandIconParams = {
+export type DataTableRenderExpandIconParams<T extends DataTableRowData = any> = {
+    rowData: T;
     expanded: boolean;
 };
 export type DataTableRenderFilterParams<T extends DataTableRowData = any> = {
@@ -125,6 +126,7 @@ function convertVNodesToColumns<T extends NDataTableRowData>(
             let column: NDataTableColumn<T> = {
                 ...normalizeVProps(restProps),
                 key: vKey ?? `__X_DATATABLE_COLUMN_${depth}_${index}`,
+                allowExport: getVPropAsBoolean(vProps, 'allow-export'),
                 ellipsis: getVPropAsBoolean(vProps, 'ellipsis'),
                 expandable: getVPropAsBoolean(vProps, 'expandable'),
                 filterMultiple: getVPropAsBoolean(vProps, 'filter-multiple'),
@@ -489,7 +491,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
             'render-column': DataTableRenderColumnParams<T>;
             'render-cell': DataTableRenderCellParams<T>;
             'render-expand': DataTableRenderExpandParams<T>;
-            'render-expand-icon': DataTableRenderExpandIconParams;
+            'render-expand-icon': DataTableRenderExpandIconParams<T>;
             'render-filter': DataTableRenderFilterParams<T>;
             'render-filter-icon': DataTableRenderFilterIconParams<T>;
             'render-filter-menu': DataTableRenderFilterMenuParams<T>;
@@ -556,7 +558,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
                     }
 
                     type Params = Parameters<NDataTableRenderExpandIcon>[0];
-                    return (params: Params) => slot(params);
+                    return (params: Params) => slot(params as DataTableRenderExpandIconParams<T>);
                 });
 
                 const mergedSlots = mergeVSlots(slots, {

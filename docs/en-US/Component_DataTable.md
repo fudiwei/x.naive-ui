@@ -87,7 +87,7 @@ For other props, please see [Naive-UI documentation](https://www.naiveui.com/en-
 | render-column      | `{ column }`                           | Custom column title.   |         |
 | render-cell        | `{ column, rowData, rowIndex, value }` | Custom cell content.   |         |
 | render-expand      | `{ rowData, rowIndex }`                | Custom expandable row. |         |
-| render-expand-icon | `{ expanded }`                         | Custom expand icon.    | 0.14.0  |
+| render-expand-icon | `{ rowData, expanded }`                | Custom expand icon.    | 0.14.0  |
 | render-filter      | `{ column, active, show }`             | Custom filter trigger. | 0.6.0   |
 | render-filter-icon | `{ column, active, show }`             | Custom filter icon.    | 0.6.0   |
 | render-filter-menu | `{ column, hide }`                     | Custom filter icon.    | 0.6.0   |

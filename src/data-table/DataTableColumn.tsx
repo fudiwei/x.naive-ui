@@ -40,6 +40,9 @@ const _props = {
     align: {
         type: String as PropType<Required<NDataTableColumn>['align']>
     },
+    allowExport: {
+        type: Boolean as PropType<boolean>
+    },
     title: {
         type: String as PropType<string>
     },

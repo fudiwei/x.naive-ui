@@ -87,7 +87,7 @@
 | render-column      | `{ column }`                           | 自定义列头的内容     |        |
 | render-cell        | `{ column, rowData, rowIndex, value }` | 自定义单元格的内容   |        |
 | render-expand      | `{ rowData, rowIndex }`                | 自定义展开行的内容   |        |
-| render-expand-icon | `{ expanded }`                         | 自定义展开图标       | 0.14.0 |
+| render-expand-icon | `{ rowData, expanded }`                | 自定义展开图标       | 0.14.0 |
 | render-filter      | `{ column, active, show }`             | 自定义过滤器触发元素 | 0.6.0  |
 | render-filter-icon | `{ column, active, show }`             | 自定义过滤器图标     | 0.6.0  |
 | render-filter-menu | `{ column, hide }`                     | 自定义过滤器菜单     | 0.6.0  |
