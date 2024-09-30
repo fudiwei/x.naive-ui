@@ -2,13 +2,21 @@
 
 ---
 
+## 0.18.0 (2024-09-30)
+
+### Features
+
+-   适配 Naive-UI `v2.40.1`。
+
+### Fixes
+
+-   修复 `x-n-dropdown`、`x-n-menu`、`x-n-popselect`、`x-n-select` 等组件使用模板定义选项时，当存在嵌套子选项时潜在的唯一标识冲突问题。
+
 ## 0.17.1 (2024-05-13)
 
 ### Fixes
 
--   修复 `x-n-data-table` 组件使用模板写法时不能正确渲染的问题。关闭 [#9](https://github.com/fudiwei/x.naive-ui/issues/9)。
-
-### Fixes
+-   修复 `x-n-data-table` 组件使用模板定义列时不能正确渲染的问题。关闭 [#9](https://github.com/fudiwei/x.naive-ui/issues/9)。
 
 ## 0.17.0 (2024-05-08)
 
