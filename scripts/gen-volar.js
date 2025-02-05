@@ -12,47 +12,45 @@ const componentPrefix = 'XN';
 const componentExcludes = [];
 
 function parseComponentsDeclaration(code) {
-    if (!code) {
-        return {};
-    }
-    return Object.fromEntries(
-        Array.from(code.matchAll(/(?<!\/\/)\s+\s+['"]?(.+?)['"]?:\s(.+?)\n/g)).map((i) => [i[1], i[2]])
-    );
+  if (!code) {
+    return {};
+  }
+  return Object.fromEntries(Array.from(code.matchAll(/(?<!\/\/)\s+\s+['"]?(.+?)['"]?:\s(.+?)\n/g)).map((i) => [i[1], i[2]]));
 }
 
 function generateComponentsType() {
-    const components = {};
-    Object.keys(srcComponents).forEach((key) => {
-        const entry = `(typeof import('@skit/x.naive-ui'))['${key}']`;
-        if (key.startsWith(componentPrefix) && !componentExcludes.includes(key)) {
-            components[key] = entry;
-        }
-    });
-
-    const originalContent = fs.existsSync(OUTPUT) ? fs.readFileSync(OUTPUT, 'utf-8') : '';
-    const originalImports = parseComponentsDeclaration(originalContent);
-    const lines = Object.entries({ ...originalImports, ...components })
-        .filter(([key]) => !!components[key])
-        .sort((a, b) => a[0].localeCompare(b[0]))
-        .map(([name, v]) => {
-            if (!/^\w+$/.test(name)) {
-                name = `'${name}'`;
-            }
-            return `${name}: ${v};`;
-        });
-    const content = `// Auto generated component declarations
-declare module 'vue' {
-    export interface GlobalComponents {
-        ${lines.join('\r\n        ')}
+  const components = {};
+  Object.keys(srcComponents).forEach((key) => {
+    const entry = `(typeof import('@skit/x.naive-ui'))['${key}']`;
+    if (key.startsWith(componentPrefix) && !componentExcludes.includes(key)) {
+      components[key] = entry;
     }
+  });
+
+  const originalContent = fs.existsSync(OUTPUT) ? fs.readFileSync(OUTPUT, 'utf-8') : '';
+  const originalImports = parseComponentsDeclaration(originalContent);
+  const lines = Object.entries({ ...originalImports, ...components })
+    .filter(([key]) => !!components[key])
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([name, v]) => {
+      if (!/^\w+$/.test(name)) {
+        name = `'${name}'`;
+      }
+      return `${name}: ${v};`;
+    });
+  const content = `// Auto generated component declarations
+declare module 'vue' {
+  export interface GlobalComponents {
+    ${lines.join('\r\n    ')}
+  }
 }
 
 export {};
 `;
 
-    if (content !== originalContent) {
-        fs.writeFileSync(OUTPUT, content, 'utf-8');
-    }
+  if (content !== originalContent) {
+    fs.writeFileSync(OUTPUT, content, 'utf-8');
+  }
 }
 
 generateComponentsType();
