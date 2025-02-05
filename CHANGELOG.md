@@ -2,6 +2,16 @@
 
 ---
 
+## 0.19.0 (2025-02-05)
+
+### Features
+
+- 适配 Naive-UI `v2.41.0`。
+
+### Fixes
+
+- 修复 `x-n-data-table`、`x-n-menu` 等组件在定义子项包含值为 `null` 或 `undefined` 的 `children` 属性时，渲染结果不符合预期的问题。关闭 [#11](https://github.com/fudiwei/x.naive-ui/issues/11)。
+
 ## 0.18.0 (2024-09-30)
 
 ### Features
