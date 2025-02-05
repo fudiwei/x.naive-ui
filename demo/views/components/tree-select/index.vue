@@ -9,25 +9,25 @@ const $encode = window.encodeURIComponent;
 </script>
 
 <template>
-    <DemoContainer
-        :catalog="[
-            {
-                title: '自定义渲染',
-                anchor: 'custom-render'
-            }
-        ]"
-    >
-        <n-space vertical :size="20">
-            <DemoCard
-                title="Customized Rendering / 自定义渲染"
-                anchor="custom-render"
-                :js-code="$encode(SampleCustomRenderCodeJs)"
-                :ts-code="$encode(SampleCustomRenderCodeTs)"
-            >
-                <template #demo>
-                    <SampleCustomRenderDemo />
-                </template>
-            </DemoCard>
-        </n-space>
-    </DemoContainer>
+  <DemoContainer
+    :catalog="[
+      {
+        title: '自定义渲染',
+        anchor: 'custom-render'
+      }
+    ]"
+  >
+    <n-space vertical :size="20">
+      <DemoCard
+        title="Customized Rendering / 自定义渲染"
+        anchor="custom-render"
+        :js-code="$encode(SampleCustomRenderCodeJs)"
+        :ts-code="$encode(SampleCustomRenderCodeTs)"
+      >
+        <template #demo>
+          <SampleCustomRenderDemo />
+        </template>
+      </DemoCard>
+    </n-space>
+  </DemoContainer>
 </template>

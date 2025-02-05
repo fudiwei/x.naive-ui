@@ -12,25 +12,25 @@
 
 ```html
 <script setup>
-    const options = [
-        {
-            value: 1,
-            label: '1',
-            children: [
-                { value: 11, label: '1-1' },
-                { value: 12, label: '1-2' }
-            ]
-        },
-        { value: 2, label: '2' },
-        { value: 3, label: '3' }
-    ];
+  const options = [
+    {
+      value: 1,
+      label: '1',
+      children: [
+        { value: 11, label: '1-1' },
+        { value: 12, label: '1-2' }
+      ]
+    },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' }
+  ];
 </script>
 <template>
-    <x-n-cascader :options="options">
-        <template #render-label="{ option }">
-            <div>{{ 'Option' + option.label }}</div>
-        </template>
-    </x-n-cascader>
+  <x-n-cascader :options="options">
+    <template #render-label="{ option }">
+      <div>{{ 'Option' + option.label }}</div>
+    </template>
+  </x-n-cascader>
 </template>
 ```
 

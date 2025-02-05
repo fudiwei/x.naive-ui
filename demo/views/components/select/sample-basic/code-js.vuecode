@@ -2,100 +2,93 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-    setup() {
-        return {
-            value: ref(),
-            options: [
-                {
-                    label: "Everybody's Got Something to Hide Except Me and My Monkey",
-                    value: 'song0',
-                    disabled: true
-                },
-                {
-                    label: 'Drive My Car',
-                    value: 'song1'
-                },
-                {
-                    label: 'Norwegian Wood',
-                    value: 'song2'
-                },
-                {
-                    label: "You Won't See",
-                    value: 'song3',
-                    disabled: true
-                },
-                {
-                    label: 'Nowhere Man',
-                    value: 'song4'
-                },
-                {
-                    label: 'Think For Yourself',
-                    value: 'song5'
-                },
-                {
-                    label: 'The Word',
-                    value: 'song6'
-                },
-                {
-                    label: 'Michelle',
-                    value: 'song7',
-                    disabled: true
-                },
-                {
-                    label: 'What goes on',
-                    value: 'song8'
-                },
-                {
-                    label: 'Girl',
-                    value: 'song9'
-                },
-                {
-                    label: "I'm looking through you",
-                    value: 'song10'
-                },
-                {
-                    label: 'In My Life',
-                    value: 'song11'
-                },
-                {
-                    label: 'Wait',
-                    value: 'song12'
-                }
-            ]
-        };
-    }
+  setup() {
+    return {
+      value: ref(),
+      options: [
+        {
+          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          value: 'song0',
+          disabled: true
+        },
+        {
+          label: 'Drive My Car',
+          value: 'song1'
+        },
+        {
+          label: 'Norwegian Wood',
+          value: 'song2'
+        },
+        {
+          label: "You Won't See",
+          value: 'song3',
+          disabled: true
+        },
+        {
+          label: 'Nowhere Man',
+          value: 'song4'
+        },
+        {
+          label: 'Think For Yourself',
+          value: 'song5'
+        },
+        {
+          label: 'The Word',
+          value: 'song6'
+        },
+        {
+          label: 'Michelle',
+          value: 'song7',
+          disabled: true
+        },
+        {
+          label: 'What goes on',
+          value: 'song8'
+        },
+        {
+          label: 'Girl',
+          value: 'song9'
+        },
+        {
+          label: "I'm looking through you",
+          value: 'song10'
+        },
+        {
+          label: 'In My Life',
+          value: 'song11'
+        },
+        {
+          label: 'Wait',
+          value: 'song12'
+        }
+      ]
+    };
+  }
 });
 </script>
 
 <template>
-    <n-space vertical>
-        <x-n-select v-model:value="value">
-            <x-n-select-option value="song0" disabled>
-                Everybody's Got Something to Hide Except Me and My Monkey
-            </x-n-select-option>
-            <x-n-select-option value="song1">Drive My Car</x-n-select-option>
-            <x-n-select-option value="song2">Norwegian Wood</x-n-select-option>
-            <x-n-select-option value="song3" disabled>You Won't See</x-n-select-option>
-            <x-n-select-option value="song4">Nowhere Man</x-n-select-option>
-            <x-n-select-option value="song5">Think For Yourself</x-n-select-option>
-            <x-n-select-option value="song6">The Word</x-n-select-option>
-            <x-n-select-option value="song7" disabled>Michelle</x-n-select-option>
-            <x-n-select-option value="song8">What goes on</x-n-select-option>
-            <x-n-select-option value="song9">Girl</x-n-select-option>
-            <x-n-select-option value="song10" label="I'm looking through you" />
-            <x-n-select-option value="song11" label="In My Life" />
-            <x-n-select-option value="song12" label="Wait" />
-        </x-n-select>
+  <n-space vertical>
+    <x-n-select v-model:value="value">
+      <x-n-select-option value="song0" disabled>Everybody's Got Something to Hide Except Me and My Monkey</x-n-select-option>
+      <x-n-select-option value="song1">Drive My Car</x-n-select-option>
+      <x-n-select-option value="song2">Norwegian Wood</x-n-select-option>
+      <x-n-select-option value="song3" disabled>You Won't See</x-n-select-option>
+      <x-n-select-option value="song4">Nowhere Man</x-n-select-option>
+      <x-n-select-option value="song5">Think For Yourself</x-n-select-option>
+      <x-n-select-option value="song6">The Word</x-n-select-option>
+      <x-n-select-option value="song7" disabled>Michelle</x-n-select-option>
+      <x-n-select-option value="song8">What goes on</x-n-select-option>
+      <x-n-select-option value="song9">Girl</x-n-select-option>
+      <x-n-select-option value="song10" label="I'm looking through you" />
+      <x-n-select-option value="song11" label="In My Life" />
+      <x-n-select-option value="song12" label="Wait" />
+    </x-n-select>
 
-        <x-n-select v-model:value="value">
-            <x-n-select-option
-                v-for="option in options"
-                :key="option.value"
-                :value="option.value"
-                :disabled="option.disabled"
-            >
-                {{ option.label }}
-            </x-n-select-option>
-        </x-n-select>
-    </n-space>
+    <x-n-select v-model:value="value">
+      <x-n-select-option v-for="option in options" :key="option.value" :value="option.value" :disabled="option.disabled">
+        {{ option.label }}
+      </x-n-select-option>
+    </x-n-select>
+  </n-space>
 </template>

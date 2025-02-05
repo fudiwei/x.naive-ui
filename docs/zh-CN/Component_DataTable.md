@@ -14,28 +14,28 @@
 
 ```html
 <script setup>
-    const data = [
-        { key: 1, name: 'Athos', age: 20 },
-        { key: 2, name: 'Porthos', age: 19 },
-        { key: 3, name: 'Aramis', age: 18 }
-    ];
+  const data = [
+    { key: 1, name: 'Athos', age: 20 },
+    { key: 2, name: 'Porthos', age: 19 },
+    { key: 3, name: 'Aramis', age: 18 }
+  ];
 </script>
 <template>
-    <x-n-data-table :data="data">
-        <x-n-data-table-column type="selection" />
-        <x-n-data-table-column key="no" title="NO.">
-            <template #render-cell="{ rowIndex }">
-                <div>{{ rowIndex + 1 }}</div>
-            </template>
-        </x-n-data-table-column>
-        <x-n-data-table-column key="name" title="Name" />
-        <x-n-data-table-column key="age" title="Age" />
-        <x-n-data-table-column key="actions" title="Actions">
-            <template #render-cell="{ column, rowData, rowIndex }">
-                <button>{{ 'Say hello to ' + rowData.name }}</button>
-            </template>
-        </x-n-data-table-column>
-    </x-n-data-table>
+  <x-n-data-table :data="data">
+    <x-n-data-table-column type="selection" />
+    <x-n-data-table-column key="no" title="NO.">
+      <template #render-cell="{ rowIndex }">
+        <div>{{ rowIndex + 1 }}</div>
+      </template>
+    </x-n-data-table-column>
+    <x-n-data-table-column key="name" title="Name" />
+    <x-n-data-table-column key="age" title="Age" />
+    <x-n-data-table-column key="actions" title="Actions">
+      <template #render-cell="{ column, rowData, rowIndex }">
+        <button>{{ 'Say hello to ' + rowData.name }}</button>
+      </template>
+    </x-n-data-table-column>
+  </x-n-data-table>
 </template>
 ```
 
@@ -43,30 +43,30 @@
 
 ```html
 <script setup>
-    const columns = [
-        { type: 'selection' },
-        { key: 'no', title: 'NO.' },
-        { key: 'name', title: 'Name' },
-        { key: 'age', title: 'Age' },
-        { key: 'actions', title: 'Actions' }
-    ];
-    const data = [
-        { key: 1, name: 'Athos', age: 20 },
-        { key: 2, name: 'Porthos', age: 19 },
-        { key: 3, name: 'Aramis', age: 18 }
-    ];
+  const columns = [
+    { type: 'selection' },
+    { key: 'no', title: 'NO.' },
+    { key: 'name', title: 'Name' },
+    { key: 'age', title: 'Age' },
+    { key: 'actions', title: 'Actions' }
+  ];
+  const data = [
+    { key: 1, name: 'Athos', age: 20 },
+    { key: 2, name: 'Porthos', age: 19 },
+    { key: 3, name: 'Aramis', age: 18 }
+  ];
 </script>
 <template>
-    <x-n-data-table :columns="columns" :data="data">
-        <template #render-cell="{ column, rowData, rowIndex }">
-            <template v-if="column.key === 'no'">
-                <div>{{ rowIndex + 1 }}</div>
-            </template>
-            <template v-else-if="column.key === 'actions'">
-                <button>{{ 'Say hello to ' + rowData.name }}</button>
-            </template>
-        </template>
-    </x-n-data-table>
+  <x-n-data-table :columns="columns" :data="data">
+    <template #render-cell="{ column, rowData, rowIndex }">
+      <template v-if="column.key === 'no'">
+        <div>{{ rowIndex + 1 }}</div>
+      </template>
+      <template v-else-if="column.key === 'actions'">
+        <button>{{ 'Say hello to ' + rowData.name }}</button>
+      </template>
+    </template>
+  </x-n-data-table>
 </template>
 ```
 

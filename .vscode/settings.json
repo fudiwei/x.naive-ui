@@ -1,13 +1,13 @@
 {
     "editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "explicit"
-	},
+        "source.fixAll.eslint": "explicit"
+    },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.detectIndentation": false,
     "editor.formatOnSave": true,
     "editor.insertSpaces": false,
-    "editor.tabSize": 4,
-    "editor.wordWrapColumn": 120,
+    "editor.tabSize": 2,
+    "editor.wordWrapColumn": 160,
     "files.associations": {
         "*.vue": "vue",
         "*.vuecode": "vue"

@@ -3,9 +3,9 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'XNMenuDivider',
+  name: 'XNMenuDivider',
 
-    render() {
-        return null;
-    }
+  render() {
+    return null;
+  }
 });

@@ -24,162 +24,140 @@ const $encode = window.encodeURIComponent;
 </script>
 
 <template>
-    <DemoContainer
-        :catalog="[
-            {
-                title: '基础用法',
-                anchor: 'basic'
-            },
-            {
-                title: '选项组',
-                anchor: 'group'
-            },
-            {
-                title: '自定义选项渲染',
-                anchor: 'custom-render-label'
-            },
-            {
-                title: '给选项增加 Tooltip',
-                anchor: 'custom-render-option'
-            },
-            {
-                title: '自定义标签渲染',
-                anchor: 'custom-render-tag'
-            },
-            {
-                title: '选择人员',
-                anchor: 'person-picker'
-            }
-        ]"
-    >
-        <n-space vertical :size="20">
-            <DemoCard
-                title="Basic / 基础用法"
-                anchor="basic"
-                :js-code="$encode(SampleBasicCodeJs)"
-                :ts-code="$encode(SampleBasicCodeTs)"
-            >
-                <template #content>
-                    <p>
-                        以模板形式改写 Naive-UI 官方文档示例「
-                        <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#basic.vue" target="blank">
-                            Select - 基础用法
-                        </n-a>
-                        」。
-                    </p>
-                </template>
-                <template #demo>
-                    <SampleBasicDemo />
-                </template>
-            </DemoCard>
+  <DemoContainer
+    :catalog="[
+      {
+        title: '基础用法',
+        anchor: 'basic'
+      },
+      {
+        title: '选项组',
+        anchor: 'group'
+      },
+      {
+        title: '自定义选项渲染',
+        anchor: 'custom-render-label'
+      },
+      {
+        title: '给选项增加 Tooltip',
+        anchor: 'custom-render-option'
+      },
+      {
+        title: '自定义标签渲染',
+        anchor: 'custom-render-tag'
+      },
+      {
+        title: '选择人员',
+        anchor: 'person-picker'
+      }
+    ]"
+  >
+    <n-space vertical :size="20">
+      <DemoCard title="Basic / 基础用法" anchor="basic" :js-code="$encode(SampleBasicCodeJs)" :ts-code="$encode(SampleBasicCodeTs)">
+        <template #content>
+          <p>
+            以模板形式改写 Naive-UI 官方文档示例「
+            <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#basic.vue" target="blank">Select - 基础用法</n-a>
+            」。
+          </p>
+        </template>
+        <template #demo>
+          <SampleBasicDemo />
+        </template>
+      </DemoCard>
 
-            <DemoCard
-                title="Group / 选项组"
-                anchor="group"
-                :js-code="$encode(SampleGroupCodeJs)"
-                :ts-code="$encode(SampleGroupCodeTs)"
-            >
-                <template #content>
-                    <p>
-                        以模板形式改写 Naive-UI 官方文档示例「
-                        <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#group.vue" target="blank">
-                            Select - 选项组
-                        </n-a>
-                        」。
-                    </p>
-                    <p>
-                        注意：任何非
-                        <n-text type="info">&lt;x-n-select-option&gt;</n-text>
-                        、
-                        <n-text type="info">&lt;x-n-select-option-group&gt;</n-text>
-                        类型的子元素，将被忽略。
-                    </p>
-                </template>
+      <DemoCard title="Group / 选项组" anchor="group" :js-code="$encode(SampleGroupCodeJs)" :ts-code="$encode(SampleGroupCodeTs)">
+        <template #content>
+          <p>
+            以模板形式改写 Naive-UI 官方文档示例「
+            <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#group.vue" target="blank">Select - 选项组</n-a>
+            」。
+          </p>
+          <p>
+            注意：任何非
+            <n-text type="info">&lt;x-n-select-option&gt;</n-text>
+            、
+            <n-text type="info">&lt;x-n-select-option-group&gt;</n-text>
+            类型的子元素，将被忽略。
+          </p>
+        </template>
 
-                <template #demo>
-                    <SampleGroupDemo />
-                </template>
-            </DemoCard>
+        <template #demo>
+          <SampleGroupDemo />
+        </template>
+      </DemoCard>
 
-            <DemoCard
-                title="Customized Option Rendering / 自定义选项渲染"
-                anchor="custom-render-label"
-                :js-code="$encode(SampleRenderLabelCodeJs)"
-                :ts-code="$encode(SampleRenderLabelCodeTs)"
-            >
-                <template #content>
-                    <p>
-                        以插槽形式改写 Naive-UI 官方文档示例「
-                        <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#custom-option.vue" target="blank">
-                            Select - 自定义选项渲染
-                        </n-a>
-                        」。
-                    </p>
-                </template>
-                <template #demo>
-                    <SampleRenderLabelDemo />
-                </template>
-            </DemoCard>
+      <DemoCard
+        title="Customized Option Rendering / 自定义选项渲染"
+        anchor="custom-render-label"
+        :js-code="$encode(SampleRenderLabelCodeJs)"
+        :ts-code="$encode(SampleRenderLabelCodeTs)"
+      >
+        <template #content>
+          <p>
+            以插槽形式改写 Naive-UI 官方文档示例「
+            <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#custom-option.vue" target="blank">Select - 自定义选项渲染</n-a>
+            」。
+          </p>
+        </template>
+        <template #demo>
+          <SampleRenderLabelDemo />
+        </template>
+      </DemoCard>
 
-            <DemoCard
-                title="Add Tooltip to Option / 给选项增加 Tooltip"
-                anchor="custom-render-option"
-                :js-code="$encode(SampleRenderOptionCodeJs)"
-                :ts-code="$encode(SampleRenderOptionCodeTs)"
-            >
-                <template #content>
-                    <p>
-                        以插槽形式改写 Naive-UI 官方文档示例「
-                        <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#add-tooltip.vue" target="blank">
-                            Select - 给选项增加 Tooltip
-                        </n-a>
-                        」。
-                    </p>
-                </template>
-                <template #demo>
-                    <SampleRenderOptionDemo />
-                </template>
-            </DemoCard>
+      <DemoCard
+        title="Add Tooltip to Option / 给选项增加 Tooltip"
+        anchor="custom-render-option"
+        :js-code="$encode(SampleRenderOptionCodeJs)"
+        :ts-code="$encode(SampleRenderOptionCodeTs)"
+      >
+        <template #content>
+          <p>
+            以插槽形式改写 Naive-UI 官方文档示例「
+            <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#add-tooltip.vue" target="blank">Select - 给选项增加 Tooltip</n-a>
+            」。
+          </p>
+        </template>
+        <template #demo>
+          <SampleRenderOptionDemo />
+        </template>
+      </DemoCard>
 
-            <DemoCard
-                title="Customized Tag Rendering / 自定义标签渲染"
-                anchor="custom-render-tag"
-                :js-code="$encode(SampleRenderTagCodeJs)"
-                :ts-code="$encode(SampleRenderTagCodeTs)"
-            >
-                <template #content>
-                    <p>
-                        以插槽形式改写 Naive-UI 官方文档示例「
-                        <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#render-tag.vue" target="blank">
-                            Select - 自定义标签渲染
-                        </n-a>
-                        」。
-                    </p>
-                </template>
-                <template #demo>
-                    <SampleRenderTagDemo />
-                </template>
-            </DemoCard>
+      <DemoCard
+        title="Customized Tag Rendering / 自定义标签渲染"
+        anchor="custom-render-tag"
+        :js-code="$encode(SampleRenderTagCodeJs)"
+        :ts-code="$encode(SampleRenderTagCodeTs)"
+      >
+        <template #content>
+          <p>
+            以插槽形式改写 Naive-UI 官方文档示例「
+            <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#render-tag.vue" target="blank">Select - 自定义标签渲染</n-a>
+            」。
+          </p>
+        </template>
+        <template #demo>
+          <SampleRenderTagDemo />
+        </template>
+      </DemoCard>
 
-            <DemoCard
-                title="Select Person / 选择人员"
-                anchor="person-picker"
-                :js-code="$encode(SamplePersonPickerCodeJs)"
-                :ts-code="$encode(SamplePersonPickerCodeTs)"
-            >
-                <template #content>
-                    <p>
-                        以插槽形式改写 Naive-UI 官方文档示例「
-                        <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#render-person.vue" target="blank">
-                            Select - 选择人员
-                        </n-a>
-                        」。
-                    </p>
-                </template>
-                <template #demo>
-                    <SamplePersonPickerDemo />
-                </template>
-            </DemoCard>
-        </n-space>
-    </DemoContainer>
+      <DemoCard
+        title="Select Person / 选择人员"
+        anchor="person-picker"
+        :js-code="$encode(SamplePersonPickerCodeJs)"
+        :ts-code="$encode(SamplePersonPickerCodeTs)"
+      >
+        <template #content>
+          <p>
+            以插槽形式改写 Naive-UI 官方文档示例「
+            <n-a href="//www.naiveui.com/zh-CN/os-theme/components/select#render-person.vue" target="blank">Select - 选择人员</n-a>
+            」。
+          </p>
+        </template>
+        <template #demo>
+          <SamplePersonPickerDemo />
+        </template>
+      </DemoCard>
+    </n-space>
+  </DemoContainer>
 </template>

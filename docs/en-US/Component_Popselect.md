@@ -14,15 +14,15 @@ For more details, please refer to the Demo.
 
 ```html
 <template>
-    <x-n-popselect>
-        <template #trigger>
-            <n-button>Popselect</n-button>
-        </template>
+  <x-n-popselect>
+    <template #trigger>
+      <n-button>Popselect</n-button>
+    </template>
 
-        <x-n-select-option value="1">Option A</x-n-select-option>
-        <x-n-select-option value="2">Option B</x-n-select-option>
-        <x-n-select-option value="3">Option C</x-n-select-option>
-    </x-n-popselect>
+    <x-n-select-option value="1">Option A</x-n-select-option>
+    <x-n-select-option value="2">Option B</x-n-select-option>
+    <x-n-select-option value="3">Option C</x-n-select-option>
+  </x-n-popselect>
 </template>
 ```
 
@@ -30,22 +30,22 @@ For more details, please refer to the Demo.
 
 ```html
 <script setup>
-    const options = [
-        { value: '1', label: 'A' },
-        { value: '2', label: 'B' },
-        { value: '3', label: 'C' }
-    ];
+  const options = [
+    { value: '1', label: 'A' },
+    { value: '2', label: 'B' },
+    { value: '3', label: 'C' }
+  ];
 </script>
 <template>
-    <x-n-popselect :options="options">
-        <template #trigger>
-            <n-button>Popselect</n-button>
-        </template>
+  <x-n-popselect :options="options">
+    <template #trigger>
+      <n-button>Popselect</n-button>
+    </template>
 
-        <template #render-label="{ option }">
-            <div>{{ 'Option ' + option.label }}</div>
-        </template>
-    </x-n-popselect>
+    <template #render-label="{ option }">
+      <div>{{ 'Option ' + option.label }}</div>
+    </template>
+  </x-n-popselect>
 </template>
 ```
 

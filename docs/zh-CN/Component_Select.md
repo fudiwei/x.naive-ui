@@ -14,11 +14,11 @@
 
 ```html
 <template>
-    <x-n-select>
-        <x-n-select-option value="1">Option A</x-n-select-option>
-        <x-n-select-option value="2">Option B</x-n-select-option>
-        <x-n-select-option value="3">Option C</x-n-select-option>
-    </x-n-select>
+  <x-n-select>
+    <x-n-select-option value="1">Option A</x-n-select-option>
+    <x-n-select-option value="2">Option B</x-n-select-option>
+    <x-n-select-option value="3">Option C</x-n-select-option>
+  </x-n-select>
 </template>
 ```
 
@@ -26,18 +26,18 @@
 
 ```html
 <script setup>
-    const options = [
-        { value: '1', label: 'A' },
-        { value: '2', label: 'B' },
-        { value: '3', label: 'C' }
-    ];
+  const options = [
+    { value: '1', label: 'A' },
+    { value: '2', label: 'B' },
+    { value: '3', label: 'C' }
+  ];
 </script>
 <template>
-    <x-n-select :options="options">
-        <template #render-label="{ option }">
-            <div>{{ 'Option ' + option.label }}</div>
-        </template>
-    </x-n-select>
+  <x-n-select :options="options">
+    <template #render-label="{ option }">
+      <div>{{ 'Option ' + option.label }}</div>
+    </template>
+  </x-n-select>
 </template>
 ```
 

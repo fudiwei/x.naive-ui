@@ -2,6 +2,6 @@
 /// <reference path="../types/volar.d.ts" />
 
 declare module '*.vuecode' {
-    const code: string;
-    export default code;
+  const code: string;
+  export default code;
 }

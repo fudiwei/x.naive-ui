@@ -43,17 +43,17 @@ app.use(XNDataTable);
 
 ```html
 <template>
-    <x-n-data-table :columns="columns" :data="data" />
+  <x-n-data-table :columns="columns" :data="data" />
 </template>
 
 <script>
-    import { XNDataTable } from '@skit/naive-ui';
+  import { XNDataTable } from '@skit/naive-ui';
 
-    export default {
-        components: {
-            XNDataTable
-        }
-    };
+  export default {
+    components: {
+      XNDataTable
+    }
+  };
 </script>
 ```
 
@@ -71,12 +71,12 @@ import unpluginVueComponents from 'unplugin-vue-components/vite';
 import { XNaiveUIResolver } from '@skit/x.naive-ui/unplugin';
 
 export default defineConfig({
-    plugins: [
-        vue(),
-        unpluginVueComponents({
-            resolvers: [XNaiveUIResolver()]
-        })
-    ]
+  plugins: [
+    vue(),
+    unpluginVueComponents({
+      resolvers: [XNaiveUIResolver()]
+    })
+  ]
 });
 ```
 
@@ -88,8 +88,8 @@ export default defineConfig({
 
 ```json
 {
-    "compilerOptions": {
-        "types": ["@skit/x.naive-ui/types/volar.d.ts"]
-    }
+  "compilerOptions": {
+    "types": ["@skit/x.naive-ui/types/volar.d.ts"]
+  }
 }
 ```

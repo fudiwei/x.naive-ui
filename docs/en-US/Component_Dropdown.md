@@ -14,16 +14,16 @@ For more details, please refer to the Demo.
 
 ```html
 <template>
-    <x-n-dropdown>
-        <template #trigger>
-            <n-button>Dropdown</n-button>
-        </template>
+  <x-n-dropdown>
+    <template #trigger>
+      <n-button>Dropdown</n-button>
+    </template>
 
-        <x-n-dropdown-item key="1">Menu A</x-n-dropdown-item>
-        <x-n-dropdown-item key="2">Menu B</x-n-dropdown-item>
-        <x-n-dropdown-divider />
-        <x-n-dropdown-item key="3">Menu C</x-n-dropdown-item>
-    </x-n-dropdown>
+    <x-n-dropdown-item key="1">Menu A</x-n-dropdown-item>
+    <x-n-dropdown-item key="2">Menu B</x-n-dropdown-item>
+    <x-n-dropdown-divider />
+    <x-n-dropdown-item key="3">Menu C</x-n-dropdown-item>
+  </x-n-dropdown>
 </template>
 ```
 
@@ -31,22 +31,22 @@ For more details, please refer to the Demo.
 
 ```html
 <script setup>
-    const options = [
-        { key: '1', label: 'A' },
-        { key: '2', label: 'B' },
-        { key: '3', label: 'C' }
-    ];
+  const options = [
+    { key: '1', label: 'A' },
+    { key: '2', label: 'B' },
+    { key: '3', label: 'C' }
+  ];
 </script>
 <template>
-    <x-n-dropdown :options="options">
-        <template #trigger>
-            <n-button>Dropdown</n-button>
-        </template>
+  <x-n-dropdown :options="options">
+    <template #trigger>
+      <n-button>Dropdown</n-button>
+    </template>
 
-        <template #render-label="{ option }">
-            <div>{{ 'Menu ' + option.label }}</div>
-        </template>
-    </x-n-dropdown>
+    <template #render-label="{ option }">
+      <div>{{ 'Menu ' + option.label }}</div>
+    </template>
+  </x-n-dropdown>
 </template>
 ```
 

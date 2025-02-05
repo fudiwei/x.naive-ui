@@ -3,9 +3,9 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'XNDropdownDivider',
+  name: 'XNDropdownDivider',
 
-    render() {
-        return null;
-    }
+  render() {
+    return null;
+  }
 });

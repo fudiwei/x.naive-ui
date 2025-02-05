@@ -12,25 +12,25 @@ For more details, please refer to the Demo.
 
 ```html
 <script setup>
-    const options = [
-        {
-            key: 1,
-            label: '1',
-            children: [
-                { key: 11, label: '1-1' },
-                { key: 12, label: '1-2' }
-            ]
-        },
-        { key: 2, label: '2' },
-        { key: 3, label: '3' }
-    ];
+  const options = [
+    {
+      key: 1,
+      label: '1',
+      children: [
+        { key: 11, label: '1-1' },
+        { key: 12, label: '1-2' }
+      ]
+    },
+    { key: 2, label: '2' },
+    { key: 3, label: '3' }
+  ];
 </script>
 <template>
-    <x-n-tree-select :options="options">
-        <template #render-label="{ option }">
-            <div>{{ 'Option ' + option.label }}</div>
-        </template>
-    </x-n-tree-select>
+  <x-n-tree-select :options="options">
+    <template #render-label="{ option }">
+      <div>{{ 'Option ' + option.label }}</div>
+    </template>
+  </x-n-tree-select>
 </template>
 ```
 

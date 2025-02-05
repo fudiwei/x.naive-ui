@@ -9,52 +9,48 @@ import { objectOmitter } from '../_utils/internal';
 import ComponentEmptyIcon from './EmptyIcon';
 
 const _props = (() => {
-    const restProps = objectOmitter(defaultNEmptyProps, 'description');
-    return {
-        ...restProps,
-        description: {
-            type: String as PropType<string>,
-            default: '暂无数据'
-        }
-    } as const;
+  const restProps = objectOmitter(defaultNEmptyProps, 'description');
+  return {
+    ...restProps,
+    description: {
+      type: String as PropType<string>,
+      default: '暂无数据'
+    }
+  } as const;
 })();
 
 export type EmptyProps = ExtractPublicPropTypes<typeof _props>;
 
 export default defineComponent({
-    name: 'XNEmpty',
+  name: 'XNEmpty',
 
-    components: {
-        NEmpty,
-        NIcon,
-        XNEmptyIcon: ComponentEmptyIcon
-    },
+  components: {
+    NEmpty,
+    NIcon,
+    XNEmptyIcon: ComponentEmptyIcon
+  },
 
-    props: _props,
+  props: _props,
 
-    slots: Object as SlotsType<{
-        default?: NonNullable<unknown>;
-        extra?: NonNullable<unknown>;
-        icon?: NonNullable<unknown>;
-    }>,
+  slots: Object as SlotsType<{
+    default?: NonNullable<unknown>;
+    extra?: NonNullable<unknown>;
+    icon?: NonNullable<unknown>;
+  }>,
 
-    setup(props, { attrs, slots, expose }) {
-        expose({});
+  setup(props, { attrs, slots, expose }) {
+    expose({});
 
-        return () => {
-            const mergedSlots = computed(() =>
-                mergeVSlots(slots, {
-                    default: () => (
-                        <div style="font-size: 0.75rem; line-height: 1rem;">
-                            {slots['default']?.() ?? props.description}
-                        </div>
-                    ),
+    return () => {
+      const mergedSlots = computed(() =>
+        mergeVSlots(slots, {
+          default: () => <div style="font-size: 0.75rem; line-height: 1rem;">{slots.default?.() ?? props.description}</div>,
 
-                    icon: slots['icon'] || (() => <ComponentEmptyIcon />)
-                })
-            );
+          icon: slots.icon || (() => <ComponentEmptyIcon />)
+        })
+      );
 
-            return <NEmpty {...attrs} {...props} v-slots={mergedSlots.value} />;
-        };
-    }
+      return <NEmpty {...attrs} {...props} v-slots={mergedSlots.value} />;
+    };
+  }
 });

@@ -14,17 +14,17 @@
 
 ```html
 <template>
-    <x-n-menu>
-        <x-n-menu-item key="1">Menu A</x-n-menu-item>
-        <x-n-menu-item key="1">Menu B</x-n-menu-item>
-        <x-n-menu-divider />
-        <x-n-menu-item key="3" label="Menu C">
-            <template #submenu>
-                <x-n-menu-item key="3-1">Menu C1</x-n-menu-item>
-                <x-n-menu-item key="3-2">Menu C2</x-n-menu-item>
-            </template>
-        </x-n-menu-item>
-    </x-n-menu>
+  <x-n-menu>
+    <x-n-menu-item key="1">Menu A</x-n-menu-item>
+    <x-n-menu-item key="1">Menu B</x-n-menu-item>
+    <x-n-menu-divider />
+    <x-n-menu-item key="3" label="Menu C">
+      <template #submenu>
+        <x-n-menu-item key="3-1">Menu C1</x-n-menu-item>
+        <x-n-menu-item key="3-2">Menu C2</x-n-menu-item>
+      </template>
+    </x-n-menu-item>
+  </x-n-menu>
 </template>
 ```
 
@@ -32,25 +32,25 @@
 
 ```html
 <script setup>
-    const options = [
-        { key: '1', label: 'A' },
-        { key: '2', label: 'B' },
-        {
-            value: '3',
-            label: 'C',
-            children: [
-                { key: '3-1', label: 'C1' },
-                { key: '3-2', label: 'C2' }
-            ]
-        }
-    ];
+  const options = [
+    { key: '1', label: 'A' },
+    { key: '2', label: 'B' },
+    {
+      value: '3',
+      label: 'C',
+      children: [
+        { key: '3-1', label: 'C1' },
+        { key: '3-2', label: 'C2' }
+      ]
+    }
+  ];
 </script>
 <template>
-    <x-n-menu :options="options">
-        <template #render-label="{ option }">
-            <div>{{ 'Menu ' + option.label }}</div>
-        </template>
-    </x-n-menu>
+  <x-n-menu :options="options">
+    <template #render-label="{ option }">
+      <div>{{ 'Menu ' + option.label }}</div>
+    </template>
+  </x-n-menu>
 </template>
 ```
 

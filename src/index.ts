@@ -32,16 +32,16 @@ export * from './select';
 export * from './tree';
 export * from './tree-select';
 export default {
-    install: (app: App) => {
-        app.use(XNButton);
-        app.use(XNCascader);
-        app.use(XNDataTable);
-        app.use(XNDropdown);
-        app.use(XNEmpty);
-        app.use(XNMenu);
-        app.use(XNPopselect);
-        app.use(XNSelect);
-        app.use(XNTree);
-        app.use(XNTreeSelect);
-    }
+  install: (app: App) => {
+    app.use(XNButton);
+    app.use(XNCascader);
+    app.use(XNDataTable);
+    app.use(XNDropdown);
+    app.use(XNEmpty);
+    app.use(XNMenu);
+    app.use(XNPopselect);
+    app.use(XNSelect);
+    app.use(XNTree);
+    app.use(XNTreeSelect);
+  }
 };
