@@ -67,7 +67,7 @@ function convertVNodesToOptions(vnodes: VNode[], depth: number = 1): NMenuOption
 
         if (vnode.type === ComponentMenuItem) {
             // 菜单项
-            temp.push({
+            const item = {
                 ...normalizeVProps(restProps),
                 key: vKey ?? `__X_MENU_ITEM_${depth}_${index}`,
                 props: restProps as HTMLAttributes,
@@ -77,7 +77,16 @@ function convertVNodesToOptions(vnodes: VNode[], depth: number = 1): NMenuOption
                 icon: resolveVSlot(vSlots['icon']),
                 extra: resolveVSlot(vSlots['extra']) || vProps.extra,
                 children: vSlots['submenu'] ? convertVNodesToOptions(vSlots['submenu'](), depth + 1) : undefined
-            } as NMenuOption);
+            } as NMenuOption;
+
+            if ('children' in item) {
+                // If there's no children, the prop must be unset, not be `null` or `undefined`.
+                if (item.children == null) {
+                    delete item.children;
+                }
+            }
+
+            temp.push(item);
         } else if (vnode.type === ComponentMenuItemGroup) {
             // 菜单分组
             temp.push({

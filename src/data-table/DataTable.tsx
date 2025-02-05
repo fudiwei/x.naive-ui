@@ -3,6 +3,7 @@ import type { VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from '
 import type {
     DataTableColumn as _NDataTableColumn,
     DataTableBaseColumn as NDataTableBaseColumn,
+    DataTableColumnGroup as NDataTableColumnGroup,
     DataTableSelectionColumn as NDataTableSelectionColumn,
     DataTableExpandColumn as NDataTableExpandColumn,
     DataTableInst as NDataTableInst
@@ -526,16 +527,19 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
                                 column = { ...column };
 
                                 if ('children' in column) {
-                                    // If there's no children, the prop must be unset, not be `undefined`.
-                                    const children = forEach(column.children);
-                                    if (children) {
-                                        column.children = children as NDataTableBaseColumn<T>[];
+                                    // If there's no children, the prop must be unset, not be `null` or `undefined`.
+                                    if (column.children == null) {
+                                        delete (column as Partial<NDataTableColumnGroup<T>>)['children'];
+                                    } else {
+                                        const children = forEach(column.children);
+                                        if (children) {
+                                            column.children = children as NDataTableBaseColumn<T>[];
+                                        }
                                     }
                                 }
 
                                 return populateColumnRenders<T>(column, slots);
                             });
-
                         return forEach(props.columns as NDataTableColumn<T>[]);
                     }
 
