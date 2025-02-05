@@ -427,19 +427,19 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
     props: _props as ReturnType<typeof _propsMakeGeneric<T>>,
 
     slots: Object as SlotsType<{
-      'default': NonNullable<unknown>;
-      'loading': NonNullable<unknown>;
-      'empty': NonNullable<unknown>;
-      'summary': NonNullable<unknown>;
-      'render-column': DataTableRenderColumnParams<T>;
-      'render-cell': DataTableRenderCellParams<T>;
-      'render-expand': DataTableRenderExpandParams<T>;
-      'render-expand-icon': DataTableRenderExpandIconParams<T>;
-      'render-filter': DataTableRenderFilterParams<T>;
-      'render-filter-icon': DataTableRenderFilterIconParams<T>;
-      'render-filter-menu': DataTableRenderFilterMenuParams<T>;
-      'render-sorter': DataTableRenderSorterParams<T>;
-      'render-sorter-icon': DataTableRenderSorterIconParams<T>;
+      'default': () => VNode[];
+      'loading': () => VNode[];
+      'empty': () => VNode[];
+      'summary': () => VNode[];
+      'render-column': (params: DataTableRenderColumnParams<T>) => VNode[];
+      'render-cell': (params: DataTableRenderCellParams<T>) => VNode[];
+      'render-expand': (params: DataTableRenderExpandParams<T>) => VNode[];
+      'render-expand-icon': (params: DataTableRenderExpandIconParams<T>) => VNode[];
+      'render-filter': (params: DataTableRenderFilterParams<T>) => VNode[];
+      'render-filter-icon': (params: DataTableRenderFilterIconParams<T>) => VNode[];
+      'render-filter-menu': (params: DataTableRenderFilterMenuParams<T>) => VNode[];
+      'render-sorter': (params: DataTableRenderSorterParams<T>) => VNode[];
+      'render-sorter-icon': (params: DataTableRenderSorterIconParams<T>) => VNode[];
     }>,
 
     setup(props, { attrs, slots, expose }) {
@@ -462,7 +462,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
 
       return () => {
         const mergedColumns = computed(() => {
-          const vnodes = slots.default?.({});
+          const vnodes = slots.default?.();
           if (isEmptyVNode(vnodes)) {
             const forEach = (columns?: NDataTableColumn<T>[]) =>
               columns?.map((column) => {
@@ -489,7 +489,7 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
         });
 
         const mergedSummary = computed(() => {
-          const vnodes = slots.summary?.({});
+          const vnodes = slots.summary?.();
           if (isEmptyVNode(vnodes)) {
             return props.summary;
           }

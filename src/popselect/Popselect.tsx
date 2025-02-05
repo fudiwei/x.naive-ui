@@ -97,12 +97,12 @@ const ComponentPopselect = defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    'default': NonNullable<unknown>;
-    'action': NonNullable<unknown>;
-    'empty': NonNullable<unknown>;
-    'header': NonNullable<unknown>;
-    'render-label': PopselectRenderLabelParams;
-    'trigger': NonNullable<unknown>;
+    'default': () => VNode[];
+    'action': () => VNode[];
+    'empty': () => VNode[];
+    'header': () => VNode[];
+    'render-label': (params: PopselectRenderLabelParams) => VNode[];
+    'trigger': () => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {
@@ -123,7 +123,7 @@ const ComponentPopselect = defineComponent({
     }
 
     const nOptions = computed(() => {
-      const vnodes = slots.default?.({});
+      const vnodes = slots.default?.();
       if (isEmptyVNode(vnodes)) {
         return (props.options ?? []).map((option) => {
           if (typeof option === 'string' || typeof option === 'number') {

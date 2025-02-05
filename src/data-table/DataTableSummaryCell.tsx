@@ -1,6 +1,6 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { ExtractPropTypes, PropType, SlotsType } from 'vue';
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue';
 import { defineComponent } from 'vue';
 
 import type { DataTableRenderSummaryParams, DataTableRowData } from './DataTable';
@@ -26,7 +26,7 @@ export default (<T extends DataTableRowData = any>() => {
     props: _props,
 
     slots: Object as SlotsType<{
-      default: NonNullable<DataTableRenderSummaryParams<T>>;
+      default: (params: DataTableRenderSummaryParams<T>) => VNode[];
     }>,
 
     render() {

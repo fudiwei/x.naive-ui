@@ -1,6 +1,6 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { ExtractPublicPropTypes, SlotsType } from 'vue';
+import type { ExtractPublicPropTypes, SlotsType, VNode } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { NButton, buttonProps as defaultNButtonProps } from 'naive-ui';
 
@@ -26,8 +26,8 @@ export default defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    default?: NonNullable<unknown>;
-    icon?: NonNullable<unknown>;
+    default?: () => VNode[];
+    icon?: () => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {

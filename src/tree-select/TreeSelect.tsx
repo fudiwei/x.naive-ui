@@ -1,6 +1,6 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { ExtractPublicPropTypes, PropType, SlotsType } from 'vue';
+import type { ExtractPublicPropTypes, PropType, SlotsType, VNode } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import type {
   TreeSelectInst as NTreeSelectInst,
@@ -72,15 +72,15 @@ export default defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    'action': NonNullable<unknown>;
-    'arrow': NonNullable<unknown>;
-    'empty': NonNullable<unknown>;
-    'header': NonNullable<unknown>;
-    'render-label': TreeSelectRenderLabelParams;
-    'render-prefix': TreeSelectRenderPrefixParams;
-    'render-suffix': TreeSelectRenderSuffixParams;
-    'render-tag': TreeSelectRenderTagParams;
-    'render-switcher-icon': TreeSelectRenderSwitcherIconParams;
+    'action': () => VNode[];
+    'arrow': () => VNode[];
+    'empty': () => VNode[];
+    'header': () => VNode[];
+    'render-label': (params: TreeSelectRenderLabelParams) => VNode[];
+    'render-prefix': (params: TreeSelectRenderPrefixParams) => VNode[];
+    'render-suffix': (params: TreeSelectRenderSuffixParams) => VNode[];
+    'render-tag': (params: TreeSelectRenderTagParams) => VNode[];
+    'render-switcher-icon': (params: TreeSelectRenderSwitcherIconParams) => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {

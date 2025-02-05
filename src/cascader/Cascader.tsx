@@ -55,12 +55,12 @@ export default defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    'action': NonNullable<unknown>;
-    'arrow': NonNullable<unknown>;
-    'empty': NonNullable<unknown>;
-    'render-label': CascaderRenderLabelParams;
-    'render-prefix': CascaderRenderPrefixParams;
-    'render-suffix': CascaderRenderSuffixParams;
+    'action': () => VNode[];
+    'arrow': () => VNode[];
+    'empty': () => VNode[];
+    'render-label': (params: CascaderRenderLabelParams) => VNode[];
+    'render-prefix': (params: CascaderRenderPrefixParams) => VNode[];
+    'render-suffix': (params: CascaderRenderSuffixParams) => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {

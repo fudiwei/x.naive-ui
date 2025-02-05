@@ -107,14 +107,14 @@ const ComponentSelect = defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    'default': NonNullable<unknown>;
-    'action': NonNullable<unknown>;
-    'arrow': NonNullable<unknown>;
-    'empty': NonNullable<unknown>;
-    'header': NonNullable<unknown>;
-    'render-label': SelectRenderLabelParams;
-    'render-option': SelectRenderOptionParams;
-    'render-tag': SelectRenderTagParams;
+    'default': () => VNode[];
+    'action': () => VNode[];
+    'arrow': () => VNode[];
+    'empty': () => VNode[];
+    'header': () => VNode[];
+    'render-label': (params: SelectRenderLabelParams) => VNode[];
+    'render-option': (params: SelectRenderOptionParams) => VNode[];
+    'render-tag': (params: SelectRenderTagParams) => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {
@@ -135,7 +135,7 @@ const ComponentSelect = defineComponent({
     }
 
     const nOptions = computed(() => {
-      const vnodes = slots.default?.({});
+      const vnodes = slots.default?.();
       if (isEmptyVNode(vnodes)) {
         return (props.options ?? []).map((option) => {
           if (typeof option === 'string' || typeof option === 'number') {

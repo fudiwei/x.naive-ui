@@ -1,6 +1,6 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { ExtractPropTypes, PropType, SlotsType } from 'vue';
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue';
 import { defineComponent } from 'vue';
 
 const _props = {
@@ -21,9 +21,9 @@ export default defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    default: NonNullable<unknown>;
-    icon: NonNullable<unknown>;
-    submenu: NonNullable<unknown>;
+    default: () => VNode[];
+    icon: () => VNode[];
+    submenu: () => VNode[];
   }>,
 
   render() {

@@ -122,11 +122,11 @@ export default defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    'default': NonNullable<unknown>;
-    'render-label': DropdownRenderLabelParams;
-    'render-option': DropdownRenderOptionParams;
-    'render-icon': DropdownRenderIconParams;
-    'trigger': NonNullable<unknown>;
+    'default': () => VNode[];
+    'render-label': (params: DropdownRenderLabelParams) => VNode[];
+    'render-option': (params: DropdownRenderOptionParams) => VNode[];
+    'render-icon': (params: DropdownRenderIconParams) => VNode[];
+    'trigger': () => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {
@@ -142,7 +142,7 @@ export default defineComponent({
 
     return () => {
       const mergedOptions = computed<NDropdownOption[]>(() => {
-        const vnodes = slots.default?.({});
+        const vnodes = slots.default?.();
         if (isEmptyVNode(vnodes)) {
           return props.options;
         }

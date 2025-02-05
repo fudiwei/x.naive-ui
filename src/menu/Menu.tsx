@@ -126,11 +126,11 @@ const ComponentMenu = defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    'default': NonNullable<unknown>;
-    'render-label': MenuRenderLabelParams;
-    'render-extra': MenuRenderExtraParams;
-    'render-icon': MenuRenderIconParams;
-    'render-expand-icon': MenuRenderExpandIconParams;
+    'default': () => VNode[];
+    'render-label': (params: MenuRenderLabelParams) => VNode[];
+    'render-extra': (params: MenuRenderExtraParams) => VNode[];
+    'render-icon': (params: MenuRenderIconParams) => VNode[];
+    'render-expand-icon': (params: MenuRenderExpandIconParams) => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {
@@ -154,7 +154,7 @@ const ComponentMenu = defineComponent({
 
     return () => {
       const mergedOptions = computed<NMenuOption[]>(() => {
-        const vnodes = slots.default?.({});
+        const vnodes = slots.default?.();
         if (isEmptyVNode(vnodes)) {
           return props.options;
         }

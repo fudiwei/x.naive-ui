@@ -1,6 +1,6 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { ExtractPublicPropTypes, PropType, SlotsType } from 'vue';
+import type { ExtractPublicPropTypes, PropType, SlotsType, VNode } from 'vue';
 import type {} from 'vueuc';
 import { computed, defineComponent, ref } from 'vue';
 import type { TreeInst as NTreeInst, TreeOption as NTreeOption } from 'naive-ui';
@@ -67,11 +67,11 @@ export default defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    'empty': NonNullable<unknown>;
-    'render-label': TreeRenderLabelParams;
-    'render-prefix': TreeRenderPrefixParams;
-    'render-suffix': TreeRenderSuffixParams;
-    'render-switcher-icon': TreeRenderSwitcherIconParams;
+    'empty': () => VNode[];
+    'render-label': (params: TreeRenderLabelParams) => VNode[];
+    'render-prefix': (params: TreeRenderPrefixParams) => VNode[];
+    'render-suffix': (params: TreeRenderSuffixParams) => VNode[];
+    'render-switcher-icon': (params: TreeRenderSwitcherIconParams) => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {

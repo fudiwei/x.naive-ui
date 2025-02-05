@@ -1,6 +1,6 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { ExtractPropTypes, PropType, SlotsType } from 'vue';
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue';
 import { defineComponent } from 'vue';
 import type {
   DataTableBaseColumn as NDataTableBaseColumn,
@@ -121,15 +121,15 @@ export default (<T extends DataTableRowData = any>() => {
     props: _props,
 
     slots: Object as SlotsType<{
-      'default': NonNullable<unknown>;
-      'title': NonNullable<unknown>;
-      'render-cell': DataTableRenderCellParams<T>;
-      'render-expand': DataTableRenderExpandParams<T>;
-      'render-filter': DataTableRenderFilterParams<T>;
-      'render-filter-icon': DataTableRenderFilterIconParams<T>;
-      'render-filter-menu': DataTableRenderFilterMenuParams<T>;
-      'render-sorter': DataTableRenderSorterParams<T>;
-      'render-sorter-icon': DataTableRenderSorterIconParams<T>;
+      'default': () => VNode[];
+      'title': () => VNode[];
+      'render-cell': (params: DataTableRenderCellParams<T>) => VNode[];
+      'render-expand': (params: DataTableRenderExpandParams<T>) => VNode[];
+      'render-filter': (params: DataTableRenderFilterParams<T>) => VNode[];
+      'render-filter-icon': (params: DataTableRenderFilterIconParams<T>) => VNode[];
+      'render-filter-menu': (params: DataTableRenderFilterMenuParams<T>) => VNode[];
+      'render-sorter': (params: DataTableRenderSorterParams<T>) => VNode[];
+      'render-sorter-icon': (params: DataTableRenderSorterIconParams<T>) => VNode[];
     }>,
 
     render() {

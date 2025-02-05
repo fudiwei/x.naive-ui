@@ -1,6 +1,6 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { ExtractPublicPropTypes, PropType, SlotsType } from 'vue';
+import type { ExtractPublicPropTypes, PropType, SlotsType, VNode } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
@@ -33,9 +33,9 @@ export default defineComponent({
   props: _props,
 
   slots: Object as SlotsType<{
-    default?: NonNullable<unknown>;
-    extra?: NonNullable<unknown>;
-    icon?: NonNullable<unknown>;
+    default?: () => VNode[];
+    extra?: () => VNode[];
+    icon?: () => VNode[];
   }>,
 
   setup(props, { attrs, slots, expose }) {
