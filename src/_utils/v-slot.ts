@@ -1,5 +1,5 @@
-﻿import type { VNode, VNodeChild, Slot } from 'vue';
-import { isVNode, h, camelize } from 'vue';
+﻿import type { Slot, VNode, VNodeChild } from 'vue';
+import { camelize, h, isVNode } from 'vue';
 
 import { isTextVNode } from './v-node';
 

@@ -1,9 +1,9 @@
 ﻿<script setup lang="ts">
-import DemoContainer from '../_common/demo-doc.vue';
 import DemoCard from '../_common/demo-card.vue';
-import SampleBasicDemo from './sample-basic/demo.vue';
+import DemoContainer from '../_common/demo-doc.vue';
 import SampleBasicCodeJs from './sample-basic/code-js.vuecode';
 import SampleBasicCodeTs from './sample-basic/code-ts.vuecode';
+import SampleBasicDemo from './sample-basic/demo.vue';
 
 const $encode = window.encodeURIComponent;
 </script>

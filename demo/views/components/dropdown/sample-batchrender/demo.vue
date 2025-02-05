@@ -1,7 +1,7 @@
 ﻿<script lang="ts">
 import { defineComponent } from 'vue';
-import CashOutline from '~@/assets/icons/CashOutline.svg';
 import type { DropdownRenderLabelParams } from '@skit/x.naive-ui';
+import CashOutline from '~@/assets/icons/CashOutline.svg';
 
 const options = [
   {

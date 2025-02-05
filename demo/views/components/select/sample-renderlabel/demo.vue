@@ -1,7 +1,7 @@
 ﻿<script lang="ts">
 import { defineComponent, ref } from 'vue';
-import MusicalNoteOutline from '~@/assets/icons/MusicalNoteOutline.svg';
 import type { SelectOptions, SelectRenderLabelParams } from '@skit/x.naive-ui';
+import MusicalNoteOutline from '~@/assets/icons/MusicalNoteOutline.svg';
 
 export default defineComponent({
   components: {

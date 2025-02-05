@@ -1,7 +1,7 @@
 ﻿<script lang="ts">
 import { defineComponent, ref } from 'vue';
-import MusicalNoteOutline from '~@/assets/icons/MusicalNoteOutline.svg';
 import type { CascaderOption, CascaderRenderLabelParams } from '@skit/x.naive-ui';
+import MusicalNoteOutline from '~@/assets/icons/MusicalNoteOutline.svg';
 
 function createOptions(depth = 3, iterator = 1, prefix = '') {
   const length = 12;

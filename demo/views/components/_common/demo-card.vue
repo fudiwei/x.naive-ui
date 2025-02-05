@@ -1,5 +1,5 @@
 ﻿<script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 import VueLogo from '~@/assets/logos/vue.svg';
 
 const $props = defineProps({

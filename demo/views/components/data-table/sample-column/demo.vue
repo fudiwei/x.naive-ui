@@ -1,6 +1,5 @@
 ﻿<script lang="ts">
 import { defineComponent } from 'vue';
-import type { DataTableRenderColumnParams } from '@skit/x.naive-ui';
 
 const createColumns = () => {
   return [
@@ -72,7 +71,7 @@ export default defineComponent({
     </x-n-data-table>
 
     <x-n-data-table :columns="columns" :data="data" :pagination="pagination">
-      <template #render-column="{ column }: DataTableRenderColumnParams">
+      <template #render-column="{ column }">
         <template v-if="column.key === 'name'">
           <n-tooltip>
             <template #trigger>

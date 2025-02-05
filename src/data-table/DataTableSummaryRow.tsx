@@ -3,7 +3,7 @@
 import type { SlotsType } from 'vue';
 import { defineComponent } from 'vue';
 
-import type { DataTableRowData, DataTableRenderSummaryParams } from './DataTable';
+import type { DataTableRenderSummaryParams, DataTableRowData } from './DataTable';
 
 export default (<T extends DataTableRowData = any>() => {
   return defineComponent({

@@ -1,9 +1,9 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { PropType, SlotsType, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType, SlotsType } from 'vue';
 import { defineComponent } from 'vue';
 
-import type { DataTableRowData, DataTableRenderSummaryParams } from './DataTable';
+import type { DataTableRenderSummaryParams, DataTableRowData } from './DataTable';
 
 const _props = {
   rowSpan: {

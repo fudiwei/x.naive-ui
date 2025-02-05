@@ -1,19 +1,19 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
-import type { MenuOption as NMenuOption, MenuGroupOption as NMenuGroupOption, MenuDividerOption as NMenuDividerOption, MenuInst as NMenuInst } from 'naive-ui';
-import { defineComponent, ref, computed } from 'vue';
+import type { ExtractPublicPropTypes, HTMLAttributes, PropType, Slots, SlotsType, VNode } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
+import type { MenuDividerOption as NMenuDividerOption, MenuGroupOption as NMenuGroupOption, MenuInst as NMenuInst, MenuOption as NMenuOption } from 'naive-ui';
 import { NMenu, menuProps as defaultNMenuProps } from 'naive-ui';
 
-import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
-import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
-import { isVShowFalse } from '../_utils/v-dir';
-import { objectOmitter } from '../_utils/internal';
-import * as logger from '../_utils/logger';
 import ComponentMenuDivider from './MenuDivider';
 import ComponentMenuItem from './MenuItem';
 import ComponentMenuItemGroup from './MenuItemGroup';
+import { objectOmitter } from '../_utils/internal';
+import * as logger from '../_utils/logger';
+import { isVShowFalse } from '../_utils/v-dir';
+import { flattenVNodeChildren, isEmptyVNode } from '../_utils/v-node';
+import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
+import { getVSlot, mergeVSlots, resolveVSlot } from '../_utils/v-slot';
 
 export type MenuOption = {
   type?: 'group' | 'divider';

@@ -1,24 +1,24 @@
 ﻿<script setup lang="ts">
-import DemoContainer from '../_common/demo-doc.vue';
 import DemoCard from '../_common/demo-card.vue';
-import SampleBasicDemo from './sample-basic/demo.vue';
+import DemoContainer from '../_common/demo-doc.vue';
 import SampleBasicCodeJs from './sample-basic/code-js.vuecode';
 import SampleBasicCodeTs from './sample-basic/code-ts.vuecode';
-import SampleGroupDemo from './sample-group/demo.vue';
+import SampleBasicDemo from './sample-basic/demo.vue';
 import SampleGroupCodeJs from './sample-group/code-js.vuecode';
 import SampleGroupCodeTs from './sample-group/code-ts.vuecode';
-import SampleRenderLabelDemo from './sample-renderlabel/demo.vue';
-import SampleRenderLabelCodeJs from './sample-renderlabel/code-js.vuecode';
-import SampleRenderLabelCodeTs from './sample-renderlabel/code-ts.vuecode';
-import SampleRenderOptionDemo from './sample-renderoption/demo.vue';
-import SampleRenderOptionCodeJs from './sample-renderoption/code-js.vuecode';
-import SampleRenderOptionCodeTs from './sample-renderoption/code-ts.vuecode';
-import SampleRenderTagDemo from './sample-rendertag/demo.vue';
-import SampleRenderTagCodeJs from './sample-rendertag/code-js.vuecode';
-import SampleRenderTagCodeTs from './sample-rendertag/code-ts.vuecode';
-import SamplePersonPickerDemo from './sample-personpicker/demo.vue';
+import SampleGroupDemo from './sample-group/demo.vue';
 import SamplePersonPickerCodeJs from './sample-personpicker/code-js.vuecode';
 import SamplePersonPickerCodeTs from './sample-personpicker/code-ts.vuecode';
+import SamplePersonPickerDemo from './sample-personpicker/demo.vue';
+import SampleRenderLabelCodeJs from './sample-renderlabel/code-js.vuecode';
+import SampleRenderLabelCodeTs from './sample-renderlabel/code-ts.vuecode';
+import SampleRenderLabelDemo from './sample-renderlabel/demo.vue';
+import SampleRenderOptionCodeJs from './sample-renderoption/code-js.vuecode';
+import SampleRenderOptionCodeTs from './sample-renderoption/code-ts.vuecode';
+import SampleRenderOptionDemo from './sample-renderoption/demo.vue';
+import SampleRenderTagCodeJs from './sample-rendertag/code-js.vuecode';
+import SampleRenderTagCodeTs from './sample-rendertag/code-ts.vuecode';
+import SampleRenderTagDemo from './sample-rendertag/demo.vue';
 
 const $encode = window.encodeURIComponent;
 </script>

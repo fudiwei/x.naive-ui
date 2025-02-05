@@ -1,8 +1,8 @@
 ﻿<script lang="ts">
 import { defineComponent } from 'vue';
-import PersonCircleOutline from '~@/assets/icons/PersonCircleOutline.svg';
-import PencilOutline from '~@/assets/icons/PencilOutline.svg';
 import LogOutOutline from '~@/assets/icons/LogOutOutline.svg';
+import PencilOutline from '~@/assets/icons/PencilOutline.svg';
+import PersonCircleOutline from '~@/assets/icons/PersonCircleOutline.svg';
 
 export default defineComponent({
   components: {

@@ -1,23 +1,23 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+import type { ExtractPublicPropTypes, PropType, Slots, SlotsType, VNode } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import type {
-  SelectOption as NSelectOption,
   SelectGroupOption as NSelectGroupOption,
   SelectInst as NSelectInst,
+  SelectOption as NSelectOption,
   SelectRenderOption as NSelectRenderOption,
   SelectRenderTag as NSelectRenderTag
 } from 'naive-ui';
-import { defineComponent, ref, computed } from 'vue';
 import { NSelect, selectProps as defaultNSelectProps } from 'naive-ui';
 
-import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
-import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
-import { objectOmitter } from '../_utils/internal';
-import * as logger from '../_utils/logger';
 import ComponentSelectOption from './SelectOption';
 import ComponentSelectOptionGroup from './SelectOptionGroup';
+import { objectOmitter } from '../_utils/internal';
+import * as logger from '../_utils/logger';
+import { flattenVNodeChildren, isEmptyVNode } from '../_utils/v-node';
+import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
+import { getVSlot, mergeVSlots, resolveVSlot } from '../_utils/v-slot';
 
 export type SelectOption = {
   type?: 'group';

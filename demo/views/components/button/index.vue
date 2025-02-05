@@ -1,15 +1,15 @@
 ﻿<script setup lang="ts">
-import DemoContainer from '../_common/demo-doc.vue';
 import DemoCard from '../_common/demo-card.vue';
-import SampleBasicDemo from './sample-basic/demo.vue';
+import DemoContainer from '../_common/demo-doc.vue';
 import SampleBasicCodeJs from './sample-basic/code-js.vuecode';
 import SampleBasicCodeTs from './sample-basic/code-ts.vuecode';
-import SampleSizeDemo from './sample-size/demo.vue';
-import SampleSizeCodeJs from './sample-size/code-js.vuecode';
-import SampleSizeCodeTs from './sample-size/code-ts.vuecode';
-import SampleShapeDemo from './sample-shape/demo.vue';
+import SampleBasicDemo from './sample-basic/demo.vue';
 import SampleShapeCodeJs from './sample-shape/code-js.vuecode';
 import SampleShapeCodeTs from './sample-shape/code-ts.vuecode';
+import SampleShapeDemo from './sample-shape/demo.vue';
+import SampleSizeCodeJs from './sample-size/code-js.vuecode';
+import SampleSizeCodeTs from './sample-size/code-ts.vuecode';
+import SampleSizeDemo from './sample-size/demo.vue';
 
 const $encode = window.encodeURIComponent;
 </script>

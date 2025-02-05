@@ -1,5 +1,5 @@
 ﻿import type { VNode, VNodeChild, VNodeNormalizedChildren } from 'vue';
-import { Fragment, Text, Comment, isVNode } from 'vue';
+import { Comment, Fragment, Text, isVNode } from 'vue';
 
 export { isVNode };
 

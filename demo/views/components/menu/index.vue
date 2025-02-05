@@ -1,12 +1,12 @@
 ﻿<script setup lang="ts">
-import DemoContainer from '../_common/demo-doc.vue';
 import DemoCard from '../_common/demo-card.vue';
-import SampleHorizontalDemo from './sample-horizontal/demo.vue';
-import SampleHorizontalCodeJs from './sample-horizontal/code-js.vuecode';
-import SampleHorizontalCodeTs from './sample-horizontal/code-ts.vuecode';
-import SampleBatchRenderDemo from './sample-batchrender/demo.vue';
+import DemoContainer from '../_common/demo-doc.vue';
 import SampleBatchRenderCodeJs from './sample-batchrender/code-js.vuecode';
 import SampleBatchRenderCodeTs from './sample-batchrender/code-ts.vuecode';
+import SampleBatchRenderDemo from './sample-batchrender/demo.vue';
+import SampleHorizontalCodeJs from './sample-horizontal/code-js.vuecode';
+import SampleHorizontalCodeTs from './sample-horizontal/code-ts.vuecode';
+import SampleHorizontalDemo from './sample-horizontal/demo.vue';
 
 const $encode = window.encodeURIComponent;
 </script>

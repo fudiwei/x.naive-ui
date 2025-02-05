@@ -1,18 +1,29 @@
-import eslintPluginVue from 'eslint-plugin-vue';
-import vueEslintStandardConfig from '@vue/eslint-config-standard';
-import { defineConfigWithVueTs, vueTsConfigs as vueEslintTsConfigs } from '@vue/eslint-config-typescript';
-import vueEslintPrettierConfig from '@vue/eslint-config-prettier';
+import eslintVuePrettierConfig from '@vue/eslint-config-prettier';
+import eslintVueStandardConfig from '@vue/eslint-config-standard';
+import { defineConfigWithVueTs, vueTsConfigs as eslintVueTsConfigs } from '@vue/eslint-config-typescript';
+import { flatConfigs as eslintImportConfigs } from 'eslint-plugin-import';
+import eslintVuePlugin from 'eslint-plugin-vue';
 
+/**
+ * @type {import("eslint").Linter.Config[]}
+ */
 export default [
   {
     ignores: ['/dist/**', '/es/**', '/lib/**', '**/*.vuecode']
   },
 
-  ...vueEslintStandardConfig,
-  ...eslintPluginVue.configs['flat/essential'],
-  ...defineConfigWithVueTs(vueEslintTsConfigs.recommended),
-  vueEslintPrettierConfig,
+  ...eslintVueStandardConfig,
+
+  ...eslintVuePlugin.configs['flat/essential'],
+
+  ...defineConfigWithVueTs(eslintVueTsConfigs.recommended),
+
+  eslintVuePrettierConfig,
+
+  eslintImportConfigs.recommended,
+
   {
+    name: 'my-eslint-config/overrides',
     rules: {
       'indent': ['error', 2, { SwitchCase: 1 }],
       'linebreak-style': ['warn', 'windows'],
@@ -37,6 +48,76 @@ export default [
           caughtErrorsIgnorePattern: '^_'
         }
       ]
+    }
+  },
+
+  {
+    name: 'my-eslint-config/import-sort',
+    rules: {
+      'import/named': 'off',
+      'import/no-named-as-default-member': 'off',
+      'import/no-unresolved': 'off',
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index'],
+          pathGroups: [
+            {
+              pattern: 'vue*',
+              group: 'external',
+              position: 'before'
+            },
+            {
+              pattern: 'vue/**',
+              group: 'external',
+              position: 'before'
+            },
+            {
+              pattern: 'vue-*',
+              group: 'external',
+              position: 'before'
+            },
+            {
+              pattern: 'vue-*/**',
+              group: 'external',
+              position: 'before'
+            },
+            {
+              pattern: '@vue*/**',
+              group: 'external',
+              position: 'before'
+            },
+            {
+              pattern: '~/**',
+              group: 'external',
+              position: 'after'
+            },
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'before'
+            }
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true
+          }
+        }
+      ],
+      'sort-imports': [
+        'error',
+        {
+          ignoreDeclarationSort: true
+        }
+      ]
+    },
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx']
+        }
+      }
     }
   }
 ];

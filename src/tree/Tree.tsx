@@ -1,19 +1,19 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+import type { ExtractPublicPropTypes, PropType, SlotsType } from 'vue';
 import type {} from 'vueuc';
-import type { TreeOption as NTreeOption, TreeInst as NTreeInst } from 'naive-ui';
+import { computed, defineComponent, ref } from 'vue';
+import type { TreeInst as NTreeInst, TreeOption as NTreeOption } from 'naive-ui';
+import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
 import type {
   RenderLabel as NTreeRenderLabel,
   RenderPrefix as NTreeRenderPrefix,
   RenderSuffix as NTreeRenderSuffix,
   RenderSwitcherIcon as NTreeRenderSwitcherIcon
 } from 'naive-ui/es/tree/src/interface';
-import { defineComponent, ref, computed } from 'vue';
-import { NTree, treeProps as defaultNTreeProps } from 'naive-ui';
 
-import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { objectOmitter } from '../_utils/internal';
+import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 
 export type TreeOption = {
   children?: TreeOption[];

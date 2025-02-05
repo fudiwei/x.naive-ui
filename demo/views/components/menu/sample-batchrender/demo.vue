@@ -1,8 +1,8 @@
 ﻿<script lang="ts">
 import { defineComponent, ref } from 'vue';
+import type { MenuOption, MenuRenderIconParams, MenuRenderLabelParams } from '@skit/x.naive-ui';
 import BookmarkOutline from '~@/assets/icons/BookmarkOutline.svg';
 import CaretDownOutline from '~@/assets/icons/CaretDownOutline.svg';
-import type { MenuOption, MenuRenderLabelParams, MenuRenderIconParams } from '@skit/x.naive-ui';
 
 const menuOptions: MenuOption[] = [
   {

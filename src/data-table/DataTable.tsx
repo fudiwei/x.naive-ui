@@ -1,38 +1,38 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+import type { ExtractPublicPropTypes, PropType, Slots, SlotsType, VNode } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import type {
-  DataTableColumn as _NDataTableColumn,
   DataTableBaseColumn as NDataTableBaseColumn,
   DataTableColumnGroup as NDataTableColumnGroup,
-  DataTableSelectionColumn as NDataTableSelectionColumn,
   DataTableExpandColumn as NDataTableExpandColumn,
-  DataTableInst as NDataTableInst
+  DataTableInst as NDataTableInst,
+  DataTableSelectionColumn as NDataTableSelectionColumn,
+  DataTableColumn as _NDataTableColumn
 } from 'naive-ui';
+import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 import type {
-  RowData as NDataTableRowData,
   TableColumnGroup as NDataTableGroupColumn,
-  SummaryRowData as NDataTableSummaryRow,
-  SummaryCell as NDataTableSummaryCell,
-  SortOrder as NDataTableSortOrders,
   RenderExpandIcon as NDataTableRenderExpandIcon,
   RenderFilter as NDataTableRenderFilter,
   RenderFilterIcon as NDataTableRenderFilterIcon,
   RenderFilterMenu as NDataTableRenderFilterMenu,
   RenderSorter as NDataTableRenderSorter,
-  RenderSorterIcon as NDataTableRenderSorterIcon
+  RenderSorterIcon as NDataTableRenderSorterIcon,
+  RowData as NDataTableRowData,
+  SortOrder as NDataTableSortOrders,
+  SummaryCell as NDataTableSummaryCell,
+  SummaryRowData as NDataTableSummaryRow
 } from 'naive-ui/es/data-table/src/interface';
-import { defineComponent, ref, computed } from 'vue';
-import { NDataTable, dataTableProps as defaultNDataTableProps } from 'naive-ui';
 
-import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
-import { getVProp, getVPropAsBoolean, getVPropAsNumber, normalizeVProps } from '../_utils/v-prop';
-import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
+import ComponentDataTableColumn from './DataTableColumn';
+import ComponentDataTableSummaryCell from './DataTableSummaryCell';
+import ComponentDataTableSummaryRow from './DataTableSummaryRow';
 import { objectOmitter } from '../_utils/internal';
 import * as logger from '../_utils/logger';
-import ComponentDataTableColumn from './DataTableColumn';
-import ComponentDataTableSummaryRow from './DataTableSummaryRow';
-import ComponentDataTableSummaryCell from './DataTableSummaryCell';
+import { flattenVNodeChildren, isEmptyVNode } from '../_utils/v-node';
+import { getVProp, getVPropAsBoolean, getVPropAsNumber, normalizeVProps } from '../_utils/v-prop';
+import { getVSlot, mergeVSlots, resolveVSlot } from '../_utils/v-slot';
 
 type NDataTableColumn<T = any> = _NDataTableColumn<T> & { __X_COLUMN?: NDataTableColumn<T> };
 

@@ -1,7 +1,7 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { SlotsType, ExtractPublicPropTypes } from 'vue';
-import { defineComponent, computed } from 'vue';
+import type { ExtractPublicPropTypes, SlotsType } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { NButton, buttonProps as defaultNButtonProps } from 'naive-ui';
 
 import { flattenVNodeChildren } from '../_utils/v-node';

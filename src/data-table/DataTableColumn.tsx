@@ -1,22 +1,22 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { PropType, SlotsType, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType, SlotsType } from 'vue';
+import { defineComponent } from 'vue';
 import type {
-  DataTableColumn as NDataTableColumn,
   DataTableBaseColumn as NDataTableBaseColumn,
+  DataTableColumn as NDataTableColumn,
   DataTableSelectionColumn as NDataTableSelectionColumn
 } from 'naive-ui';
-import { defineComponent } from 'vue';
 
 import type {
-  DataTableRowData,
   DataTableRenderCellParams,
   DataTableRenderExpandParams,
-  DataTableRenderFilterParams,
   DataTableRenderFilterIconParams,
   DataTableRenderFilterMenuParams,
+  DataTableRenderFilterParams,
+  DataTableRenderSorterIconParams,
   DataTableRenderSorterParams,
-  DataTableRenderSorterIconParams
+  DataTableRowData
 } from './DataTable';
 
 const _props = {

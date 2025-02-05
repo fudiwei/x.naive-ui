@@ -1,7 +1,7 @@
 ﻿<script lang="ts">
 import { defineComponent } from 'vue';
-import { useMessage } from 'naive-ui';
 import type { DataTableColumn, DataTableRenderCellParams, DataTableRenderExpandParams } from '@skit/x.naive-ui';
+import { useMessage } from 'naive-ui';
 
 type RowData = {
   key: number;

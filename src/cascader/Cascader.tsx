@@ -1,12 +1,12 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { VNode, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
-import type { CascaderOption as NCascaderOption, CascaderInst as NCascaderInst } from 'naive-ui';
-import { defineComponent, ref, computed } from 'vue';
+import type { ExtractPublicPropTypes, PropType, SlotsType, VNode } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
+import type { CascaderInst as NCascaderInst, CascaderOption as NCascaderOption } from 'naive-ui';
 import { NCascader, cascaderProps as defaultNCascaderProps } from 'naive-ui';
 
-import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 import { objectOmitter } from '../_utils/internal';
+import { getVSlot, mergeVSlots } from '../_utils/v-slot';
 
 export type CascaderOption = {
   children?: CascaderOption[];

@@ -1,24 +1,24 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+import type { ExtractPublicPropTypes, HTMLAttributes, PropType, Slots, SlotsType, VNode } from 'vue';
 import type {} from 'treemate';
+import { computed, defineComponent } from 'vue';
 import type {
-  DropdownOption as NDropdownOption,
-  DropdownGroupOption as NDropdownGroupOption,
   DropdownDividerOption as NDropdownDividerOption,
+  DropdownGroupOption as NDropdownGroupOption,
+  DropdownOption as NDropdownOption,
   DropdownRenderOption as NDropdownRenderOption
 } from 'naive-ui';
-import { defineComponent, computed } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
 
-import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
-import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
-import { getVSlot, resolveVSlot, mergeVSlots } from '../_utils/v-slot';
-import { isVShowFalse } from '../_utils/v-dir';
-import { objectOmitter } from '../_utils/internal';
 import ComponentDropdownDivider from './DropdownDivider';
 import ComponentDropdownItem from './DropdownItem';
 import ComponentDropdownItemGroup from './DropdownItemGroup';
+import { objectOmitter } from '../_utils/internal';
+import { isVShowFalse } from '../_utils/v-dir';
+import { flattenVNodeChildren, isEmptyVNode } from '../_utils/v-node';
+import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';
+import { getVSlot, mergeVSlots, resolveVSlot } from '../_utils/v-slot';
 
 export type DropdownOption = {
   type?: 'group' | 'divider' | 'render';

@@ -1,21 +1,21 @@
 ﻿<script setup lang="ts">
-import DemoContainer from '../_common/demo-doc.vue';
 import DemoCard from '../_common/demo-card.vue';
-import SampleBasicDemo from './sample-basic/demo.vue';
+import DemoContainer from '../_common/demo-doc.vue';
 import SampleBasicCodeJs from './sample-basic/code-js.vuecode';
 import SampleBasicCodeTs from './sample-basic/code-ts.vuecode';
-import SampleIconDemo from './sample-icon/demo.vue';
-import SampleIconCodeJs from './sample-icon/code-js.vuecode';
-import SampleIconCodeTs from './sample-icon/code-ts.vuecode';
-import SampleCascadeDemo from './sample-cascade/demo.vue';
-import SampleCascadeCodeJs from './sample-cascade/code-js.vuecode';
-import SampleCascadeCodeTs from './sample-cascade/code-ts.vuecode';
-import SamplePureContentDemo from './sample-purecontent/demo.vue';
-import SamplePureContentCodeJs from './sample-purecontent/code-js.vuecode';
-import SamplePureContentCodeTs from './sample-purecontent/code-ts.vuecode';
-import SampleBatchRenderDemo from './sample-batchrender/demo.vue';
+import SampleBasicDemo from './sample-basic/demo.vue';
 import SampleBatchRenderCodeJs from './sample-batchrender/code-js.vuecode';
 import SampleBatchRenderCodeTs from './sample-batchrender/code-ts.vuecode';
+import SampleBatchRenderDemo from './sample-batchrender/demo.vue';
+import SampleCascadeCodeJs from './sample-cascade/code-js.vuecode';
+import SampleCascadeCodeTs from './sample-cascade/code-ts.vuecode';
+import SampleCascadeDemo from './sample-cascade/demo.vue';
+import SampleIconCodeJs from './sample-icon/code-js.vuecode';
+import SampleIconCodeTs from './sample-icon/code-ts.vuecode';
+import SampleIconDemo from './sample-icon/demo.vue';
+import SamplePureContentCodeJs from './sample-purecontent/code-js.vuecode';
+import SamplePureContentCodeTs from './sample-purecontent/code-ts.vuecode';
+import SamplePureContentDemo from './sample-purecontent/demo.vue';
 
 const $encode = window.encodeURIComponent;
 </script>

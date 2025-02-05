@@ -1,9 +1,9 @@
-import { fileURLToPath, URL } from 'node:url';
-import { defineConfig } from 'vite';
+import { URL, fileURLToPath } from 'node:url';
 import vitePluginVue from '@vitejs/plugin-vue';
 import vitePluginVueJsx from '@vitejs/plugin-vue-jsx';
-import vitePluginSvg from 'vite-svg-loader';
 import { string as rollupPluginString } from 'rollup-plugin-string';
+import { defineConfig } from 'vite';
+import vitePluginSvg from 'vite-svg-loader';
 
 // https://vitejs.dev/config/
 export default defineConfig({

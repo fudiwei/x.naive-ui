@@ -1,12 +1,12 @@
 ﻿/* @jsxImportSource vue */
 /* @jsxRuntime automatic */
-import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
-import { defineComponent, computed } from 'vue';
+import type { ExtractPublicPropTypes, PropType, SlotsType } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { NEmpty, NIcon, emptyProps as defaultNEmptyProps } from 'naive-ui';
 
-import { mergeVSlots } from '../_utils/v-slot';
-import { objectOmitter } from '../_utils/internal';
 import ComponentEmptyIcon from './EmptyIcon';
+import { objectOmitter } from '../_utils/internal';
+import { mergeVSlots } from '../_utils/v-slot';
 
 const _props = (() => {
   const restProps = objectOmitter(defaultNEmptyProps, 'description');

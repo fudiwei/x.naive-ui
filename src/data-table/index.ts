@@ -2,8 +2,8 @@
 
 import ComponentDataTable from './DataTable';
 import ComponentDataTableColumn from './DataTableColumn';
-import ComponentDataTableSummaryRow from './DataTableSummaryRow';
 import ComponentDataTableSummaryCell from './DataTableSummaryCell';
+import ComponentDataTableSummaryRow from './DataTableSummaryRow';
 
 export type {
   DataTableProps,
