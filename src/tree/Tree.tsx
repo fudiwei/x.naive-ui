@@ -1,5 +1,7 @@
 ﻿/* @jsxImportSource vue */
+/* @jsxRuntime automatic */
 import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+import type {} from 'vueuc';
 import type { TreeOption as NTreeOption, TreeInst as NTreeInst } from 'naive-ui';
 import type {
     RenderLabel as NTreeRenderLabel,

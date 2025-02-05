@@ -1,4 +1,5 @@
 ﻿/* @jsxImportSource vue */
+/* @jsxRuntime automatic */
 import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
     MenuOption as NMenuOption,

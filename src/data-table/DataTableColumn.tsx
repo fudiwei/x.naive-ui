@@ -1,4 +1,5 @@
 ﻿/* @jsxImportSource vue */
+/* @jsxRuntime automatic */
 import type { PropType, SlotsType, ExtractPropTypes } from 'vue';
 import type {
     DataTableColumn as NDataTableColumn,

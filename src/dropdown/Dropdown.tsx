@@ -1,5 +1,7 @@
 ﻿/* @jsxImportSource vue */
+/* @jsxRuntime automatic */
 import type { HTMLAttributes, VNode, Slots, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
+import type {} from 'treemate';
 import type {
     DropdownOption as NDropdownOption,
     DropdownGroupOption as NDropdownGroupOption,
@@ -8,7 +10,6 @@ import type {
 } from 'naive-ui';
 import { defineComponent, computed } from 'vue';
 import { NDropdown, dropdownProps as defaultNDropdownProps } from 'naive-ui';
-import type {} from 'treemate';
 
 import { isEmptyVNode, flattenVNodeChildren } from '../_utils/v-node';
 import { getVPropAsBoolean, normalizeVProps } from '../_utils/v-prop';

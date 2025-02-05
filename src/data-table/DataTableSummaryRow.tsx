@@ -1,4 +1,5 @@
 ﻿/* @jsxImportSource vue */
+/* @jsxRuntime automatic */
 import type { SlotsType } from 'vue';
 import { defineComponent } from 'vue';
 

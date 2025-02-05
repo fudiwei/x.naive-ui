@@ -1,4 +1,5 @@
 ﻿/* @jsxImportSource vue */
+/* @jsxRuntime automatic */
 import type { VNode, PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type { CascaderOption as NCascaderOption, CascaderInst as NCascaderInst } from 'naive-ui';
 import { defineComponent, ref, computed } from 'vue';

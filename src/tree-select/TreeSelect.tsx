@@ -1,4 +1,5 @@
 ﻿/* @jsxImportSource vue */
+/* @jsxRuntime automatic */
 import type { PropType, SlotsType, ExtractPublicPropTypes } from 'vue';
 import type {
     TreeSelectOption as NTreeSelectOption,
