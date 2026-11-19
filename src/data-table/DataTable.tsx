@@ -450,6 +450,8 @@ const ComponentDataTable = (<T extends DataTableRowData = any>() => {
         downloadCsv: (...args) => nRef.value!.downloadCsv(...args),
         filter: (...args) => nRef.value!.filter(...args),
         filters: (...args) => nRef.value!.filters(...args),
+        getCurrentPageData: (...args) => nRef.value!.getCurrentPageData(...args),
+        getFilteredAndSortedData: (...args) => nRef.value!.getFilteredAndSortedData(...args),
         page: (...args) => nRef.value!.page(...args),
         // @ts-ignore: Function overloading
         scrollTo: (...args) => nRef.value!.scrollTo(...args),
